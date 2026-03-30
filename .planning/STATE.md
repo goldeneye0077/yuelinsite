@@ -5,14 +5,14 @@
 See: .planning/PROJECT.md (updated 2026-03-30)
 
 **Core value:** 让潜在客户能够快速理解跃鳞科技卖什么、能解决什么问题、为什么值得联系，并顺畅发起咨询。
-**Current focus:** Phase 1 - Foundation & Bilingual Shell
+**Current focus:** Phase 1 - Platform Foundation & Theme Shell
 
 ## Current Position
 
-Phase: 1 of 5 (Foundation & Bilingual Shell)
+Phase: 1 of 5 (Platform Foundation & Theme Shell)
 Plan: 0 of 3 in current phase
 Status: Ready to plan
-Last activity: 2026-03-30 - Initialized project, config, research, requirements, and roadmap
+Last activity: 2026-03-30 - Updated stack, deployment, theme decisions, and planning artifacts
 
 Progress: [-----] 0%
 
@@ -42,7 +42,8 @@ Recent decisions affecting current work:
 
 - Initialization: Position the site as a bilingual corporate website focused on brand presentation plus inquiry capture
 - Initialization: Use 5 top-level product categories plus detailed industrial sensor subcategories from the reference site
-- Initialization: Build with a server-first bilingual architecture and keep v1 content structured but lightweight
+- Initialization: Build with a React + Vite frontend, FastAPI + PostgreSQL backend, and Docker Compose deployment workflow
+- Initialization: Provide light and dark themes from the foundation phase instead of bolting them on later
 
 ### Pending Todos
 

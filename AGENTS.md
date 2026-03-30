@@ -11,6 +11,9 @@
 ## Constraints
 
 - 首版必须支持中文与英文双语
+- 技术栈固定为 React + Vite + React Query + React Router + VChart 前端，以及 Python 3.11 + FastAPI + SQLAlchemy 2 + Alembic + PostgreSQL 后端
+- 部署方式固定为 Docker Compose
+- 页面必须支持浅色与深色两套主题
 - 官网以品牌展示为主，兼顾询盘与留资
 - 产品中心采用 5 个一级分类，并在工业传感器下扩展参考站点的细分子类
 - 当前只有 logo 与地址等少量基础资料，其余信息先按结构化占位设计
@@ -20,7 +23,7 @@
 
 - 先维护 `.planning/` 工件，再推进实现工作
 - 重大实现默认通过 GSD 工作流推进，避免计划与代码脱节
-- 当前路线图已初始化，下一步从 `Phase 1: Foundation & Bilingual Shell` 开始
+- 当前路线图已初始化，下一步从 `Phase 1: Platform Foundation & Theme Shell` 开始
 
 ## Preferred Entry Points
 
@@ -36,9 +39,9 @@
 - `.planning/REQUIREMENTS.md`
 - `.planning/ROADMAP.md`
 - `.planning/STATE.md`
-- `CLAUDE.md`
 
 ## Notes
 
+- 后端优先承担询盘、内容配置与未来扩展边界，不要为了企业官网首版过度堆砌后台复杂度
 - 英文文案目前为首版规划级内容，正式上线前应统一润色
 - 产品图片、联系电话、企业邮箱、资质证书、品牌授权图等素材后续补齐

@@ -10,110 +10,119 @@
 
 | Technology | Version | Purpose | Why Recommended |
 |------------|---------|---------|-----------------|
-| Next.js | 16.1.x | 官网应用框架、路由、SEO、构建输出 | 官方文档已以 App Router 为主线，适合内容型站点、国际化路由、元数据管理与后续表单扩展 |
-| React | 19.2.x patched | UI 组件与渲染基础 | Next.js 16 基于 React 最新能力，React 官方当前主版本为 19.2，适合以服务端优先方式构建页面 |
-| TypeScript | 5.9 | 类型安全、内容模型约束、长期维护 | 官方当前版本为 5.9，适合为双语内容、产品数据结构和表单输入建立稳定约束 |
-| Tailwind CSS | 4.x | 设计系统落地、响应式样式、快速搭建页面 | 官方 v4 面向现代浏览器，适合企业官网这类以布局、节奏、组件一致性为主的前端项目 |
-| next-intl | 4.5.x | 中英文国际化、路由本地化、文案管理 | 官方站点与发布记录显示其已覆盖 Next.js App Router 与 Next.js 16 场景，适合 SEO 友好的双语官网 |
+| Python | 3.11 | 后端运行时 | 这是项目已锁定的运行时版本，生态成熟且与 FastAPI、SQLAlchemy 2、Alembic 配合稳定 |
+| FastAPI | 0.125.x | 官网 API、询盘接口、后续后台扩展边界 | 官方 release notes 显示当前仍在 0.x 主线，但对现代 Python 类型系统和 OpenAPI 支持成熟，适合轻量后端服务 |
+| SQLAlchemy | 2.0.x | ORM、数据库会话和查询模型 | 官方 2.0 文档与教程已明确把 `select()` 风格作为标准路径，适合新项目 |
+| Alembic | 1.17.x | 数据库迁移管理 | 作为 SQLAlchemy 官方迁移工具，适合持续演进表结构 |
+| PostgreSQL | 16.x | 持久化存储 | 对结构化业务数据、询盘存储和后续扩展都足够稳定，适合 Docker Compose 场景 |
+| React | 19.2.x | 前端 UI 基础 | 当前 React 主线版本，适合现代组件模型与主题化 UI |
+| Vite | 8.x | 前端开发与构建工具 | Vite 官方已在 2026-03 发布 8.0，适合 React 项目的开发体验和生产构建 |
+| React Router | 7.x | 前端路由与多页面信息架构 | 官方当前文档主线已进入 v7，适合官网多级页面与布局组织 |
+| TanStack Query | 5.x | 服务端数据获取与缓存 | 官方当前 React 文档主线是 v5，适合前端消费 FastAPI 内容与询盘接口 |
+| VChart | 1.x | 解决方案或能力展示中的数据可视化 | 官方文档支持 React 生态与主题切换，适合在工业官网中少量使用高质量图表 |
+| Docker Compose | Compose Spec / V2 | 前后端与数据库的本地和部署编排 | Docker 官方将 Compose 作为多容器应用的标准定义方式，适合这个项目的固定部署要求 |
 
 ### Supporting Libraries
 
 | Library | Version | Purpose | When to Use |
 |---------|---------|---------|-------------|
-| zod | 4.x | 表单与内容结构校验 | 用于询盘表单、联系方式、产品数据与双语内容结构校验 |
-| resend | latest stable | 询盘邮件投递 | 当首版需要把留言表单发送到企业邮箱时使用 |
-| @hookform/resolvers | latest stable | 表单校验桥接 | 如果后续需要更复杂的前端交互表单，再配合 React Hook Form 使用 |
-| react-hook-form | 7.x | 客户端增强型表单交互 | 仅在留言表单需要复杂交互、即时验证和更细表单状态控制时引入 |
+| Pydantic Settings | 2.x | 环境变量与后端配置管理 | 用于分离开发、测试和生产配置 |
+| psycopg | 3.x | PostgreSQL 驱动 | 配合 SQLAlchemy 2 使用 PostgreSQL |
+| react-i18next | latest stable | 中英文国际化文案管理 | 当双语文案需要系统化管理时使用 |
+| react-hook-form + zod | latest stable | 表单状态与前后端一致校验 | 用于询盘表单和资料申请表单 |
+| react-helmet-async | latest stable | 前端 metadata 管理 | 用于 React + Vite 路线下的页面标题、描述与 SEO 补强 |
+| @visactor/react-vchart | latest stable | React 中的 VChart 组件封装 | 用于少量高质量图表模块的实现 |
 
 ### Development Tools
 
 | Tool | Purpose | Notes |
 |------|---------|-------|
-| ESLint | 静态检查 | 使用 Next.js 默认规则集即可起步 |
-| Prettier | 统一格式 | 保持多语言 JSON、内容配置和组件风格一致 |
-| Lighthouse | 性能与 SEO 基线检查 | 企业官网首版应重点关注 LCP、CLS、SEO 与 Accessibility |
-| Playwright | 回归与关键流程检查 | 适合验证中英文切换、产品页跳转、表单提交流程 |
+| Ruff | Python 静态检查与格式化 | 适合 FastAPI 项目保持后端代码整洁 |
+| Pytest | 后端测试 | 重点覆盖接口、表单提交流程和配置逻辑 |
+| ESLint | 前端静态检查 | React + Vite 项目的基础质量门槛 |
+| Playwright | 关键路径回归 | 适合验证中英文切换、明暗主题切换和表单提交流程 |
 
 ## Installation
 
 ```bash
-# Core
-npm install next@latest react@latest react-dom@latest next-intl zod
+# Backend
+pip install "fastapi>=0.125,<0.126" "sqlalchemy>=2.0,<2.1" "alembic>=1.17,<1.18" "psycopg[binary]>=3,<4" "pydantic-settings>=2,<3"
 
-# Optional for inquiry delivery
-npm install resend
+# Frontend
+npm install react react-dom react-router @tanstack/react-query @visactor/react-vchart @visactor/vchart react-i18next react-hook-form zod @hookform/resolvers react-helmet-async
 
-# Optional for richer form UX
-npm install react-hook-form @hookform/resolvers
-
-# Dev dependencies
-npm install -D typescript @types/node @types/react @types/react-dom eslint prettier
+# Frontend build
+npm install -D vite typescript eslint
 ```
 
 ## Alternatives Considered
 
 | Recommended | Alternative | When to Use Alternative |
 |-------------|-------------|-------------------------|
-| Next.js 16.x | Astro | 如果官网几乎完全静态、没有服务端表单需求、也不打算很快扩展多语言和内容逻辑，Astro 会更轻 |
-| next-intl 4.x | Next.js 原生最小化 i18n 方案 | 如果只做极少量文案切换且不需要路径本地化与系统化消息管理，可以先用原生最小实现 |
-| Tailwind CSS 4.x | CSS Modules + 自定义样式体系 | 如果设计稿极其克制、组件数量少、且团队更偏传统样式组织方式时可考虑 |
-| 本地结构化内容文件 | Headless CMS | 如果后续需要市场团队高频改内容、多人协作编辑，再考虑 CMS，不建议 v1 直接上 |
+| React + Vite | Next.js | 如果项目目标更偏 SSR/SSG 与搜索流量优先，Next.js 会更省 SEO 方案成本 |
+| FastAPI | Django / Flask | 如果后续需要更重的后台管理和内建 CMS 倾向，可考虑 Django；但当前项目更适合轻量 API |
+| TanStack Query | 手写 fetch + context | 如果网站几乎完全静态且无 API 状态缓存需求，可简化；但当前既然已有后端，Query 更稳 |
+| PostgreSQL | SQLite | 仅原型期可考虑 SQLite；正式双容器部署与后续扩展更适合 PostgreSQL |
 
 ## What NOT to Use
 
 | Avoid | Why | Use Instead |
 |-------|-----|-------------|
-| Create React App | React 官方已不推荐新项目使用，且对 SEO、路由、服务端能力不友好 | Next.js |
-| 纯客户端国际化切换 | 会削弱 SEO、首屏可见内容和路由一致性 | 基于 Next.js 路由的服务端优先国际化 |
-| v1 就引入重型 CMS 和数据库后台 | 当前资料不齐，首版以结构化占位和快速落地更重要 | 本地内容源，后续再平滑迁移 |
-| 大量依赖第三方页面构建器 | 会让组件质量、性能和双语维护失控 | 自建可复用 section/component 体系 |
+| SQLAlchemy 1.x 风格查询作为新代码主线 | 官方已将 2.0 风格作为标准，继续写旧风格会增加维护分裂 | SQLAlchemy 2.0 `select()` 风格 |
+| 在 React 组件中直接散落硬编码双语文案 | 双语维护和后续内容更新会快速失控 | 统一 i18n 消息与结构化内容源 |
+| 为官网首版引入过重的后台与 CMS | 当前更需要稳定前台体验和询盘链路，而不是复杂后台 | 先做薄后端 API + 结构化内容管理 |
+| 把 VChart 用成 dashboard 主界面 | 企业官网不是数据平台，图表过多会稀释品牌信息 | 只在解决方案或能力说明处少量使用图表 |
 
 ## Stack Patterns by Variant
 
-**If 仅做静态展示 + 简单联系方式:**
-- 使用 Next.js App Router + 静态生成
-- 联系方式直接展示，表单先接第三方服务
-- 因为这样上线更快、维护成本更低
+**If 首版只需要轻量内容与询盘闭环:**
+- 前端通过 React Router 组织页面
+- 后端仅提供询盘、内容配置和健康检查 API
+- 因为这样能控制后端复杂度，避免官网项目过度工程化
 
-**If 首版就要企业询盘闭环:**
-- 使用 Next.js Route Handler 或 Server Action + Zod + Resend
-- 因为可以把验证、投递、错误反馈和安全控制放在统一服务端边界
+**If 后续要加入简单内容管理:**
+- 保持 FastAPI + PostgreSQL 数据模型清晰
+- 再追加后台管理接口或管理端
+- 因为当前固定栈已经为后续内容后台预留了演进空间
 
-**If 后续要高频更新产品与资料下载:**
-- 保留当前内容模型
-- 二期再接 Headless CMS 或内部资料后台
-- 因为先把前台结构做稳定，比先做后台更有价值
+**If 需要在方案页展示能力数据:**
+- 使用 VChart 做少量条形图、对比图或流程辅助图
+- 跟随站点浅色/深色主题同步切换
+- 因为这比堆叠数字卡片更有表现力，但不应喧宾夺主
 
 ## Version Compatibility
 
 | Package A | Compatible With | Notes |
 |-----------|-----------------|-------|
-| next@16.1.x | react@19.2.x | Next.js 16 官方基于 React 最新能力，注意使用补丁版本规避 2025 年披露的 RSC 安全问题 |
-| next@16.1.x | next-intl@4.4+ | next-intl 发布记录明确提到对 Next.js 16 的适配 |
-| typescript@5.9 | next@16.1.x | 当前官方推荐组合，适合 App Router 与现代 tsconfig 初始化 |
-| tailwindcss@4.x | modern browsers | 官方兼容说明要求现代浏览器，适合企业官网面向主流桌面与移动设备的场景 |
+| Python 3.11 | FastAPI 0.125.x | FastAPI 当前版本线支持现代 Python 特性，Python 3.11 是稳妥选择 |
+| Python 3.11 | SQLAlchemy 2.0.x / Alembic 1.17.x | SQLAlchemy 2 和 Alembic 当前版本线都适合 Python 3.11 |
+| React 19.2.x | Vite 8.x | Vite 当前主线适合 React 19 项目构建 |
+| React 19.2.x | React Router 7.x | React Router 当前官方文档主线面向 React 18/19 |
+| React 19.2.x | TanStack Query 5.x | TanStack Query 当前 React 文档主线为 v5 |
+| VChart | 浅色/深色主题 | 官方文档支持注册与切换主题，可与全站主题系统联动 |
 
 ## Sources
 
-- [Next.js 官网](https://nextjs.org/) - 确认当前主版本已进入 16 系列
-- [Next.js App Router 文档](https://nextjs.org/docs/app) - 确认 App Router 为当前主线架构
-- [Next.js 国际化指南](https://nextjs.org/docs/app/guides/internationalization) - 确认服务端优先国际化路由方案
-- [Next.js generateMetadata 文档](https://nextjs.org/docs/app/api-reference/functions/generate-metadata) - 确认 SEO 元数据能力
-- [Next.js Forms 指南](https://nextjs.org/docs/app/guides/forms) - 确认表单与 Server Action 路径
-- [Next.js 静态导出指南](https://nextjs.org/docs/app/guides/static-exports) - 确认静态部署可行性
-- [Next.js Image 组件文档](https://nextjs.org/docs/app/api-reference/components/image) - 确认图片优化与安全配置
-- [Next.js 16 升级指南](https://nextjs.org/docs/app/guides/upgrading/version-16) - 确认 16 代更新主线
-- [React Versions](https://react.dev/versions) - 确认当前 React 主版本为 19.2
-- [React 19.2 发布说明](https://react.dev/blog/2025/10/01/react-19-2) - 确认 React 19.2 为当前版本线
-- [React 安全公告](https://react.dev/blog/2025/12/11/denial-of-service-and-source-code-exposure-in-react-server-components) - 确认应使用已修补的 19.2.x 补丁版本
-- [TypeScript 下载页](https://www.typescriptlang.org/download/) - 确认当前最新版本为 5.9
-- [TypeScript 5.9 发布说明](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-5-9.html) - 确认当前版本特性
-- [next-intl 官网](https://next-intl.dev/) - 确认其支持 App Router、静态渲染与国际化路由
-- [next-intl Releases](https://github.com/amannn/next-intl/releases) - 确认 4.x 系列与 Next.js 16 适配信息
-- [Zod 官网](https://zod.dev/packages/zod) - 确认 Zod 4 已稳定
-- [Tailwind CSS 兼容性文档](https://tailwindcss.com/docs/compatibility) - 确认 v4 面向现代浏览器
-- [Tailwind CSS Releases](https://github.com/tailwindlabs/tailwindcss/releases) - 确认 4.x 为当前稳定主线
-- [Resend 文档](https://resend.com/docs) - 确认可作为邮件投递方案
+- [Python 3.11 Documentation](https://docs.python.org/3.11/)
+- [FastAPI Release Notes](https://fastapi.tiangolo.com/release-notes/)
+- [FastAPI Version Guidance](https://fastapi.tiangolo.com/deployment/versions/)
+- [SQLAlchemy 2.0 Documentation](https://docs.sqlalchemy.org/20/)
+- [SQLAlchemy Unified Tutorial](https://docs.sqlalchemy.org/20/tutorial/index.html)
+- [Alembic Changelog](https://alembic.sqlalchemy.org/en/latest/changelog.html)
+- [PostgreSQL Documentation](https://www.postgresql.org/docs/)
+- [PostgreSQL 16 Documentation](https://www.postgresql.org/docs/16/)
+- [React Versions](https://react.dev/versions)
+- [Vite 8 Announcement](https://vite.dev/blog/announcing-vite8)
+- [Vite Documentation](https://vite.dev/)
+- [React Router Home](https://reactrouter.com/home)
+- [React Router Library Installation](https://reactrouter.com/start/library/installation)
+- [TanStack Query React Docs](https://tanstack.com/query/latest/docs/react/)
+- [TanStack Query Home](https://tanstack.com/query/latest)
+- [React VChart Docs](https://visactor.io/vchart/guide/tutorial_docs/Cross-terminal_and_Developer_Ecology/react)
+- [VChart Theme Customization](https://www.visactor.io/vchart/guide/tutorial_docs/Theme/Customize_Theme)
+- [Docker Compose Guide](https://docs.docker.com/guides/docker-compose/)
+- [Compose File Reference](https://docs.docker.com/compose/compose-file/)
+- [Use Compose in Production](https://docs.docker.com/compose/how-tos/production/)
 
 ---
 *Stack research for: bilingual industrial corporate website*

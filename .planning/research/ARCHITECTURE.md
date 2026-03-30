@@ -12,93 +12,97 @@
 [Browser]
    |
    v
-[Next.js App Router]
-   |-- [Locale Routing: /zh, /en]
-   |-- [Page Layouts + Sections]
-   |-- [Metadata / Sitemap / SEO]
+[React + Vite Frontend]
+   |-- [React Router: /zh, /en, /products, /solutions ...]
+   |-- [Theme Layer: light / dark]
+   |-- [VChart for selective data storytelling]
    |
-   +--> [Content Layer]
-   |      |-- company.ts
-   |      |-- product-categories.ts
-   |      |-- solutions.ts
-   |      |-- messages/zh.json
-   |      +-- messages/en.json
-   |
-   +--> [Inquiry Layer]
-          |-- Zod validation
-          |-- Server Action / Route Handler
-          +-- Email delivery or form service
+   +--> [TanStack Query]
+            |
+            v
+       [FastAPI Backend]
+            |-- [Public content / config endpoints]
+            |-- [Inquiry submission API]
+            |-- [Health check / admin-ready extension points]
+            |
+            v
+       [SQLAlchemy 2 + PostgreSQL]
+            |
+            v
+         [Alembic]
+
+[Docker Compose]
+   |-- frontend
+   |-- backend
+   `-- db
 ```
 
 ### Component Responsibilities
 
 | Component | Responsibility | Typical Implementation |
 |-----------|----------------|------------------------|
-| Locale routing | 处理中英文路径、默认语言与切换逻辑 | `app/[locale]/...` + `next-intl` |
-| Content layer | 承载公司信息、产品分类、解决方案、品牌合作、表单字段配置 | `src/content/*.ts` 或 `*.json` |
-| Page sections | 复用官网各页面版块，如 hero、产品栅格、品牌合作、CTA | `src/components/sections/*` |
-| Shared UI | 承载按钮、标题、卡片、导航、页脚、语言切换器等 | `src/components/ui/*` |
-| Inquiry layer | 接收、校验并转发询盘信息 | Server Action 或 Route Handler |
-| SEO layer | 管理页面 title、description、OG、sitemap、robots | `generateMetadata`, metadata files |
+| Frontend router | 组织中英文页面、产品树、方案页和联系页 | React Router nested routes |
+| Theme layer | 管理浅色/深色主题 token 与全站样式切换 | CSS variables + React theme state |
+| Content layer | 承载公司信息、产品分类、方案内容、合作品牌和支持信息 | 前端静态配置 + 后端配置接口 |
+| Query layer | 获取站点内容、提交询盘、管理缓存与重试 | TanStack Query |
+| API layer | 暴露询盘接口、站点配置接口和健康检查 | FastAPI routers |
+| Persistence layer | 存储询盘与未来可扩展的站点数据 | SQLAlchemy 2 + PostgreSQL |
+| Migration layer | 管理数据库结构演进 | Alembic |
+| Deployment layer | 统一本地开发和部署编排 | Docker Compose |
 
 ## Recommended Project Structure
 
 ```text
-src/
+frontend/
+|-- src/
+|   |-- app/                    # app bootstrap
+|   |-- router/                 # route definitions
+|   |-- pages/                  # top-level route pages
+|   |-- sections/               # reusable page sections
+|   |-- components/             # shared UI
+|   |-- features/
+|   |   |-- i18n/               # language setup
+|   |   |-- theme/              # light/dark theme system
+|   |   `-- inquiry/            # inquiry form UI logic
+|   |-- lib/
+|   |   |-- api/                # fetch client
+|   |   |-- query/              # query client/config
+|   |   `-- charts/             # VChart helpers
+|   `-- content/                # structured fallback content
+|-- public/
+|-- vite.config.ts
+`-- package.json
+
+backend/
 |-- app/
-|   |-- [locale]/
-|   |   |-- layout.tsx           # locale root layout
-|   |   |-- page.tsx             # homepage
-|   |   |-- products/
-|   |   |-- solutions/
-|   |   |-- brands/
-|   |   |-- support/
-|   |   |-- about/
-|   |   `-- contact/
-|   |-- sitemap.ts               # sitemap generation
-|   `-- robots.ts                # robots config
-|-- components/
-|   |-- sections/                # page-level sections
-|   |-- layout/                  # header/footer/nav
-|   `-- ui/                      # shared primitives
-|-- content/
-|   |-- company.ts               # company profile and address
-|   |-- products.ts              # category tree and product cards
-|   |-- solutions.ts             # solutions content
-|   |-- brands.ts                # partner brand content
-|   `-- support.ts               # service/support content
-|-- i18n/
-|   |-- routing.ts               # locale configuration
-|   `-- request.ts               # next-intl wiring
-|-- messages/
-|   |-- zh.json
-|   `-- en.json
-|-- lib/
-|   |-- metadata.ts              # shared seo helpers
-|   |-- schema.ts                # zod schemas
-|   `-- utils.ts
-|-- actions/
-|   `-- inquiry.ts               # inquiry server action
-public/
-|-- images/
-|-- downloads/
-`-- icons/
+|   |-- api/                    # FastAPI routers
+|   |-- core/                   # settings, security, app config
+|   |-- db/                     # engine, session, base
+|   |-- models/                 # SQLAlchemy models
+|   |-- schemas/                # Pydantic schemas
+|   |-- services/               # inquiry/content services
+|   `-- main.py                 # app entrypoint
+|-- alembic/
+|-- alembic.ini
+`-- pyproject.toml
+
+compose.yaml
 ```
 
 ### Structure Rationale
 
-- **`app/[locale]/`:** 让路由天然按语言分段，后续新增页面和 metadata 更清晰。
-- **`content/` 与 `messages/` 分离:** 结构化业务数据和纯翻译文案分开，便于维护。
-- **`sections/` 组件化:** 官网页面高度依赖版块复用，拆 section 比按页面复制更稳。
-- **`actions/` 独立:** 表单逻辑不应散落在页面组件里，便于后续切换邮件或 CRM 接入。
+- **`frontend/` 与 `backend/` 分离:** 当前栈明确是前后端分离，目录边界需要清晰。
+- **`features/theme` 独立:** 明暗主题是明确需求，不能散落在页面细节里临时实现。
+- **`features/i18n` 独立:** 双语与主题一样，属于全局能力而不是单页逻辑。
+- **`services/` 放在 FastAPI 后端:** 让询盘逻辑、内容读取逻辑和未来后台能力有明确边界。
 
 ## Architectural Patterns
 
-### Pattern 1: Content-Driven Pages
+### Pattern 1: Content-Driven Frontend
 
-**What:** 页面主要由结构化内容配置驱动，而不是把文本硬编码在组件里。  
-**When to use:** 企业官网、产品站、多语言站点。  
-**Trade-offs:** 前期多写一点结构定义，但后续维护成本显著降低。
+**What:** 页面由结构化内容和可复用 section 驱动，而不是把全部文本与结构写死在页面组件里。  
+**When to use:** 企业官网、多语言产品站、后续可能接后台的内容站。  
+**Trade-offs:** 前期需要先定义内容结构，但后续维护和替换资料明显更稳。
 
 **Example:**
 ```typescript
@@ -108,25 +112,24 @@ export const companyProfile = {
 }
 ```
 
-### Pattern 2: Server-First Rendering
+### Pattern 2: Thin Backend, Clear API Boundary
 
-**What:** 页面默认走服务端组件，仅在必要处使用客户端组件。  
-**When to use:** 品牌官网、SEO 页面、内容站。  
-**Trade-offs:** 交互代码要更克制，但能获得更好的首屏性能与 SEO。
+**What:** 后端优先承担询盘、配置、健康检查和未来扩展边界，而不是把官网首版做成重后台系统。  
+**When to use:** 品牌官网、展示站、轻业务闭环站点。  
+**Trade-offs:** 初期后端能力克制，但更符合官网项目节奏。
 
 **Example:**
-```typescript
-export default async function HomePage() {
-  const data = await getHomeContent()
-  return <HomeSections data={data} />
-}
+```python
+@router.post("/inquiries")
+async def create_inquiry(payload: InquiryCreate, session: SessionDep):
+    return await inquiry_service.create(session, payload)
 ```
 
-### Pattern 3: Locale-Segmented Routing
+### Pattern 3: Tokenized Theme System
 
-**What:** 通过 `/zh/...` 与 `/en/...` 维持稳定、可索引的双语路径。  
-**When to use:** 需要双语 SEO 和路径一致性的企业官网。  
-**Trade-offs:** 页面目录会多一层，但可维护性更高。
+**What:** 用统一 design tokens 驱动浅色/深色主题，而不是在组件中手写分散颜色判断。  
+**When to use:** 有明确主题切换要求的网站。  
+**Trade-offs:** 需要前期定义色板和语义 token，但后续所有组件与图表都能跟随。
 
 ## Data Flow
 
@@ -134,57 +137,57 @@ export default async function HomePage() {
 
 ```text
 [User visits /en/products]
-    -> [locale route]
-    -> [load translations + product content]
-    -> [render layout + page sections]
-    -> [inject metadata]
-    -> [send HTML]
+    -> [React Router route]
+    -> [TanStack Query / local content lookup]
+    -> [render sections]
+    -> [apply active theme tokens]
+    -> [optional API request to backend]
 ```
 
 ### State Management
 
 ```text
-Static content
-    -> loaded on server
-    -> rendered to sections
+Theme state
+    -> stored in UI preference
+    -> mapped to CSS variables and chart theme
 
-Form state
-    -> optional client component
-    -> validate with zod
-    -> submit to server action
+Server data
+    -> fetched by TanStack Query
+    -> cached in frontend
+    -> rendered by route pages and sections
 ```
 
 ### Key Data Flows
 
-1. **Page rendering flow:** locale route -> content lookup -> section composition -> metadata generation -> response
-2. **Inquiry flow:** user input -> client/server validation -> email/form service -> success or failure feedback
+1. **Page rendering flow:** route match -> locale content load -> section composition -> theme apply -> page render
+2. **Inquiry flow:** user input -> frontend validation -> FastAPI API -> SQLAlchemy session -> PostgreSQL persistence -> success/error response
 
 ## Scaling Considerations
 
 | Scale | Architecture Adjustments |
 |-------|--------------------------|
-| 0-1k visits/day | 纯前台结构 + CDN + 本地内容源即可 |
-| 1k-100k visits/day | 优化图片、缓存、表单速率限制、日志与监控 |
-| 100k+ visits/day | 考虑把内容管理、搜索和表单线索接入拆分成独立服务 |
+| 0-1k visits/day | React + FastAPI + PostgreSQL in one Compose stack is sufficient |
+| 1k-100k visits/day | 加入缓存、限流、日志与监控，优化静态资源和 API 热点 |
+| 100k+ visits/day | 前端静态资源 CDN 化，后端水平拆分，数据库和内容服务独立扩容 |
 
 ### Scaling Priorities
 
-1. **First bottleneck:** 图片和首屏体积，先通过 `next/image`、静态资源规范化和 section 精简解决。
-2. **Second bottleneck:** 内容更新流程，如果更新频率升高，再引入 CMS 或后台编辑链路。
+1. **First bottleneck:** 前端首屏资源与图片体积，先靠资源压缩、按需图表和 section 精简解决。
+2. **Second bottleneck:** 询盘接口与数据库连接管理，随后补连接池、限流和后台运维监控。
 
 ## Anti-Patterns
 
-### Anti-Pattern 1: 在组件里直接写死双语文案
+### Anti-Pattern 1: 为官网首版做过重后台
 
-**What people do:** 在 JSX 中直接塞中文，然后再用条件判断补英文。  
-**Why it's wrong:** 页面一多就会难以维护，也不利于统一 SEO。  
-**Do this instead:** 统一使用 locale 路由 + message 文件 + 结构化内容源。
+**What people do:** 一开始就把 CMS、权限、复杂管理后台和工作流全做进去。  
+**Why it's wrong:** 会把官网项目拉成后台项目，稀释核心目标。  
+**Do this instead:** 先做薄后端，只承载询盘和站点配置边界。
 
-### Anti-Pattern 2: 所有页面都做成客户端组件
+### Anti-Pattern 2: 主题切换只换背景色
 
-**What people do:** 为了省事全站加 `use client`。  
-**Why it's wrong:** 企业官网最看重首屏、SEO 和稳定输出，这会徒增 JS 体积。  
-**Do this instead:** 默认服务端组件，只有表单和必要交互才客户端化。
+**What people do:** 只做页面背景深浅切换，但按钮、图表、边界线和文本对比度没跟上。  
+**Why it's wrong:** 最终浅深色都“不完整”，会显得很廉价。  
+**Do this instead:** 用 token 驱动文本、边框、图表、CTA 和状态色的整体切换。
 
 ## Integration Points
 
@@ -192,26 +195,31 @@ Form state
 
 | Service | Integration Pattern | Notes |
 |---------|---------------------|-------|
-| Resend or mail provider | Server Action / Route Handler | 用于留言表单投递 |
-| Analytics | Script or framework integration | 首版可后置，避免过早复杂化 |
-| Map service | Embedded map or static map link | 联系页可后续补充 |
+| Mail provider | FastAPI service layer | 用于留言表单通知 |
+| Analytics | Frontend script / API | 可后置接入 |
+| Map service | Contact page embed or link | 联系页可后续补充 |
 
 ### Internal Boundaries
 
 | Boundary | Communication | Notes |
 |----------|---------------|-------|
-| `content` -> `sections` | direct imports | 适合首版静态和半静态内容 |
-| `messages` -> UI text | `next-intl` hooks/helpers | 避免直接访问原始 JSON |
-| `contact form` -> `actions` | form submission | 要统一校验和错误反馈 |
+| `frontend content` -> `pages/sections` | direct imports + query hydration | 首版可静态优先，后续再逐步 API 化 |
+| `frontend inquiry` -> `backend api` | HTTP JSON | 前后端校验应保持一致 |
+| `backend services` -> `db models` | service + repository style | 避免路由直接操作数据库 |
+| `theme system` -> `VChart` | shared theme mapping | 图表主题必须跟随站点主题 |
 
 ## Sources
 
-- [Next.js App Router](https://nextjs.org/docs/app)
-- [Next.js 国际化指南](https://nextjs.org/docs/app/guides/internationalization)
-- [Next.js Forms 指南](https://nextjs.org/docs/app/guides/forms)
-- [Next.js Image 组件文档](https://nextjs.org/docs/app/api-reference/components/image)
-- [Next.js generateMetadata 文档](https://nextjs.org/docs/app/api-reference/functions/generate-metadata)
-- [next-intl 官网](https://next-intl.dev/)
+- [FastAPI Release Notes](https://fastapi.tiangolo.com/release-notes/)
+- [SQLAlchemy 2.0 Documentation](https://docs.sqlalchemy.org/20/)
+- [SQLAlchemy Unified Tutorial](https://docs.sqlalchemy.org/20/tutorial/index.html)
+- [Alembic Changelog](https://alembic.sqlalchemy.org/en/latest/changelog.html)
+- [React Router Home](https://reactrouter.com/home)
+- [React Router Library Installation](https://reactrouter.com/start/library/installation)
+- [TanStack Query React Docs](https://tanstack.com/query/latest/docs/react/)
+- [React VChart Docs](https://visactor.io/vchart/guide/tutorial_docs/Cross-terminal_and_Developer_Ecology/react)
+- [VChart Theme Customization](https://www.visactor.io/vchart/guide/tutorial_docs/Theme/Customize_Theme)
+- [Docker Compose Guide](https://docs.docker.com/guides/docker-compose/)
 
 ---
 *Architecture research for: bilingual industrial corporate website*

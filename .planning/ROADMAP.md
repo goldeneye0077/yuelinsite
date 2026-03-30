@@ -2,7 +2,7 @@
 
 ## Overview
 
-本项目将从双语基础架构和全站信息骨架开始，先建立可扩展的官网底盘，再逐步完成品牌首页、产品中心、解决方案与支持内容，最后收口询盘转化、响应式质量、SEO 与上线准备。路线图的顺序遵循一个原则：先解决结构问题，再解决内容承载，最后补齐转化和上线质量。
+本项目将从前后端基础架构、Docker Compose 运行环境、双语路由和主题系统开始，先建立可扩展的官网底盘，再逐步完成品牌首页、产品中心、解决方案与支持内容，最后收口询盘转化、响应式质量与上线准备。路线图的顺序遵循一个原则：先解决平台与结构问题，再解决内容承载，最后补齐转化和上线质量。
 
 ## Phases
 
@@ -12,7 +12,7 @@
 
 Decimal phases appear between their surrounding integers in numeric order.
 
-- [ ] **Phase 1: Foundation & Bilingual Shell** - 搭建官网技术基座、双语路由和全站公共框架
+- [ ] **Phase 1: Platform Foundation & Theme Shell** - 搭建前后端底座、Docker Compose、双语路由和明暗主题框架
 - [ ] **Phase 2: Brand Story & Corporate Presence** - 完成首页、关于我们和品牌信任表达
 - [ ] **Phase 3: Product Center & Taxonomy** - 建立产品中心结构和工业传感器细分类目
 - [ ] **Phase 4: Solutions, Brands & Support** - 完成解决方案、品牌合作和服务支持内容
@@ -20,22 +20,23 @@ Decimal phases appear between their surrounding integers in numeric order.
 
 ## Phase Details
 
-### Phase 1: Foundation & Bilingual Shell
-**Goal**: 建立可扩展的官网底盘，包括技术栈、双语路由、全局布局、导航和基础页面框架  
+### Phase 1: Platform Foundation & Theme Shell
+**Goal**: 建立可扩展的官网底盘，包括前后端工程、Docker Compose、双语路由、主题系统、全局布局和基础页面框架  
 **Depends on**: Nothing (first phase)  
-**Requirements**: [GLOB-01, GLOB-02, GLOB-03]  
+**Requirements**: [GLOB-01, GLOB-02, GLOB-03, GLOB-05]  
 **UI hint**: yes  
 **Success Criteria** (what must be TRUE):
   1. User can access both Chinese and English homepage routes with the same site structure
   2. User can switch language from the global navigation without losing orientation
   3. User can reach the main sections and contact entry from a shared header and footer on core templates
-  4. User sees a stable desktop and mobile navigation shell ready for inner-page expansion
+  4. User can switch between light and dark themes and keep core navigation, typography, and chart areas readable
+  5. Developers can start frontend, backend, and database together through a single Docker Compose setup
 **Plans**: 3 plans
 
 Plans:
-- [ ] 01-01: Scaffold the Next.js app, styling foundation, and project conventions
-- [ ] 01-02: Implement locale routing, message loading, and bilingual page shell
-- [ ] 01-03: Build shared layout, header, footer, and mobile navigation
+- [ ] 01-01: Scaffold the React + Vite frontend, FastAPI backend, PostgreSQL integration baseline, and Docker Compose setup
+- [ ] 01-02: Implement locale routing, content loading conventions, and frontend-backend API contract for site data and inquiries
+- [ ] 01-03: Build shared layout, header, footer, mobile navigation, and the light/dark theme token system
 
 ### Phase 2: Brand Story & Corporate Presence
 **Goal**: 用首页、关于我们和企业信任内容把品牌定位、公司介绍和联系事实讲清楚  
@@ -92,7 +93,7 @@ Plans:
 - [ ] 04-04: Build service and support page with catalog/download request entry
 
 ### Phase 5: Inquiry, QA & Launch Readiness
-**Goal**: 补齐联系与询盘闭环，验证响应式体验和核心 SEO，形成可上线状态  
+**Goal**: 补齐联系与询盘闭环，验证响应式体验与主题一致性，并形成可上线状态  
 **Depends on**: Phase 4  
 **Requirements**: [LEAD-01, LEAD-02, LEAD-03, GLOB-04]  
 **UI hint**: yes  
@@ -101,23 +102,24 @@ Plans:
   2. User can submit an inquiry form with essential business fields and receive clear feedback
   3. User can find inquiry entry points from homepage, product, solution, and contact pages
   4. User can browse the core pages on desktop and mobile without blocked navigation or broken layouts
-  5. Core pages expose launch-ready metadata, sitemap coverage, and acceptable performance for a corporate website
+  5. User sees consistent light/dark theme behavior across the core pages and chart surfaces
+  6. Developers can build and run the launch-ready stack through Docker Compose with stable environment configuration
 **Plans**: 4 plans
 
 Plans:
-- [ ] 05-01: Build contact page, inquiry form, validation, and submission flow
+- [ ] 05-01: Build contact page, inquiry form, backend validation, persistence, and submission flow
 - [ ] 05-02: Audit and add CTA entry points across homepage, product, solution, and contact pages
-- [ ] 05-03: Complete responsive QA, content polish, and accessibility/performance fixes
-- [ ] 05-04: Finalize metadata, sitemap, launch checklist, and release-ready verification
+- [ ] 05-03: Complete responsive QA, theme consistency checks, and accessibility/performance fixes
+- [ ] 05-04: Finalize Docker Compose deployment workflow, launch checklist, and release-ready verification
 
 ## Progress
 
 **Execution Order:**
-Phases execute in numeric order: 2 -> 2.1 -> 2.2 -> 3 -> 3.1 -> 4
+Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Foundation & Bilingual Shell | 0/3 | Not started | - |
+| 1. Platform Foundation & Theme Shell | 0/3 | Not started | - |
 | 2. Brand Story & Corporate Presence | 0/4 | Not started | - |
 | 3. Product Center & Taxonomy | 0/4 | Not started | - |
 | 4. Solutions, Brands & Support | 0/4 | Not started | - |

@@ -11,6 +11,7 @@
 - [ ] **GLOB-02**: User can switch language without losing orientation in the site
 - [ ] **GLOB-03**: User can reach the main sections and contact entry from a consistent global header and footer
 - [ ] **GLOB-04**: User can browse the core pages on desktop and mobile without layout breakage or blocked navigation
+- [ ] **GLOB-05**: User can switch between light and dark themes and read the core UI and chart surfaces clearly in both modes
 
 ### Homepage
 
@@ -84,6 +85,7 @@
 | GLOB-02 | Phase 1 | Pending |
 | GLOB-03 | Phase 1 | Pending |
 | GLOB-04 | Phase 5 | Pending |
+| GLOB-05 | Phase 1 | Pending |
 | HOME-01 | Phase 2 | Pending |
 | HOME-02 | Phase 2 | Pending |
 | HOME-03 | Phase 2 | Pending |
@@ -105,8 +107,8 @@
 | LEAD-03 | Phase 5 | Pending |
 
 **Coverage:**
-- v1 requirements: 23 total
-- Mapped to phases: 23
+- v1 requirements: 24 total
+- Mapped to phases: 24
 - Unmapped: 0 - complete
 
 ---
