@@ -35,7 +35,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 **Plans**: 3 plans
 
 Plans:
-- [ ] 01-01: Scaffold the React + Vite frontend, FastAPI backend, PostgreSQL integration baseline, and Docker Compose setup
+- [x] 01-01: Scaffold the React + Vite frontend, FastAPI backend, PostgreSQL integration baseline, and Docker Compose setup
 - [ ] 01-02: Implement locale routing, content loading conventions, and frontend-backend API contract for site data and inquiries
 - [ ] 01-03: Build shared layout, header, footer, mobile navigation, the light/dark theme token system, and the Precision Industrial visual foundation
 
@@ -121,7 +121,7 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Platform Foundation & Theme Shell | 0/3 | Not started | - |
+| 1. Platform Foundation & Theme Shell | 1/3 | In progress | 2026-03-30 (01-01) |
 | 2. Brand Story & Corporate Presence | 0/4 | Not started | - |
 | 3. Product Center & Taxonomy | 0/4 | Not started | - |
 | 4. Solutions, Brands & Support | 0/4 | Not started | - |

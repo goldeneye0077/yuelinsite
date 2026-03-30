@@ -10,28 +10,28 @@ See: .planning/PROJECT.md (updated 2026-03-30)
 ## Current Position
 
 Phase: 1 of 5 (Platform Foundation & Theme Shell)
-Plan: 3 of 3 drafted for current phase
-Status: Ready to execute
-Last activity: 2026-03-30 - Planned Phase 1 with context, research, validation, UI contract, and executable plans
+Plan: 1 of 3 completed in current phase
+Status: Ready for Plan 01-02
+Last activity: 2026-03-30 - Implemented Plan 01-01 with the repo scaffold, Compose runtime, backend health service, and smoke tests
 
-Progress: [-----] 0%
+Progress: [#----] 7%
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 0
-- Average duration: -
-- Total execution time: -
+- Total plans completed: 1
+- Average duration: ~65 minutes
+- Total execution time: ~65 minutes
 
 **By Phase:**
 
 | Phase | Plans | Total | Avg/Plan |
 |-------|-------|-------|----------|
-| - | - | - | - |
+| 1 | 1 | ~65m | ~65m |
 
 **Recent Trend:**
-- Last 5 plans: -
-- Trend: Stable
+- Last 5 plans: 01-01 complete
+- Trend: Starting
 
 ## Accumulated Context
 
@@ -44,18 +44,21 @@ Recent decisions affecting current work:
 - Initialization: Use 5 top-level product categories plus detailed industrial sensor subcategories from the reference site
 - Initialization: Build with a React + Vite frontend, FastAPI + PostgreSQL backend, and Docker Compose deployment workflow
 - Initialization: Provide light and dark themes from the foundation phase instead of bolting them on later
+- Execution 01-01: Frontend verification should not depend on the database or backend being up
+- Execution 01-01: PostgreSQL remains internal to Compose for now instead of binding host port `5432`
 
 ### Pending Todos
 
-None yet.
+- Continue with Plan 01-02 locale routing and site/inquiry contract implementation.
 
 ### Blockers/Concerns
 
 - Real product images, contact channels beyond the address, and trust assets are still placeholders
 - English copy will need a later polish pass before production launch
+- `npm audit` reports 2 critical vulnerabilities in transitive frontend packages and needs a later remediation pass
 
 ## Session Continuity
 
 Last session: 2026-03-30 00:00
-Stopped at: Phase 1 planning complete; execution can start from Plan 01-01
-Resume file: .planning/phases/01-platform-foundation-theme-shell/01-01-PLAN.md
+Stopped at: Plan 01-01 complete; Phase 1 can continue with locale routing and contract work
+Resume file: .planning/phases/01-platform-foundation-theme-shell/01-02-PLAN.md
