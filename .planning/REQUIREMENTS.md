@@ -80,34 +80,34 @@
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| GLOB-01 | TBD | Pending |
-| GLOB-02 | TBD | Pending |
-| GLOB-03 | TBD | Pending |
-| GLOB-04 | TBD | Pending |
-| HOME-01 | TBD | Pending |
-| HOME-02 | TBD | Pending |
-| HOME-03 | TBD | Pending |
-| PROD-01 | TBD | Pending |
-| PROD-02 | TBD | Pending |
-| PROD-03 | TBD | Pending |
-| PROD-04 | TBD | Pending |
-| SOLN-01 | TBD | Pending |
-| SOLN-02 | TBD | Pending |
-| BRND-01 | TBD | Pending |
-| BRND-02 | TBD | Pending |
-| SUPP-01 | TBD | Pending |
-| SUPP-02 | TBD | Pending |
-| ABOU-01 | TBD | Pending |
-| ABOU-02 | TBD | Pending |
-| ABOU-03 | TBD | Pending |
-| LEAD-01 | TBD | Pending |
-| LEAD-02 | TBD | Pending |
-| LEAD-03 | TBD | Pending |
+| GLOB-01 | Phase 1 | Pending |
+| GLOB-02 | Phase 1 | Pending |
+| GLOB-03 | Phase 1 | Pending |
+| GLOB-04 | Phase 5 | Pending |
+| HOME-01 | Phase 2 | Pending |
+| HOME-02 | Phase 2 | Pending |
+| HOME-03 | Phase 2 | Pending |
+| PROD-01 | Phase 3 | Pending |
+| PROD-02 | Phase 3 | Pending |
+| PROD-03 | Phase 3 | Pending |
+| PROD-04 | Phase 3 | Pending |
+| SOLN-01 | Phase 4 | Pending |
+| SOLN-02 | Phase 4 | Pending |
+| BRND-01 | Phase 4 | Pending |
+| BRND-02 | Phase 4 | Pending |
+| SUPP-01 | Phase 4 | Pending |
+| SUPP-02 | Phase 4 | Pending |
+| ABOU-01 | Phase 2 | Pending |
+| ABOU-02 | Phase 2 | Pending |
+| ABOU-03 | Phase 2 | Pending |
+| LEAD-01 | Phase 5 | Pending |
+| LEAD-02 | Phase 5 | Pending |
+| LEAD-03 | Phase 5 | Pending |
 
 **Coverage:**
 - v1 requirements: 23 total
-- Mapped to phases: 0
-- Unmapped: 23 - warning
+- Mapped to phases: 23
+- Unmapped: 0 - complete
 
 ---
 *Requirements defined: 2026-03-30*
