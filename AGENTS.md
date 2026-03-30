@@ -42,6 +42,9 @@
 
 ## Notes
 
+- UI direction uses `Precision Industrial`: deep navy, steel gray, cool white, and sparse amber accents; light mode should feel like an engineering catalog, dark mode like a control room
+- Homepage hero should behave like a poster with one dominant visual anchor, not a SaaS-style card collage
+- Use VChart sparingly and narratively in solution contexts, not as a dashboard centerpiece
 - 后端优先承担询盘、内容配置与未来扩展边界，不要为了企业官网首版过度堆砌后台复杂度
 - 英文文案目前为首版规划级内容，正式上线前应统一润色
 - 产品图片、联系电话、企业邮箱、资质证书、品牌授权图等素材后续补齐

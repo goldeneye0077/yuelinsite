@@ -21,7 +21,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 ## Phase Details
 
 ### Phase 1: Platform Foundation & Theme Shell
-**Goal**: 建立可扩展的官网底盘，包括前后端工程、Docker Compose、双语路由、主题系统、全局布局和基础页面框架  
+**Goal**: 建立可扩展的官网底盘，包括前后端工程、Docker Compose、双语路由、主题系统、全局布局和 Precision Industrial 的视觉基线  
 **Depends on**: Nothing (first phase)  
 **Requirements**: [GLOB-01, GLOB-02, GLOB-03, GLOB-05]  
 **UI hint**: yes  
@@ -31,15 +31,16 @@ Decimal phases appear between their surrounding integers in numeric order.
   3. User can reach the main sections and contact entry from a shared header and footer on core templates
   4. User can switch between light and dark themes and keep core navigation, typography, and chart areas readable
   5. Developers can start frontend, backend, and database together through a single Docker Compose setup
+  6. User sees a stable industrial visual baseline in both themes, with restrained chrome and no template-style first impression
 **Plans**: 3 plans
 
 Plans:
 - [ ] 01-01: Scaffold the React + Vite frontend, FastAPI backend, PostgreSQL integration baseline, and Docker Compose setup
 - [ ] 01-02: Implement locale routing, content loading conventions, and frontend-backend API contract for site data and inquiries
-- [ ] 01-03: Build shared layout, header, footer, mobile navigation, and the light/dark theme token system
+- [ ] 01-03: Build shared layout, header, footer, mobile navigation, the light/dark theme token system, and the Precision Industrial visual foundation
 
 ### Phase 2: Brand Story & Corporate Presence
-**Goal**: 用首页、关于我们和企业信任内容把品牌定位、公司介绍和联系事实讲清楚  
+**Goal**: 用首页、关于我们和企业信任内容，把品牌定位、公司介绍和联系事实用高辨识度的工业视觉语言讲清楚  
 **Depends on**: Phase 1  
 **Requirements**: [HOME-01, HOME-02, HOME-03, ABOU-01, ABOU-02, ABOU-03]  
 **UI hint**: yes  
@@ -48,13 +49,14 @@ Plans:
   2. User can view a complete bilingual company profile and the Shenzhen office address
   3. User can see trust-building sections such as core strengths, company introduction, and reserved qualification/authorization areas
   4. User can enter product, solutions, and inquiry paths directly from homepage CTA modules
+  5. User sees a first-screen composition with one dominant visual anchor instead of a generic card-grid hero
 **Plans**: 4 plans
 
 Plans:
-- [ ] 02-01: Build homepage hero, positioning, and core value sections
+- [ ] 02-01: Build a poster-like homepage hero with strong brand hierarchy, dominant visual anchor, and restrained CTA composition
 - [ ] 02-02: Build bilingual company profile and About page content
-- [ ] 02-03: Add trust modules, reserved qualification blocks, and brand-consistent visual system
-- [ ] 02-04: Wire company facts, address, and supporting bilingual copy across core brand pages
+- [ ] 02-03: Add trust modules, reserved qualification blocks, and brand-consistent cardless section layouts
+- [ ] 02-04: Wire company facts, address, supporting bilingual copy, and controlled motion details across core brand pages
 
 ### Phase 3: Product Center & Taxonomy
 **Goal**: 建立产品中心的信息架构、5 个一级类与工业传感器二级分类，并形成可浏览的产品页体系  
