@@ -3,18 +3,14 @@ import { render, screen } from '@testing-library/react'
 import { App } from './App'
 
 describe('App', () => {
-  it('renders the project brand and foundation summary', () => {
+  it('renders the routed bilingual foundation shell', async () => {
     render(<App />)
 
     expect(
-      screen.getByRole('heading', { name: /shenzhen yuelin technology/i }),
+      await screen.findByRole('heading', { name: /shenzhen yuelin technology/i }),
     ).toBeInTheDocument()
     expect(
-      screen.getByText(/building the bilingual industrial site foundation/i),
+      await screen.findByRole('link', { name: /switch to english/i }),
     ).toBeInTheDocument()
-    expect(screen.getByRole('link', { name: /api health/i })).toHaveAttribute(
-      'href',
-      'http://localhost:8000/api/health',
-    )
   })
 })

@@ -108,6 +108,24 @@ select {
   gap: 14px;
 }
 
+.route-header {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.route-chip {
+  display: inline-flex;
+  align-items: center;
+  min-height: 32px;
+  padding: 6px 12px;
+  border: 1px solid rgba(17, 34, 50, 0.12);
+  border-radius: 999px;
+  color: #385066;
+  font-size: 0.88rem;
+  background: rgba(255, 255, 255, 0.45);
+}
+
 .primary-link {
   display: inline-flex;
   align-items: center;
