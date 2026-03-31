@@ -47,6 +47,18 @@ export type ProcessStep = {
   detail: string
 }
 
+export type SolutionTrack = {
+  step: string
+  title: string
+  summary: string
+  scenarioTitle: string
+  scenario: string
+  scopeTitle: string
+  scope: string[]
+  valueTitle: string
+  value: string[]
+}
+
 export type FooterLinkItem = {
   label: string
   section: SectionRouteKey
@@ -114,6 +126,25 @@ export interface SiteContent {
   }
   productCenter: RoutePageContent
   solutions: RoutePageContent
+  solutionsPage: {
+    eyebrow: string
+    heroSummary: string
+    heroDescription: string
+    coverageTitle: string
+    coverageSummary: string
+    coverageItems: TrustSignal[]
+    tracksTitle: string
+    tracksSummary: string
+    tracks: SolutionTrack[]
+    coordinationTitle: string
+    coordinationSummary: string
+    coordinationItems: HighlightItem[]
+    processTitle: string
+    processSummary: string
+    processSteps: ProcessStep[]
+    finalCtaTitle: string
+    finalCtaBody: string
+  }
   support: RoutePageContent
   about: RoutePageContent
   aboutPage: {

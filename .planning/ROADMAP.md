@@ -103,8 +103,8 @@ The guiding principle is simple: solve platform and structure first, then conten
 
 **Plans**: 4 plans
 
-- [ ] 04-01: Build solution content structure for industrial automation, software development, and technical integration
-- [ ] 04-02: Implement bilingual solution pages and CTA sections
+- [x] 04-01: Build solution content structure and a dedicated overview page for industrial automation, software development, and technical integration
+- [ ] 04-02: Deepen the bilingual solutions experience with stronger track-level CTA sections and transitions
 - [ ] 04-03: Implement brand cooperation modules with contextual partner presentation
 - [ ] 04-04: Build the service/support page with catalog and download request entry
 
@@ -138,5 +138,5 @@ The guiding principle is simple: solve platform and structure first, then conten
 | 1. Platform Foundation & Theme Shell | 3/3 | Complete | 2026-03-31 (01-01, 01-02, 01-03) |
 | 2. Brand Story & Corporate Presence | 4/4 | Complete | 2026-03-31 (02-01, 02-02, 02-03, 02-04) |
 | 3. Product Center & Taxonomy | 4/4 | Complete | 2026-03-31 (03-01, 03-02, 03-03, 03-04) |
-| 4. Solutions, Brands & Support | 0/4 | Not started | - |
+| 4. Solutions, Brands & Support | 1/4 | In progress | 2026-03-31 (04-01) |
 | 5. Inquiry, QA & Launch Readiness | 0/4 | Not started | - |

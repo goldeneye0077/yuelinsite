@@ -219,11 +219,155 @@ export const enSiteContent: SiteContent = {
   solutions: {
     title: 'Solutions',
     summary:
-      'Industrial automation, software development, and technical integration will share one clear consulting narrative.',
+      'Industrial automation solutions, software development, and technical integration are framed as one connected path from selection to project delivery.',
     description:
-      'This placeholder will later carry scenario framing, delivery scope, and the right consultation path for each customer type.',
+      'This page establishes the bilingual solutions structure first, so equipment makers, integrators, and factory-side teams can quickly judge fit, scope, and next steps.',
     primaryCta: 'Request Consultation / \u83b7\u53d6\u54a8\u8be2',
-    secondaryCta: 'Return home',
+    secondaryCta: 'View product center',
+  },
+  solutionsPage: {
+    eyebrow: 'Solutions and delivery paths',
+    heroSummary:
+      'From industrial sensor selection to software coordination and field integration, Yuelin Technology presents three service tracks that are easier for industrial buyers to scan and compare.',
+    heroDescription:
+      'The page answers three practical questions first: what kinds of projects fit, what support scope can be covered, and what the customer should expect from the collaboration. That keeps the first discussion grounded before anyone has to read the full catalog.',
+    coverageTitle: 'Customer fit and project stage',
+    coverageSummary:
+      'Whether the need is a new machine, a line-side upgrade, or a project that must connect sensing, execution, and control, this view should make the collaboration boundary easier to read.',
+    coverageItems: [
+      {
+        label: 'Equipment makers',
+        title: 'For new-machine development and coordinated selection',
+        detail:
+          'Useful when the project needs sensors, execution units, interface direction, and outgoing reliability considered together.',
+      },
+      {
+        label: 'System integrators',
+        title: 'For interface review and implementation alignment',
+        detail:
+          'Useful when signal paths, control interfaces, brand preference, and delivery boundaries need to be clarified early.',
+      },
+      {
+        label: 'Factory-side teams',
+        title: 'For production-line upgrades and replacement support',
+        detail:
+          'Useful around inspection stations, positioning units, safety reinforcement, or cycle-time-driven retrofit work.',
+      },
+    ],
+    tracksTitle: 'Three solution directions',
+    tracksSummary:
+      'The goal is to make the direction legible first, then move into models, pricing, and project follow-up without forcing industrial customers through fragmented information.',
+    tracks: [
+      {
+        step: '01',
+        title: 'Industrial automation solutions',
+        summary:
+          'Bring sensing, execution, control, and production rhythm into one implementation path instead of treating them as separate conversations.',
+        scenarioTitle: 'Applicable scenarios',
+        scenario:
+          'Suitable for new equipment development, inspection-station builds, machine upgrades, line retrofits, and safety reinforcement projects.',
+        scopeTitle: 'Support scope',
+        scope: [
+          'Selection guidance across sensors, pneumatic units, and linear modules',
+          'Interface alignment for inspection, positioning, safety, and motion linkage',
+          'Implementation guidance shaped by equipment structure and field constraints',
+        ],
+        valueTitle: 'Expected value',
+        value: [
+          'Reduce early-stage selection and integration friction',
+          'Align equipment-side and control-side boundaries earlier',
+          'Create a clearer path into sampling, quotation, and validation',
+        ],
+      },
+      {
+        step: '02',
+        title: 'Software development',
+        summary:
+          'Connect field signals, logic handling, and operator-facing software into one practical software route.',
+        scenarioTitle: 'Applicable scenarios',
+        scenario:
+          'Suitable for automation-adjacent work that needs data capture, status monitoring, workstation logic, basic visualization, or lightweight business coordination.',
+        scopeTitle: 'Support scope',
+        scope: [
+          'Field-signal structuring and software-logic breakdown',
+          'Lightweight planning around monitoring, parameters, alarms, and process flow',
+          'Basic UI or data-handling support attached to existing automation projects',
+        ],
+        valueTitle: 'Expected value',
+        value: [
+          'Extend the conversation from hardware selection into software coordination',
+          'Reduce the gap between sensor data and field logic',
+          'Help customers see a clearer path from detection to usable information',
+        ],
+      },
+      {
+        step: '03',
+        title: 'Technical integration',
+        summary:
+          'Combine brands, interfaces, execution units, and implementation boundaries into a coordinated route that can actually move forward.',
+        scenarioTitle: 'Applicable scenarios',
+        scenario:
+          'Suitable for multi-brand environments, complex system connections, field-constrained installations, or projects that need sustained technical coordination.',
+        scopeTitle: 'Support scope',
+        scope: [
+          'Interface coordination around partner brands and existing systems',
+          'Layout, linkage, and replacement planning based on field conditions',
+          'Continuous technical alignment across selection, validation, and delivery',
+        ],
+        valueTitle: 'Expected value',
+        value: [
+          'Help project teams align brand and interface strategy faster',
+          'Lower rework risk when plans change on site',
+          'Keep commercial discussion and technical implementation in the same rhythm',
+        ],
+      },
+    ],
+    coordinationTitle: 'What to prepare for the first conversation',
+    coordinationSummary:
+      'If the project does not yet have a complete specification file, these inputs are enough to start productively.',
+    coordinationItems: [
+      {
+        title: 'Equipment and station boundary',
+        detail:
+          'Share the equipment type, inspection target, cycle requirement, and installation limits to narrow the route faster.',
+      },
+      {
+        title: 'Interface and control conditions',
+        detail:
+          'Sync PLC, IO, communication method, software linkage, or execution-unit interfaces early so implementation complexity is easier to judge.',
+      },
+      {
+        title: 'Delivery target and timing',
+        detail:
+          'Whether the need is sampling, replacement, validation, or a broader line upgrade, a clear milestone makes the next step more effective.',
+      },
+    ],
+    processTitle: 'How the solution path moves forward',
+    processSummary:
+      'The solutions page should not only list capabilities. It should also explain the route: confirm the scenario first, align the boundaries next, then move into commercial and implementation follow-up.',
+    processSteps: [
+      {
+        step: '01',
+        title: 'Confirm the scenario and target',
+        detail:
+          'Clarify the inspection target, motion relationship, safety expectation, and field limits so the problem definition is stable.',
+      },
+      {
+        step: '02',
+        title: 'Align product, software, and integration boundaries',
+        detail:
+          'Use the chosen solution direction to decide the needed sensors, execution units, software logic, and coordination interfaces.',
+      },
+      {
+        step: '03',
+        title: 'Move into inquiry and execution follow-up',
+        detail:
+          'Once the direction is clear, the route can progress into quotation, sampling, validation planning, or implementation scheduling.',
+      },
+    ],
+    finalCtaTitle: 'If the scenario is already clear, the next step is the conversation',
+    finalCtaBody:
+      'Share the equipment type, detection target, control method, or retrofit goal first, and we can narrow the path through the most suitable solution direction.',
   },
   support: {
     title: 'Support',
