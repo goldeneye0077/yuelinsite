@@ -42,5 +42,8 @@ def test_inquiry_contract_returns_phase_five_notice(client):
         },
     )
 
-    assert response.status_code == 501
-    assert 'Phase 5' in response.json()['detail']
+    assert response.status_code == 201
+    payload = response.json()
+    assert payload['status'] == 'received'
+    assert payload['submissionId'] == 1
+    assert payload['detail'] == '询盘已收到，我们会尽快与您联系。'

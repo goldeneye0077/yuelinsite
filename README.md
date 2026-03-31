@@ -16,6 +16,7 @@ docker compose up --build
 
 Frontend: `http://localhost:5173`
 Backend health: `http://localhost:8000/api/health`
+Compose startup now applies Alembic migrations automatically before the API boots.
 
 ## Verification
 

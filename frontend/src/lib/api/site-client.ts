@@ -40,6 +40,8 @@ export interface InquirySubmissionInput {
 
 export interface InquiryContractResponse {
   detail: string
+  submissionId: number
+  status: 'received'
 }
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL ?? 'http://localhost:8000'
@@ -75,11 +77,38 @@ export async function submitInquiry(
     body: JSON.stringify(payload),
   })
 
-  const data = (await response.json()) as InquiryContractResponse
-
   if (!response.ok) {
-    throw new Error(data.detail)
+    throw new Error(await getInquiryErrorMessage(response, payload.locale))
   }
 
-  return data
+  return (await response.json()) as InquiryContractResponse
+}
+
+async function getInquiryErrorMessage(response: Response, locale: Locale) {
+  const fallbackMessage =
+    locale === 'zh'
+      ? '询盘暂时无法提交，请稍后再试。'
+      : 'Unable to submit the inquiry right now. Please try again later.'
+
+  try {
+    const data = (await response.json()) as {
+      detail?: string | Array<{ msg?: string }>
+    }
+
+    if (typeof data.detail === 'string') {
+      return data.detail
+    }
+
+    if (Array.isArray(data.detail)) {
+      const firstMessage = data.detail.find((item) => typeof item.msg === 'string')?.msg
+
+      if (firstMessage) {
+        return firstMessage
+      }
+    }
+  } catch {
+    return fallbackMessage
+  }
+
+  return fallbackMessage
 }

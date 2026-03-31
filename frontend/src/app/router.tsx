@@ -11,11 +11,11 @@ import {
 } from '../i18n/locales'
 import { SiteShell } from '../layouts/SiteShell'
 import { AboutPage } from '../pages/AboutPage'
+import { ContactPage } from '../pages/ContactPage'
 import { HomeShellPage } from '../pages/HomeShellPage'
 import { ProductCenterPage } from '../pages/ProductCenterPage'
 import { ProductFamilyPage } from '../pages/ProductFamilyPage'
 import { ProductGroupPage } from '../pages/ProductGroupPage'
-import { SectionPlaceholderPage } from '../pages/SectionPlaceholderPage'
 import { SolutionsPage } from '../pages/SolutionsPage'
 import { SupportPage } from '../pages/SupportPage'
 
@@ -63,7 +63,7 @@ export function createAppRouter(options: RouterFactoryOptions = {}) {
         },
         {
           path: 'contact',
-          element: <SectionPlaceholderPage section="contact" />,
+          element: <ContactPage />,
         },
       ],
     },

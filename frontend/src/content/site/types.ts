@@ -96,6 +96,32 @@ export type SupportResourceEntry = {
   secondaryCta: SolutionTrackCta
 }
 
+export type ContactCategoryOption = {
+  value: string
+  label: string
+}
+
+export type ContactFormCopy = {
+  companyNameLabel: string
+  companyNamePlaceholder: string
+  contactNameLabel: string
+  contactNamePlaceholder: string
+  emailLabel: string
+  emailPlaceholder: string
+  phoneLabel: string
+  phonePlaceholder: string
+  interestCategoryLabel: string
+  messageLabel: string
+  messagePlaceholder: string
+  submitLabel: string
+  pendingLabel: string
+  requiredHint: string
+  helperNote: string
+  successLabel: string
+  errorLabel: string
+  referenceLabel: string
+}
+
 export type FooterLinkItem = {
   label: string
   section: SectionRouteKey
@@ -240,6 +266,27 @@ export interface SiteContent {
     finalCtaBody: string
   }
   contact: RoutePageContent
+  contactPage: {
+    eyebrow: string
+    heroSummary: string
+    heroDescription: string
+    quickPanelTitle: string
+    quickPanelSummary: string
+    quickPanelItems: TrustSignal[]
+    formTitle: string
+    formSummary: string
+    form: ContactFormCopy
+    categoryOptions: ContactCategoryOption[]
+    guidanceTitle: string
+    guidanceSummary: string
+    guidanceItems: HighlightItem[]
+    processTitle: string
+    processSummary: string
+    processSteps: ProcessStep[]
+    routingTitle: string
+    routingSummary: string
+    routingLinks: FooterLinkItem[]
+  }
   footer: {
     summary: string
     addressLabel: string

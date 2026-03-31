@@ -801,11 +801,129 @@ export const enSiteContent: SiteContent = {
   },
   contact: {
     title: 'Contact',
-    summary: 'Inquiry entry points will converge on one shared contact route across the site.',
+    summary:
+      'Use one dedicated contact surface to move from product interest into a real inquiry.',
     description:
-      'Phase 01 establishes the route and API contract, while real inquiry persistence is scheduled for Phase 5.',
-    primaryCta: 'Request Consultation / \u83b7\u53d6\u54a8\u8be2',
-    secondaryCta: 'Return home',
+      'The contact page now combines company coordinates, project-intake guidance, and real submission feedback in one place.',
+    primaryCta: 'Start Inquiry',
+    secondaryCta: 'View Support',
+  },
+  contactPage: {
+    eyebrow: 'Inquiry channel',
+    heroSummary:
+      'When the project direction is clear enough to start a real conversation, use this form to send the core business boundary first.',
+    heroDescription:
+      'This route is built for product selection requests, solution consultations, and integration follow-up. Keep the message practical and we can align the right next step faster.',
+    quickPanelTitle: 'Direct contact view',
+    quickPanelSummary:
+      'The page works like an intake desk: company coordinates stay visible, project scope can be stated clearly, and the inquiry now lands in the backend instead of stopping at a placeholder contract.',
+    quickPanelItems: [
+      {
+        label: 'Office location',
+        title: 'Shenzhen office stays visible on the inquiry surface',
+        detail:
+          'Building 3, Xunmei Technology Plaza, No. 8 Keyuan Road, Kejiyuan Community, Yuehai Subdistrict, Nanshan District, Shenzhen.',
+      },
+      {
+        label: 'Response rhythm',
+        title: 'The form is designed for quick triage instead of long back-and-forth',
+        detail:
+          'Share the product direction, scenario, or integration scope first, so the next reply can start from an actual project frame.',
+      },
+      {
+        label: 'Intake scope',
+        title: 'Products, solutions, and support requests can all enter here',
+        detail:
+          'Industrial sensor selection, automation collaboration, technical integration, and material requests all converge on the same inquiry path.',
+      },
+    ],
+    formTitle: 'Inquiry form',
+    formSummary:
+      'Leave the essential company and project information first. The current flow stores the submission and returns an immediate confirmation.',
+    form: {
+      companyNameLabel: 'Company',
+      companyNamePlaceholder: 'Factory, integrator, or project owner',
+      contactNameLabel: 'Contact name',
+      contactNamePlaceholder: 'Primary project contact',
+      emailLabel: 'Email',
+      emailPlaceholder: 'name@example.com',
+      phoneLabel: 'Phone',
+      phonePlaceholder: 'Mobile or office number',
+      interestCategoryLabel: 'Inquiry category',
+      messageLabel: 'Project note',
+      messagePlaceholder:
+        'Briefly describe the scenario, target product direction, line condition, or integration scope.',
+      submitLabel: 'Submit inquiry',
+      pendingLabel: 'Submitting...',
+      requiredHint: 'All fields are required for the first-pass intake.',
+      helperNote:
+        'If model numbers, target distance, safety constraints, or interface requirements are already known, include them here.',
+      successLabel: 'Inquiry received',
+      errorLabel: 'Submission issue',
+      referenceLabel: 'Reference',
+    },
+    categoryOptions: [
+      { value: 'industrial-sensors', label: 'Industrial sensors' },
+      { value: 'safety-protection-sensors', label: 'Safety protection sensors' },
+      { value: 'laser-ranging-sensors', label: 'Laser ranging sensors' },
+      { value: 'linear-guides-modules', label: 'Linear guides and modules' },
+      { value: 'pneumatic-components', label: 'Pneumatic components' },
+      { value: 'industrial-automation-solution', label: 'Industrial automation solution' },
+      { value: 'software-development', label: 'Software development' },
+      { value: 'technical-integration', label: 'Technical integration' },
+      { value: 'general-consultation', label: 'General consultation' },
+    ],
+    guidanceTitle: 'Before you send',
+    guidanceSummary:
+      'A concise but concrete inquiry gets routed faster than a vague brand-level message.',
+    guidanceItems: [
+      {
+        title: 'State the equipment or line context',
+        detail:
+          'Mention the production environment, sensing object, travel distance, or integration side so the request is not detached from use conditions.',
+      },
+      {
+        title: 'Point to the likely category first',
+        detail:
+          'Even if the model is not fixed yet, selecting the rough product or solution category helps narrow the follow-up route quickly.',
+      },
+      {
+        title: 'Keep business and technical questions together when needed',
+        detail:
+          'If product selection and integration coordination are linked, describe both in one note so the next reply starts with the full context.',
+      },
+    ],
+    processTitle: 'What happens after submission',
+    processSummary:
+      'The form should not feel like a dead-end. It establishes a simple handoff rhythm from site browsing into business follow-up.',
+    processSteps: [
+      {
+        step: '01',
+        title: 'Submission is stored immediately',
+        detail:
+          'The inquiry is written into the backend so it no longer stops at a placeholder contract response.',
+      },
+      {
+        step: '02',
+        title: 'The request is read by category and scenario',
+        detail:
+          'Product-family interest, solution direction, and field-side notes provide the first sorting frame for follow-up.',
+      },
+      {
+        step: '03',
+        title: 'Communication moves into the right next path',
+        detail:
+          'The next step can become product clarification, material response, quotation discussion, or deeper integration coordination.',
+      },
+    ],
+    routingTitle: 'Continue browsing if the need is still forming',
+    routingSummary:
+      'If the project is not ready for a full inquiry yet, move back into the product, solution, or support surfaces without losing the current route.',
+    routingLinks: [
+      { label: 'Review product center', section: 'products' },
+      { label: 'Review solutions', section: 'solutions' },
+      { label: 'Open support desk', section: 'support' },
+    ],
   },
   footer: {
     summary:
