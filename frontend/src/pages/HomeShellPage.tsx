@@ -117,6 +117,40 @@ export function HomeShellPage() {
       </section>
 
       <section className="page-band page-band--bordered">
+        <div className="trust-ledger">
+          <section className="trust-ledger__panel">
+            <p className="eyebrow">{content.home.assuranceTitle}</p>
+            <p className="story-intro">{content.home.assuranceSummary}</p>
+            <div className="assurance-list">
+              {content.home.assuranceSignals.map((item) => (
+                <article key={item.title} className="assurance-item">
+                  <p className="assurance-item__label">{item.label}</p>
+                  <h2 className="assurance-item__title">{item.title}</h2>
+                  <p>{item.detail}</p>
+                </article>
+              ))}
+            </div>
+          </section>
+
+          <section className="trust-ledger__panel trust-ledger__panel--offset">
+            <p className="eyebrow">{content.home.processTitle}</p>
+            <p className="story-intro">{content.home.processSummary}</p>
+            <div className="process-list">
+              {content.home.processSteps.map((item) => (
+                <article key={item.step} className="process-step">
+                  <p className="process-step__index">{item.step}</p>
+                  <div className="process-step__copy">
+                    <h2>{item.title}</h2>
+                    <p>{item.detail}</p>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </section>
+        </div>
+      </section>
+
+      <section className="page-band page-band--bordered">
         <div className="final-cta">
           <div>
             <p className="eyebrow">{content.meta.brandName}</p>

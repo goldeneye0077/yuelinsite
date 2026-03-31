@@ -156,6 +156,52 @@ export const enSiteContent: SiteContent = {
         value: 'Selection support | Project coordination | Technical response',
       },
     ],
+    assuranceTitle: 'Qualification and authorization framing',
+    assuranceSummary:
+      'The homepage now reserves visible trust positions for company documents, authorization proof, and delivery references so industrial buyers can read the confidence layer without leaving the first narrative flow.',
+    assuranceSignals: [
+      {
+        label: 'Credential dossier',
+        title: 'Company document surfaces are already prepared',
+        detail:
+          'Business qualifications, system certifications, and company capability materials can be inserted later without rebuilding the homepage structure.',
+      },
+      {
+        label: 'Authorization readiness',
+        title: 'Partner authorization space is structurally defined',
+        detail:
+          'Brand letters, agency statements, and supporting authorization visuals can be slotted into the existing layout as the asset pack is completed.',
+      },
+      {
+        label: 'Delivery proof',
+        title: 'Case and application evidence can grow in place',
+        detail:
+          'Project snapshots, application notes, and industry examples can be added progressively while keeping the same homepage story intact.',
+      },
+    ],
+    processTitle: 'Project coordination rhythm',
+    processSummary:
+      'The consulting path is intentionally short: confirm the sensing scenario first, align model and interface next, then move into inquiry and follow-up.',
+    processSteps: [
+      {
+        step: '01',
+        title: 'Confirm the scenario',
+        detail:
+          'Start from the equipment type, sensing target, installation condition, and line-side constraints so the need boundary is clear early.',
+      },
+      {
+        step: '02',
+        title: 'Align model and interface',
+        detail:
+          'Review brand preference, output method, integration interface, and delivery scope before the conversation becomes a formal business inquiry.',
+      },
+      {
+        step: '03',
+        title: 'Enter inquiry follow-up',
+        detail:
+          'Once the direction is stable, the next step can move naturally into inquiry, quotation, sampling, or deeper technical coordination.',
+      },
+    ],
     finalCtaTitle: 'Start with the project scenario',
     finalCtaBody:
       'Share the equipment model, sensing requirement, or integration scope first, and the next step can be mapped to the right product and technical route.',
@@ -249,6 +295,8 @@ export const enSiteContent: SiteContent = {
       },
     ],
     partnersTitle: 'Partner brands',
+    partnersSummary:
+      'These partner references are presented as capability context, showing the sensing, safety, pneumatic, and integration ecosystem the company is prepared to work within.',
     qualificationsTitle: 'Qualifications and authorization placeholders',
     qualificationsSummary:
       'The structure is ready for company credentials, partner authorization materials, and supporting capability documents, even though the real assets are still pending.',
@@ -257,16 +305,65 @@ export const enSiteContent: SiteContent = {
         title: 'Company credentials',
         detail:
           'Reserved for business qualifications, system certifications, and project-level supporting documents.',
+        status: 'Reserved',
       },
       {
         title: 'Partner authorization',
         detail:
           'Reserved for cooperation brand authorization images, agency materials, or related statements.',
+        status: 'Reserved',
       },
       {
         title: 'Delivery proof',
         detail:
           'Reserved for project cases, service process references, or industry application evidence.',
+        status: 'Reserved',
+      },
+    ],
+    authorizationTitle: 'Authorization and document readiness',
+    authorizationSummary:
+      'The real materials can arrive later, but the structure for authorization, compliance, and project proof is already defined so the trust layer can grow without redesign.',
+    authorizationItems: [
+      {
+        label: 'Partner authorization',
+        title: 'Brand-specific material slots are ready',
+        detail:
+          'Separate positions can hold letters or supporting documents for Panasonic, Sick, AirTAC, Mindman, and other partner-related materials.',
+      },
+      {
+        label: 'Company compliance',
+        title: 'Corporate documents can be grouped clearly',
+        detail:
+          'Business qualifications, certifications, and capability files can be added in layers instead of being scattered across unrelated pages.',
+      },
+      {
+        label: 'Project evidence',
+        title: 'Cases and supporting proof can be added progressively',
+        detail:
+          'Delivery screenshots, application notes, and industry references can be appended over time without changing the core About layout.',
+      },
+    ],
+    deliveryTitle: 'Delivery coordination path',
+    deliverySummary:
+      'The About page should explain not only what the company offers, but also how communication moves from requirement framing into a workable project path.',
+    deliverySteps: [
+      {
+        step: '01',
+        title: 'Confirm scenario and constraints',
+        detail:
+          'Clarify the equipment environment, sensing target, safety expectation, and field-side limitations before narrowing down the route.',
+      },
+      {
+        step: '02',
+        title: 'Align model, interface, and scope',
+        detail:
+          'Discuss sensors, execution units, software paths, and technical integration boundaries in one coordinated conversation.',
+      },
+      {
+        step: '03',
+        title: 'Move into inquiry and follow-up',
+        detail:
+          'Once the direction is stable, the discussion can progress into quotation, sampling, or deeper project coordination.',
       },
     ],
     finalCtaTitle: 'If the project direction is already clear, start the conversation directly',

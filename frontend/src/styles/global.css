@@ -774,12 +774,20 @@ img {
   align-items: start;
 }
 
+.trust-ledger {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 36px;
+  align-items: start;
+}
+
 .about-section {
   padding-top: 20px;
   border-top: 1px solid var(--color-border);
 }
 
-.about-section--offset {
+.about-section--offset,
+.trust-ledger__panel--offset {
   padding-left: 18px;
   border-left: 1px solid var(--color-border);
 }
@@ -790,17 +798,72 @@ img {
 }
 
 .about-copy p,
-.qualification-item p {
+.qualification-item p,
+.assurance-item p,
+.process-step__copy p {
   margin: 0;
   color: var(--color-text-muted);
   line-height: 1.8;
 }
 
-.qualification-item h2 {
+.trust-ledger__panel {
+  padding-top: 20px;
+  border-top: 1px solid var(--color-border);
+}
+
+.assurance-list,
+.process-list {
+  display: grid;
+  gap: 18px;
+}
+
+.assurance-item,
+.process-step {
+  padding-top: 14px;
+  border-top: 1px solid rgba(141, 163, 181, 0.2);
+}
+
+.assurance-item__label,
+.qualification-item__status,
+.process-step__index {
+  margin: 0 0 10px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.assurance-item__label,
+.qualification-item__status {
+  color: var(--color-accent);
+}
+
+.assurance-item__title,
+.qualification-item h2,
+.process-step__copy h2 {
   margin: 0 0 8px;
   font-family: var(--font-display);
   font-size: 1.3rem;
   line-height: 1.04;
+  color: var(--color-text);
+}
+
+.process-step {
+  display: grid;
+  grid-template-columns: 72px minmax(0, 1fr);
+  gap: 18px;
+}
+
+.process-step__index {
+  color: rgba(216, 137, 43, 0.92);
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  letter-spacing: 0.1em;
+}
+
+.process-step__copy {
+  display: grid;
+  gap: 6px;
 }
 
 .story-block,
@@ -1023,6 +1086,7 @@ img {
   .home-story-grid,
   .about-hero,
   .about-grid,
+  .trust-ledger,
   .story-list--compact,
   .final-cta {
     grid-template-columns: 1fr;
@@ -1046,6 +1110,11 @@ img {
   }
 
   .about-section--offset {
+    padding-left: 0;
+    border-left: 0;
+  }
+
+  .trust-ledger__panel--offset {
     padding-left: 0;
     border-left: 0;
   }

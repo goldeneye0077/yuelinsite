@@ -75,6 +75,7 @@ export function AboutPage() {
         <div className="about-grid">
           <section className="about-section">
             <p className="eyebrow">{content.aboutPage.partnersTitle}</p>
+            <p className="story-intro">{content.aboutPage.partnersSummary}</p>
             <div className="partner-list">
               {content.home.partners.map((partner) => (
                 <article key={partner.name} className="partner-item">
@@ -91,8 +92,43 @@ export function AboutPage() {
             <div className="qualification-list">
               {content.aboutPage.qualifications.map((item) => (
                 <article key={item.title} className="qualification-item">
+                  <p className="qualification-item__status">{item.status}</p>
                   <h2>{item.title}</h2>
                   <p>{item.detail}</p>
+                </article>
+              ))}
+            </div>
+          </section>
+        </div>
+      </section>
+
+      <section className="page-band page-band--bordered">
+        <div className="trust-ledger">
+          <section className="trust-ledger__panel">
+            <p className="eyebrow">{content.aboutPage.authorizationTitle}</p>
+            <p className="story-intro">{content.aboutPage.authorizationSummary}</p>
+            <div className="assurance-list">
+              {content.aboutPage.authorizationItems.map((item) => (
+                <article key={item.title} className="assurance-item">
+                  <p className="assurance-item__label">{item.label}</p>
+                  <h2 className="assurance-item__title">{item.title}</h2>
+                  <p>{item.detail}</p>
+                </article>
+              ))}
+            </div>
+          </section>
+
+          <section className="trust-ledger__panel trust-ledger__panel--offset">
+            <p className="eyebrow">{content.aboutPage.deliveryTitle}</p>
+            <p className="story-intro">{content.aboutPage.deliverySummary}</p>
+            <div className="process-list">
+              {content.aboutPage.deliverySteps.map((item) => (
+                <article key={item.step} className="process-step">
+                  <p className="process-step__index">{item.step}</p>
+                  <div className="process-step__copy">
+                    <h2>{item.title}</h2>
+                    <p>{item.detail}</p>
+                  </div>
                 </article>
               ))}
             </div>

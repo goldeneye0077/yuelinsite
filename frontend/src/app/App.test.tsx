@@ -21,5 +21,6 @@ describe('App', () => {
       (await screen.findAllByRole('link', { name: /request consultation/i })).length,
     ).toBeGreaterThan(0)
     expect(await screen.findByText(/Panasonic/i)).toBeInTheDocument()
+    expect(await screen.findByText(/资质与授权展示/)).toBeInTheDocument()
   })
 })

@@ -19,6 +19,12 @@ export type HighlightItem = {
   detail: string
 }
 
+export type TrustSignal = {
+  label: string
+  title: string
+  detail: string
+}
+
 export type CompanyFact = {
   label: string
   value: string
@@ -30,6 +36,13 @@ export type PartnerBrand = {
 }
 
 export type QualificationPlaceholder = {
+  title: string
+  detail: string
+  status: string
+}
+
+export type ProcessStep = {
+  step: string
   title: string
   detail: string
 }
@@ -89,6 +102,12 @@ export interface SiteContent {
     profileSummary: string
     profileBody: string
     profileFacts: CompanyFact[]
+    assuranceTitle: string
+    assuranceSummary: string
+    assuranceSignals: TrustSignal[]
+    processTitle: string
+    processSummary: string
+    processSteps: ProcessStep[]
     finalCtaTitle: string
     finalCtaBody: string
   }
@@ -108,9 +127,16 @@ export interface SiteContent {
     trustSummary: string
     trustItems: HighlightItem[]
     partnersTitle: string
+    partnersSummary: string
     qualificationsTitle: string
     qualificationsSummary: string
     qualifications: QualificationPlaceholder[]
+    authorizationTitle: string
+    authorizationSummary: string
+    authorizationItems: TrustSignal[]
+    deliveryTitle: string
+    deliverySummary: string
+    deliverySteps: ProcessStep[]
     finalCtaTitle: string
     finalCtaBody: string
   }
