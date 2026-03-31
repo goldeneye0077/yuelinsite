@@ -983,6 +983,100 @@ img {
   line-height: 1.7;
 }
 
+.taxonomy-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
+  gap: 36px;
+  align-items: start;
+}
+
+.taxonomy-panel {
+  padding-top: 20px;
+  border-top: 1px solid var(--color-border);
+}
+
+.taxonomy-panel--offset {
+  padding-left: 18px;
+  border-left: 1px solid var(--color-border);
+}
+
+.taxonomy-title,
+.taxonomy-category-item h3,
+.taxonomy-group-item h3 {
+  margin: 0;
+  font-family: var(--font-display);
+  color: var(--color-text);
+}
+
+.taxonomy-title {
+  font-size: clamp(1.9rem, 3vw, 2.6rem);
+  line-height: 1.04;
+}
+
+.taxonomy-source {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 14px;
+  margin: 20px 0 0;
+  color: var(--color-text-muted);
+  font-size: 0.94rem;
+  line-height: 1.6;
+}
+
+.taxonomy-source a {
+  color: var(--color-accent);
+}
+
+.taxonomy-divider {
+  margin: 24px 0;
+  border-top: 1px solid var(--color-border);
+}
+
+.taxonomy-category-list,
+.taxonomy-group-grid {
+  display: grid;
+  gap: 18px;
+}
+
+.taxonomy-category-item,
+.taxonomy-group-item {
+  padding-top: 14px;
+  border-top: 1px solid rgba(141, 163, 181, 0.2);
+}
+
+.taxonomy-category-item__header {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 12px;
+  align-items: start;
+}
+
+.taxonomy-category-item__count {
+  margin: 2px 0 0;
+  color: var(--color-accent);
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  line-height: 1;
+}
+
+.taxonomy-category-item__summary,
+.taxonomy-category-item__usecase,
+.taxonomy-group-item__summary,
+.taxonomy-group-item__series {
+  margin: 10px 0 0;
+  color: var(--color-text-muted);
+  line-height: 1.7;
+}
+
+.taxonomy-group-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.taxonomy-group-item__series {
+  color: var(--color-text);
+  font-size: 0.95rem;
+}
+
 .motion-rise {
   opacity: 0;
   animation: sectionRise 720ms cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
@@ -1168,6 +1262,7 @@ img {
   .track-grid,
   .footer-grid,
   .placeholder-grid,
+  .taxonomy-layout,
   .status-strip,
   .home-story-grid,
   .about-hero,
@@ -1203,6 +1298,15 @@ img {
   .trust-ledger__panel--offset {
     padding-left: 0;
     border-left: 0;
+  }
+
+  .taxonomy-panel--offset {
+    padding-left: 0;
+    border-left: 0;
+  }
+
+  .taxonomy-group-grid {
+    grid-template-columns: 1fr;
   }
 }
 
