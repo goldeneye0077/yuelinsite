@@ -505,13 +505,165 @@ export const zhSiteContent: SiteContent = {
       '告诉我们设备类型、检测目标、控制方式或改造目的，我们会先按最合适的解决方案方向帮你收敛路径。',
   },
   support: {
-    title: '\u670d\u52a1\u4e0e\u652f\u6301 / Support',
+    title: '服务与支持 / Support',
     summary:
-      '\u8d44\u6599\u4e0b\u8f7d\u3001\u76ee\u5f55\u7533\u8bf7\u3001\u6280\u672f\u652f\u6301\u4f1a\u6536\u655b\u5230\u7edf\u4e00\u652f\u6301\u9875\u9762\u3002',
+      '产品目录申请、资料获取与技术配合现在都收束到同一条支持路径里。',
     description:
-      '\u5f53\u524d\u5148\u786e\u4fdd\u8def\u7531\u3001\u680f\u76ee\u4e0e\u54a8\u8be2\u5165\u53e3\u5b8c\u6574\uff0c\u540e\u7eed\u518d\u63a5\u5165\u8bf4\u660e\u4e66\u3001\u76ee\u5f55\u548c\u552e\u540e\u652f\u6301\u6d41\u7a0b\u3002',
-    primaryCta: 'Request Consultation / \u83b7\u53d6\u54a8\u8be2',
-    secondaryCta: '\u8fd4\u56de\u9996\u9875',
+      '这页会像工业服务台一样组织内容：先告诉客户能申请什么、资料准备到哪一步、以及技术支持应该如何进入下一步沟通。',
+    primaryCta: 'Request Support / 获取支持',
+    secondaryCta: '查看产品中心',
+  },
+  supportPage: {
+    eyebrow: '服务与支持路径',
+    heroSummary:
+      '服务与支持页把选型后的问题收成一条更清楚的路线：哪些资料现在就能申请、哪些文件还处于预留状态、技术问题该怎样进入下一步沟通。',
+    heroDescription:
+      '它不再只是一个“联系我们”的替代页，而是一个更像工业服务目录的入口，让客户能先判断资料、目录和项目协同应该走哪条支持路径。',
+    quickPanelTitle: '快速支持视图',
+    quickPanelSummary:
+      '客户打开这页时，应该一眼看清三件事：目录能否申请、资料是否在准备、技术沟通能否直接开始。',
+    quickPanelItems: [
+      {
+        label: '目录入口',
+        title: '产品目录申请路径已经明确',
+        detail:
+          '客户不需要在多个栏目里来回找入口，可以直接从支持页进入目录申请与产品梳理路径。',
+      },
+      {
+        label: '资料状态',
+        title: '下载资料会带着准备状态一起说明',
+        detail:
+          '说明书、手册和相关技术文件后续可以直接补入，不需要重新推翻页面结构。',
+      },
+      {
+        label: '技术响应',
+        title: '支持路径会贴着真实项目问题展开',
+        detail:
+          '围绕选型、接口、替换条件和项目节点组织支持，而不是做成空泛的售后公告栏。',
+      },
+    ],
+    capabilityTitle: '支持能力',
+    capabilitySummary:
+      '这里要表达的是持续项目配合，而不是被动售后，因此内容会优先围绕项目推进所需的支持方式展开。',
+    capabilities: [
+      {
+        title: '选型跟进与替换建议',
+        detail:
+          '适合客户已经知道设备场景，但还需要继续缩小传感器、气动元件或线性模组范围的情况。',
+      },
+      {
+        title: '围绕集成条件的技术配合',
+        detail:
+          '适合问题已经涉及 IO、通讯、现场约束或某个部件如何衔接更大实施路径的项目。',
+      },
+      {
+        title: '辅助决策的资料准备',
+        detail:
+          '适合客户在正式询盘或报价前，先需要目录、资料占位或文件准备确认的场景。',
+      },
+    ],
+    guidanceTitle: '什么情况下应该先看这页',
+    guidanceSummary:
+      '支持页的职责不是把所有问题压成同一个表单，而是把客户引到最合适的下一步。',
+    guidanceItems: [
+      {
+        title: '需要目录或资料时先从这里进入',
+        detail:
+          '如果客户先想确认产品目录、技术文件占位或下一步可提供哪些资料，支持页应该是第一站。',
+      },
+      {
+        title: '需要技术澄清时也先从这里进入',
+        detail:
+          '如果问题围绕型号匹配、替换边界或现场条件，这里应该像技术协同入口，而不是一个死板的留言页。',
+      },
+      {
+        title: '明确后再平滑转入正式咨询',
+        detail:
+          '一旦资料需求、项目条件或支持边界清楚了，就应该自然进入下一步咨询与配合。',
+      },
+    ],
+    resourceTitle: '资料与申请台',
+    resourceSummary:
+      '这里会明确告诉客户哪些内容可以现在申请，哪些仍是占位入口，避免支持页看起来像空栏目。',
+    resources: [
+      {
+        label: '目录申请',
+        status: '可直接进入',
+        title: '产品目录申请',
+        detail:
+          '适合客户先需要一个按产品族和应用方向整理的总览，再决定后续是否进入型号和集成沟通。',
+        deliverable:
+          '预期结果：获得分类级目录、建立选型对话基础，并能顺畅转入产品中心或后续咨询。',
+        primaryCta: {
+          label: '申请产品目录',
+          section: 'contact',
+        },
+        secondaryCta: {
+          label: '查看产品中心',
+          section: 'products',
+        },
+      },
+      {
+        label: '资料占位',
+        status: '已预留入口',
+        title: '说明书与技术资料获取',
+        detail:
+          '适合客户先确认说明书、手册或相关技术文件是否能通过支持路径准备与提供。',
+        deliverable:
+          '预期结果：确认资料准备状态、建立文件获取路径，并明确下一步沟通方式。',
+        primaryCta: {
+          label: '申请技术资料',
+          section: 'contact',
+        },
+        secondaryCta: {
+          label: '查看解决方案',
+          section: 'solutions',
+        },
+      },
+      {
+        label: '协同受理',
+        status: '引导式入口',
+        title: '项目支持受理',
+        detail:
+          '适合需求已经超出单一文件，需要把型号、接口、时间点和实施配合一起带入支持讨论的项目。',
+        deliverable:
+          '预期结果：明确支持边界、整理项目信息，并进入更准确的技术跟进路径。',
+        primaryCta: {
+          label: '发起支持受理',
+          section: 'contact',
+        },
+        secondaryCta: {
+          label: '返回解决方案',
+          section: 'solutions',
+        },
+      },
+    ],
+    processTitle: '支持响应节奏',
+    processSummary:
+      '支持页需要把下一步讲清楚：先提出需求，再确认资料或协同类型，最后进入真正的后续动作。',
+    processSteps: [
+      {
+        step: '01',
+        title: '提交需求边界',
+        detail:
+          '先说明产品族、设备场景或需要的文件类型，让支持请求从一开始就被收敛。',
+      },
+      {
+        step: '02',
+        title: '确认资料或技术配合类型',
+        detail:
+          '判断下一步是目录分享、技术文件准备，还是更广义的项目协同支持。',
+      },
+      {
+        step: '03',
+        title: '进入正确的后续路径',
+        detail:
+          '一旦支持方向清楚，就可以继续进入咨询、报价、送样或更深入的技术沟通。',
+      },
+    ],
+    finalCtaTitle: '如果支持需求已经明确，现在就可以进入申请路径',
+    finalCtaBody:
+      '告诉我们你需要的资料类型、设备场景或协同问题，我们会先帮你收敛出最快有价值的下一步。',
   },
   about: {
     title: '\u5173\u4e8e\u6211\u4eec / About',

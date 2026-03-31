@@ -86,6 +86,16 @@ export type SolutionTrackTransition = {
   targetId: string
 }
 
+export type SupportResourceEntry = {
+  label: string
+  status: string
+  title: string
+  detail: string
+  deliverable: string
+  primaryCta: SolutionTrackCta
+  secondaryCta: SolutionTrackCta
+}
+
 export type FooterLinkItem = {
   label: string
   section: SectionRouteKey
@@ -181,6 +191,28 @@ export interface SiteContent {
     finalCtaBody: string
   }
   support: RoutePageContent
+  supportPage: {
+    eyebrow: string
+    heroSummary: string
+    heroDescription: string
+    quickPanelTitle: string
+    quickPanelSummary: string
+    quickPanelItems: TrustSignal[]
+    capabilityTitle: string
+    capabilitySummary: string
+    capabilities: HighlightItem[]
+    guidanceTitle: string
+    guidanceSummary: string
+    guidanceItems: HighlightItem[]
+    resourceTitle: string
+    resourceSummary: string
+    resources: SupportResourceEntry[]
+    processTitle: string
+    processSummary: string
+    processSteps: ProcessStep[]
+    finalCtaTitle: string
+    finalCtaBody: string
+  }
   about: RoutePageContent
   aboutPage: {
     eyebrow: string

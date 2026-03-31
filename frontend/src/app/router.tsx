@@ -17,6 +17,7 @@ import { ProductFamilyPage } from '../pages/ProductFamilyPage'
 import { ProductGroupPage } from '../pages/ProductGroupPage'
 import { SectionPlaceholderPage } from '../pages/SectionPlaceholderPage'
 import { SolutionsPage } from '../pages/SolutionsPage'
+import { SupportPage } from '../pages/SupportPage'
 
 type RouterFactoryOptions = {
   initialEntries?: string[]
@@ -54,7 +55,7 @@ export function createAppRouter(options: RouterFactoryOptions = {}) {
         },
         {
           path: 'support',
-          element: <SectionPlaceholderPage section="support" />,
+          element: <SupportPage />,
         },
         {
           path: 'about',

@@ -38,8 +38,8 @@
 
 ### Service & Support
 
-- [ ] **SUPP-01**: User can view the company's core service and support capabilities, including technical support and consultation guidance
-- [ ] **SUPP-02**: User can find a clear entry for catalog request, data download, or placeholder resource access from the support area
+- [x] **SUPP-01**: User can view the company's core service and support capabilities, including technical support and consultation guidance
+- [x] **SUPP-02**: User can find a clear entry for catalog request, data download, or placeholder resource access from the support area
 
 ### About & Trust
 
@@ -97,8 +97,8 @@
 | SOLN-02 | Phase 4 | Complete |
 | BRND-01 | Phase 4 | Complete |
 | BRND-02 | Phase 4 | Complete |
-| SUPP-01 | Phase 4 | Pending |
-| SUPP-02 | Phase 4 | Pending |
+| SUPP-01 | Phase 4 | Complete |
+| SUPP-02 | Phase 4 | Complete |
 | ABOU-01 | Phase 2 | Complete |
 | ABOU-02 | Phase 2 | Complete |
 | ABOU-03 | Phase 2 | Complete |
@@ -113,4 +113,4 @@
 
 ---
 *Requirements defined: 2026-03-30*
-*Last updated: 2026-03-30 after initial definition*
+*Last updated: 2026-03-31 after Phase 4 support completion*

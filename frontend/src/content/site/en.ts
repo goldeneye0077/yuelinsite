@@ -504,11 +504,163 @@ export const enSiteContent: SiteContent = {
   support: {
     title: 'Support',
     summary:
-      'Downloads, catalog requests, and technical support will connect through one service route.',
+      'Catalog requests, resource access, and technical coordination now share one clearer support route.',
     description:
-      'Phase 01 secures the shell and the contact pathway first; manuals, datasheets, and support workflows arrive later.',
-    primaryCta: 'Request Consultation / \u83b7\u53d6\u54a8\u8be2',
-    secondaryCta: 'Return home',
+      'The support page is structured as an industrial service desk: what help is available, which materials can be requested, and how the next support step should be started.',
+    primaryCta: 'Request Support / 获取支持',
+    secondaryCta: 'View product center',
+  },
+  supportPage: {
+    eyebrow: 'Service and support routes',
+    heroSummary:
+      'The support page turns post-selection questions into a readable route: what can be requested now, what materials are still in preparation, and how technical follow-up should begin.',
+    heroDescription:
+      'Instead of hiding support behind a single contact button, this page gives industrial buyers a clearer service desk with visible entry points for catalogs, data preparation, and coordination needs.',
+    quickPanelTitle: 'Quick support view',
+    quickPanelSummary:
+      'Three things should be readable at a glance: what materials are requestable, what is still in preparation, and how fast the next technical conversation can start.',
+    quickPanelItems: [
+      {
+        label: 'Catalog route',
+        title: 'Product catalog requests are already visible',
+        detail:
+          'Visitors can move from the support page into a clear catalog-request path instead of searching across unrelated sections.',
+      },
+      {
+        label: 'Resource status',
+        title: 'Downloads are framed with preparation status',
+        detail:
+          'Datasheets, manuals, and related files can be introduced later without changing the page structure again.',
+      },
+      {
+        label: 'Technical response',
+        title: 'Support is positioned as project coordination',
+        detail:
+          'The support route stays close to real project questions such as model fit, interface conditions, and replacement timing.',
+      },
+    ],
+    capabilityTitle: 'Support capabilities',
+    capabilitySummary:
+      'The page should explain support as ongoing project assistance rather than as a passive after-sales notice board.',
+    capabilities: [
+      {
+        title: 'Selection follow-up and replacement guidance',
+        detail:
+          'Suitable when the customer already knows the machine context but still needs help narrowing the right sensor, pneumatic, or linear-motion direction.',
+      },
+      {
+        title: 'Technical coordination around integration conditions',
+        detail:
+          'Suitable when the request involves IO, communication method, field-side limits, or matching one component decision to a broader implementation path.',
+      },
+      {
+        title: 'Resource preparation for decision-making',
+        detail:
+          'Suitable when the customer needs catalogs, file placeholders, or material confirmation before moving into a formal consultation or quotation step.',
+      },
+    ],
+    guidanceTitle: 'When to use this page',
+    guidanceSummary:
+      'Support should guide the visitor into the next right step instead of forcing every question into the same generic route.',
+    guidanceItems: [
+      {
+        title: 'Use it for catalog and material requests',
+        detail:
+          'If the buyer needs a product directory, a technical file placeholder, or a structured list of what can be shared next, the support page should be the first stop.',
+      },
+      {
+        title: 'Use it for project-side technical clarification',
+        detail:
+          'If the question is about model fit, replacement boundaries, or field-side conditions, the support route should feel like technical coordination, not a dead-end form.',
+      },
+      {
+        title: 'Use it before a deeper business handoff',
+        detail:
+          'Once the needed file set, scenario facts, or support boundary is clear, the visitor should be able to move smoothly into the consultation route.',
+      },
+    ],
+    resourceTitle: 'Resource desk',
+    resourceSummary:
+      'These entries clarify what can be requested now and what remains a placeholder until the real document pack is supplied.',
+    resources: [
+      {
+        label: 'Catalog request',
+        status: 'Available route',
+        title: 'Product catalog request',
+        detail:
+          'Use this when a customer needs a structured overview of product families before narrowing models or discussing integration details.',
+        deliverable:
+          'Expected output: category-level directory, selection conversation basis, and product-center handoff.',
+        primaryCta: {
+          label: 'Request catalog support',
+          section: 'contact',
+        },
+        secondaryCta: {
+          label: 'Browse product center',
+          section: 'products',
+        },
+      },
+      {
+        label: 'Data placeholder',
+        status: 'Prepared slot',
+        title: 'Datasheet and manual access',
+        detail:
+          'Use this when the buyer needs to confirm that technical files, manuals, or related supporting data can be prepared through the support route.',
+        deliverable:
+          'Expected output: file-preparation confirmation, placeholder resource route, and next-step clarification.',
+        primaryCta: {
+          label: 'Request technical files',
+          section: 'contact',
+        },
+        secondaryCta: {
+          label: 'Review solutions',
+          section: 'solutions',
+        },
+      },
+      {
+        label: 'Integration prep',
+        status: 'Guided entry',
+        title: 'Project-side support intake',
+        detail:
+          'Use this when the need is broader than a single file and must connect model choice, interface conditions, timing, and implementation coordination.',
+        deliverable:
+          'Expected output: clearer support boundary, intake facts, and the right route into technical follow-up.',
+        primaryCta: {
+          label: 'Start support intake',
+          section: 'contact',
+        },
+        secondaryCta: {
+          label: 'Return to solutions',
+          section: 'solutions',
+        },
+      },
+    ],
+    processTitle: 'Support response rhythm',
+    processSummary:
+      'The support route should make the next three steps obvious: request, confirm, and continue into the right follow-up.',
+    processSteps: [
+      {
+        step: '01',
+        title: 'Submit the need boundary',
+        detail:
+          'Start with the product family, machine context, or file type needed so the support request is immediately scoped.',
+      },
+      {
+        step: '02',
+        title: 'Confirm resource or coordination type',
+        detail:
+          'Clarify whether the next step is catalog sharing, technical-file preparation, or broader project-side coordination.',
+      },
+      {
+        step: '03',
+        title: 'Move into the right follow-up path',
+        detail:
+          'Once the support route is clear, the next step can continue into consultation, quotation, sampling, or technical discussion.',
+      },
+    ],
+    finalCtaTitle: 'If the support need is already clear, move directly into the request path',
+    finalCtaBody:
+      'Share the file type, machine scenario, or coordination question first, and the support route can narrow the fastest useful next step.',
   },
   about: {
     title: 'About',
