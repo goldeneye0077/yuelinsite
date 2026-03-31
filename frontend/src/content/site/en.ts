@@ -5,6 +5,7 @@ export const enSiteContent: SiteContent = {
   meta: {
     brandName: 'Yuelin Technology',
     companyName: 'Shenzhen Yuelin Technology Co., Ltd.',
+    crossLocaleCompanyName: '\u6df1\u5733\u5e02\u8dc3\u9cde\u79d1\u6280\u6709\u9650\u516c\u53f8',
     brandLine: 'Industrial sensing and automation integration',
     switchLabel: {
       zh: '\u5207\u6362\u5230\u4e2d\u6587',
@@ -45,7 +46,7 @@ export const enSiteContent: SiteContent = {
   ],
   home: {
     eyebrow: 'Industrial sensing and automation integration',
-    title: 'Shenzhen Yuelin Technology',
+    title: 'Shenzhen Yuelin Technology Co., Ltd.',
     summary:
       'Industrial sensors, automation-focused components, and technical integration support for equipment makers, integrators, and factory buyers.',
     description:
@@ -411,6 +412,8 @@ export const enSiteContent: SiteContent = {
     eyebrow: 'Materials in preparation',
     body:
       'If you already have a product model, project scenario, or integration scope in mind, use the consultation path now and we will map the right catalog or technical route next.',
+    factsSummary:
+      'Until each section is fully built, the core company facts, Shenzhen location, and consultation route stay visible in the same place for continuity.',
     inquiryCta: 'Request Consultation / \u83b7\u53d6\u54a8\u8be2',
     homeCta: 'Return home',
   },

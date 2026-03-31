@@ -15,6 +15,7 @@ export function HomeShellPage() {
           <div className="home-hero__copy">
             <p className="eyebrow">{content.home.eyebrow}</p>
             <h1>{content.home.title}</h1>
+            <p className="hero-signature">{content.meta.crossLocaleCompanyName}</p>
             <p className="hero-summary">{content.home.summary}</p>
             <p className="hero-description">{content.home.description}</p>
             <div className="hero-actions">
@@ -48,7 +49,7 @@ export function HomeShellPage() {
 
       <section className="page-band page-band--tight">
         <p className="eyebrow">{content.home.statusLabel}</p>
-        <div className="status-strip status-strip--audience">
+        <div className="status-strip status-strip--audience motion-rise motion-delay-1">
           {content.home.statusItems.map((item) => (
             <p key={item} className="status-item">
               {item}
@@ -58,7 +59,7 @@ export function HomeShellPage() {
       </section>
 
       <section className="page-band page-band--bordered">
-        <div className="home-story-grid">
+        <div className="home-story-grid motion-rise motion-delay-2">
           <section className="story-block">
             <p className="eyebrow">{content.home.strengthsTitle}</p>
             <div className="story-list">
@@ -86,7 +87,7 @@ export function HomeShellPage() {
       </section>
 
       <section className="page-band page-band--bordered">
-        <div className="home-story-grid">
+        <div className="home-story-grid motion-rise motion-delay-3">
           <section className="story-block">
             <p className="eyebrow">{content.home.partnersTitle}</p>
             <p className="story-intro">{content.home.partnersSummary}</p>
@@ -117,7 +118,7 @@ export function HomeShellPage() {
       </section>
 
       <section className="page-band page-band--bordered">
-        <div className="trust-ledger">
+        <div className="trust-ledger motion-rise motion-delay-4">
           <section className="trust-ledger__panel">
             <p className="eyebrow">{content.home.assuranceTitle}</p>
             <p className="story-intro">{content.home.assuranceSummary}</p>
@@ -151,7 +152,7 @@ export function HomeShellPage() {
       </section>
 
       <section className="page-band page-band--bordered">
-        <div className="final-cta">
+        <div className="final-cta motion-rise motion-delay-5">
           <div>
             <p className="eyebrow">{content.meta.brandName}</p>
             <h2>{content.home.finalCtaTitle}</h2>

@@ -7,17 +7,17 @@
 
 ### Global Experience
 
-- [ ] **GLOB-01**: User can access both Chinese and English versions of the site with a consistent page structure
-- [ ] **GLOB-02**: User can switch language without losing orientation in the site
-- [ ] **GLOB-03**: User can reach the main sections and contact entry from a consistent global header and footer
+- [x] **GLOB-01**: User can access both Chinese and English versions of the site with a consistent page structure
+- [x] **GLOB-02**: User can switch language without losing orientation in the site
+- [x] **GLOB-03**: User can reach the main sections and contact entry from a consistent global header and footer
 - [ ] **GLOB-04**: User can browse the core pages on desktop and mobile without layout breakage or blocked navigation
-- [ ] **GLOB-05**: User can switch between light and dark themes and read the core UI and chart surfaces clearly in both modes
+- [x] **GLOB-05**: User can switch between light and dark themes and read the core UI and chart surfaces clearly in both modes
 
 ### Homepage
 
-- [ ] **HOME-01**: User can understand what Shenzhen Yuelin Technology Co., Ltd. does within the first screen of the homepage
-- [ ] **HOME-02**: User can quickly see the company's core strengths, major product directions, and cooperation brands from the homepage
-- [ ] **HOME-03**: User can enter product center, solutions, and inquiry paths directly from homepage CTA modules
+- [x] **HOME-01**: User can understand what Shenzhen Yuelin Technology Co., Ltd. does within the first screen of the homepage
+- [x] **HOME-02**: User can quickly see the company's core strengths, major product directions, and cooperation brands from the homepage
+- [x] **HOME-03**: User can enter product center, solutions, and inquiry paths directly from homepage CTA modules
 
 ### Product Center
 
@@ -43,9 +43,9 @@
 
 ### About & Trust
 
-- [ ] **ABOU-01**: User can view a complete company profile in Chinese and English
-- [ ] **ABOU-02**: User can find the company's Shenzhen office address and core contact information from the About or Contact sections
-- [ ] **ABOU-03**: User can view trust-building content such as company introduction, cooperation brands, and reserved qualification/authorization sections
+- [x] **ABOU-01**: User can view a complete company profile in Chinese and English
+- [x] **ABOU-02**: User can find the company's Shenzhen office address and core contact information from the About or Contact sections
+- [x] **ABOU-03**: User can view trust-building content such as company introduction, cooperation brands, and reserved qualification/authorization sections
 
 ### Lead Capture
 
@@ -81,14 +81,14 @@
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| GLOB-01 | Phase 1 | Pending |
-| GLOB-02 | Phase 1 | Pending |
-| GLOB-03 | Phase 1 | Pending |
+| GLOB-01 | Phase 1 | Complete |
+| GLOB-02 | Phase 1 | Complete |
+| GLOB-03 | Phase 1 | Complete |
 | GLOB-04 | Phase 5 | Pending |
-| GLOB-05 | Phase 1 | Pending |
-| HOME-01 | Phase 2 | Pending |
-| HOME-02 | Phase 2 | Pending |
-| HOME-03 | Phase 2 | Pending |
+| GLOB-05 | Phase 1 | Complete |
+| HOME-01 | Phase 2 | Complete |
+| HOME-02 | Phase 2 | Complete |
+| HOME-03 | Phase 2 | Complete |
 | PROD-01 | Phase 3 | Pending |
 | PROD-02 | Phase 3 | Pending |
 | PROD-03 | Phase 3 | Pending |
@@ -99,9 +99,9 @@
 | BRND-02 | Phase 4 | Pending |
 | SUPP-01 | Phase 4 | Pending |
 | SUPP-02 | Phase 4 | Pending |
-| ABOU-01 | Phase 2 | Pending |
-| ABOU-02 | Phase 2 | Pending |
-| ABOU-03 | Phase 2 | Pending |
+| ABOU-01 | Phase 2 | Complete |
+| ABOU-02 | Phase 2 | Complete |
+| ABOU-03 | Phase 2 | Complete |
 | LEAD-01 | Phase 5 | Pending |
 | LEAD-02 | Phase 5 | Pending |
 | LEAD-03 | Phase 5 | Pending |

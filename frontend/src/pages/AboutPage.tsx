@@ -12,9 +12,12 @@ export function AboutPage() {
     <>
       <section className="page-band page-band--tight">
         <div className="about-hero">
-          <div className="about-hero__copy">
+          <div className="about-hero__copy motion-rise motion-delay-1">
             <p className="eyebrow">{content.aboutPage.eyebrow}</p>
             <h1>{content.about.title}</h1>
+            <p className="hero-signature hero-signature--surface">
+              {content.meta.companyName} / {content.meta.crossLocaleCompanyName}
+            </p>
             <p className="hero-summary">{content.aboutPage.heroSummary}</p>
             <p className="hero-description">{content.aboutPage.heroDescription}</p>
             <div className="hero-actions">
@@ -28,7 +31,7 @@ export function AboutPage() {
             </div>
           </div>
 
-          <aside className="about-hero__rail">
+          <aside className="about-hero__rail motion-rise motion-delay-2">
             <div className="about-hero__logo-frame">
               <img alt="" className="about-hero__logo" src={brandLogo} />
             </div>
@@ -46,7 +49,7 @@ export function AboutPage() {
       </section>
 
       <section className="page-band page-band--bordered">
-        <div className="about-grid">
+        <div className="about-grid motion-rise motion-delay-2">
           <section className="about-section">
             <p className="eyebrow">{content.aboutPage.companyTitle}</p>
             <div className="about-copy">
@@ -72,7 +75,7 @@ export function AboutPage() {
       </section>
 
       <section className="page-band page-band--bordered">
-        <div className="about-grid">
+        <div className="about-grid motion-rise motion-delay-3">
           <section className="about-section">
             <p className="eyebrow">{content.aboutPage.partnersTitle}</p>
             <p className="story-intro">{content.aboutPage.partnersSummary}</p>
@@ -103,7 +106,7 @@ export function AboutPage() {
       </section>
 
       <section className="page-band page-band--bordered">
-        <div className="trust-ledger">
+        <div className="trust-ledger motion-rise motion-delay-4">
           <section className="trust-ledger__panel">
             <p className="eyebrow">{content.aboutPage.authorizationTitle}</p>
             <p className="story-intro">{content.aboutPage.authorizationSummary}</p>
@@ -137,7 +140,7 @@ export function AboutPage() {
       </section>
 
       <section className="page-band page-band--bordered">
-        <div className="final-cta">
+        <div className="final-cta motion-rise motion-delay-5">
           <div>
             <p className="eyebrow">{content.meta.companyName}</p>
             <h2>{content.aboutPage.finalCtaTitle}</h2>

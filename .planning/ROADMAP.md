@@ -15,7 +15,7 @@ The guiding principle is simple: solve platform and structure first, then conten
 ## Phases
 
 - [x] **Phase 1: Platform Foundation & Theme Shell** - Frontend/backend scaffold, Docker Compose, bilingual routing, shared shell, and light/dark Precision Industrial foundation
-- [ ] **Phase 2: Brand Story & Corporate Presence** - Homepage storytelling, About content, and trust-building presentation
+- [x] **Phase 2: Brand Story & Corporate Presence** - Homepage storytelling, About content, and trust-building presentation
 - [ ] **Phase 3: Product Center & Taxonomy** - Product center structure plus industrial sensor subcategory taxonomy
 - [ ] **Phase 4: Solutions, Brands & Support** - Solutions, partner brands, and service/support experience
 - [ ] **Phase 5: Inquiry, QA & Launch Readiness** - Inquiry flow, responsive QA, theme consistency, and launch verification
@@ -64,7 +64,7 @@ The guiding principle is simple: solve platform and structure first, then conten
 - [x] 02-01: Build a poster-like homepage hero with strong hierarchy, dominant visual anchor, and restrained CTA composition
 - [x] 02-02: Build the bilingual company profile and About page content
 - [x] 02-03: Add trust modules, reserved qualification blocks, and brand-consistent cardless layouts
-- [ ] 02-04: Wire company facts, address, bilingual copy, and controlled motion details across core brand pages
+- [x] 02-04: Wire company facts, address, bilingual copy, and controlled motion details across core brand pages
 
 ### Phase 3: Product Center & Taxonomy
 
@@ -136,7 +136,7 @@ The guiding principle is simple: solve platform and structure first, then conten
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Platform Foundation & Theme Shell | 3/3 | Complete | 2026-03-31 (01-01, 01-02, 01-03) |
-| 2. Brand Story & Corporate Presence | 3/4 | In progress | 2026-03-31 (02-01, 02-02, 02-03) |
+| 2. Brand Story & Corporate Presence | 4/4 | Complete | 2026-03-31 (02-01, 02-02, 02-03, 02-04) |
 | 3. Product Center & Taxonomy | 0/4 | Not started | - |
 | 4. Solutions, Brands & Support | 0/4 | Not started | - |
 | 5. Inquiry, QA & Launch Readiness | 0/4 | Not started | - |

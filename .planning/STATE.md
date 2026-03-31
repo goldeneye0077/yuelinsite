@@ -5,35 +5,35 @@
 See: `.planning/PROJECT.md` (updated 2026-03-30)
 
 **Core value:** Help potential customers quickly understand what Yuelin Technology offers, what problems it can solve, and why it is worth contacting.  
-**Current focus:** Phase 2 - Brand Story & Corporate Presence
+**Current focus:** Phase 3 - Product Center & Taxonomy
 
 ## Current Position
 
-Phase: 2 of 5 (Brand Story & Corporate Presence)  
-Current plan: 02-03 complete
-Status: Ready for 02-04
-Last activity: 2026-03-31 - Implemented 02-03 with homepage/About trust ledgers, authorization framing, and delivery-path modules
+Phase: 3 of 5 (Product Center & Taxonomy)
+Current plan: 02-04 complete
+Status: Ready for 03-01
+Last activity: 2026-03-31 - Implemented 02-04 with bilingual identity refinement, placeholder-page fact continuity, and restrained motion polish
 
-Progress: 6 of 19 plans complete
+Progress: 7 of 19 plans complete
 
 ## Performance Metrics
 
 **Velocity**
 
-- Total plans completed: 6
+- Total plans completed: 7
 - Average duration: ~60 minutes
-- Total execution time: ~360 minutes
+- Total execution time: ~420 minutes
 
 **By Phase**
 
 | Phase | Plans | Total | Avg/Plan |
 |-------|-------|-------|----------|
 | 1 | 3 | ~180m | ~60m |
-| 2 | 3 | ~180m | ~60m |
+| 2 | 4 | ~240m | ~60m |
 
 **Recent Trend**
 
-- Last completed plans: 01-02, 01-03, 02-01, 02-02, 02-03
+- Last completed plans: 01-03, 02-01, 02-02, 02-03, 02-04
 - Trend: Stable
 
 ## Accumulated Context
@@ -48,10 +48,12 @@ Progress: 6 of 19 plans complete
 - Preserve route orientation during locale switches by swapping only the first route segment.
 - Establish backend site bootstrap and inquiry contracts before deeper UI phases.
 - Use a Precision Industrial visual direction with restrained chrome, editorial composition, and chart-ready theme tokens.
+- Show a cross-locale company signature on brand pages to make bilingual identity feel deliberate instead of bolted on.
+- Keep company facts and the Shenzhen address visible on placeholder brand routes until those sections are fully built.
 
 ### Pending Todos
 
-- Continue with 02-04 for copy refinement, motion polish, and tighter continuity across the remaining brand surfaces.
+- Start 03-01 by defining the five top-level product groups and the industrial-sensor subcategory taxonomy from the reference structure.
 
 ### Blockers/Concerns
 
@@ -62,5 +64,5 @@ Progress: 6 of 19 plans complete
 ## Session Continuity
 
 Last session: 2026-03-31  
-Stopped at: 02-03 complete and 02-04 ready
-Resume from: `.planning/phases/02-brand-story-corporate-presence/02-04-PLAN.md`
+Stopped at: Phase 2 complete and 03-01 ready
+Resume from: `.planning/ROADMAP.md` and begin 03-01 planning

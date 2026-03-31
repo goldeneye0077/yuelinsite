@@ -75,6 +75,7 @@ export interface SiteContent {
   meta: {
     brandName: string
     companyName: string
+    crossLocaleCompanyName: string
     brandLine: string
     switchLabel: Record<Locale, string>
     trackLabel: string
@@ -153,6 +154,7 @@ export interface SiteContent {
   placeholder: {
     eyebrow: string
     body: string
+    factsSummary: string
     inquiryCta: string
     homeCta: string
   }
