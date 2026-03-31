@@ -134,6 +134,42 @@ export function SolutionsPage() {
       </section>
 
       <section className="page-band page-band--bordered">
+        <div className="brand-ecosystem motion-rise motion-delay-4" id="partner-ecosystem">
+          <section className="brand-ecosystem__lead">
+            <p className="eyebrow">{content.solutionsPage.partnershipTitle}</p>
+            <p className="story-intro">{content.solutionsPage.partnershipSummary}</p>
+            <div className="story-list">
+              {content.solutionsPage.partnershipModes.map((item) => (
+                <article key={item.title} className="story-item">
+                  <h2>{item.title}</h2>
+                  <p>{item.detail}</p>
+                </article>
+              ))}
+            </div>
+          </section>
+
+          <section className="brand-ecosystem__rail">
+            <p className="eyebrow">{content.solutionsPage.partnershipModesTitle}</p>
+            <p className="story-intro">{content.solutionsPage.partnershipModesSummary}</p>
+            <div className="brand-context-list">
+              {content.solutionsPage.partnerBrands.map((brand) => (
+                <article key={brand.name} className="brand-context-item">
+                  <p className="assurance-item__label">{brand.label}</p>
+                  <h2>{brand.name}</h2>
+                  <p>{brand.detail}</p>
+                  <p className="brand-context-item__role">{brand.projectRole}</p>
+                  <div className="brand-context-item__meta">
+                    <p className="track-label">{content.solutionsPage.partnerTrackLabel}</p>
+                    <p className="brand-context-item__track">{brand.relatedTrack}</p>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </section>
+        </div>
+      </section>
+
+      <section className="page-band page-band--bordered">
         <div className="solutions-support-grid motion-rise motion-delay-4">
           <section className="solutions-support-panel" id="solution-intake">
             <p className="eyebrow">{content.solutionsPage.coordinationTitle}</p>

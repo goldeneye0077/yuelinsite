@@ -35,6 +35,14 @@ export type PartnerBrand = {
   detail: string
 }
 
+export type PartnerBrandContext = {
+  label: string
+  name: string
+  detail: string
+  projectRole: string
+  relatedTrack: string
+}
+
 export type QualificationPlaceholder = {
   title: string
   detail: string
@@ -156,6 +164,13 @@ export interface SiteContent {
     tracksTitle: string
     tracksSummary: string
     tracks: SolutionTrack[]
+    partnershipTitle: string
+    partnershipSummary: string
+    partnershipModesTitle: string
+    partnershipModesSummary: string
+    partnershipModes: HighlightItem[]
+    partnerTrackLabel: string
+    partnerBrands: PartnerBrandContext[]
     coordinationTitle: string
     coordinationSummary: string
     coordinationItems: HighlightItem[]

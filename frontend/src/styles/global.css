@@ -1022,6 +1022,60 @@ img {
   line-height: 1.1;
 }
 
+.brand-ecosystem {
+  display: grid;
+  grid-template-columns: minmax(0, 0.42fr) minmax(0, 0.58fr);
+  gap: 36px;
+  align-items: start;
+}
+
+.brand-ecosystem__lead,
+.brand-ecosystem__rail {
+  padding-top: 20px;
+  border-top: 1px solid var(--color-border);
+}
+
+.brand-ecosystem__rail {
+  padding-left: 18px;
+  border-left: 1px solid var(--color-border);
+}
+
+.brand-context-list {
+  display: grid;
+  gap: 18px;
+}
+
+.brand-context-item {
+  display: grid;
+  gap: 10px;
+  padding-top: 14px;
+  border-top: 1px solid rgba(141, 163, 181, 0.2);
+}
+
+.brand-context-item h2 {
+  margin: 0;
+  color: var(--color-text);
+  font-family: var(--font-display);
+  font-size: 1.28rem;
+  line-height: 1.08;
+}
+
+.brand-context-item p,
+.brand-context-item__track {
+  margin: 0;
+  color: var(--color-text-muted);
+  line-height: 1.7;
+}
+
+.brand-context-item__role {
+  color: var(--color-text);
+}
+
+.brand-context-item__meta {
+  display: grid;
+  gap: 6px;
+}
+
 .solutions-support-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -2051,6 +2105,7 @@ img {
   .placeholder-grid,
   .taxonomy-layout,
   .solutions-hero,
+  .brand-ecosystem,
   .solutions-support-grid,
   .product-hero__inner,
   .product-family-sheet,
@@ -2087,6 +2142,7 @@ img {
     border-left: 0;
   }
 
+  .brand-ecosystem__rail,
   .solutions-support-panel--offset,
   .about-section--offset {
     padding-left: 0;

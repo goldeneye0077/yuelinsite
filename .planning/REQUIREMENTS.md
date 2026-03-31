@@ -33,8 +33,8 @@
 
 ### Brand Cooperation
 
-- [ ] **BRND-01**: User can view the five key cooperation brands: Huayifeng, Panasonic, Sick, AirTAC, and Mindman
-- [ ] **BRND-02**: User can understand that the site supports both proprietary and partner-related business presentation rather than showing logos without context
+- [x] **BRND-01**: User can view the five key cooperation brands: Huayifeng, Panasonic, Sick, AirTAC, and Mindman
+- [x] **BRND-02**: User can understand that the site supports both proprietary and partner-related business presentation rather than showing logos without context
 
 ### Service & Support
 
@@ -95,8 +95,8 @@
 | PROD-04 | Phase 3 | Complete |
 | SOLN-01 | Phase 4 | Complete |
 | SOLN-02 | Phase 4 | Complete |
-| BRND-01 | Phase 4 | Pending |
-| BRND-02 | Phase 4 | Pending |
+| BRND-01 | Phase 4 | Complete |
+| BRND-02 | Phase 4 | Complete |
 | SUPP-01 | Phase 4 | Pending |
 | SUPP-02 | Phase 4 | Pending |
 | ABOU-01 | Phase 2 | Complete |

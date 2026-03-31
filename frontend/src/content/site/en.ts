@@ -375,12 +375,83 @@ export const enSiteContent: SiteContent = {
         },
         transition: {
           label: 'Return to action',
-          title: 'When the route is clear, move into the intake step',
+          title: 'When the route is clear, check how partner brands fit the route',
           detail:
-            'Once the team has identified the right direction, the next move is to gather the equipment facts, interface conditions, and timeline for a real consultation.',
-          ctaLabel: 'Jump to conversation prep',
-          targetId: 'solution-intake',
+            'Technical integration often depends on how partner brands and proprietary business scope fit together, so the next stop should explain that cooperation structure before intake.',
+          ctaLabel: 'Jump to partner ecosystem',
+          targetId: 'partner-ecosystem',
         },
+      },
+    ],
+    partnershipTitle: 'Partner ecosystem with context',
+    partnershipSummary:
+      'These brands are presented as working layers inside the project ecosystem, not as a detached logo wall. The point is to show how proprietary business, partner alignment, and mixed-brand delivery can coexist on the same site.',
+    partnershipModesTitle: 'How brand cooperation is framed',
+    partnershipModesSummary:
+      'The module needs to explain both trust and operating logic: where Yuelin Technology leads directly, where partner brands add credibility, and where mixed-brand coordination matters most.',
+    partnershipModes: [
+      {
+        title: 'Own business first, partner context second',
+        detail:
+          'The site should still read as Yuelin Technology’s business presentation, while partner brands clarify the sensing, safety, pneumatic, and integration ecosystem around it.',
+      },
+      {
+        title: 'Brand references tied to real project layers',
+        detail:
+          'Each cooperation brand should be shown with the layer it strengthens, such as taxonomy reference, sensing precision, safety coverage, or execution-side support.',
+      },
+      {
+        title: 'Mixed-brand projects stay readable',
+        detail:
+          'Visitors should understand that selection, replacement, and integration work may combine Yuelin delivery with brand-specific requirements instead of forcing a single-brand story.',
+      },
+    ],
+    partnerTrackLabel: 'Related track',
+    partnerBrands: [
+      {
+        label: 'Reference taxonomy',
+        name: 'Huayifeng',
+        detail:
+          'Used as a practical reference source for category logic, helping the site describe industrial-sensor structure in a way buyers already recognize.',
+        projectRole:
+          'Best for projects that begin with selection range, category mapping, and quick understanding of the sensing catalog.',
+        relatedTrack: 'Industrial automation solutions',
+      },
+      {
+        label: 'Precision sensing',
+        name: 'Panasonic',
+        detail:
+          'Supports the precision-sensing and internationally legible side of the story, especially where equipment teams care about stable detection reputation.',
+        projectRole:
+          'Fits projects that need clearer sensing credibility, tighter positioning expectations, or export-facing equipment communication.',
+        relatedTrack: 'Industrial automation solutions',
+      },
+      {
+        label: 'Safety and detection',
+        name: 'Sick',
+        detail:
+          'Strengthens the connection to industrial sensing, safety inspection, and intelligent-manufacturing scenarios that need stronger technical context.',
+        projectRole:
+          'Fits projects that combine detection depth with safety logic, especially when the buyer expects a recognizable industrial reference.',
+        relatedTrack: 'Technical integration',
+      },
+      {
+        label: 'Pneumatic execution',
+        name: 'AirTAC',
+        detail:
+          'Represents the execution-side and machine-side component layer, making automation solutions feel closer to real actuation and workstation motion.',
+        projectRole:
+          'Fits projects where sensing must coordinate with cylinders, pneumatic actions, or machine-level replacement work.',
+        relatedTrack: 'Industrial automation solutions',
+      },
+      {
+        label: 'System coordination',
+        name: 'Mindman',
+        detail:
+          'Completes the partner expectation around execution units and system coordination, especially in mixed-brand implementation discussions.',
+        projectRole:
+          'Fits projects that need broader execution-unit alignment or longer-cycle integration coordination across multiple component layers.',
+        relatedTrack: 'Technical integration',
       },
     ],
     coordinationTitle: 'What to prepare for the first conversation',
