@@ -10,29 +10,30 @@ See: `.planning/PROJECT.md` (updated 2026-03-30)
 ## Current Position
 
 Phase: 2 of 5 (Brand Story & Corporate Presence)  
-Previous phase: Phase 1 complete  
-Status: Ready for Phase 2 planning and execution  
-Last activity: 2026-03-31 - Implemented Plan 01-03 with the shared shell, theme tokens, header/footer/mobile navigation, and placeholder route templates
+Current plan: 02-01 complete  
+Status: Ready for 02-02  
+Last activity: 2026-03-31 - Implemented 02-01 with a real brand homepage hero, trust sections, and imported logo asset
 
-Progress: 3 of 19 plans complete
+Progress: 4 of 19 plans complete
 
 ## Performance Metrics
 
 **Velocity**
 
-- Total plans completed: 3
+- Total plans completed: 4
 - Average duration: ~60 minutes
-- Total execution time: ~180 minutes
+- Total execution time: ~240 minutes
 
 **By Phase**
 
 | Phase | Plans | Total | Avg/Plan |
 |-------|-------|-------|----------|
 | 1 | 3 | ~180m | ~60m |
+| 2 | 1 | ~60m | ~60m |
 
 **Recent Trend**
 
-- Last completed plans: 01-01, 01-02, 01-03
+- Last completed plans: 01-01, 01-02, 01-03, 02-01
 - Trend: Stable
 
 ## Accumulated Context
@@ -50,7 +51,7 @@ Progress: 3 of 19 plans complete
 
 ### Pending Todos
 
-- Start Phase 2 planning and implementation for the homepage hero, About content, and trust modules.
+- Continue with 02-02 for the dedicated About page and fuller bilingual company profile surface.
 
 ### Blockers/Concerns
 
@@ -61,5 +62,5 @@ Progress: 3 of 19 plans complete
 ## Session Continuity
 
 Last session: 2026-03-31  
-Stopped at: Phase 1 complete and Phase 2 ready  
-Resume from: `.planning/ROADMAP.md`
+Stopped at: 02-01 complete and 02-02 ready  
+Resume from: `.planning/phases/02-brand-story-corporate-presence/02-02-PLAN.md`

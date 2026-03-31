@@ -44,21 +44,121 @@ export const enSiteContent: SiteContent = {
     },
   ],
   home: {
-    eyebrow: 'Precision industrial corporate shell',
+    eyebrow: 'Industrial sensing and automation integration',
     title: 'Shenzhen Yuelin Technology',
     summary:
-      'A bilingual corporate website foundation for industrial sensors, automation projects, and technical integration partnerships.',
+      'Industrial sensors, automation-focused components, and technical integration support for equipment makers, integrators, and factory buyers.',
     description:
-      'The first screen prioritizes brand confidence, route clarity, and a low-friction consultation path before deeper product and solution content arrives.',
+      'Yuelin Technology combines industrial sensor supply, safety protection, laser ranging, linear motion components, pneumatic products, software development, and technical integration into one clear consulting path.',
     primaryCta: 'Request Consultation / \u83b7\u53d6\u54a8\u8be2',
     secondaryCta: 'View product structure',
-    statusLabel: 'Foundation status',
+    statusLabel: 'Who we serve',
     statusItems: [
-      'Mirrored Chinese and English route shells are active',
-      'Inquiry touchpoints stay visible across the first foundation pages',
-      'Light and dark themes share the same design tokens and surfaces',
+      'Equipment makers: sensing, linkage, and production-line upgrades',
+      'System integrators: interface alignment, control paths, and implementation support',
+      'Factory-side buyers: reliable supply, technical guidance, and responsive delivery',
     ],
-    visualLabel: 'Reserved visual anchor',
+    visualLabel: 'Live logo and industrial flow anchor',
+    strengthsTitle: 'Core strengths',
+    strengths: [
+      {
+        title: 'Selection and combination support',
+        detail:
+          'Match industrial sensors, safety protection, and motion components to the actual requirements of equipment and line-side environments.',
+      },
+      {
+        title: 'Software development and integration',
+        detail:
+          'Connect sensing signals, software logic, and implementation needs into a practical automation delivery path.',
+      },
+      {
+        title: 'Consultation-to-project continuity',
+        detail:
+          'Keep brand presentation, technical discussion, and inquiry capture on one continuous route instead of separate disconnected steps.',
+      },
+    ],
+    directionsTitle: 'Major product and service directions',
+    directions: [
+      {
+        title: 'Industrial sensors',
+        detail:
+          'Built around the reference taxonomy for photoelectric, displacement, ultrasonic, pressure, magnetic, and related subcategories.',
+      },
+      {
+        title: 'Safety protection sensors',
+        detail:
+          'Prepared for line-side protection, region detection, and machine safety scenarios.',
+      },
+      {
+        title: 'Laser ranging sensors',
+        detail:
+          'For non-contact ranging, displacement checks, and high-precision positioning use cases.',
+      },
+      {
+        title: 'Linear guides and modules',
+        detail:
+          'Supporting motion units, positioning modules, and structure-level equipment upgrades.',
+      },
+      {
+        title: 'Pneumatic components',
+        detail:
+          'Extending the execution and control layer around integrated automation projects.',
+      },
+    ],
+    partnersTitle: 'Partner brands',
+    partnersSummary:
+      'The homepage should present partner capability with context, building trust through recognizable industrial references instead of logo-only decoration.',
+    partners: [
+      {
+        name: 'Huayifeng',
+        detail:
+          'A key structural reference for the industrial sensor category system used across the site.',
+      },
+      {
+        name: 'Panasonic',
+        detail:
+          'Supports a more precise and internationally legible sensing and automation impression.',
+      },
+      {
+        name: 'Sick',
+        detail:
+          'Connects naturally with industrial sensing, safety, and intelligent manufacturing scenarios.',
+      },
+      {
+        name: 'AirTAC',
+        detail:
+          'Reinforces the pneumatic and machine-side application story on the homepage.',
+      },
+      {
+        name: 'Mindman',
+        detail:
+          'Rounds out the partner expectation around execution units and technical integration.',
+      },
+    ],
+    profileTitle: 'Company profile',
+    profileSummary:
+      'Shenzhen Yuelin Technology Co., Ltd. is based in Shenzhen and focuses on industrial sensors, automation-related products, and technical services.',
+    profileBody:
+      'The company serves smart manufacturing scenarios with industrial sensors, safety protection sensors, laser ranging sensors, linear guides and modules, pneumatic components, software development, and technical integration. The aim is to improve equipment automation capability and production efficiency through reliable supply, practical technical support, and responsive delivery.',
+    profileFacts: [
+      {
+        label: 'Office',
+        value:
+          'Building 3, Xunmei Technology Plaza, No. 8 Keyuan Road, Kejiyuan Community, Yuehai Subdistrict, Nanshan District, Shenzhen',
+      },
+      {
+        label: 'Main focus',
+        value:
+          'Industrial sensors | Solutions | Software development | Technical integration',
+      },
+      {
+        label: 'Working style',
+        value: 'Selection support | Project coordination | Technical response',
+      },
+    ],
+    finalCtaTitle: 'Start with the project scenario',
+    finalCtaBody:
+      'Share the equipment model, sensing requirement, or integration scope first, and the next step can be mapped to the right product and technical route.',
   },
   productCenter: {
     title: 'Product Center',

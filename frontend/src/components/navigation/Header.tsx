@@ -1,6 +1,7 @@
 import { Languages, Menu, MoonStar, SunMedium } from 'lucide-react'
 import { Link, NavLink, useLocation } from 'react-router-dom'
 
+import brandLogo from '../../assets/logo6.png'
 import type { SiteContent } from '../../content/site/types'
 import {
   buildLocalePath,
@@ -25,9 +26,7 @@ export function Header({ content, locale, onOpenMenu }: HeaderProps) {
       <div className="header-inner">
         <Link className="brand-lockup" to={buildLocalePath(locale)}>
           <span aria-hidden="true" className="brand-mark">
-            <span />
-            <span />
-            <span />
+            <img alt="" className="brand-mark__image" src={brandLogo} />
           </span>
           <span className="brand-copy">
             <span className="brand-name">{content.meta.companyName}</span>

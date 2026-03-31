@@ -14,6 +14,21 @@ export type FoundationTrack = {
   detail: string
 }
 
+export type HighlightItem = {
+  title: string
+  detail: string
+}
+
+export type CompanyFact = {
+  label: string
+  value: string
+}
+
+export type PartnerBrand = {
+  name: string
+  detail: string
+}
+
 export type FooterLinkItem = {
   label: string
   section: SectionRouteKey
@@ -58,6 +73,19 @@ export interface SiteContent {
     statusLabel: string
     statusItems: [string, string, string]
     visualLabel: string
+    strengthsTitle: string
+    strengths: HighlightItem[]
+    directionsTitle: string
+    directions: HighlightItem[]
+    partnersTitle: string
+    partnersSummary: string
+    partners: PartnerBrand[]
+    profileTitle: string
+    profileSummary: string
+    profileBody: string
+    profileFacts: CompanyFact[]
+    finalCtaTitle: string
+    finalCtaBody: string
   }
   productCenter: RoutePageContent
   solutions: RoutePageContent
