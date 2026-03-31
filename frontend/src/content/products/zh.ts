@@ -2,38 +2,53 @@ import type { ProductTaxonomyContent } from './types'
 
 export const zhProductTaxonomy: ProductTaxonomyContent = {
   locale: 'zh',
-  eyebrow: '产品架构预览',
-  title: '五大产品主轴与工业传感器子类同步结构',
+  eyebrow: '产品中心 / Product Center',
+  title: '工业传感与执行元件产品目录',
   summary:
-    '先把五个一级类与工业传感器的参考子类沉成统一数据模型，后续产品中心首页、分类页和子类导航都直接复用这套结构。',
-  sourceLabel: '参考结构对齐：华怡丰产品中心',
+    '围绕五大一级类建立双语产品目录，兼顾工业传感器的细分深度与企业站浏览效率。',
+  description:
+    '当前产品中心先把目录结构、分类逻辑和咨询入口做稳，后续可以继续挂接真实型号、图片、说明书与下载资料。',
+  sourceLabel: '参考目录来源',
   sourceUrl: 'https://www.hyfcn.com/product.html',
-  categoriesTitle: '一级分类',
+  categoriesTitle: '五大产品主轴',
   categoriesSummary:
-    '一级类以你的业务边界为准，工业传感器内部子类则优先对齐参考站的感测产品结构。',
-  industrialSensorsTitle: '工业传感器子类',
+    '一级分类按照跃鳞科技的业务表达来组织，工业传感器内部细分优先对齐参考站的传感产品目录。',
+  industrialSensorsTitle: '工业传感器细分',
   industrialSensorsSummary:
-    '这里保留与参考页同步的主要传感器分组，后续 03-03 再继续展开到列表模板和子类导航层。',
+    '这一层先承接参考目录里最成熟的传感器分组，后续 03-03 会继续展开子类导航和列表模板。',
+  familyCtaLabel: '查看分类',
+  consultTitle: '需要选型或项目沟通',
+  consultBody:
+    '如果你已经有目标场景、设备结构或替换需求，可以先从这里发起咨询，后续再补型号、图纸和更细的技术资料。',
+  consultCtaLabel: '发起咨询',
+  backToCatalogLabel: '返回产品中心',
+  relatedFamiliesTitle: '相关一级分类',
+  relatedFamiliesSummary:
+    '产品中心不是孤立浏览。你可以顺着同一套工业自动化叙事，继续查看其他一级类和后续解决方案模块。',
+  categoryMetaGroupsLabel: '细分类数量',
+  categoryMetaSeriesLabel: '代表系列',
+  sourceSyncedLabel: '参考站同步',
+  projectInferredLabel: '项目推导',
   categories: [
     {
       key: 'industrial-sensors',
       name: '工业传感器',
       summary:
-        '以参考站的传感器产品结构为底稿，覆盖检测、接近、识别、压力、超声波、磁性与配件等核心分组。',
+        '以参考站的传感产品结构为底稿，覆盖检测、接近、识别、压力、超声波、磁性与配件等核心分组。',
       useCase: '面向通用感测、识别与状态检测场景。',
       source: 'reference-synced',
       groups: [
         {
           slug: 'fiber-sensors',
           name: '光纤传感器',
-          summary: '对应参考页中的光纤与放大器相关分组。',
+          summary: '对应参考目录中的光纤放大器与光纤单元类目。',
           source: 'reference-synced',
-          series: ['经济型数字光纤传感器', '多功能双数显光纤传感器', '光纤元件'],
+          series: ['经济型数字光纤传感器', '双数显光纤传感器', '光纤元件'],
         },
         {
           slug: 'photoelectric-sensors',
           name: '光电传感器',
-          summary: '承接大部分通用光电检测分支，激光测距类独立到一级类。',
+          summary: '承接通用光电检测结构，激光测距相关能力在一级类中独立展开。',
           source: 'reference-synced',
           series: [
             '小方型光电传感器',
@@ -42,25 +57,25 @@ export const zhProductTaxonomy: ProductTaxonomyContent = {
             '超薄型光电传感器',
             '迷你型背景抑制光电传感器',
             '背景抑制光电传感器',
-            '背景抑制型线性光传感器',
-            'M8圆柱型光电传感器',
-            'M12圆柱型光电传感器',
-            'M18圆柱型光电传感器',
+            '线性光电传感器',
+            'M8 圆柱型光电传感器',
+            'M12 圆柱型光电传感器',
+            'M18 圆柱型光电传感器',
             '内置型框型光电传感器',
-            '光电管道液位传感器',
+            '液位光电传感器',
           ],
         },
         {
           slug: 'displacement-sensors',
           name: '位移测量传感器',
-          summary: '保留参考页中的激光位移测量分支。',
+          summary: '保留微型与高精度激光位移测量分组。',
           source: 'reference-synced',
           series: ['微型激光位移传感器', '高精度激光位移传感器'],
         },
         {
           slug: 'slot-sensors',
           name: '槽型光电传感器',
-          summary: '覆盖连接器型、电缆型与不同槽宽结构。',
+          summary: '覆盖连接器型、电缆型以及不同槽宽结构。',
           source: 'reference-synced',
           series: [
             '连接器型槽型光电传感器',
@@ -74,9 +89,9 @@ export const zhProductTaxonomy: ProductTaxonomyContent = {
         {
           slug: 'color-and-label-sensors',
           name: '颜色与标签传感器',
-          summary: '把颜色识别与标签识别放在同一浏览段落内。',
+          summary: '把颜色识别和标签识别放在同一浏览段内。',
           source: 'reference-synced',
-          series: ['白光颜色传感器', '数字式色标传感器', '智能型数字颜色传感器', '标签传感器'],
+          series: ['白光颜色传感器', '数字式色标传感器', '智能型颜色传感器', '标签传感器'],
         },
         {
           slug: 'inductive-proximity-sensors',
@@ -85,7 +100,7 @@ export const zhProductTaxonomy: ProductTaxonomyContent = {
           source: 'reference-synced',
           series: [
             '环形接近传感器',
-            '经济型环型接近传感器',
+            '经济型环形接近传感器',
             '管型接近传感器',
             '小方型接近传感器',
             '超小圆柱型接近传感器',
@@ -93,7 +108,7 @@ export const zhProductTaxonomy: ProductTaxonomyContent = {
             '短型圆柱型接近传感器',
             '方型接近传感器',
             '防焊渣电感式接近传感器',
-            '圆柱型模拟量接近传感器',
+            '模拟量接近传感器',
           ],
         },
         {
@@ -106,20 +121,20 @@ export const zhProductTaxonomy: ProductTaxonomyContent = {
             '扁平型电容接近传感器',
             '圆柱型电容接近传感器',
             '耐腐蚀圆柱型电容接近传感器',
-            '耐腐蚀圆柱型液位电容接近传感器',
+            '耐腐蚀液位电容接近传感器',
           ],
         },
         {
           slug: 'industrial-code-readers',
           name: '工业读码器',
-          summary: '对应参考页中的固定式和手持式读码设备。',
+          summary: '对应固定式和手持式工业读码设备。',
           source: 'reference-synced',
           series: ['固定式工业读码器', '手持式工业读码器'],
         },
         {
           slug: 'vision-sensors',
           name: '图像识别传感器',
-          summary: '承接图像识别与视觉判断类场景。',
+          summary: '承接图像识别与轻量视觉判断场景。',
           source: 'reference-synced',
           series: ['图像识别传感器'],
         },
@@ -128,12 +143,12 @@ export const zhProductTaxonomy: ProductTaxonomyContent = {
           name: '压力传感器',
           summary: '压力检测与耐腐蚀需求作为独立组保留。',
           source: 'reference-synced',
-          series: ['双数显数字压力传感器', '防水/耐腐蚀型压力传感器'],
+          series: ['双数显数字压力传感器', '防水耐腐蚀型压力传感器'],
         },
         {
           slug: 'ultrasonic-sensors',
           name: '超声波传感器',
-          summary: '覆盖常规超声波检测和单双张检测。',
+          summary: '覆盖常规超声波检测与单双张检测。',
           source: 'reference-synced',
           series: ['圆柱型超声波传感器', '超声波单双张检测传感器'],
         },
@@ -164,23 +179,23 @@ export const zhProductTaxonomy: ProductTaxonomyContent = {
       key: 'safety-protection-sensors',
       name: '安全防护传感器',
       summary:
-        '从参考页中拆出安全/区域传感器与安全门锁相关产品，独立成你的第二个一级类。',
+        '从参考目录中拆出安全区域传感与安全门锁相关产品，独立成跃鳞科技的第二个一级类。',
       useCase: '面向产线安全、区域防护和门禁互锁场景。',
       source: 'reference-synced',
       groups: [
         {
           slug: 'light-curtains-and-area-sensors',
           name: '光幕与区域传感器',
-          summary: '覆盖基本型光幕、超薄型光幕、区域传感器与激光雷达扫描仪。',
+          summary: '覆盖基础型光幕、超薄型光幕、区域传感器与激光雷达扫描仪。',
           source: 'reference-synced',
-          series: ['基本型光幕传感器', '超薄型光幕传感器', '超薄型区域传感器', '激光雷达扫描仪'],
+          series: ['基础型光幕传感器', '超薄型光幕传感器', '超薄型区域传感器', '激光雷达扫描仪'],
         },
         {
           slug: 'safety-door-lock-switches',
           name: '安全门锁开关',
           summary: '集中承接门锁、门开关与系列化安全门锁产品。',
           source: 'reference-synced',
-          series: ['安全门锁开关', '小型安全门开关', '安全门锁开关SDS04系列'],
+          series: ['安全门锁开关', '小型安全门开关', 'RDS04 系列安全门锁开关'],
         },
         {
           slug: 'safety-relay-and-non-contact-switches',
@@ -195,7 +210,7 @@ export const zhProductTaxonomy: ProductTaxonomyContent = {
       key: 'laser-ranging-sensors',
       name: '激光测距传感器',
       summary:
-        '把参考页中的激光测距、TOF 激光与激光位移测量能力抽出，形成独立激光测距主轴。',
+        '把参考目录中的激光测距、TOF 激光与激光位移测量能力抽出，形成独立的激光检测主轴。',
       useCase: '面向非接触测距、激光位移和高精度定位场景。',
       source: 'reference-synced',
       groups: [
@@ -209,9 +224,9 @@ export const zhProductTaxonomy: ProductTaxonomyContent = {
         {
           slug: 'tof-laser-sensors',
           name: 'TOF 激光传感器',
-          summary: '保留参考页中的 TOF 型激光检测结构。',
+          summary: '保留参考目录中的 TOF 型激光检测结构。',
           source: 'reference-synced',
-          series: ['TOF型全金属激光传感器', 'TOF激光传感器'],
+          series: ['TOF 全金属激光传感器', 'TOF 激光传感器'],
         },
         {
           slug: 'laser-displacement',
@@ -226,7 +241,7 @@ export const zhProductTaxonomy: ProductTaxonomyContent = {
       key: 'linear-guides-and-modules',
       name: '线性滑轨及模组',
       summary:
-        '参考站并未提供线性模组结构，这里先按工业传动常见浏览方式建立可扩展分组，后续可替换为真实产品目录。',
+        '参考目录未覆盖线性模组，这里先按工业传动常见浏览方式建立可扩展分组，后续可替换为真实目录。',
       useCase: '面向传动定位、滑台模组和设备结构升级场景。',
       source: 'project-inferred',
       groups: [
@@ -261,7 +276,7 @@ export const zhProductTaxonomy: ProductTaxonomyContent = {
         {
           slug: 'positioning-stages',
           name: '定位平台',
-          summary: '保留双轴或平台式定位结构的后续扩展位。',
+          summary: '为双轴或平台式定位结构预留后续扩展位。',
           source: 'project-inferred',
           series: ['定位平台', '多轴组合平台'],
         },
@@ -271,14 +286,14 @@ export const zhProductTaxonomy: ProductTaxonomyContent = {
       key: 'pneumatic-components',
       name: '气动元器件',
       summary:
-        '围绕执行、控制和气源处理建立基础气动目录分组，作为后续与传感/集成方案联动的目录底座。',
+        '围绕执行、控制和气源处理建立基础气动目录分组，作为后续与传感和集成方案联动的底座。',
       useCase: '面向执行机构、阀控与气路连接场景。',
       source: 'project-inferred',
       groups: [
         {
           slug: 'cylinders',
           name: '气缸',
-          summary: '涵盖标准、薄型、导杆与紧凑气缸。',
+          summary: '涵盖标准、薄型、导杆与紧凑型气缸。',
           source: 'project-inferred',
           series: ['标准气缸', '薄型气缸', '导杆气缸'],
         },

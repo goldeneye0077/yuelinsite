@@ -1,0 +1,33 @@
+import { render, screen } from '@testing-library/react'
+import { RouterProvider } from 'react-router-dom'
+
+import { createAppRouter } from '../app/router'
+import { AppProviders } from '../app/providers'
+import { getProductTaxonomy } from '../content/products'
+
+describe('ProductCenterPage', () => {
+  it('renders the product landing page with all five product families', async () => {
+    const taxonomy = getProductTaxonomy('zh')
+    const router = createAppRouter({
+      initialEntries: ['/zh/products'],
+    })
+
+    render(
+      <AppProviders>
+        <RouterProvider router={router} />
+      </AppProviders>,
+    )
+
+    expect(await screen.findByText(taxonomy.title)).toBeInTheDocument()
+    expect(
+      (await screen.findAllByText(taxonomy.categories[0].name)).length,
+    ).toBeGreaterThan(0)
+    expect(
+      (await screen.findAllByText(taxonomy.categories[4].name)).length,
+    ).toBeGreaterThan(0)
+    expect(
+      (await screen.findAllByText(taxonomy.categories[0].groups[0].name)).length,
+    ).toBeGreaterThan(0)
+    expect(await screen.findAllByText(taxonomy.consultCtaLabel)).not.toHaveLength(0)
+  })
+})

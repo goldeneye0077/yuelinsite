@@ -12,6 +12,8 @@ import {
 import { SiteShell } from '../layouts/SiteShell'
 import { AboutPage } from '../pages/AboutPage'
 import { HomeShellPage } from '../pages/HomeShellPage'
+import { ProductCenterPage } from '../pages/ProductCenterPage'
+import { ProductFamilyPage } from '../pages/ProductFamilyPage'
 import { SectionPlaceholderPage } from '../pages/SectionPlaceholderPage'
 
 type RouterFactoryOptions = {
@@ -34,7 +36,11 @@ export function createAppRouter(options: RouterFactoryOptions = {}) {
         },
         {
           path: 'products',
-          element: <SectionPlaceholderPage section="products" />,
+          element: <ProductCenterPage />,
+        },
+        {
+          path: 'products/:familyKey',
+          element: <ProductFamilyPage />,
         },
         {
           path: 'solutions',

@@ -31,11 +31,23 @@ export type ProductTaxonomyContent = {
   eyebrow: string
   title: string
   summary: string
+  description: string
   sourceLabel: string
   sourceUrl: string
   categoriesTitle: string
   categoriesSummary: string
   industrialSensorsTitle: string
   industrialSensorsSummary: string
+  familyCtaLabel: string
+  consultTitle: string
+  consultBody: string
+  consultCtaLabel: string
+  backToCatalogLabel: string
+  relatedFamiliesTitle: string
+  relatedFamiliesSummary: string
+  categoryMetaGroupsLabel: string
+  categoryMetaSeriesLabel: string
+  sourceSyncedLabel: string
+  projectInferredLabel: string
   categories: ProductFamily[]
 }

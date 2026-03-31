@@ -1,0 +1,227 @@
+import { ArrowRight } from 'lucide-react'
+import { Link } from 'react-router-dom'
+
+import {
+  buildProductFamilyPath,
+  getProductTaxonomy,
+} from '../content/products'
+import type { ProductFamily, ProductSourceType } from '../content/products/types'
+import { buildLocalePath } from '../i18n/locales'
+import { useSiteShellContext } from '../layouts/useSiteShellContext'
+
+function getSourceLabel(
+  source: ProductSourceType,
+  syncedLabel: string,
+  inferredLabel: string,
+) {
+  return source === 'reference-synced' ? syncedLabel : inferredLabel
+}
+
+function getSeriesCount(family: ProductFamily) {
+  return family.groups.reduce((total, group) => total + group.series.length, 0)
+}
+
+export function ProductCenterPage() {
+  const { locale, content } = useSiteShellContext()
+  const taxonomy = getProductTaxonomy(locale)
+  const totalGroups = taxonomy.categories.reduce(
+    (total, family) => total + family.groups.length,
+    0,
+  )
+  const totalSeries = taxonomy.categories.reduce(
+    (total, family) => total + getSeriesCount(family),
+    0,
+  )
+  const spotlightGroups = taxonomy.categories[0]?.groups.slice(0, 6) ?? []
+
+  return (
+    <>
+      <section className="product-hero">
+        <div className="product-hero__inner">
+          <div className="product-hero__copy">
+            <p className="eyebrow">{taxonomy.eyebrow}</p>
+            <h1>{taxonomy.title}</h1>
+            <p className="hero-signature">{content.meta.crossLocaleCompanyName}</p>
+            <p className="hero-summary">{taxonomy.summary}</p>
+            <p className="hero-description">{taxonomy.description}</p>
+            <div className="hero-actions">
+              <Link className="cta-link" to={buildLocalePath(locale, 'contact')}>
+                <span>{taxonomy.consultCtaLabel}</span>
+                <ArrowRight size={16} />
+              </Link>
+              <Link className="secondary-link" to={buildLocalePath(locale, 'solutions')}>
+                {content.navigation.find((item) => item.key === 'solutions')?.label}
+              </Link>
+            </div>
+          </div>
+
+          <div className="product-hero__rail">
+            <div className="product-hero__stats" aria-hidden="true">
+              <article className="product-hero__stat">
+                <p className="track-label">{taxonomy.categoriesTitle}</p>
+                <p className="product-hero__stat-value">{taxonomy.categories.length}</p>
+              </article>
+              <article className="product-hero__stat">
+                <p className="track-label">{taxonomy.categoryMetaGroupsLabel}</p>
+                <p className="product-hero__stat-value">{totalGroups}</p>
+              </article>
+              <article className="product-hero__stat">
+                <p className="track-label">{taxonomy.categoryMetaSeriesLabel}</p>
+                <p className="product-hero__stat-value">{totalSeries}</p>
+              </article>
+            </div>
+
+            <div className="product-hero__family-list">
+              {taxonomy.categories.map((family, index) => (
+                <Link
+                  key={family.key}
+                  className="product-hero__family-link"
+                  to={buildProductFamilyPath(locale, family.key)}
+                >
+                  <p className="product-hero__family-index">
+                    {String(index + 1).padStart(2, '0')}
+                  </p>
+                  <div className="product-hero__family-copy">
+                    <div className="product-hero__family-header">
+                      <h2>{family.name}</h2>
+                      <span className="product-source-badge">
+                        {getSourceLabel(
+                          family.source,
+                          taxonomy.sourceSyncedLabel,
+                          taxonomy.projectInferredLabel,
+                        )}
+                      </span>
+                    </div>
+                    <p>{family.summary}</p>
+                    <p className="product-hero__family-meta">
+                      {family.groups.length} {taxonomy.categoryMetaGroupsLabel.toLowerCase()}
+                    </p>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="page-band page-band--bordered">
+        <div className="product-directory">
+          <div className="product-directory__intro motion-rise motion-delay-1">
+            <p className="eyebrow">{taxonomy.categoriesTitle}</p>
+            <h2 className="profile-title">{content.productCenter.title}</h2>
+            <p className="story-intro">{taxonomy.categoriesSummary}</p>
+          </div>
+
+          <div className="product-family-sheet-list">
+            {taxonomy.categories.map((family, index) => (
+              <article
+                key={family.key}
+                className={`product-family-sheet motion-rise motion-delay-${Math.min(index + 2, 5)}`}
+              >
+                <div className="product-family-sheet__lead">
+                  <div className="product-family-sheet__meta">
+                    <p className="track-label">
+                      {String(index + 1).padStart(2, '0')} / {taxonomy.categoryMetaGroupsLabel}
+                    </p>
+                    <span className="product-source-badge">
+                      {getSourceLabel(
+                        family.source,
+                        taxonomy.sourceSyncedLabel,
+                        taxonomy.projectInferredLabel,
+                      )}
+                    </span>
+                  </div>
+                  <h2>{family.name}</h2>
+                  <p className="story-intro">{family.summary}</p>
+                  <p className="product-family-sheet__usecase">{family.useCase}</p>
+                </div>
+
+                <div className="product-family-sheet__body">
+                  <div className="product-family-sheet__stats">
+                    <article>
+                      <p className="track-label">{taxonomy.categoryMetaGroupsLabel}</p>
+                      <p className="product-family-sheet__stat-value">{family.groups.length}</p>
+                    </article>
+                    <article>
+                      <p className="track-label">{taxonomy.categoryMetaSeriesLabel}</p>
+                      <p className="product-family-sheet__stat-value">
+                        {getSeriesCount(family)}
+                      </p>
+                    </article>
+                  </div>
+
+                  <div className="product-family-sheet__group-list">
+                    {family.groups.slice(0, 4).map((group) => (
+                      <article key={group.slug} className="product-family-sheet__group-item">
+                        <h3>{group.name}</h3>
+                        <p>{group.summary}</p>
+                      </article>
+                    ))}
+                  </div>
+
+                  <div className="section-actions">
+                    <Link
+                      className="cta-link"
+                      to={buildProductFamilyPath(locale, family.key)}
+                    >
+                      <span>{taxonomy.familyCtaLabel}</span>
+                      <ArrowRight size={16} />
+                    </Link>
+                    <Link className="secondary-link" to={buildLocalePath(locale, 'contact')}>
+                      {content.productCenter.primaryCta}
+                    </Link>
+                  </div>
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="page-band page-band--bordered">
+        <div className="product-spotlight motion-rise motion-delay-3">
+          <div className="product-spotlight__copy">
+            <p className="eyebrow">{taxonomy.industrialSensorsTitle}</p>
+            <h2 className="profile-title">{taxonomy.categories[0]?.name}</h2>
+            <p className="story-intro">{taxonomy.industrialSensorsSummary}</p>
+            <p className="taxonomy-source">
+              <span>{taxonomy.sourceLabel}</span>
+              <a href={taxonomy.sourceUrl} rel="noreferrer" target="_blank">
+                {taxonomy.sourceUrl}
+              </a>
+            </p>
+          </div>
+
+          <div className="product-spotlight__list">
+            {spotlightGroups.map((group) => (
+              <article key={group.slug} className="product-spotlight__item">
+                <h3>{group.name}</h3>
+                <p>{group.summary}</p>
+                <p className="product-spotlight__series">{group.series.join(' / ')}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="page-band page-band--bordered">
+        <div className="final-cta motion-rise motion-delay-4">
+          <div>
+            <p className="eyebrow">{taxonomy.consultTitle}</p>
+            <h2>{content.productCenter.summary}</h2>
+            <p>{taxonomy.consultBody}</p>
+          </div>
+          <div className="section-actions">
+            <Link className="cta-link" to={buildLocalePath(locale, 'contact')}>
+              <span>{taxonomy.consultCtaLabel}</span>
+              <ArrowRight size={16} />
+            </Link>
+            <Link className="secondary-link" to={buildLocalePath(locale, 'about')}>
+              {content.navigation.find((item) => item.key === 'about')?.label}
+            </Link>
+          </div>
+        </div>
+      </section>
+    </>
+  )
+}
