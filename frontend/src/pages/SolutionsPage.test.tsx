@@ -25,10 +25,16 @@ describe('SolutionsPage', () => {
       await screen.findByText(content.solutionsPage.coverageItems[0].title),
     ).toBeInTheDocument()
     expect(
-      await screen.findByText(content.solutionsPage.tracks[0].title),
-    ).toBeInTheDocument()
+      (await screen.findAllByText(content.solutionsPage.tracks[0].title)).length,
+    ).toBeGreaterThan(0)
     expect(
       await screen.findByText(content.solutionsPage.processTitle),
     ).toBeInTheDocument()
+    expect(
+      await screen.findByRole('link', { name: content.solutionsPage.tracks[0].primaryCta.label }),
+    ).toBeInTheDocument()
+    expect(
+      await screen.findByRole('link', { name: content.solutionsPage.tracks[1].transition.ctaLabel }),
+    ).toHaveAttribute('href', `#${content.solutionsPage.tracks[1].transition.targetId}`)
   })
 })

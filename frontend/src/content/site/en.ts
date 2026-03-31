@@ -230,7 +230,7 @@ export const enSiteContent: SiteContent = {
     heroSummary:
       'From industrial sensor selection to software coordination and field integration, Yuelin Technology presents three service tracks that are easier for industrial buyers to scan and compare.',
     heroDescription:
-      'The page answers three practical questions first: what kinds of projects fit, what support scope can be covered, and what the customer should expect from the collaboration. That keeps the first discussion grounded before anyone has to read the full catalog.',
+      'The page no longer stops at capability framing. It now tells visitors which route to enter first, where each track should lead next, and how a project can move cleanly from one direction into another without losing context.',
     coverageTitle: 'Customer fit and project stage',
     coverageSummary:
       'Whether the need is a new machine, a line-side upgrade, or a project that must connect sensing, execution, and control, this view should make the collaboration boundary easier to read.',
@@ -254,11 +254,13 @@ export const enSiteContent: SiteContent = {
           'Useful around inspection stations, positioning units, safety reinforcement, or cycle-time-driven retrofit work.',
       },
     ],
+    trackNavLabel: 'Solution direction navigation',
     tracksTitle: 'Three solution directions',
     tracksSummary:
-      'The goal is to make the direction legible first, then move into models, pricing, and project follow-up without forcing industrial customers through fragmented information.',
+      'The goal is to help visitors choose a route quickly, then move through the right scope, value, and action path without bouncing between unrelated information blocks.',
     tracks: [
       {
+        anchor: 'industrial-automation',
         step: '01',
         title: 'Industrial automation solutions',
         summary:
@@ -278,8 +280,28 @@ export const enSiteContent: SiteContent = {
           'Align equipment-side and control-side boundaries earlier',
           'Create a clearer path into sampling, quotation, and validation',
         ],
+        actionTitle: 'Best entered from the real production scenario',
+        actionBody:
+          'If the equipment type, inspection target, or retrofit goal is already clear, this route is usually the most efficient place to start the discussion.',
+        primaryCta: {
+          label: 'Discuss the automation scenario',
+          section: 'contact',
+        },
+        secondaryCta: {
+          label: 'View relevant product directions',
+          section: 'products',
+        },
+        transition: {
+          label: 'Continue the route',
+          title: 'Move forward when the field logic also needs software coordination',
+          detail:
+            'If the project needs status displays, alarms, process logic, or operator-facing tools on top of the hardware path, the next stop is usually the software-development track.',
+          ctaLabel: 'Jump to software development',
+          targetId: 'software-development',
+        },
       },
       {
+        anchor: 'software-development',
         step: '02',
         title: 'Software development',
         summary:
@@ -299,8 +321,28 @@ export const enSiteContent: SiteContent = {
           'Reduce the gap between sensor data and field logic',
           'Help customers see a clearer path from detection to usable information',
         ],
+        actionTitle: 'Best entered from data and workflow expectations',
+        actionBody:
+          'If the team already knows what should be collected, monitored, or shown on screen, this route helps define the software boundary faster.',
+        primaryCta: {
+          label: 'Discuss software needs',
+          section: 'contact',
+        },
+        secondaryCta: {
+          label: 'Review service support',
+          section: 'support',
+        },
+        transition: {
+          label: 'Continue the route',
+          title: 'Move forward when software work must align with multi-brand systems',
+          detail:
+            'If the software layer also has to coordinate partner brands, existing systems, execution units, and field-side constraints, the next stop is usually technical integration.',
+          ctaLabel: 'Jump to technical integration',
+          targetId: 'technical-integration',
+        },
       },
       {
+        anchor: 'technical-integration',
         step: '03',
         title: 'Technical integration',
         summary:
@@ -320,6 +362,25 @@ export const enSiteContent: SiteContent = {
           'Lower rework risk when plans change on site',
           'Keep commercial discussion and technical implementation in the same rhythm',
         ],
+        actionTitle: 'Best entered from system boundaries and brand conditions',
+        actionBody:
+          'If the site already includes multiple brands, interface constraints, or tighter delivery pressure, this route is better for clarifying the coordination boundary first.',
+        primaryCta: {
+          label: 'Discuss integration boundaries',
+          section: 'contact',
+        },
+        secondaryCta: {
+          label: 'View the product center',
+          section: 'products',
+        },
+        transition: {
+          label: 'Return to action',
+          title: 'When the route is clear, move into the intake step',
+          detail:
+            'Once the team has identified the right direction, the next move is to gather the equipment facts, interface conditions, and timeline for a real consultation.',
+          ctaLabel: 'Jump to conversation prep',
+          targetId: 'solution-intake',
+        },
       },
     ],
     coordinationTitle: 'What to prepare for the first conversation',

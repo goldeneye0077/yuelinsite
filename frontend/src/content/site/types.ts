@@ -48,6 +48,7 @@ export type ProcessStep = {
 }
 
 export type SolutionTrack = {
+  anchor: string
   step: string
   title: string
   summary: string
@@ -57,6 +58,24 @@ export type SolutionTrack = {
   scope: string[]
   valueTitle: string
   value: string[]
+  actionTitle: string
+  actionBody: string
+  primaryCta: SolutionTrackCta
+  secondaryCta: SolutionTrackCta
+  transition: SolutionTrackTransition
+}
+
+export type SolutionTrackCta = {
+  label: string
+  section: SectionRouteKey
+}
+
+export type SolutionTrackTransition = {
+  label: string
+  title: string
+  detail: string
+  ctaLabel: string
+  targetId: string
 }
 
 export type FooterLinkItem = {
@@ -133,6 +152,7 @@ export interface SiteContent {
     coverageTitle: string
     coverageSummary: string
     coverageItems: TrustSignal[]
+    trackNavLabel: string
     tracksTitle: string
     tracksSummary: string
     tracks: SolutionTrack[]

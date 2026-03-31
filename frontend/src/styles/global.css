@@ -886,6 +886,66 @@ img {
   gap: 10px;
 }
 
+.solution-track-nav,
+.solution-track__rail,
+.solution-track__transition {
+  display: grid;
+  gap: 16px;
+}
+
+.solution-track-nav {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  margin: 28px 0 0;
+}
+
+.solution-track-nav__item {
+  display: grid;
+  gap: 8px;
+  min-height: 100%;
+  padding: 16px 18px;
+  border: 1px solid rgba(141, 163, 181, 0.2);
+  background: rgba(65, 152, 255, 0.03);
+  transition:
+    transform 180ms ease,
+    border-color 180ms ease,
+    background-color 180ms ease;
+}
+
+.solution-track-nav__item:hover,
+.solution-track-nav__item:focus-visible {
+  transform: translateY(-1px);
+  border-color: rgba(65, 152, 255, 0.38);
+  background: rgba(65, 152, 255, 0.08);
+  outline: none;
+}
+
+.solution-track-nav__index {
+  color: rgba(216, 137, 43, 0.92);
+  font-family: var(--font-display);
+  font-size: 1rem;
+  letter-spacing: 0.1em;
+}
+
+.solution-track-nav__title,
+.solution-track__transition h3 {
+  color: var(--color-text);
+  font-family: var(--font-display);
+}
+
+.solution-track-nav__title {
+  font-size: 1.02rem;
+  line-height: 1.1;
+}
+
+.solution-track-nav__summary,
+.solution-track__action-copy,
+.solution-track__transition p {
+  margin: 0;
+  color: var(--color-text-muted);
+  line-height: 1.7;
+}
+
 .solution-track-list {
   margin-top: 28px;
   gap: 24px;
@@ -926,6 +986,10 @@ img {
   align-items: start;
 }
 
+.solution-track__rail {
+  align-content: start;
+}
+
 .solution-track__block {
   display: grid;
   gap: 12px;
@@ -944,6 +1008,18 @@ img {
 .solution-track__list li {
   padding-top: 10px;
   border-top: 1px solid rgba(141, 163, 181, 0.16);
+}
+
+.solution-track__action,
+.solution-track__transition {
+  padding-top: 14px;
+  border-top: 1px solid rgba(141, 163, 181, 0.2);
+}
+
+.solution-track__transition h3 {
+  margin: 0;
+  font-size: 1.18rem;
+  line-height: 1.1;
 }
 
 .solutions-support-grid {
@@ -2032,6 +2108,7 @@ img {
   }
 
   .product-hero__stats,
+  .solution-track-nav,
   .product-spotlight__list,
   .product-related__list,
   .product-family-sheet__stats,

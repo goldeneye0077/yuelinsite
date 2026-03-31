@@ -233,7 +233,7 @@ export const zhSiteContent: SiteContent = {
     heroSummary:
       '从工业传感器选型到软件联动与现场集成，跃鳞科技把项目沟通压缩成更适合工业客户阅读的三条服务主线。',
     heroDescription:
-      '页面先回答三件事：我们能接什么场景、能做哪些配合、最终能给项目带来什么结果。这样客户不用先翻完产品目录，也能判断是否值得继续沟通。',
+      '这一页不只解释我们能做什么，还会告诉客户应该从哪条路线开始、下一步应该点向哪里、以及如果需求继续扩展该如何顺滑切换到下一条主线。',
     coverageTitle: '适配客户与项目阶段',
     coverageSummary:
       '无论是新设备开发、既有产线改造，还是需要把传感、执行与控制系统串起来的项目，都可以先从这里判断合作边界。',
@@ -257,11 +257,13 @@ export const zhSiteContent: SiteContent = {
           '适合围绕检测工位、定位单元、安全防护或改造节拍展开的应用需求。',
       },
     ],
+    trackNavLabel: '解决方案主线导航',
     tracksTitle: '三条解决方案主线',
     tracksSummary:
-      '先把方向讲清，再进入型号、报价与项目推进，避免工业客户在第一轮沟通里陷入零散信息。',
+      '先快速判断路线，再进入对应主线的服务范围、价值和行动入口，减少工业客户在第一轮沟通里来回切换信息。',
     tracks: [
       {
+        anchor: 'industrial-automation',
         step: '01',
         title: '工业自动化解决方案',
         summary:
@@ -281,8 +283,28 @@ export const zhSiteContent: SiteContent = {
           '让设备端与控制端更早对齐实施边界',
           '为后续送样、报价和落地验证创造明确入口',
         ],
+        actionTitle: '适合先从场景沟通切入',
+        actionBody:
+          '如果你已经明确设备类型、检测对象或改造目标，可以直接把现场条件带进沟通，我们会先收敛自动化路径。',
+        primaryCta: {
+          label: '沟通自动化场景',
+          section: 'contact',
+        },
+        secondaryCta: {
+          label: '查看相关产品方向',
+          section: 'products',
+        },
+        transition: {
+          label: '继续延伸',
+          title: '当现场动作需要进一步连到软件层',
+          detail:
+            '如果项目不只需要硬件与接口，还要把状态、告警或过程数据继续带到软件界面，下一步通常会转入软件开发主线。',
+          ctaLabel: '转到软件开发',
+          targetId: 'software-development',
+        },
       },
       {
+        anchor: 'software-development',
         step: '02',
         title: '软件开发',
         summary:
@@ -302,8 +324,28 @@ export const zhSiteContent: SiteContent = {
           '减少传感数据与现场逻辑之间的断层',
           '让客户更早看到从检测到可用信息的闭环',
         ],
+        actionTitle: '适合先从数据与流程说明开始',
+        actionBody:
+          '如果你已经知道要采什么信号、看什么状态、让谁使用界面，软件开发路线可以帮助我们更快划清功能边界。',
+        primaryCta: {
+          label: '沟通软件需求',
+          section: 'contact',
+        },
+        secondaryCta: {
+          label: '查看服务与支持',
+          section: 'support',
+        },
+        transition: {
+          label: '继续延伸',
+          title: '当软件方案还要落回多品牌设备与接口协同',
+          detail:
+            '如果项目同时涉及既有系统、合作品牌、执行单元和现场布置，下一步通常会转入技术集成主线来统一边界。',
+          ctaLabel: '转到技术集成',
+          targetId: 'technical-integration',
+        },
       },
       {
+        anchor: 'technical-integration',
         step: '03',
         title: '技术集成',
         summary:
@@ -323,6 +365,25 @@ export const zhSiteContent: SiteContent = {
           '降低方案切换和现场返工风险',
           '让商务沟通与技术实施保持同一节奏',
         ],
+        actionTitle: '适合先从系统边界与品牌条件说起',
+        actionBody:
+          '如果现场已经存在多品牌设备、接口限制或交付节奏压力，技术集成路线更适合先把协同边界谈清楚。',
+        primaryCta: {
+          label: '沟通集成边界',
+          section: 'contact',
+        },
+        secondaryCta: {
+          label: '查看产品中心',
+          section: 'products',
+        },
+        transition: {
+          label: '回到行动',
+          title: '当三条路线都已经看清，下一步就是正式沟通',
+          detail:
+            '如果你已经完成路线判断，就可以直接回到收口步骤，带着设备信息、接口条件和项目节点进入正式咨询。',
+          ctaLabel: '跳到沟通准备',
+          targetId: 'solution-intake',
+        },
       },
     ],
     coordinationTitle: '前期沟通建议',

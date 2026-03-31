@@ -29,7 +29,7 @@
 ### Solutions
 
 - [x] **SOLN-01**: User can view the three solution directions: industrial automation solutions, software development, and technical integration
-- [ ] **SOLN-02**: User can understand the applicable scenarios, service scope, and expected value of each solution direction
+- [x] **SOLN-02**: User can understand the applicable scenarios, service scope, and expected value of each solution direction
 
 ### Brand Cooperation
 
@@ -94,7 +94,7 @@
 | PROD-03 | Phase 3 | Complete |
 | PROD-04 | Phase 3 | Complete |
 | SOLN-01 | Phase 4 | Complete |
-| SOLN-02 | Phase 4 | Pending |
+| SOLN-02 | Phase 4 | Complete |
 | BRND-01 | Phase 4 | Pending |
 | BRND-02 | Phase 4 | Pending |
 | SUPP-01 | Phase 4 | Pending |

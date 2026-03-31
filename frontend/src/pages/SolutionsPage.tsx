@@ -53,9 +53,21 @@ export function SolutionsPage() {
           <p className="eyebrow">{content.solutionsPage.tracksTitle}</p>
           <p className="story-intro">{content.solutionsPage.tracksSummary}</p>
         </div>
+        <nav
+          aria-label={content.solutionsPage.trackNavLabel}
+          className="solution-track-nav motion-rise motion-delay-3"
+        >
+          {content.solutionsPage.tracks.map((track) => (
+            <a key={track.anchor} className="solution-track-nav__item" href={`#${track.anchor}`}>
+              <span className="solution-track-nav__index">{track.step}</span>
+              <span className="solution-track-nav__title">{track.title}</span>
+              <span className="solution-track-nav__summary">{track.summary}</span>
+            </a>
+          ))}
+        </nav>
         <div className="solution-track-list motion-rise motion-delay-3">
           {content.solutionsPage.tracks.map((track) => (
-            <article key={track.step} className="solution-track">
+            <article key={track.step} className="solution-track" id={track.anchor}>
               <div className="solution-track__lead">
                 <p className="solution-track__index">{track.step}</p>
                 <div className="solution-track__copy">
@@ -84,6 +96,37 @@ export function SolutionsPage() {
                     ))}
                   </ul>
                 </section>
+
+                <aside className="solution-track__rail">
+                  <section className="solution-track__action">
+                    <p className="assurance-item__label">{track.actionTitle}</p>
+                    <p className="solution-track__action-copy">{track.actionBody}</p>
+                    <div className="section-actions">
+                      <Link
+                        className="cta-link"
+                        to={buildLocalePath(locale, track.primaryCta.section)}
+                      >
+                        <span>{track.primaryCta.label}</span>
+                        <ArrowRight size={16} />
+                      </Link>
+                      <Link
+                        className="secondary-link"
+                        to={buildLocalePath(locale, track.secondaryCta.section)}
+                      >
+                        {track.secondaryCta.label}
+                      </Link>
+                    </div>
+                  </section>
+
+                  <section className="solution-track__transition">
+                    <p className="track-label">{track.transition.label}</p>
+                    <h3>{track.transition.title}</h3>
+                    <p>{track.transition.detail}</p>
+                    <a className="product-inline-link" href={`#${track.transition.targetId}`}>
+                      {track.transition.ctaLabel}
+                    </a>
+                  </section>
+                </aside>
               </div>
             </article>
           ))}
@@ -92,7 +135,7 @@ export function SolutionsPage() {
 
       <section className="page-band page-band--bordered">
         <div className="solutions-support-grid motion-rise motion-delay-4">
-          <section className="solutions-support-panel">
+          <section className="solutions-support-panel" id="solution-intake">
             <p className="eyebrow">{content.solutionsPage.coordinationTitle}</p>
             <p className="story-intro">{content.solutionsPage.coordinationSummary}</p>
             <div className="story-list">
@@ -105,7 +148,10 @@ export function SolutionsPage() {
             </div>
           </section>
 
-          <section className="solutions-support-panel solutions-support-panel--offset">
+          <section
+            className="solutions-support-panel solutions-support-panel--offset"
+            id="solution-delivery-rhythm"
+          >
             <p className="eyebrow">{content.solutionsPage.processTitle}</p>
             <p className="story-intro">{content.solutionsPage.processSummary}</p>
             <div className="process-list">
