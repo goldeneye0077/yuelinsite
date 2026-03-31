@@ -28,18 +28,18 @@ describe('ContactPage', () => {
     queryClient.clear()
   })
 
-  it('submits the inquiry form and renders success feedback', async () => {
+  it('prefills the inquiry category from page context and renders success feedback', async () => {
     const content = getSiteContent('zh')
     const user = userEvent.setup()
 
     submitInquiryMock.mockResolvedValue({
-      detail: '询盘已收到，我们会尽快与您联系。',
+      detail: 'Inquiry stored.',
       submissionId: 7,
       status: 'received',
     })
 
     const router = createAppRouter({
-      initialEntries: ['/zh/contact'],
+      initialEntries: ['/zh/contact?category=technical-integration&source=solutions'],
     })
 
     render(
@@ -48,13 +48,19 @@ describe('ContactPage', () => {
       </AppProviders>,
     )
 
+    expect(await screen.findByText(content.contactPage.entryContextLabel)).toBeInTheDocument()
+    expect(await screen.findByText(content.solutions.title)).toBeInTheDocument()
+    expect(
+      screen.getByLabelText(content.contactPage.form.interestCategoryLabel),
+    ).toHaveValue('technical-integration')
+
     await user.type(
       screen.getByLabelText(content.contactPage.form.companyNameLabel),
-      '跃鳞科技合作客户',
+      'Yuelin Partner Factory',
     )
     await user.type(
       screen.getByLabelText(content.contactPage.form.contactNameLabel),
-      '张伟',
+      'Zhang Wei',
     )
     await user.type(
       screen.getByLabelText(content.contactPage.form.emailLabel),
@@ -64,13 +70,9 @@ describe('ContactPage', () => {
       screen.getByLabelText(content.contactPage.form.phoneLabel),
       '13800000000',
     )
-    await user.selectOptions(
-      screen.getByLabelText(content.contactPage.form.interestCategoryLabel),
-      content.contactPage.categoryOptions[1].value,
-    )
     await user.type(
       screen.getByLabelText(content.contactPage.form.messageLabel),
-      '我们希望了解适合自动化产线的工业传感器与技术集成支持。',
+      'Need a technical-integration discussion for an automation line.',
     )
     await user.click(
       screen.getByRole('button', { name: content.contactPage.form.submitLabel }),
@@ -78,12 +80,12 @@ describe('ContactPage', () => {
 
     await waitFor(() => {
       expect(submitInquiryMock.mock.calls[0]?.[0]).toEqual({
-        companyName: '跃鳞科技合作客户',
-        contactName: '张伟',
+        companyName: 'Yuelin Partner Factory',
+        contactName: 'Zhang Wei',
         email: 'zhang.wei@example.com',
         phone: '13800000000',
-        interestCategory: content.contactPage.categoryOptions[1].value,
-        message: '我们希望了解适合自动化产线的工业传感器与技术集成支持。',
+        interestCategory: 'technical-integration',
+        message: 'Need a technical-integration discussion for an automation line.',
         locale: 'zh',
         sourcePage: '/zh/contact',
       })

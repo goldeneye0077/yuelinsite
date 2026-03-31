@@ -35,5 +35,16 @@ describe('SupportPage', () => {
         name: content.supportPage.resources[0].primaryCta.label,
       }),
     ).toBeInTheDocument()
+    expect(
+      (
+        await screen.findAllByRole('link', {
+          name: content.support.primaryCta,
+        })
+      ).some(
+        (link) =>
+          link.getAttribute('href') ===
+          '/zh/contact?category=general-consultation&source=support',
+      ),
+    ).toBe(true)
   })
 })

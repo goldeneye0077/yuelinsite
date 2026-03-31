@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 
 import { buildLocalePath } from '../i18n/locales'
 import { useSiteShellContext } from '../layouts/useSiteShellContext'
+import { buildInquiryPath } from '../lib/inquiry-paths'
 
 export function SupportPage() {
   const { locale, content } = useSiteShellContext()
@@ -20,7 +21,13 @@ export function SupportPage() {
             <p className="hero-summary">{content.supportPage.heroSummary}</p>
             <p className="hero-description">{content.supportPage.heroDescription}</p>
             <div className="hero-actions">
-              <Link className="cta-link" to={buildLocalePath(locale, 'contact')}>
+              <Link
+                className="cta-link"
+                to={buildInquiryPath(locale, {
+                  category: 'general-consultation',
+                  source: 'support',
+                })}
+              >
                 <span>{content.support.primaryCta}</span>
                 <ArrowRight size={16} />
               </Link>
@@ -92,7 +99,14 @@ export function SupportPage() {
               <div className="section-actions">
                 <Link
                   className="cta-link"
-                  to={buildLocalePath(locale, resource.primaryCta.section)}
+                  to={
+                    resource.primaryCta.section === 'contact'
+                      ? buildInquiryPath(locale, {
+                          category: 'general-consultation',
+                          source: 'support',
+                        })
+                      : buildLocalePath(locale, resource.primaryCta.section)
+                  }
                 >
                   <span>{resource.primaryCta.label}</span>
                   <ArrowRight size={16} />
@@ -134,7 +148,13 @@ export function SupportPage() {
               <p>{content.supportPage.finalCtaBody}</p>
             </div>
             <div className="section-actions">
-              <Link className="cta-link" to={buildLocalePath(locale, 'contact')}>
+              <Link
+                className="cta-link"
+                to={buildInquiryPath(locale, {
+                  category: 'general-consultation',
+                  source: 'support',
+                })}
+              >
                 <span>{content.support.primaryCta}</span>
                 <ArrowRight size={16} />
               </Link>

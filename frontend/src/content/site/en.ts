@@ -814,6 +814,8 @@ export const enSiteContent: SiteContent = {
       'When the project direction is clear enough to start a real conversation, use this form to send the core business boundary first.',
     heroDescription:
       'This route is built for product selection requests, solution consultations, and integration follow-up. Keep the message practical and we can align the right next step faster.',
+    entryContextLabel: 'Entry route',
+    categoryContextLabel: 'Default category',
     quickPanelTitle: 'Direct contact view',
     quickPanelSummary:
       'The page works like an intake desk: company coordinates stay visible, project scope can be stated clearly, and the inquiry now lands in the backend instead of stopping at a placeholder contract.',

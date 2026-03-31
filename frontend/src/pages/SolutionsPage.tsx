@@ -3,6 +3,10 @@ import { Link } from 'react-router-dom'
 
 import { buildLocalePath } from '../i18n/locales'
 import { useSiteShellContext } from '../layouts/useSiteShellContext'
+import {
+  buildInquiryPath,
+  getInquiryCategoryForSolutionAnchor,
+} from '../lib/inquiry-paths'
 
 export function SolutionsPage() {
   const { locale, content } = useSiteShellContext()
@@ -22,7 +26,13 @@ export function SolutionsPage() {
               {content.solutionsPage.heroDescription}
             </p>
             <div className="hero-actions">
-              <Link className="cta-link" to={buildLocalePath(locale, 'contact')}>
+              <Link
+                className="cta-link"
+                to={buildInquiryPath(locale, {
+                  category: 'general-consultation',
+                  source: 'solutions',
+                })}
+              >
                 <span>{content.solutions.primaryCta}</span>
                 <ArrowRight size={16} />
               </Link>
@@ -104,7 +114,14 @@ export function SolutionsPage() {
                     <div className="section-actions">
                       <Link
                         className="cta-link"
-                        to={buildLocalePath(locale, track.primaryCta.section)}
+                        to={
+                          track.primaryCta.section === 'contact'
+                            ? buildInquiryPath(locale, {
+                                category: getInquiryCategoryForSolutionAnchor(track.anchor),
+                                source: 'solutions',
+                              })
+                            : buildLocalePath(locale, track.primaryCta.section)
+                        }
                       >
                         <span>{track.primaryCta.label}</span>
                         <ArrowRight size={16} />
@@ -213,7 +230,13 @@ export function SolutionsPage() {
             <p>{content.solutionsPage.finalCtaBody}</p>
           </div>
           <div className="section-actions">
-            <Link className="cta-link" to={buildLocalePath(locale, 'contact')}>
+            <Link
+              className="cta-link"
+              to={buildInquiryPath(locale, {
+                category: 'general-consultation',
+                source: 'solutions',
+              })}
+            >
               <span>{content.solutions.primaryCta}</span>
               <ArrowRight size={16} />
             </Link>

@@ -270,6 +270,8 @@ export interface SiteContent {
     eyebrow: string
     heroSummary: string
     heroDescription: string
+    entryContextLabel: string
+    categoryContextLabel: string
     quickPanelTitle: string
     quickPanelSummary: string
     quickPanelItems: TrustSignal[]

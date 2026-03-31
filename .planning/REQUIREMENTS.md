@@ -51,7 +51,7 @@
 
 - [x] **LEAD-01**: User can open a contact page with a clear inquiry path instead of only static text information
 - [x] **LEAD-02**: User can submit an inquiry form with essential business fields and receive clear success or failure feedback
-- [ ] **LEAD-03**: User can find inquiry entry points from homepage, product, solution, and contact pages
+- [x] **LEAD-03**: User can find inquiry entry points from homepage, product, solution, and contact pages
 
 ## v2 Requirements
 
@@ -104,7 +104,7 @@
 | ABOU-03 | Phase 2 | Complete |
 | LEAD-01 | Phase 5 | Complete |
 | LEAD-02 | Phase 5 | Complete |
-| LEAD-03 | Phase 5 | Pending |
+| LEAD-03 | Phase 5 | Complete |
 
 **Coverage:**
 - v1 requirements: 24 total
@@ -113,4 +113,4 @@
 
 ---
 *Requirements defined: 2026-03-30*
-*Last updated: 2026-03-31 after Phase 5 inquiry flow foundation*
+*Last updated: 2026-03-31 after Phase 5 CTA-entry audit*

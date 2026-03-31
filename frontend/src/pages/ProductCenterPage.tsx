@@ -8,6 +8,10 @@ import {
 import type { ProductFamily, ProductSourceType } from '../content/products/types'
 import { buildLocalePath } from '../i18n/locales'
 import { useSiteShellContext } from '../layouts/useSiteShellContext'
+import {
+  buildInquiryPath,
+  getInquiryCategoryForProductFamily,
+} from '../lib/inquiry-paths'
 
 function getSourceLabel(
   source: ProductSourceType,
@@ -45,7 +49,13 @@ export function ProductCenterPage() {
             <p className="hero-summary">{taxonomy.summary}</p>
             <p className="hero-description">{taxonomy.description}</p>
             <div className="hero-actions">
-              <Link className="cta-link" to={buildLocalePath(locale, 'contact')}>
+              <Link
+                className="cta-link"
+                to={buildInquiryPath(locale, {
+                  category: 'general-consultation',
+                  source: 'product-center',
+                })}
+              >
                 <span>{taxonomy.consultCtaLabel}</span>
                 <ArrowRight size={16} />
               </Link>
@@ -167,7 +177,13 @@ export function ProductCenterPage() {
                       <span>{taxonomy.familyCtaLabel}</span>
                       <ArrowRight size={16} />
                     </Link>
-                    <Link className="secondary-link" to={buildLocalePath(locale, 'contact')}>
+                    <Link
+                      className="secondary-link"
+                      to={buildInquiryPath(locale, {
+                        category: getInquiryCategoryForProductFamily(family.key),
+                        source: 'product-center',
+                      })}
+                    >
                       {content.productCenter.primaryCta}
                     </Link>
                   </div>
@@ -212,7 +228,13 @@ export function ProductCenterPage() {
             <p>{taxonomy.consultBody}</p>
           </div>
           <div className="section-actions">
-            <Link className="cta-link" to={buildLocalePath(locale, 'contact')}>
+            <Link
+              className="cta-link"
+              to={buildInquiryPath(locale, {
+                category: 'general-consultation',
+                source: 'product-center',
+              })}
+            >
               <span>{taxonomy.consultCtaLabel}</span>
               <ArrowRight size={16} />
             </Link>

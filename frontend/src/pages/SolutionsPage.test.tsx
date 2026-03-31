@@ -40,6 +40,15 @@ describe('SolutionsPage', () => {
       await screen.findByRole('link', { name: content.solutionsPage.tracks[0].primaryCta.label }),
     ).toBeInTheDocument()
     expect(
+      (
+        await screen.findAllByRole('link', { name: content.solutions.primaryCta })
+      ).some(
+        (link) =>
+          link.getAttribute('href') ===
+          '/zh/contact?category=general-consultation&source=solutions',
+      ),
+    ).toBe(true)
+    expect(
       await screen.findByRole('link', { name: content.solutionsPage.tracks[1].transition.ctaLabel }),
     ).toHaveAttribute('href', `#${content.solutionsPage.tracks[1].transition.targetId}`)
   })

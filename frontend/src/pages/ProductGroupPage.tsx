@@ -11,8 +11,8 @@ import {
   getProductTaxonomy,
   normalizeIndustrialSensorGroupSlug,
 } from '../content/products'
-import { buildLocalePath } from '../i18n/locales'
 import { useSiteShellContext } from '../layouts/useSiteShellContext'
+import { buildInquiryPath } from '../lib/inquiry-paths'
 
 export function ProductGroupPage() {
   const { locale } = useSiteShellContext()
@@ -69,7 +69,13 @@ export function ProductGroupPage() {
             <p className="hero-summary">{group.summary}</p>
             <p className="hero-description">{family.useCase}</p>
             <div className="section-actions">
-              <Link className="cta-link" to={buildLocalePath(locale, 'contact')}>
+              <Link
+                className="cta-link"
+                to={buildInquiryPath(locale, {
+                  category: 'industrial-sensors',
+                  source: 'industrial-sensor-group',
+                })}
+              >
                 <span>{taxonomy.consultCtaLabel}</span>
                 <ArrowRight size={16} />
               </Link>
@@ -158,7 +164,13 @@ export function ProductGroupPage() {
                     </article>
                   </div>
                   <div className="section-actions">
-                    <Link className="cta-link" to={buildLocalePath(locale, 'contact')}>
+                    <Link
+                      className="cta-link"
+                      to={buildInquiryPath(locale, {
+                        category: 'industrial-sensors',
+                        source: 'industrial-sensor-group',
+                      })}
+                    >
                       <span>{taxonomy.consultCtaLabel}</span>
                       <ArrowRight size={16} />
                     </Link>

@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import brandLogo from '../assets/logo6.png'
 import { buildLocalePath } from '../i18n/locales'
 import { useSiteShellContext } from '../layouts/useSiteShellContext'
+import { buildInquiryPath } from '../lib/inquiry-paths'
 
 export function AboutPage() {
   const { locale, content } = useSiteShellContext()
@@ -21,7 +22,13 @@ export function AboutPage() {
             <p className="hero-summary">{content.aboutPage.heroSummary}</p>
             <p className="hero-description">{content.aboutPage.heroDescription}</p>
             <div className="hero-actions">
-              <Link className="cta-link" to={buildLocalePath(locale, 'contact')}>
+              <Link
+                className="cta-link"
+                to={buildInquiryPath(locale, {
+                  category: 'general-consultation',
+                  source: 'about',
+                })}
+              >
                 <span>{content.about.primaryCta}</span>
                 <ArrowRight size={16} />
               </Link>
@@ -147,7 +154,13 @@ export function AboutPage() {
             <p>{content.aboutPage.finalCtaBody}</p>
           </div>
           <div className="section-actions">
-            <Link className="cta-link" to={buildLocalePath(locale, 'contact')}>
+            <Link
+              className="cta-link"
+              to={buildInquiryPath(locale, {
+                category: 'general-consultation',
+                source: 'about',
+              })}
+            >
               <span>{content.about.primaryCta}</span>
               <ArrowRight size={16} />
             </Link>

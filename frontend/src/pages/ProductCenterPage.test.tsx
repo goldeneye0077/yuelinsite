@@ -29,5 +29,16 @@ describe('ProductCenterPage', () => {
       (await screen.findAllByText(taxonomy.categories[0].groups[0].name)).length,
     ).toBeGreaterThan(0)
     expect(await screen.findAllByText(taxonomy.consultCtaLabel)).not.toHaveLength(0)
+    expect(
+      (
+        await screen.findAllByRole('link', {
+          name: taxonomy.consultCtaLabel,
+        })
+      ).some(
+        (link) =>
+          link.getAttribute('href') ===
+          '/zh/contact?category=general-consultation&source=product-center',
+      ),
+    ).toBe(true)
   })
 })

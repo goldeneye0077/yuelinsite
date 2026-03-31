@@ -1,7 +1,7 @@
 import { type ChangeEvent, type FormEvent, useState } from 'react'
 import { useMutation } from '@tanstack/react-query'
 import { AlertCircle, ArrowRight, CheckCircle2, Send } from 'lucide-react'
-import { Link, useLocation } from 'react-router-dom'
+import { Link, useLocation, useSearchParams } from 'react-router-dom'
 
 import { type InquirySubmissionInput, submitInquiry } from '../lib/api/site-client'
 import { buildLocalePath } from '../i18n/locales'
@@ -22,10 +22,55 @@ function createInitialFormState(defaultCategory: string): ContactFormState {
   }
 }
 
+function resolveRequestedCategory(
+  requestedCategory: string | null,
+  availableCategories: Array<{ value: string }>,
+) {
+  if (
+    requestedCategory &&
+    availableCategories.some((option) => option.value === requestedCategory)
+  ) {
+    return requestedCategory
+  }
+
+  return availableCategories[0]?.value ?? 'general-consultation'
+}
+
+function resolveEntrySourceLabel(
+  source: string | null,
+  content: ReturnType<typeof useSiteShellContext>['content'],
+) {
+  switch (source) {
+    case 'home':
+      return content.navigation.find((item) => item.key === 'home')?.label ?? null
+    case 'about':
+      return content.about.title
+    case 'product-center':
+    case 'product-family':
+    case 'industrial-sensor-group':
+      return content.productCenter.title
+    case 'solutions':
+      return content.solutions.title
+    case 'support':
+      return content.support.title
+    default:
+      return null
+  }
+}
+
 export function ContactPage() {
   const { locale, content } = useSiteShellContext()
   const location = useLocation()
-  const defaultCategory = content.contactPage.categoryOptions[0]?.value ?? 'general'
+  const [searchParams] = useSearchParams()
+  const defaultCategory = resolveRequestedCategory(
+    searchParams.get('category'),
+    content.contactPage.categoryOptions,
+  )
+  const entrySourceLabel = resolveEntrySourceLabel(searchParams.get('source'), content)
+  const selectedCategoryLabel =
+    content.contactPage.categoryOptions.find(
+      (option) => option.value === defaultCategory,
+    )?.label ?? defaultCategory
   const [formState, setFormState] = useState<ContactFormState>(() =>
     createInitialFormState(defaultCategory),
   )
@@ -80,6 +125,14 @@ export function ContactPage() {
             </p>
             <p className="hero-summary">{content.contactPage.heroSummary}</p>
             <p className="hero-description">{content.contactPage.heroDescription}</p>
+            {entrySourceLabel ? (
+              <div className="contact-entry-context">
+                <p className="track-label">{content.contactPage.entryContextLabel}</p>
+                <p className="contact-entry-context__value">{entrySourceLabel}</p>
+                <p className="track-label">{content.contactPage.categoryContextLabel}</p>
+                <p className="contact-entry-context__value">{selectedCategoryLabel}</p>
+              </div>
+            ) : null}
             <div className="hero-actions">
               <a className="cta-link" href="#contact-form">
                 <span>{content.contact.primaryCta}</span>

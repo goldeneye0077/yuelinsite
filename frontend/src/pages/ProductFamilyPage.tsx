@@ -11,6 +11,10 @@ import {
 import type { ProductFamily, ProductSourceType } from '../content/products/types'
 import { buildLocalePath } from '../i18n/locales'
 import { useSiteShellContext } from '../layouts/useSiteShellContext'
+import {
+  buildInquiryPath,
+  getInquiryCategoryForProductFamily,
+} from '../lib/inquiry-paths'
 
 function getSourceLabel(
   source: ProductSourceType,
@@ -44,6 +48,7 @@ export function ProductFamilyPage() {
     (category) => category.key !== family.key,
   )
   const isIndustrialSensorFamily = family.key === 'industrial-sensors'
+  const inquiryCategory = getInquiryCategoryForProductFamily(family.key)
 
   return (
     <>
@@ -59,7 +64,13 @@ export function ProductFamilyPage() {
             <p className="hero-summary">{family.summary}</p>
             <p className="hero-description">{family.useCase}</p>
             <div className="section-actions">
-              <Link className="cta-link" to={buildLocalePath(locale, 'contact')}>
+              <Link
+                className="cta-link"
+                to={buildInquiryPath(locale, {
+                  category: inquiryCategory,
+                  source: 'product-family',
+                })}
+              >
                 <span>{taxonomy.consultCtaLabel}</span>
                 <ArrowRight size={16} />
               </Link>
@@ -174,7 +185,13 @@ export function ProductFamilyPage() {
               ))}
             </div>
             <div className="section-actions">
-              <Link className="cta-link" to={buildLocalePath(locale, 'contact')}>
+              <Link
+                className="cta-link"
+                to={buildInquiryPath(locale, {
+                  category: inquiryCategory,
+                  source: 'product-family',
+                })}
+              >
                 <span>{taxonomy.consultCtaLabel}</span>
                 <ArrowRight size={16} />
               </Link>
