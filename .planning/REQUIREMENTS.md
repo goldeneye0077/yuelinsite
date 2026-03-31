@@ -1,7 +1,7 @@
 # Requirements: 跃鳞科技企业官网
 
-**Defined:** 2026-03-30
-**Core Value:** 让潜在客户能够快速理解跃鳞科技卖什么、能解决什么问题、为什么值得联系，并顺畅发起咨询。
+**Defined:** 2026-03-30  
+**Core Value:** 让潜在客户快速理解跃鳞科技卖什么、能解决什么问题、为什么值得联系，并顺畅发起咨询。
 
 ## v1 Requirements
 
@@ -10,7 +10,7 @@
 - [x] **GLOB-01**: User can access both Chinese and English versions of the site with a consistent page structure
 - [x] **GLOB-02**: User can switch language without losing orientation in the site
 - [x] **GLOB-03**: User can reach the main sections and contact entry from a consistent global header and footer
-- [ ] **GLOB-04**: User can browse the core pages on desktop and mobile without layout breakage or blocked navigation
+- [x] **GLOB-04**: User can browse the core pages on desktop and mobile without layout breakage or blocked navigation
 - [x] **GLOB-05**: User can switch between light and dark themes and read the core UI and chart surfaces clearly in both modes
 
 ### Homepage
@@ -73,7 +73,7 @@
 |---------|--------|
 | User registration and login | Not aligned with v1 brand presentation and inquiry-first goals |
 | Shopping cart and online payment | Industrial product sales flow is consultation-led, not standard e-commerce in v1 |
-| Full ERP/CRM/inventory backend | Current phase focuses on public-facing site only |
+| Full ERP/CRM/inventory backend | Current phase focuses on the public-facing site only |
 | Full editorial news workflow | No evidence of immediate content operations capacity for v1 |
 | More than two languages | Chinese and English are the explicit v1 requirement |
 
@@ -84,7 +84,7 @@
 | GLOB-01 | Phase 1 | Complete |
 | GLOB-02 | Phase 1 | Complete |
 | GLOB-03 | Phase 1 | Complete |
-| GLOB-04 | Phase 5 | Pending |
+| GLOB-04 | Phase 5 | Complete |
 | GLOB-05 | Phase 1 | Complete |
 | HOME-01 | Phase 2 | Complete |
 | HOME-02 | Phase 2 | Complete |
@@ -107,10 +107,11 @@
 | LEAD-03 | Phase 5 | Complete |
 
 **Coverage:**
+
 - v1 requirements: 24 total
 - Mapped to phases: 24
-- Unmapped: 0 - complete
+- Unmapped: 0
 
 ---
-*Requirements defined: 2026-03-30*
-*Last updated: 2026-03-31 after Phase 5 CTA-entry audit*
+*Requirements defined: 2026-03-30*  
+*Last updated: 2026-03-31 after Phase 5 launch-readiness completion*

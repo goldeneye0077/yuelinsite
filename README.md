@@ -1,6 +1,6 @@
 # Shenzhen Yuelin Technology Official Site
 
-Corporate website foundation for Shenzhen Yuelin Technology Co., Ltd., built for bilingual brand presentation and inquiry capture.
+Bilingual corporate website for Shenzhen Yuelin Technology Co., Ltd., focused on industrial-sensor brand presentation, solution communication, and inquiry capture.
 
 ## Stack
 
@@ -8,27 +8,67 @@ Corporate website foundation for Shenzhen Yuelin Technology Co., Ltd., built for
 - Backend: Python 3.11 + FastAPI + SQLAlchemy 2 + Alembic + PostgreSQL
 - Deployment baseline: Docker Compose
 
-## Local Startup
+## Quick Start
+
+1. Copy `.env.example` to `.env` if you want to override the defaults.
+2. Start the full stack:
 
 ```bash
-docker compose up --build
+docker compose up --build -d
 ```
 
-Frontend: `http://localhost:5173`
-Backend health: `http://localhost:8000/api/health`
-Compose startup now applies Alembic migrations automatically before the API boots.
+3. Open the site and API health endpoints:
+
+- Frontend: `http://localhost:5173`
+- Backend health: `http://localhost:8000/api/health`
+- Backend readiness: `http://localhost:8000/api/ready`
+
+Compose startup runs Alembic migrations automatically before the API boots.
+
+## Custom Ports
+
+If `5173` or `8000` is already occupied, update these variables together:
+
+- `FRONTEND_PORT`
+- `BACKEND_PORT`
+- `VITE_API_BASE_URL`
+- `CORS_ORIGINS`
+
+Example:
+
+```bash
+FRONTEND_PORT=4173
+BACKEND_PORT=8100
+VITE_API_BASE_URL=http://localhost:8100
+CORS_ORIGINS=["http://localhost:4173","http://127.0.0.1:4173"]
+docker compose up --build -d
+```
 
 ## Verification
 
+Run the core checks before handoff or release:
+
 ```bash
 docker compose config
+npm --prefix frontend run typecheck
+npm --prefix frontend run lint
+npm --prefix frontend run test -- --run
+npm --prefix frontend run build
+npm --prefix frontend audit --omit=dev
+pytest -q backend
 docker compose run --rm frontend npm run build
 docker compose run --rm frontend npm run test -- --run
 docker compose run --rm backend pytest -q
 ```
 
+## Launch Handoff
+
+- Environment defaults live in `.env.example`
+- Final smoke-test steps live in `LAUNCH_CHECKLIST.md`
+- Current planning and delivery history live under `.planning/`
+
 ## Repository Layout
 
-- `frontend/` - React application shell
-- `backend/` - FastAPI service, tests, and Alembic setup
-- `.planning/` - GSD planning artifacts
+- `frontend/` - React application
+- `backend/` - FastAPI service, SQLAlchemy models, Alembic migrations, and tests
+- `.planning/` - GSD planning artifacts and phase records
