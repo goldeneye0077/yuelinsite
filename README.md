@@ -25,6 +25,24 @@ docker compose up --build -d
 
 Compose startup runs Alembic migrations automatically before the API boots.
 
+## Production Deployment
+
+The repo also includes a production-focused stack:
+
+- `compose.prod.yaml`
+- `frontend/Dockerfile.prod`
+- `backend/Dockerfile.prod`
+- `.env.prod.example`
+
+Typical deployment flow:
+
+```bash
+cp .env.prod.example .env.prod
+docker compose --env-file .env.prod -f compose.prod.yaml up --build -d
+```
+
+The production compose file avoids bind mounts, disables frontend dev server usage, and uses restart policies suitable for a long-running server.
+
 ## Custom Ports
 
 If `5173` or `8000` is already occupied, update these variables together:
@@ -64,6 +82,7 @@ docker compose run --rm backend pytest -q
 ## Launch Handoff
 
 - Environment defaults live in `.env.example`
+- Production server defaults live in `.env.prod.example`
 - Final smoke-test steps live in `LAUNCH_CHECKLIST.md`
 - Current planning and delivery history live under `.planning/`
 
