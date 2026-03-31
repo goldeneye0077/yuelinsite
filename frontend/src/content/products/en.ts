@@ -43,6 +43,13 @@ export const enProductTaxonomy: ProductTaxonomyContent = {
   siblingGroupsTitle: 'Sibling sensor groups',
   siblingGroupsSummary:
     'Industrial sensor browsing should stay lateral as well as deep, so nearby sensing groups remain visible while reviewing one subgroup in detail.',
+  featuredProductsTitle: 'Representative product cards',
+  featuredProductsSummary:
+    'Each subgroup now includes a selectable set of representative series cards so the catalog can carry a clearer product-reading rhythm before the real model catalog is attached.',
+  productHighlightsLabel: 'Highlights',
+  productInquiryHintLabel: 'Inquiry hint',
+  productCardCtaLabel: 'Open product detail',
+  productDetailPanelTitle: 'Detail-ready product panel',
   categories: [
     {
       key: 'industrial-sensors',

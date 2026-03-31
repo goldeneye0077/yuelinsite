@@ -1460,6 +1460,115 @@ img {
   gap: 18px;
 }
 
+.product-card-stage {
+  display: grid;
+  grid-template-columns: minmax(0, 0.56fr) minmax(280px, 0.44fr);
+  gap: 24px;
+  align-items: start;
+  margin: 8px 0 12px;
+}
+
+.product-card-grid,
+.product-card-detail__highlights {
+  display: grid;
+  gap: 16px;
+}
+
+.product-card {
+  display: grid;
+  gap: 10px;
+  padding: 18px 18px 20px;
+  border: 1px solid rgba(141, 163, 181, 0.22);
+  background: transparent;
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition:
+    transform 180ms ease,
+    border-color 180ms ease,
+    background-color 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.product-card:hover,
+.product-card--active {
+  transform: translateY(-2px);
+  border-color: rgba(65, 152, 255, 0.36);
+  background: rgba(65, 152, 255, 0.06);
+  box-shadow: 0 16px 36px rgba(6, 19, 32, 0.12);
+}
+
+.product-card__status,
+.product-card__summary,
+.product-card__cta,
+.product-card-detail__meta p,
+.product-card-detail__highlights p {
+  margin: 0;
+}
+
+.product-card__status,
+.product-card__cta {
+  font-size: 0.88rem;
+}
+
+.product-card__status {
+  color: var(--color-accent);
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.product-card h3,
+.product-card-detail h3 {
+  margin: 0;
+  color: var(--color-text);
+  font-family: var(--font-display);
+  line-height: 1.08;
+}
+
+.product-card h3 {
+  font-size: 1.18rem;
+}
+
+.product-card__summary {
+  color: var(--color-text-muted);
+  line-height: 1.7;
+}
+
+.product-card__cta {
+  color: var(--color-text);
+  font-weight: 600;
+}
+
+.product-card-detail {
+  display: grid;
+  gap: 18px;
+  padding-top: 18px;
+  border-top: 1px solid var(--color-border);
+}
+
+.product-card-detail__block {
+  display: grid;
+  gap: 12px;
+}
+
+.product-card-detail__highlights p {
+  padding-top: 12px;
+  border-top: 1px solid rgba(141, 163, 181, 0.18);
+  color: var(--color-text-muted);
+  line-height: 1.7;
+}
+
+.product-card-detail__meta {
+  display: grid;
+  gap: 14px;
+}
+
+.product-card-detail__meta article {
+  padding-top: 14px;
+  border-top: 1px solid rgba(141, 163, 181, 0.2);
+}
+
 .product-subgroup-sidebar__block {
   display: grid;
   gap: 10px;
@@ -1704,6 +1813,7 @@ img {
   .product-detail-hero,
   .product-detail-grid,
   .product-subgroup-layout,
+  .product-card-stage,
   .product-related,
   .status-strip,
   .home-story-grid,

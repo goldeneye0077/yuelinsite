@@ -16,7 +16,7 @@ The guiding principle is simple: solve platform and structure first, then conten
 
 - [x] **Phase 1: Platform Foundation & Theme Shell** - Frontend/backend scaffold, Docker Compose, bilingual routing, shared shell, and light/dark Precision Industrial foundation
 - [x] **Phase 2: Brand Story & Corporate Presence** - Homepage storytelling, About content, and trust-building presentation
-- [ ] **Phase 3: Product Center & Taxonomy** - Product center structure plus industrial sensor subcategory taxonomy
+- [x] **Phase 3: Product Center & Taxonomy** - Product center structure plus industrial sensor subcategory taxonomy
 - [ ] **Phase 4: Solutions, Brands & Support** - Solutions, partner brands, and service/support experience
 - [ ] **Phase 5: Inquiry, QA & Launch Readiness** - Inquiry flow, responsive QA, theme consistency, and launch verification
 
@@ -85,7 +85,7 @@ The guiding principle is simple: solve platform and structure first, then conten
 - [x] 03-01: Define the structured product taxonomy and bilingual product data model
 - [x] 03-02: Build the product center landing page and the five top-level category pages
 - [x] 03-03: Build industrial sensor subcategory navigation and listing templates
-- [ ] 03-04: Build representative product card/detail components with inquiry CTA
+- [x] 03-04: Build representative product card/detail components with inquiry CTA
 
 ### Phase 4: Solutions, Brands & Support
 
@@ -137,6 +137,6 @@ The guiding principle is simple: solve platform and structure first, then conten
 |-------|----------------|--------|-----------|
 | 1. Platform Foundation & Theme Shell | 3/3 | Complete | 2026-03-31 (01-01, 01-02, 01-03) |
 | 2. Brand Story & Corporate Presence | 4/4 | Complete | 2026-03-31 (02-01, 02-02, 02-03, 02-04) |
-| 3. Product Center & Taxonomy | 3/4 | In progress | 2026-03-31 (03-03) |
+| 3. Product Center & Taxonomy | 4/4 | Complete | 2026-03-31 (03-01, 03-02, 03-03, 03-04) |
 | 4. Solutions, Brands & Support | 0/4 | Not started | - |
 | 5. Inquiry, QA & Launch Readiness | 0/4 | Not started | - |

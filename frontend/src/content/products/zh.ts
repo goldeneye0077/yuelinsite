@@ -43,6 +43,13 @@ export const zhProductTaxonomy: ProductTaxonomyContent = {
   siblingGroupsTitle: '同级传感器子类',
   siblingGroupsSummary:
     '工业传感器不是单一路径浏览。你可以在同一层里横向切换其他感测子类，再继续深入看具体系列。',
+  featuredProductsTitle: '代表产品卡片',
+  featuredProductsSummary:
+    '每个子类现在都会带上一组可切换的代表系列卡片，在真实型号目录接入前，先把产品阅读节奏和询盘入口建立起来。',
+  productHighlightsLabel: '核心亮点',
+  productInquiryHintLabel: '沟通提示',
+  productCardCtaLabel: '查看产品详情',
+  productDetailPanelTitle: '详情就绪面板',
   categories: [
     {
       key: 'industrial-sensors',

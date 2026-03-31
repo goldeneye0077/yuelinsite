@@ -24,7 +24,7 @@
 - [x] **PROD-01**: User can browse the five top-level product categories: industrial sensors, safety protection sensors, laser ranging sensors, linear guides and modules, and pneumatic components
 - [x] **PROD-02**: User can browse industrial sensor subcategories based on the reference taxonomy
 - [x] **PROD-03**: User can open a product category page that explains the category focus, representative subcategories, and related inquiry entry
-- [ ] **PROD-04**: User can view representative product cards or detail content with key highlights and a contact/inquiry CTA
+- [x] **PROD-04**: User can view representative product cards or detail content with key highlights and a contact/inquiry CTA
 
 ### Solutions
 
@@ -92,7 +92,7 @@
 | PROD-01 | Phase 3 | Complete |
 | PROD-02 | Phase 3 | Complete |
 | PROD-03 | Phase 3 | Complete |
-| PROD-04 | Phase 3 | Pending |
+| PROD-04 | Phase 3 | Complete |
 | SOLN-01 | Phase 4 | Pending |
 | SOLN-02 | Phase 4 | Pending |
 | BRND-01 | Phase 4 | Pending |

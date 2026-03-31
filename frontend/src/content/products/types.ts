@@ -17,6 +17,16 @@ export type ProductGroup = {
   series: string[]
 }
 
+export type RepresentativeProduct = {
+  id: string
+  title: string
+  summary: string
+  highlights: string[]
+  focus: string
+  inquiryHint: string
+  status: string
+}
+
 export type ProductFamily = {
   key: ProductFamilyKey
   name: string
@@ -60,5 +70,11 @@ export type ProductTaxonomyContent = {
   listingReadyLabel: string
   siblingGroupsTitle: string
   siblingGroupsSummary: string
+  featuredProductsTitle: string
+  featuredProductsSummary: string
+  productHighlightsLabel: string
+  productInquiryHintLabel: string
+  productCardCtaLabel: string
+  productDetailPanelTitle: string
   categories: ProductFamily[]
 }

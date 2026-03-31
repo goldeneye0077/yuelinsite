@@ -1,7 +1,9 @@
+import { useState } from 'react'
 import { ArrowRight, ChevronLeft } from 'lucide-react'
 import { Link, Navigate, useParams } from 'react-router-dom'
 
 import {
+  buildRepresentativeProducts,
   buildIndustrialSensorGroupPath,
   buildProductFamilyPath,
   getIndustrialSensorFamily,
@@ -16,6 +18,19 @@ export function ProductGroupPage() {
   const { locale } = useSiteShellContext()
   const { groupSlug } = useParams()
   const normalizedGroupSlug = normalizeIndustrialSensorGroupSlug(locale, groupSlug)
+  const taxonomy = getProductTaxonomy(locale)
+  const family = getIndustrialSensorFamily(locale)
+  const group = normalizedGroupSlug
+    ? getIndustrialSensorGroup(locale, normalizedGroupSlug)
+    : null
+  const products = normalizedGroupSlug
+    ? buildRepresentativeProducts(locale, normalizedGroupSlug)
+    : []
+  const [activeProductId, setActiveProductId] = useState<string | null>(
+    products[0]?.id ?? null,
+  )
+  const activeProduct =
+    products.find((item) => item.id === activeProductId) ?? products[0] ?? null
 
   if (!normalizedGroupSlug) {
     return (
@@ -25,10 +40,6 @@ export function ProductGroupPage() {
       />
     )
   }
-
-  const taxonomy = getProductTaxonomy(locale)
-  const family = getIndustrialSensorFamily(locale)
-  const group = getIndustrialSensorGroup(locale, normalizedGroupSlug)
 
   if (!family || !group) {
     return (
@@ -102,8 +113,67 @@ export function ProductGroupPage() {
       <section className="page-band page-band--bordered">
         <div className="product-subgroup-layout">
           <section className="product-subgroup-main motion-rise motion-delay-2">
-            <p className="eyebrow">{taxonomy.listingTemplateTitle}</p>
+            <p className="eyebrow">{taxonomy.featuredProductsTitle}</p>
             <h2 className="profile-title">{group.name}</h2>
+            <p className="story-intro">{taxonomy.featuredProductsSummary}</p>
+            <div className="product-card-stage">
+              <div className="product-card-grid">
+                {products.map((product) => (
+                  <button
+                    aria-pressed={product.id === activeProduct?.id}
+                    key={product.id}
+                    className={`product-card${product.id === activeProduct?.id ? ' product-card--active' : ''}`}
+                    onClick={() => setActiveProductId(product.id)}
+                    type="button"
+                  >
+                    <p className="product-card__status">{product.status}</p>
+                    <h3>{product.title}</h3>
+                    <p className="product-card__summary">{product.summary}</p>
+                    <p className="product-card__cta">{taxonomy.productCardCtaLabel}</p>
+                  </button>
+                ))}
+              </div>
+
+              {activeProduct ? (
+                <aside className="product-card-detail">
+                  <p className="eyebrow">{taxonomy.productDetailPanelTitle}</p>
+                  <h3>{activeProduct.title}</h3>
+                  <p className="story-intro">{activeProduct.summary}</p>
+                  <div className="product-card-detail__block">
+                    <p className="track-label">{taxonomy.productHighlightsLabel}</p>
+                    <div className="product-card-detail__highlights">
+                      {activeProduct.highlights.map((highlight) => (
+                        <p key={highlight}>{highlight}</p>
+                      ))}
+                    </div>
+                  </div>
+                  <div className="product-card-detail__meta">
+                    <article>
+                      <p className="track-label">{taxonomy.listingFocusLabel}</p>
+                      <p>{activeProduct.focus}</p>
+                    </article>
+                    <article>
+                      <p className="track-label">{taxonomy.productInquiryHintLabel}</p>
+                      <p>{activeProduct.inquiryHint}</p>
+                    </article>
+                  </div>
+                  <div className="section-actions">
+                    <Link className="cta-link" to={buildLocalePath(locale, 'contact')}>
+                      <span>{taxonomy.consultCtaLabel}</span>
+                      <ArrowRight size={16} />
+                    </Link>
+                    <Link
+                      className="secondary-link"
+                      to={buildProductFamilyPath(locale, 'industrial-sensors')}
+                    >
+                      {family.name}
+                    </Link>
+                  </div>
+                </aside>
+              ) : null}
+            </div>
+
+            <p className="eyebrow">{taxonomy.listingTemplateTitle}</p>
             <p className="story-intro">{taxonomy.listingTemplateSummary}</p>
             <div className="product-series-list">
               {group.series.map((series, index) => (
