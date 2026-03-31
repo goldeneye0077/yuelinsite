@@ -196,6 +196,83 @@ export const enSiteContent: SiteContent = {
     primaryCta: 'Request Consultation / \u83b7\u53d6\u54a8\u8be2',
     secondaryCta: 'Return home',
   },
+  aboutPage: {
+    eyebrow: 'About Yuelin Technology',
+    heroSummary:
+      'From industrial sensing and component selection to automation integration paths, the company is positioned to support projects with steadier supply and more practical technical coordination.',
+    heroDescription:
+      'This page brings the company profile, office address, business facts, partner references, and qualification placeholders into one calm corporate surface so industrial buyers can build trust faster.',
+    companyTitle: 'Company profile',
+    companyParagraphs: [
+      'Shenzhen Yuelin Technology Co., Ltd. is based in Shenzhen and focuses on industrial sensors, automation-related products, and technical services. The company works with equipment makers, system integrators, and factory-side customers who need clearer selection and implementation support.',
+      'Its business scope covers industrial sensors, safety protection sensors, laser ranging sensors, linear guides and modules, pneumatic components, software development, and technical integration. The goal is to improve equipment automation capability and line efficiency through reliable supply, practical support, and responsive project coordination.',
+    ],
+    factsTitle: 'Company facts',
+    facts: [
+      {
+        label: 'Full name',
+        value: 'Shenzhen Yuelin Technology Co., Ltd.',
+      },
+      {
+        label: 'Office address',
+        value:
+          'Building 3, Xunmei Technology Plaza, No. 8 Keyuan Road, Kejiyuan Community, Yuehai Subdistrict, Nanshan District, Shenzhen',
+      },
+      {
+        label: 'Customer types',
+        value: 'Equipment makers | System integrators | Factory-side buyers',
+      },
+      {
+        label: 'Business focus',
+        value:
+          'Industrial sensors | Solutions | Software development | Technical integration',
+      },
+    ],
+    trustTitle: 'How we work',
+    trustSummary:
+      'For industrial customers, reliable supply response, a clear selection path, and project-ready coordination matter more than broad marketing claims.',
+    trustItems: [
+      {
+        title: 'Reliable supply and selection dialogue',
+        detail:
+          'Conversations start from actual scenarios, product models, and implementation needs rather than vague brand language alone.',
+      },
+      {
+        title: 'Integration-aware technical support',
+        detail:
+          'Sensor signals, execution units, and software paths are framed together so technical discussions can stay close to delivery reality.',
+      },
+      {
+        title: 'Bilingual corporate expression',
+        detail:
+          'Chinese and English surfaces share the same company structure, making external presentation more consistent for local and international communication.',
+      },
+    ],
+    partnersTitle: 'Partner brands',
+    qualificationsTitle: 'Qualifications and authorization placeholders',
+    qualificationsSummary:
+      'The structure is ready for company credentials, partner authorization materials, and supporting capability documents, even though the real assets are still pending.',
+    qualifications: [
+      {
+        title: 'Company credentials',
+        detail:
+          'Reserved for business qualifications, system certifications, and project-level supporting documents.',
+      },
+      {
+        title: 'Partner authorization',
+        detail:
+          'Reserved for cooperation brand authorization images, agency materials, or related statements.',
+      },
+      {
+        title: 'Delivery proof',
+        detail:
+          'Reserved for project cases, service process references, or industry application evidence.',
+      },
+    ],
+    finalCtaTitle: 'If the project direction is already clear, start the conversation directly',
+    finalCtaBody:
+      'Whether the need is product selection, technical integration, or production-line automation coordination, the consultation entry can be the first concrete next step.',
+  },
   contact: {
     title: 'Contact',
     summary: 'Inquiry entry points will converge on one shared contact route across the site.',

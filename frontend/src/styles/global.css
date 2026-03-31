@@ -687,6 +687,122 @@ img {
   align-items: start;
 }
 
+.about-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 0.92fr) minmax(300px, 0.72fr);
+  gap: 40px;
+  align-items: start;
+}
+
+.about-hero__copy {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.about-hero__copy h1 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(2.8rem, 5vw, 4.6rem);
+  line-height: 0.94;
+  letter-spacing: -0.04em;
+}
+
+.about-hero__rail {
+  display: grid;
+  gap: 20px;
+}
+
+.about-hero__logo-frame,
+.about-facts {
+  padding-top: 20px;
+  border-top: 1px solid var(--color-border);
+}
+
+.about-hero__logo-frame {
+  position: relative;
+  min-height: 260px;
+  overflow: hidden;
+}
+
+.about-hero__logo-frame::before {
+  content: '';
+  position: absolute;
+  inset: 18px 4% auto 28%;
+  height: 120px;
+  border-radius: var(--radius-pill);
+  background: linear-gradient(
+    90deg,
+    rgba(86, 176, 232, 0.12),
+    rgba(13, 77, 122, 0.72),
+    rgba(240, 169, 75, 0.18)
+  );
+  filter: blur(8px);
+  transform: rotate(-10deg);
+}
+
+.about-hero__logo {
+  position: relative;
+  z-index: 1;
+  width: min(100%, 280px);
+  margin-left: auto;
+  filter: drop-shadow(0 14px 26px rgba(6, 17, 27, 0.18));
+}
+
+.about-facts,
+.qualification-list {
+  display: grid;
+  gap: 16px;
+}
+
+.about-fact,
+.qualification-item {
+  padding-top: 14px;
+  border-top: 1px solid rgba(141, 163, 181, 0.2);
+}
+
+.about-fact__value {
+  margin: 0;
+  color: var(--color-text);
+  line-height: 1.7;
+}
+
+.about-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 36px;
+  align-items: start;
+}
+
+.about-section {
+  padding-top: 20px;
+  border-top: 1px solid var(--color-border);
+}
+
+.about-section--offset {
+  padding-left: 18px;
+  border-left: 1px solid var(--color-border);
+}
+
+.about-copy {
+  display: grid;
+  gap: 18px;
+}
+
+.about-copy p,
+.qualification-item p {
+  margin: 0;
+  color: var(--color-text-muted);
+  line-height: 1.8;
+}
+
+.qualification-item h2 {
+  margin: 0 0 8px;
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  line-height: 1.04;
+}
+
 .story-block,
 .final-cta {
   padding-top: 20px;
@@ -905,6 +1021,8 @@ img {
   .placeholder-grid,
   .status-strip,
   .home-story-grid,
+  .about-hero,
+  .about-grid,
   .story-list--compact,
   .final-cta {
     grid-template-columns: 1fr;
@@ -923,6 +1041,11 @@ img {
   }
 
   .story-block--profile {
+    padding-left: 0;
+    border-left: 0;
+  }
+
+  .about-section--offset {
     padding-left: 0;
     border-left: 0;
   }

@@ -10,6 +10,7 @@ import {
   SECTION_ROUTE_KEYS,
 } from '../i18n/locales'
 import { SiteShell } from '../layouts/SiteShell'
+import { AboutPage } from '../pages/AboutPage'
 import { HomeShellPage } from '../pages/HomeShellPage'
 import { SectionPlaceholderPage } from '../pages/SectionPlaceholderPage'
 
@@ -45,7 +46,7 @@ export function createAppRouter(options: RouterFactoryOptions = {}) {
         },
         {
           path: 'about',
-          element: <SectionPlaceholderPage section="about" />,
+          element: <AboutPage />,
         },
         {
           path: 'contact',

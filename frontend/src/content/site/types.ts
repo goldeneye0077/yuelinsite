@@ -29,6 +29,11 @@ export type PartnerBrand = {
   detail: string
 }
 
+export type QualificationPlaceholder = {
+  title: string
+  detail: string
+}
+
 export type FooterLinkItem = {
   label: string
   section: SectionRouteKey
@@ -91,6 +96,24 @@ export interface SiteContent {
   solutions: RoutePageContent
   support: RoutePageContent
   about: RoutePageContent
+  aboutPage: {
+    eyebrow: string
+    heroSummary: string
+    heroDescription: string
+    companyTitle: string
+    companyParagraphs: string[]
+    factsTitle: string
+    facts: CompanyFact[]
+    trustTitle: string
+    trustSummary: string
+    trustItems: HighlightItem[]
+    partnersTitle: string
+    qualificationsTitle: string
+    qualificationsSummary: string
+    qualifications: QualificationPlaceholder[]
+    finalCtaTitle: string
+    finalCtaBody: string
+  }
   contact: RoutePageContent
   footer: {
     summary: string
