@@ -49,5 +49,16 @@ export type ProductTaxonomyContent = {
   categoryMetaSeriesLabel: string
   sourceSyncedLabel: string
   projectInferredLabel: string
+  subgroupCtaLabel: string
+  subgroupNavigatorTitle: string
+  subgroupNavigatorSummary: string
+  listingTemplateTitle: string
+  listingTemplateSummary: string
+  listingSeriesLabel: string
+  listingFocusLabel: string
+  listingStatusLabel: string
+  listingReadyLabel: string
+  siblingGroupsTitle: string
+  siblingGroupsSummary: string
   categories: ProductFamily[]
 }

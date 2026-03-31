@@ -1,6 +1,9 @@
 import {
+  buildIndustrialSensorGroupPath,
   buildProductFamilyPath,
+  getIndustrialSensorGroup,
   getProductTaxonomy,
+  normalizeIndustrialSensorGroupSlug,
   normalizeProductFamilyKey,
 } from './index'
 
@@ -38,6 +41,19 @@ describe('product taxonomy', () => {
     expect(normalizeProductFamilyKey('not-a-family')).toBeNull()
     expect(buildProductFamilyPath('zh', 'laser-ranging-sensors')).toBe(
       '/zh/products/laser-ranging-sensors',
+    )
+  })
+
+  it('normalizes industrial sensor subgroup slugs and builds subgroup paths', () => {
+    expect(normalizeIndustrialSensorGroupSlug('zh', 'fiber-sensors')).toBe(
+      'fiber-sensors',
+    )
+    expect(normalizeIndustrialSensorGroupSlug('zh', 'invalid-group')).toBeNull()
+    expect(getIndustrialSensorGroup('zh', 'pressure-sensors')?.name).toBe(
+      '压力传感器',
+    )
+    expect(buildIndustrialSensorGroupPath('en', 'fiber-sensors')).toBe(
+      '/en/products/industrial-sensors/fiber-sensors',
     )
   })
 })

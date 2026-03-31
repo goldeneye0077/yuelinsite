@@ -29,6 +29,20 @@ export const enProductTaxonomy: ProductTaxonomyContent = {
   categoryMetaSeriesLabel: 'Representative series',
   sourceSyncedLabel: 'Reference-aligned',
   projectInferredLabel: 'Project-inferred',
+  subgroupCtaLabel: 'Open subgroup',
+  subgroupNavigatorTitle: 'Industrial sensor navigator',
+  subgroupNavigatorSummary:
+    'Use the reference-aligned subgroups as the browsing backbone, then expand each subgroup into a list-ready catalog template.',
+  listingTemplateTitle: 'Series directory template',
+  listingTemplateSummary:
+    'Each subgroup page now organizes the known series into a stable listing layout so later product cards, models, and downloads can plug into predictable rows.',
+  listingSeriesLabel: 'Series',
+  listingFocusLabel: 'Focus',
+  listingStatusLabel: 'Status',
+  listingReadyLabel: 'Template ready',
+  siblingGroupsTitle: 'Sibling sensor groups',
+  siblingGroupsSummary:
+    'Industrial sensor browsing should stay lateral as well as deep, so nearby sensing groups remain visible while reviewing one subgroup in detail.',
   categories: [
     {
       key: 'industrial-sensors',

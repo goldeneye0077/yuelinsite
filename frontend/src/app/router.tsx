@@ -14,6 +14,7 @@ import { AboutPage } from '../pages/AboutPage'
 import { HomeShellPage } from '../pages/HomeShellPage'
 import { ProductCenterPage } from '../pages/ProductCenterPage'
 import { ProductFamilyPage } from '../pages/ProductFamilyPage'
+import { ProductGroupPage } from '../pages/ProductGroupPage'
 import { SectionPlaceholderPage } from '../pages/SectionPlaceholderPage'
 
 type RouterFactoryOptions = {
@@ -37,6 +38,10 @@ export function createAppRouter(options: RouterFactoryOptions = {}) {
         {
           path: 'products',
           element: <ProductCenterPage />,
+        },
+        {
+          path: 'products/industrial-sensors/:groupSlug',
+          element: <ProductGroupPage />,
         },
         {
           path: 'products/:familyKey',

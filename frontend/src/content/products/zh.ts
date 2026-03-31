@@ -29,6 +29,20 @@ export const zhProductTaxonomy: ProductTaxonomyContent = {
   categoryMetaSeriesLabel: '代表系列',
   sourceSyncedLabel: '参考站同步',
   projectInferredLabel: '项目推导',
+  subgroupCtaLabel: '查看子类',
+  subgroupNavigatorTitle: '工业传感器子类导航',
+  subgroupNavigatorSummary:
+    '以参考目录同步的子类为浏览主轴，再把每个子类展开成可继续接真实目录的列表模板。',
+  listingTemplateTitle: '系列列表模板',
+  listingTemplateSummary:
+    '每个子类页都会先按已知系列建立稳定的目录行结构，后续再往这些行里补型号、图片、参数和下载资料。',
+  listingSeriesLabel: '系列',
+  listingFocusLabel: '适用重点',
+  listingStatusLabel: '当前状态',
+  listingReadyLabel: '模板已就绪',
+  siblingGroupsTitle: '同级传感器子类',
+  siblingGroupsSummary:
+    '工业传感器不是单一路径浏览。你可以在同一层里横向切换其他感测子类，再继续深入看具体系列。',
   categories: [
     {
       key: 'industrial-sensors',

@@ -2,6 +2,7 @@ import { ArrowRight, ChevronLeft } from 'lucide-react'
 import { Link, Navigate, useParams } from 'react-router-dom'
 
 import {
+  buildIndustrialSensorGroupPath,
   buildProductFamilyPath,
   getProductFamily,
   getProductTaxonomy,
@@ -42,6 +43,7 @@ export function ProductFamilyPage() {
   const relatedFamilies = taxonomy.categories.filter(
     (category) => category.key !== family.key,
   )
+  const isIndustrialSensorFamily = family.key === 'industrial-sensors'
 
   return (
     <>
@@ -102,7 +104,30 @@ export function ProductFamilyPage() {
       <section className="page-band page-band--bordered">
         <div className="product-detail-grid">
           <section className="product-detail-section motion-rise motion-delay-2">
-            <p className="eyebrow">{taxonomy.categoriesTitle}</p>
+            <p className="eyebrow">
+              {isIndustrialSensorFamily
+                ? taxonomy.subgroupNavigatorTitle
+                : taxonomy.categoriesTitle}
+            </p>
+            {isIndustrialSensorFamily ? (
+              <p className="story-intro">{taxonomy.subgroupNavigatorSummary}</p>
+            ) : null}
+            {isIndustrialSensorFamily ? (
+              <div className="product-subnav">
+                {family.groups.map((group) => (
+                  <Link
+                    key={group.slug}
+                    className="product-subnav__item"
+                    to={buildIndustrialSensorGroupPath(locale, group.slug)}
+                  >
+                    <span className="product-subnav__title">{group.name}</span>
+                    <span className="product-subnav__meta">
+                      {group.series.length} {taxonomy.categoryMetaSeriesLabel.toLowerCase()}
+                    </span>
+                  </Link>
+                ))}
+              </div>
+            ) : null}
             <div className="product-detail-group-list">
               {family.groups.map((group) => (
                 <article key={group.slug} className="product-detail-group">
@@ -121,6 +146,17 @@ export function ProductFamilyPage() {
                   <p className="product-detail-group__series">
                     {group.series.join(' / ')}
                   </p>
+                  {isIndustrialSensorFamily ? (
+                    <div className="product-detail-group__actions">
+                      <Link
+                        className="product-inline-link"
+                        to={buildIndustrialSensorGroupPath(locale, group.slug)}
+                      >
+                        <span>{taxonomy.subgroupCtaLabel}</span>
+                        <ArrowRight size={15} />
+                      </Link>
+                    </div>
+                  ) : null}
                 </article>
               ))}
             </div>

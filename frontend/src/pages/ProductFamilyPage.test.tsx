@@ -26,6 +26,9 @@ describe('ProductFamilyPage', () => {
       (await screen.findAllByText(industrialSensors.groups[0].summary)).length,
     ).toBeGreaterThan(0)
     expect(
+      (await screen.findAllByText(taxonomy.subgroupCtaLabel)).length,
+    ).toBeGreaterThan(0)
+    expect(
       (await screen.findAllByText(taxonomy.categories[1].name)).length,
     ).toBeGreaterThan(0)
     expect(
