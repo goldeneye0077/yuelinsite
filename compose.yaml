@@ -7,7 +7,7 @@ services:
     environment:
       VITE_API_BASE_URL: ${VITE_API_BASE_URL:-http://localhost:8000}
     ports:
-      - '5173:5173'
+      - '${FRONTEND_PORT:-5173}:5173'
     volumes:
       - ./frontend:/app
       - frontend_node_modules:/app/node_modules
@@ -20,8 +20,9 @@ services:
       APP_NAME: ${APP_NAME:-Yuelin Official Site API}
       APP_ENV: ${APP_ENV:-development}
       DATABASE_URL: ${DATABASE_URL:-postgresql+psycopg://yuelin:yuelin_dev@db:5432/yuelin_site}
+      CORS_ORIGINS: ${CORS_ORIGINS:-["http://localhost:5173","http://127.0.0.1:5173","http://localhost:4173","http://127.0.0.1:4173"]}
     ports:
-      - '8000:8000'
+      - '${BACKEND_PORT:-8000}:8000'
     volumes:
       - ./backend:/app
     depends_on:
