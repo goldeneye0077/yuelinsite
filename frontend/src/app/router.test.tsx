@@ -1,6 +1,7 @@
 import { render, screen, waitFor } from '@testing-library/react'
 import { RouterProvider } from 'react-router-dom'
 
+import { AppProviders } from './providers'
 import { createAppRouter } from './router'
 import {
   buildLocalePath,
@@ -17,11 +18,15 @@ describe('createAppRouter', () => {
       initialEntries: ['/fr/products'],
     })
 
-    render(<RouterProvider router={router} />)
+      render(
+        <AppProviders>
+          <RouterProvider router={router} />
+        </AppProviders>,
+      )
 
-    await waitFor(() => {
-      expect(router.state.location.pathname).toBe(buildLocalePath(DEFAULT_LOCALE))
-    })
+      await waitFor(() => {
+        expect(router.state.location.pathname).toBe(buildLocalePath(DEFAULT_LOCALE))
+      })
   })
 
   it.each(SUPPORTED_LOCALES)(
@@ -34,7 +39,11 @@ describe('createAppRouter', () => {
           initialEntries: [buildLocalePath(locale, section)],
         })
 
-        const { unmount } = render(<RouterProvider router={router} />)
+        const { unmount } = render(
+          <AppProviders>
+            <RouterProvider router={router} />
+          </AppProviders>,
+        )
 
         expect(
           await screen.findByRole('heading', {

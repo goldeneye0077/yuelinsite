@@ -1,128 +1,142 @@
-# Roadmap: 跃鳞科技企业官网
+# Roadmap: Shenzhen Yuelin Technology Official Site
 
 ## Overview
 
-本项目将从前后端基础架构、Docker Compose 运行环境、双语路由和主题系统开始，先建立可扩展的官网底盘，再逐步完成品牌首页、产品中心、解决方案与支持内容，最后收口询盘转化、响应式质量与上线准备。路线图的顺序遵循一个原则：先解决平台与结构问题，再解决内容承载，最后补齐转化和上线质量。
+This project builds a bilingual corporate website for Shenzhen Yuelin Technology Co., Ltd. The delivery order stays intentional:
+
+1. Establish the platform foundation, shared shell, and theme system.
+2. Build the brand-facing homepage and corporate presence.
+3. Expand the product center and taxonomy.
+4. Add solutions, partner brands, and support content.
+5. Close the loop with inquiry, QA, and launch readiness.
+
+The guiding principle is simple: solve platform and structure first, then content, then conversion and launch quality.
 
 ## Phases
 
-**Phase Numbering:**
-- Integer phases (1, 2, 3): Planned milestone work
-- Decimal phases (2.1, 2.2): Urgent insertions (marked with INSERTED)
-
-Decimal phases appear between their surrounding integers in numeric order.
-
-- [ ] **Phase 1: Platform Foundation & Theme Shell** - 搭建前后端底座、Docker Compose、双语路由和明暗主题框架
-- [ ] **Phase 2: Brand Story & Corporate Presence** - 完成首页、关于我们和品牌信任表达
-- [ ] **Phase 3: Product Center & Taxonomy** - 建立产品中心结构和工业传感器细分类目
-- [ ] **Phase 4: Solutions, Brands & Support** - 完成解决方案、品牌合作和服务支持内容
-- [ ] **Phase 5: Inquiry, QA & Launch Readiness** - 完成询盘闭环、跨页 CTA、响应式校验和上线质量收口
+- [x] **Phase 1: Platform Foundation & Theme Shell** - Frontend/backend scaffold, Docker Compose, bilingual routing, shared shell, and light/dark Precision Industrial foundation
+- [ ] **Phase 2: Brand Story & Corporate Presence** - Homepage storytelling, About content, and trust-building presentation
+- [ ] **Phase 3: Product Center & Taxonomy** - Product center structure plus industrial sensor subcategory taxonomy
+- [ ] **Phase 4: Solutions, Brands & Support** - Solutions, partner brands, and service/support experience
+- [ ] **Phase 5: Inquiry, QA & Launch Readiness** - Inquiry flow, responsive QA, theme consistency, and launch verification
 
 ## Phase Details
 
 ### Phase 1: Platform Foundation & Theme Shell
-**Goal**: 建立可扩展的官网底盘，包括前后端工程、Docker Compose、双语路由、主题系统、全局布局和 Precision Industrial 的视觉基线  
-**Depends on**: Nothing (first phase)  
+
+**Goal**: Establish the durable site foundation, including the frontend/backend scaffold, Docker Compose workflow, locale-prefixed routing, shared shell, and the Precision Industrial light/dark baseline.
+
+**Depends on**: Nothing  
 **Requirements**: [GLOB-01, GLOB-02, GLOB-03, GLOB-05]  
 **UI hint**: yes  
-**Success Criteria** (what must be TRUE):
-  1. User can access both Chinese and English homepage routes with the same site structure
-  2. User can switch language from the global navigation without losing orientation
-  3. User can reach the main sections and contact entry from a shared header and footer on core templates
-  4. User can switch between light and dark themes and keep core navigation, typography, and chart areas readable
-  5. Developers can start frontend, backend, and database together through a single Docker Compose setup
-  6. User sees a stable industrial visual baseline in both themes, with restrained chrome and no template-style first impression
+**Success Criteria**:
+
+1. Users can access mirrored Chinese and English routes with a shared site structure.
+2. Users can switch language without losing route orientation.
+3. Users can navigate the core sections from a consistent shared header and footer.
+4. Users can switch between light and dark themes while keeping shell typography, navigation, and chart-ready surfaces readable.
+5. Developers can run the project through one Compose workflow.
+6. The first visible shell feels industrial and deliberate rather than template-like.
+
 **Plans**: 3 plans
 
-Plans:
 - [x] 01-01: Scaffold the React + Vite frontend, FastAPI backend, PostgreSQL integration baseline, and Docker Compose setup
-- [x] 01-02: Implement locale routing, content loading conventions, and frontend-backend API contract for site data and inquiries
-- [ ] 01-03: Build shared layout, header, footer, mobile navigation, the light/dark theme token system, and the Precision Industrial visual foundation
+- [x] 01-02: Implement locale routing, content loading conventions, and frontend-backend API contracts for site data and inquiries
+- [x] 01-03: Build the shared layout, header, footer, mobile navigation, theme token system, and Precision Industrial visual shell
 
 ### Phase 2: Brand Story & Corporate Presence
-**Goal**: 用首页、关于我们和企业信任内容，把品牌定位、公司介绍和联系事实用高辨识度的工业视觉语言讲清楚  
+
+**Goal**: Use the homepage and About surfaces to communicate the company position, address, trust framing, and first strong brand impression.
+
 **Depends on**: Phase 1  
 **Requirements**: [HOME-01, HOME-02, HOME-03, ABOU-01, ABOU-02, ABOU-03]  
 **UI hint**: yes  
-**Success Criteria** (what must be TRUE):
-  1. User can understand what the company does within the first screen of the homepage
-  2. User can view a complete bilingual company profile and the Shenzhen office address
-  3. User can see trust-building sections such as core strengths, company introduction, and reserved qualification/authorization areas
-  4. User can enter product, solutions, and inquiry paths directly from homepage CTA modules
-  5. User sees a first-screen composition with one dominant visual anchor instead of a generic card-grid hero
+**Success Criteria**:
+
+1. Users understand what the company does from the first screen.
+2. Users can read a complete bilingual company profile and the Shenzhen office address.
+3. Users see trust-building sections such as strengths, company introduction, and reserved qualification/authorization areas.
+4. Users can move from homepage modules into product, solution, or inquiry paths.
+5. The homepage hero remains dominant and editorial instead of turning into a card wall.
+
 **Plans**: 4 plans
 
-Plans:
-- [ ] 02-01: Build a poster-like homepage hero with strong brand hierarchy, dominant visual anchor, and restrained CTA composition
-- [ ] 02-02: Build bilingual company profile and About page content
-- [ ] 02-03: Add trust modules, reserved qualification blocks, and brand-consistent cardless section layouts
-- [ ] 02-04: Wire company facts, address, supporting bilingual copy, and controlled motion details across core brand pages
+- [ ] 02-01: Build a poster-like homepage hero with strong hierarchy, dominant visual anchor, and restrained CTA composition
+- [ ] 02-02: Build the bilingual company profile and About page content
+- [ ] 02-03: Add trust modules, reserved qualification blocks, and brand-consistent cardless layouts
+- [ ] 02-04: Wire company facts, address, bilingual copy, and controlled motion details across core brand pages
 
 ### Phase 3: Product Center & Taxonomy
-**Goal**: 建立产品中心的信息架构、5 个一级类与工业传感器二级分类，并形成可浏览的产品页体系  
+
+**Goal**: Build the product information architecture around five top-level categories and detailed industrial sensor subcategories.
+
 **Depends on**: Phase 2  
 **Requirements**: [PROD-01, PROD-02, PROD-03, PROD-04]  
 **UI hint**: yes  
-**Success Criteria** (what must be TRUE):
-  1. User can browse all five top-level product categories from the product center
-  2. User can drill into industrial sensor subcategories based on the selected reference taxonomy
-  3. User can open category pages with category explanation, representative groupings, and inquiry entry
-  4. User can view representative product cards or detail content with key highlights and contact CTA
+**Success Criteria**:
+
+1. Users can browse all five top-level product categories.
+2. Users can drill into industrial sensor subcategories based on the reference taxonomy.
+3. Users can open category pages with context, representative groupings, and inquiry entry points.
+4. Users can view representative product cards or detail content with key highlights and CTA support.
+
 **Plans**: 4 plans
 
-Plans:
-- [ ] 03-01: Define structured product taxonomy and bilingual product data model
-- [ ] 03-02: Build product center landing page and five top-level category entry pages
+- [ ] 03-01: Define the structured product taxonomy and bilingual product data model
+- [ ] 03-02: Build the product center landing page and the five top-level category pages
 - [ ] 03-03: Build industrial sensor subcategory navigation and listing templates
 - [ ] 03-04: Build representative product card/detail components with inquiry CTA
 
 ### Phase 4: Solutions, Brands & Support
-**Goal**: 通过解决方案、品牌合作和服务支持内容，把公司的业务能力与合作生态说清楚  
+
+**Goal**: Clarify business capability and partner ecosystem through solutions, cooperation brands, and support content.
+
 **Depends on**: Phase 3  
 **Requirements**: [SOLN-01, SOLN-02, BRND-01, BRND-02, SUPP-01, SUPP-02]  
 **UI hint**: yes  
-**Success Criteria** (what must be TRUE):
-  1. User can view the three solution directions and understand their scenarios, scope, and value
-  2. User can view the five cooperation brands with contextual explanation instead of logo-only presentation
-  3. User can browse service and support capabilities and find a clear catalog/download entry
-  4. User can move from solutions or support content into an inquiry path without dead ends
+**Success Criteria**:
+
+1. Users can understand the three solution directions and their value.
+2. Users can view the five partner brands with context instead of logo-only presentation.
+3. Users can find service/support capability and a clear catalog or download entry.
+4. Users can move from solutions or support surfaces into inquiry without dead ends.
+
 **Plans**: 4 plans
 
-Plans:
 - [ ] 04-01: Build solution content structure for industrial automation, software development, and technical integration
-- [ ] 04-02: Implement bilingual solution pages and related CTA sections
-- [ ] 04-03: Implement brand cooperation page/modules with contextual presentation for partner brands
-- [ ] 04-04: Build service and support page with catalog/download request entry
+- [ ] 04-02: Implement bilingual solution pages and CTA sections
+- [ ] 04-03: Implement brand cooperation modules with contextual partner presentation
+- [ ] 04-04: Build the service/support page with catalog and download request entry
 
 ### Phase 5: Inquiry, QA & Launch Readiness
-**Goal**: 补齐联系与询盘闭环，验证响应式体验与主题一致性，并形成可上线状态  
+
+**Goal**: Complete the contact and inquiry loop, verify responsive and theme quality, and prepare the stack for launch.
+
 **Depends on**: Phase 4  
 **Requirements**: [LEAD-01, LEAD-02, LEAD-03, GLOB-04]  
 **UI hint**: yes  
-**Success Criteria** (what must be TRUE):
-  1. User can open a dedicated contact page with a clear inquiry path
-  2. User can submit an inquiry form with essential business fields and receive clear feedback
-  3. User can find inquiry entry points from homepage, product, solution, and contact pages
-  4. User can browse the core pages on desktop and mobile without blocked navigation or broken layouts
-  5. User sees consistent light/dark theme behavior across the core pages and chart surfaces
-  6. Developers can build and run the launch-ready stack through Docker Compose with stable environment configuration
+**Success Criteria**:
+
+1. Users can open a dedicated contact page with a clear inquiry path.
+2. Users can submit an inquiry form with essential business fields and clear feedback.
+3. Users can find inquiry entry points from homepage, product, solution, and contact pages.
+4. Users can browse the core pages on desktop and mobile without broken navigation or layout regressions.
+5. Users see consistent light/dark behavior across the shell and chart-ready surfaces.
+6. Developers can build and run the launch-ready stack through Docker Compose.
+
 **Plans**: 4 plans
 
-Plans:
-- [ ] 05-01: Build contact page, inquiry form, backend validation, persistence, and submission flow
+- [ ] 05-01: Build the contact page, inquiry form, backend validation, persistence, and submission flow
 - [ ] 05-02: Audit and add CTA entry points across homepage, product, solution, and contact pages
 - [ ] 05-03: Complete responsive QA, theme consistency checks, and accessibility/performance fixes
-- [ ] 05-04: Finalize Docker Compose deployment workflow, launch checklist, and release-ready verification
+- [ ] 05-04: Finalize deployment workflow, launch checklist, and release-ready verification
 
 ## Progress
 
-**Execution Order:**
-Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5
-
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Platform Foundation & Theme Shell | 2/3 | In progress | 2026-03-30 (01-01, 01-02) |
-| 2. Brand Story & Corporate Presence | 0/4 | Not started | - |
+| 1. Platform Foundation & Theme Shell | 3/3 | Complete | 2026-03-31 (01-01, 01-02, 01-03) |
+| 2. Brand Story & Corporate Presence | 0/4 | Ready to start | - |
 | 3. Product Center & Taxonomy | 0/4 | Not started | - |
 | 4. Solutions, Brands & Support | 0/4 | Not started | - |
 | 5. Inquiry, QA & Launch Readiness | 0/4 | Not started | - |

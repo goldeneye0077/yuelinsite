@@ -3,80 +3,144 @@ import type { SiteContent } from './types'
 export const zhSiteContent: SiteContent = {
   locale: 'zh',
   meta: {
-    brandName: '跃鳞科技',
-    companyName: '深圳市跃鳞科技有限公司',
+    brandName: '\u8dc3\u9cde\u79d1\u6280',
+    companyName: '\u6df1\u5733\u5e02\u8dc3\u9cde\u79d1\u6280\u6709\u9650\u516c\u53f8',
+    brandLine: '\u5de5\u4e1a\u4f20\u611f\u4e0e\u81ea\u52a8\u5316\u96c6\u6210',
     switchLabel: {
-      zh: '切换到中文',
+      zh: '\u5207\u6362\u5230\u4e2d\u6587',
       en: 'Switch to English',
     },
-    trackLabel: '基础能力轨道',
+    trackLabel: '\u57fa\u7840\u80fd\u529b\u8f68\u9053',
+    themeLabel: '\u754c\u9762\u4e3b\u9898',
+    lightLabel: '\u6d45\u8272',
+    darkLabel: '\u6df1\u8272',
+    menuLabel: '\u6253\u5f00\u5bfc\u822a',
+    closeMenuLabel: '\u5173\u95ed\u5bfc\u822a',
   },
   navigation: [
-    { key: 'home', label: '首页' },
-    { key: 'products', label: '产品中心' },
-    { key: 'solutions', label: '解决方案' },
-    { key: 'support', label: '服务与支持' },
-    { key: 'about', label: '关于我们' },
-    { key: 'contact', label: '联系我们' },
+    { key: 'home', label: '\u9996\u9875' },
+    { key: 'products', label: '\u4ea7\u54c1\u4e2d\u5fc3' },
+    { key: 'solutions', label: '\u89e3\u51b3\u65b9\u6848' },
+    { key: 'support', label: '\u670d\u52a1\u4e0e\u652f\u6301' },
+    { key: 'about', label: '\u5173\u4e8e\u6211\u4eec' },
+    { key: 'contact', label: '\u8054\u7cfb\u6211\u4eec' },
   ],
   foundationTracks: [
     {
-      label: '前端',
+      label: '\u524d\u7aef',
       value: 'React + Vite',
-      detail: '为双语企业官网准备好可扩展的客户端骨架。',
+      detail:
+        '\u4e3a\u53cc\u8bed\u4f01\u4e1a\u5b98\u7f51\u51c6\u5907\u597d\u53ef\u6269\u5c55\u7684\u5ba2\u6237\u7aef\u9aa8\u67b6\u3002',
     },
     {
-      label: '后端',
+      label: '\u540e\u7aef',
       value: 'FastAPI + PostgreSQL',
-      detail: '先锁定健康检查、站点数据 contract 与未来迁移路径。',
+      detail:
+        '\u5148\u9501\u5b9a\u5065\u5eb7\u68c0\u67e5\u3001\u7ad9\u70b9\u5951\u7ea6\u548c\u540e\u7eed\u8fc1\u79fb\u8fb9\u754c\u3002',
     },
     {
-      label: '基础设施',
+      label: '\u90e8\u7f72',
       value: 'Docker Compose',
-      detail: '本地开发和后续上线验证共用一套启动入口。',
+      detail:
+        '\u672c\u5730\u5f00\u53d1\u548c\u4e0a\u7ebf\u9a8c\u8bc1\u5171\u7528\u4e00\u5957\u542f\u52a8\u5165\u53e3\u3002',
     },
   ],
   home: {
-    eyebrow: 'Phase 01 · 双语路由与 Contract 基线',
+    eyebrow: '\u6b22\u8fce\u6765\u5230\u7cbe\u5bc6\u5de5\u4e1a\u54c1\u724c\u95e8\u9762',
     title: 'Shenzhen Yuelin Technology',
-    summary: '正在构建面向工业传感器与自动化业务的双语官网底盘。',
+    summary:
+      '\u9762\u5411\u8bbe\u5907\u5236\u9020\u5546\u3001\u7cfb\u7edf\u96c6\u6210\u5546\u4e0e\u7ec8\u7aef\u5de5\u5382\u5ba2\u6237\uff0c\u5448\u73b0\u5de5\u4e1a\u4f20\u611f\u3001\u81ea\u52a8\u5316\u96c6\u6210\u4e0e\u6280\u672f\u670d\u52a1\u80fd\u529b\u3002',
     description:
-      '当前阶段先锁定中文、英文镜像路由和基础数据模型，后续主题壳层与内容页可以直接接入。',
-    statusLabel: '基础状态',
+      '\u9996\u5c4f\u5148\u5efa\u7acb\u54c1\u724c\u57fa\u8c03\u3001\u5bfc\u822a\u58f3\u5c42\u4e0e\u8f6c\u5316\u5165\u53e3\uff0c\u540e\u7eed\u518d\u9010\u6b65\u8865\u9f50\u4ea7\u54c1\u7ec6\u5206\u3001\u65b9\u6848\u573a\u666f\u4e0e\u8d44\u6599\u652f\u6301\u3002',
+    primaryCta: 'Request Consultation / \u83b7\u53d6\u54a8\u8be2',
+    secondaryCta: '\u67e5\u770b\u4ea7\u54c1\u7ed3\u6784',
+    statusLabel: '\u57fa\u7840\u5e03\u5c40',
     statusItems: [
-      '双语路由结构已经进入实现阶段',
-      '站点 bootstrap contract 正在对齐',
-      '主题与共享导航将在下一计划接入',
+      '\u53cc\u8bed\u8def\u7531\u4e0e\u5171\u4eab\u58f3\u5c42\u5df2\u5bf9\u9f50',
+      '\u8f7b\u91cf\u8be2\u76d8\u8def\u5f84\u4ece\u5168\u7ad9\u6c47\u5165',
+      '\u6d45\u8272\u4e0e\u6df1\u8272\u4e3b\u9898\u4f1a\u5171\u4eab\u540c\u4e00\u5957\u6807\u8bb0',
     ],
+    visualLabel: '\u4fdd\u7559\u4e3b\u89c6\u89c9\u951a\u70b9',
   },
   productCenter: {
-    title: '产品中心 / Product Center',
-    summary: '五大产品方向将通过统一的双语路由结构呈现。',
+    title: '\u4ea7\u54c1\u4e2d\u5fc3 / Product Center',
+    summary:
+      '\u4ee5\u4e94\u5927\u4e00\u7ea7\u5206\u7c7b\u4e3a\u4e3b\u8f74\uff0c\u540c\u6b65\u5c55\u5f00\u5de5\u4e1a\u4f20\u611f\u5668\u4e8c\u7ea7\u5b50\u7c7b\u3002',
     description:
-      '工业传感器、安全防护传感器、激光测距传感器、线性滑轨及模组、气动元器件会在后续阶段按分类展开。',
+      '\u5de5\u4e1a\u4f20\u611f\u5668\u3001\u5b89\u5168\u9632\u62a4\u4f20\u611f\u5668\u3001\u6fc0\u5149\u6d4b\u8ddd\u4f20\u611f\u5668\u3001\u7ebf\u6027\u6ed1\u8f68\u53ca\u6a21\u7ec4\u3001\u6c14\u52a8\u5143\u5668\u4ef6\u5c06\u6309\u7167\u53cc\u8bed\u7ed3\u6784\u7ee7\u7eed\u5b8c\u5584\u3002',
+    primaryCta: 'Request Consultation / \u83b7\u53d6\u54a8\u8be2',
+    secondaryCta: '\u8fd4\u56de\u9996\u9875',
   },
   solutions: {
-    title: '解决方案 / Solutions',
-    summary: '工业自动化、软件开发与技术集成将使用同一套站点结构承载。',
+    title: '\u89e3\u51b3\u65b9\u6848 / Solutions',
+    summary:
+      '\u5de5\u4e1a\u81ea\u52a8\u5316\u89e3\u51b3\u65b9\u6848\u3001\u8f6f\u4ef6\u5f00\u53d1\u4e0e\u6280\u672f\u96c6\u6210\u4f1a\u5171\u7528\u540c\u4e00\u5957\u7ed9\u5ba2\u6237\u7684\u53d9\u4e8b\u8def\u5f84\u3002',
     description:
-      '这一页当前作为结构占位，后续会补齐应用场景、服务范围和转化入口。',
+      '\u672c\u9636\u6bb5\u5148\u4fdd\u7559\u5bf9\u5e94\u7248\u9762\u4e0e\u8f6c\u5316\u5165\u53e3\uff0c\u540e\u7eed\u8865\u8db3\u884c\u4e1a\u573a\u666f\u3001\u4ea4\u4ed8\u65b9\u5f0f\u4e0e\u6210\u529f\u6848\u4f8b\u3002',
+    primaryCta: 'Request Consultation / \u83b7\u53d6\u54a8\u8be2',
+    secondaryCta: '\u8fd4\u56de\u9996\u9875',
   },
   support: {
-    title: '服务与支持 / Support',
-    summary: '资料下载、目录申请和技术支持路径会挂在统一支持页。',
+    title: '\u670d\u52a1\u4e0e\u652f\u6301 / Support',
+    summary:
+      '\u8d44\u6599\u4e0b\u8f7d\u3001\u76ee\u5f55\u7533\u8bf7\u3001\u6280\u672f\u652f\u6301\u4f1a\u6536\u655b\u5230\u7edf\u4e00\u652f\u6301\u9875\u9762\u3002',
     description:
-      '现阶段先锁定路由和内容模型，后续再补齐真实资料、说明书和支持流程。',
+      '\u5f53\u524d\u5148\u786e\u4fdd\u8def\u7531\u3001\u680f\u76ee\u4e0e\u54a8\u8be2\u5165\u53e3\u5b8c\u6574\uff0c\u540e\u7eed\u518d\u63a5\u5165\u8bf4\u660e\u4e66\u3001\u76ee\u5f55\u548c\u552e\u540e\u652f\u6301\u6d41\u7a0b\u3002',
+    primaryCta: 'Request Consultation / \u83b7\u53d6\u54a8\u8be2',
+    secondaryCta: '\u8fd4\u56de\u9996\u9875',
   },
   about: {
-    title: '关于我们 / About',
-    summary: '企业介绍、地址信息与品牌信任内容将保持中英文镜像结构。',
+    title: '\u5173\u4e8e\u6211\u4eec / About',
+    summary:
+      '\u4f01\u4e1a\u4ecb\u7ecd\u3001\u54c1\u724c\u4fe1\u4efb\u4e0e\u8054\u7cfb\u4fe1\u606f\u5c06\u4fdd\u6301\u4e2d\u82f1\u6587\u955c\u50cf\u7ed3\u6784\u3002',
     description:
-      '当前已确认公司名称与深圳地址，后续将补充更完整的品牌表达和资质占位。',
+      '\u516c\u53f8\u7b80\u4ecb\u4f1a\u805a\u7126\u5de5\u4e1a\u4f20\u611f\u4e0e\u81ea\u52a8\u5316\u670d\u52a1\uff0c\u5730\u5740\u3001\u6388\u6743\u4e0e\u8d44\u8d28\u5148\u7559\u51fa\u7edf\u4e00\u5c55\u793a\u4f4d\u7f6e\u3002',
+    primaryCta: 'Request Consultation / \u83b7\u53d6\u54a8\u8be2',
+    secondaryCta: '\u8fd4\u56de\u9996\u9875',
   },
   contact: {
-    title: '联系我们 / Contact',
-    summary: '询盘入口会从首页、产品页与解决方案页汇入统一 contact 路由。',
+    title: '\u8054\u7cfb\u6211\u4eec / Contact',
+    summary:
+      '\u8be2\u76d8\u5165\u53e3\u4f1a\u4ece\u9996\u9875\u3001\u4ea7\u54c1\u9875\u548c\u89e3\u51b3\u65b9\u6848\u9875\u6c47\u5165\u7edf\u4e00\u8054\u7cfb\u9875\u3002',
     description:
-      'Phase 01 先建立 contact 路由和 API contract，真实询盘表单持久化安排在 Phase 5。',
+      '\u76ee\u524d\u5148\u786e\u5b9a\u8868\u5355\u5951\u7ea6\u4e0e\u6267\u884c\u8def\u5f84\uff0c\u771f\u5b9e\u8be2\u76d8\u5165\u5e93\u4e0e\u540e\u53f0\u6d41\u8f6c\u8ba1\u5212\u5728 Phase 5 \u5b8c\u6210\u3002',
+    primaryCta: 'Request Consultation / \u83b7\u53d6\u54a8\u8be2',
+    secondaryCta: '\u8fd4\u56de\u9996\u9875',
+  },
+  footer: {
+    summary:
+      '\u8dc3\u9cde\u79d1\u6280\u805a\u7126\u5de5\u4e1a\u4f20\u611f\u3001\u81ea\u52a8\u5316\u89e3\u51b3\u65b9\u6848\u4e0e\u6280\u672f\u96c6\u6210\uff0c\u4ee5\u54c1\u724c\u5c55\u793a\u4e3a\u4e3b\uff0c\u540c\u65f6\u4fdd\u7559\u8f7b\u91cf\u8be2\u76d8\u5165\u53e3\u3002',
+    addressLabel: '\u516c\u53f8\u5730\u5740',
+    address:
+      '\u6df1\u5733\u5e02\u5357\u5c71\u533a\u7ca4\u6d77\u8857\u9053\u79d1\u6280\u56ed\u793e\u533a\u79d1\u82d1\u8def 8 \u53f7\u8baf\u7f8e\u79d1\u6280\u5e7f\u573a 3 \u53f7\u697c',
+    inquiryLabel: '\u9884\u7559\u8be2\u76d8\u5165\u53e3',
+    inquirySummary:
+      '\u7559\u4e0b\u4ea7\u54c1\u578b\u53f7\u3001\u9879\u76ee\u573a\u666f\u6216\u96c6\u6210\u9700\u6c42\uff0c\u540e\u7eed\u9875\u9762\u4f1a\u5c06\u8fd9\u4e2a\u5165\u53e3\u5347\u7ea7\u4e3a\u5b8c\u6574\u8868\u5355\u3002',
+    legal: '\u00a9 2026 Shenzhen Yuelin Technology Co., Ltd. All rights reserved.',
+    groups: [
+      {
+        title: '\u7ad9\u70b9\u5bfc\u822a',
+        items: [
+          { label: '\u9996\u9875', section: 'home' },
+          { label: '\u4ea7\u54c1\u4e2d\u5fc3', section: 'products' },
+          { label: '\u89e3\u51b3\u65b9\u6848', section: 'solutions' },
+        ],
+      },
+      {
+        title: '\u670d\u52a1\u8def\u5f84',
+        items: [
+          { label: '\u670d\u52a1\u4e0e\u652f\u6301', section: 'support' },
+          { label: '\u5173\u4e8e\u6211\u4eec', section: 'about' },
+          { label: '\u8054\u7cfb\u6211\u4eec', section: 'contact' },
+        ],
+      },
+    ],
+  },
+  placeholder: {
+    eyebrow: '\u6863\u6848\u6b63\u5728\u7ec4\u7ec7',
+    body:
+      '\u5982\u679c\u4f60\u5df2\u6709\u4ea7\u54c1\u578b\u53f7\u3001\u9879\u76ee\u573a\u666f\u6216\u6280\u672f\u96c6\u6210\u9700\u6c42\uff0c\u53ef\u4ee5\u5148\u4ece\u54a8\u8be2\u5165\u53e3\u7559\u8d44\uff0c\u6211\u4eec\u4f1a\u5728\u540e\u7eed\u9636\u6bb5\u8865\u8db3\u5bf9\u5e94\u7684\u8be6\u7ec6\u4fe1\u606f\u3002',
+    inquiryCta: 'Request Consultation / \u83b7\u53d6\u54a8\u8be2',
+    homeCta: '\u8fd4\u56de\u9996\u9875',
   },
 }

@@ -1,0 +1,60 @@
+:root {
+  --font-sans: 'IBM Plex Sans', 'Noto Sans SC', sans-serif;
+  --font-display: 'IBM Plex Sans Condensed', 'IBM Plex Sans', 'Noto Sans SC',
+    sans-serif;
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 40px;
+  --space-2xl: 64px;
+  --space-3xl: 96px;
+  --radius-sm: 12px;
+  --radius-md: 20px;
+  --radius-lg: 32px;
+  --radius-pill: 999px;
+  --shell-max-width: 1180px;
+  --transition-base: 180ms ease;
+  --transition-slow: 260ms ease;
+}
+
+:root,
+[data-theme='light'] {
+  color-scheme: light;
+  --color-bg: #f4f7fa;
+  --color-bg-strong: #edf2f6;
+  --color-surface: #ffffff;
+  --color-surface-elevated: #e8eef3;
+  --color-border: #c3d0da;
+  --color-border-strong: #8da3b5;
+  --color-text: #112132;
+  --color-text-muted: #526679;
+  --color-link: #0d4d7a;
+  --color-accent: #d8892b;
+  --color-accent-soft: rgba(216, 137, 43, 0.12);
+  --color-hero-panel: rgba(255, 255, 255, 0.66);
+  --color-control: rgba(255, 255, 255, 0.72);
+  --color-shadow: rgba(17, 33, 50, 0.08);
+  --color-chart-neutral: #6b7e90;
+  --color-chart-highlight: #d8892b;
+}
+
+[data-theme='dark'] {
+  color-scheme: dark;
+  --color-bg: #07111b;
+  --color-bg-strong: #091625;
+  --color-surface: #0e1b29;
+  --color-surface-elevated: #14283a;
+  --color-border: #2c455a;
+  --color-border-strong: #5d7c97;
+  --color-text: #f3f7fb;
+  --color-text-muted: #a8b9c8;
+  --color-link: #56b0e8;
+  --color-accent: #f0a94b;
+  --color-accent-soft: rgba(240, 169, 75, 0.14);
+  --color-hero-panel: rgba(14, 27, 41, 0.78);
+  --color-control: rgba(20, 40, 58, 0.82);
+  --color-shadow: rgba(1, 8, 15, 0.38);
+  --color-chart-neutral: #7f97ab;
+  --color-chart-highlight: #f0a94b;
+}

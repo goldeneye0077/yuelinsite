@@ -14,6 +14,16 @@ export type FoundationTrack = {
   detail: string
 }
 
+export type FooterLinkItem = {
+  label: string
+  section: SectionRouteKey
+}
+
+export type FooterGroup = {
+  title: string
+  items: FooterLinkItem[]
+}
+
 export type RouteNavigationItem = {
   key: SectionRouteKey
   label: string
@@ -23,6 +33,8 @@ export type RoutePageContent = {
   title: string
   summary: string
   description: string
+  primaryCta: string
+  secondaryCta: string
 }
 
 export interface SiteContent {
@@ -30,8 +42,14 @@ export interface SiteContent {
   meta: {
     brandName: string
     companyName: string
+    brandLine: string
     switchLabel: Record<Locale, string>
     trackLabel: string
+    themeLabel: string
+    lightLabel: string
+    darkLabel: string
+    menuLabel: string
+    closeMenuLabel: string
   }
   navigation: RouteNavigationItem[]
   foundationTracks: FoundationTrack[]
@@ -39,12 +57,28 @@ export interface SiteContent {
     eyebrow: string
     statusLabel: string
     statusItems: [string, string, string]
+    visualLabel: string
   }
   productCenter: RoutePageContent
   solutions: RoutePageContent
   support: RoutePageContent
   about: RoutePageContent
   contact: RoutePageContent
+  footer: {
+    summary: string
+    addressLabel: string
+    address: string
+    inquiryLabel: string
+    inquirySummary: string
+    legal: string
+    groups: FooterGroup[]
+  }
+  placeholder: {
+    eyebrow: string
+    body: string
+    inquiryCta: string
+    homeCta: string
+  }
 }
 
 export const routeContentKeyMap: Record<SectionRouteKey, SiteContentKey> = {
