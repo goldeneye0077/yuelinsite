@@ -15,9 +15,7 @@ describe('App', () => {
     )
 
     expect((await screen.findAllByText(content.home.title)).length).toBeGreaterThan(0)
-    expect(
-      await screen.findByRole('link', { name: /switch to english/i }),
-    ).toBeInTheDocument()
+    expect(await screen.findByRole('link', { name: /^english$/i })).toBeInTheDocument()
     expect(
       (await screen.findAllByRole('link', { name: /request consultation/i })).length,
     ).toBeGreaterThan(0)

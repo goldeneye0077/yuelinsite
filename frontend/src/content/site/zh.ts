@@ -8,8 +8,8 @@ export const zhSiteContent: SiteContent = {
     crossLocaleCompanyName: 'Shenzhen Yuelin Technology Co., Ltd.',
     brandLine: '\u5de5\u4e1a\u4f20\u611f\u4e0e\u81ea\u52a8\u5316\u96c6\u6210',
     switchLabel: {
-      zh: '\u5207\u6362\u5230\u4e2d\u6587',
-      en: 'Switch to English',
+      zh: '\u4e2d\u6587',
+      en: 'English',
     },
     trackLabel: '\u57fa\u7840\u80fd\u529b\u8f68\u9053',
     themeLabel: '\u754c\u9762\u4e3b\u9898',
@@ -22,6 +22,7 @@ export const zhSiteContent: SiteContent = {
     { key: 'home', label: '\u9996\u9875' },
     { key: 'products', label: '\u4ea7\u54c1\u4e2d\u5fc3' },
     { key: 'solutions', label: '\u89e3\u51b3\u65b9\u6848' },
+    { key: 'partners', label: '\u54c1\u724c\u5408\u4f5c' },
     { key: 'support', label: '\u670d\u52a1\u4e0e\u652f\u6301' },
     { key: 'about', label: '\u5173\u4e8e\u6211\u4eec' },
     { key: 'contact', label: '\u8054\u7cfb\u6211\u4eec' },
@@ -227,6 +228,14 @@ export const zhSiteContent: SiteContent = {
       '本页先建立双语解决方案框架，让设备制造商、系统集成商和终端工厂客户都能快速判断适配场景、服务边界与沟通入口。',
     primaryCta: 'Request Consultation / \u83b7\u53d6\u54a8\u8be2',
     secondaryCta: '查看产品中心',
+  },
+  partners: {
+    title: '品牌合作 / Partners',
+    summary: '把合作品牌、授权资料和项目协同能力整理成更像业务入口的合作页面。',
+    description:
+      '这一页不再只是品牌名单，而是把品牌角色、资料支持、合作说明和后续沟通动作放进同一条阅读路径。',
+    primaryCta: '发起合作咨询',
+    secondaryCta: '查看解决方案',
   },
   solutionsPage: {
     eyebrow: '解决方案与实施路径',

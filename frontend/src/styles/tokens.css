@@ -21,40 +21,40 @@
 :root,
 [data-theme='light'] {
   color-scheme: light;
-  --color-bg: #f4f7fa;
-  --color-bg-strong: #edf2f6;
+  --color-bg: #f6f3ec;
+  --color-bg-strong: #efe9de;
   --color-surface: #ffffff;
-  --color-surface-elevated: #e8eef3;
-  --color-border: #c3d0da;
-  --color-border-strong: #8da3b5;
-  --color-text: #112132;
-  --color-text-muted: #526679;
-  --color-link: #0d4d7a;
-  --color-accent: #d8892b;
-  --color-accent-soft: rgba(216, 137, 43, 0.12);
-  --color-hero-panel: rgba(255, 255, 255, 0.66);
-  --color-control: rgba(255, 255, 255, 0.72);
-  --color-shadow: rgba(17, 33, 50, 0.08);
-  --color-chart-neutral: #6b7e90;
-  --color-chart-highlight: #d8892b;
+  --color-surface-elevated: #f7f3eb;
+  --color-border: #ddd3c3;
+  --color-border-strong: #b9a785;
+  --color-text: #191715;
+  --color-text-muted: #625b50;
+  --color-link: #1d1a17;
+  --color-accent: #f4c318;
+  --color-accent-soft: rgba(244, 195, 24, 0.16);
+  --color-hero-panel: rgba(255, 255, 255, 0.82);
+  --color-control: rgba(255, 255, 255, 0.88);
+  --color-shadow: rgba(25, 23, 21, 0.08);
+  --color-chart-neutral: #7f7568;
+  --color-chart-highlight: #f4c318;
 }
 
 [data-theme='dark'] {
   color-scheme: dark;
-  --color-bg: #07111b;
-  --color-bg-strong: #091625;
-  --color-surface: #0e1b29;
-  --color-surface-elevated: #14283a;
-  --color-border: #2c455a;
-  --color-border-strong: #5d7c97;
-  --color-text: #f3f7fb;
-  --color-text-muted: #a8b9c8;
-  --color-link: #56b0e8;
-  --color-accent: #f0a94b;
-  --color-accent-soft: rgba(240, 169, 75, 0.14);
-  --color-hero-panel: rgba(14, 27, 41, 0.78);
-  --color-control: rgba(20, 40, 58, 0.82);
-  --color-shadow: rgba(1, 8, 15, 0.38);
-  --color-chart-neutral: #7f97ab;
-  --color-chart-highlight: #f0a94b;
+  --color-bg: #111720;
+  --color-bg-strong: #18212e;
+  --color-surface: #18212d;
+  --color-surface-elevated: #212d3b;
+  --color-border: #334151;
+  --color-border-strong: #6a7381;
+  --color-text: #f7f3ec;
+  --color-text-muted: #b8b3aa;
+  --color-link: #f7f3ec;
+  --color-accent: #f4c318;
+  --color-accent-soft: rgba(244, 195, 24, 0.16);
+  --color-hero-panel: rgba(24, 33, 45, 0.84);
+  --color-control: rgba(24, 33, 45, 0.92);
+  --color-shadow: rgba(7, 11, 16, 0.38);
+  --color-chart-neutral: #8f98a4;
+  --color-chart-highlight: #f4c318;
 }

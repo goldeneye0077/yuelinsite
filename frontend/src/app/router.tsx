@@ -13,6 +13,7 @@ import { SiteShell } from '../layouts/SiteShell'
 import { AboutPage } from '../pages/AboutPage'
 import { ContactPage } from '../pages/ContactPage'
 import { HomeShellPage } from '../pages/HomeShellPage'
+import { PartnersPage } from '../pages/PartnersPage'
 import { ProductCenterPage } from '../pages/ProductCenterPage'
 import { ProductFamilyPage } from '../pages/ProductFamilyPage'
 import { ProductGroupPage } from '../pages/ProductGroupPage'
@@ -52,6 +53,10 @@ export function createAppRouter(options: RouterFactoryOptions = {}) {
         {
           path: 'solutions',
           element: <SolutionsPage />,
+        },
+        {
+          path: 'partners',
+          element: <PartnersPage />,
         },
         {
           path: 'support',

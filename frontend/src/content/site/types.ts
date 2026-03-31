@@ -4,6 +4,7 @@ export type SiteContentKey =
   | 'home'
   | 'productCenter'
   | 'solutions'
+  | 'partners'
   | 'support'
   | 'about'
   | 'contact'
@@ -189,6 +190,7 @@ export interface SiteContent {
   }
   productCenter: RoutePageContent
   solutions: RoutePageContent
+  partners: RoutePageContent
   solutionsPage: {
     eyebrow: string
     heroSummary: string
@@ -311,6 +313,7 @@ export const routeContentKeyMap: Record<SectionRouteKey, SiteContentKey> = {
   home: 'home',
   products: 'productCenter',
   solutions: 'solutions',
+  partners: 'partners',
   support: 'support',
   about: 'about',
   contact: 'contact',

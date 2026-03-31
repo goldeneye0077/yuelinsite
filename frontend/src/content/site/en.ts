@@ -8,8 +8,8 @@ export const enSiteContent: SiteContent = {
     crossLocaleCompanyName: '\u6df1\u5733\u5e02\u8dc3\u9cde\u79d1\u6280\u6709\u9650\u516c\u53f8',
     brandLine: 'Industrial sensing and automation integration',
     switchLabel: {
-      zh: '\u5207\u6362\u5230\u4e2d\u6587',
-      en: 'Switch to English',
+      zh: '\u4e2d\u6587',
+      en: 'English',
     },
     trackLabel: 'Foundation tracks',
     themeLabel: 'Interface theme',
@@ -22,6 +22,7 @@ export const enSiteContent: SiteContent = {
     { key: 'home', label: 'Home' },
     { key: 'products', label: 'Product Center' },
     { key: 'solutions', label: 'Solutions' },
+    { key: 'partners', label: 'Partners' },
     { key: 'support', label: 'Support' },
     { key: 'about', label: 'About' },
     { key: 'contact', label: 'Contact' },
@@ -224,6 +225,15 @@ export const enSiteContent: SiteContent = {
       'This page establishes the bilingual solutions structure first, so equipment makers, integrators, and factory-side teams can quickly judge fit, scope, and next steps.',
     primaryCta: 'Request Consultation / \u83b7\u53d6\u54a8\u8be2',
     secondaryCta: 'View product center',
+  },
+  partners: {
+    title: 'Partners',
+    summary:
+      'Turn partner brands, authorization material, and collaboration context into a page that feels like a real business gateway.',
+    description:
+      'Instead of stopping at a brand list, this route explains partner roles, support material, collaboration signals, and the next action for a real project conversation.',
+    primaryCta: 'Start partner inquiry',
+    secondaryCta: 'View solutions',
   },
   solutionsPage: {
     eyebrow: 'Solutions and delivery paths',

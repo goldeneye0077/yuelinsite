@@ -8,6 +8,18 @@ import { buildInquiryPath } from '../lib/inquiry-paths'
 
 export function HomeShellPage() {
   const { locale, content } = useSiteShellContext()
+  const heroStats =
+    locale === 'zh'
+      ? [
+          { label: '产品结构', value: '5 大方向' },
+          { label: '服务主线', value: '3 条路径' },
+          { label: '站点形态', value: '双语询盘' },
+        ]
+      : [
+          { label: 'Product Map', value: '5 Families' },
+          { label: 'Service Lines', value: '3 Tracks' },
+          { label: 'Site Format', value: 'Bilingual Inquiry' },
+        ]
 
   return (
     <>
@@ -36,21 +48,39 @@ export function HomeShellPage() {
             </div>
           </div>
 
-          <div className="home-hero__visual">
-            <div className="home-hero__visual-frame">
-              <p className="hero-visual__label">{content.home.visualLabel}</p>
-              <div aria-hidden="true" className="hero-visual__grid" />
-              <div aria-hidden="true" className="hero-visual__arc" />
-              <img alt="" className="home-hero__logo" src={brandLogo} />
-              <div className="home-hero__metrics" aria-hidden="true">
-                {content.home.strengths.slice(0, 3).map((item) => (
-                  <div key={item.title} className="home-hero__metric">
-                    <span>{item.title}</span>
-                  </div>
-                ))}
+          <aside className="home-hero__rail">
+            <article className="home-hero__poster">
+              <div className="home-hero__poster-copy">
+                <p className="hero-visual__label">{content.home.visualLabel}</p>
+                <h2>{content.meta.brandName}</h2>
+                <p>{content.home.profileSummary}</p>
               </div>
+              <img alt="" className="home-hero__logo" src={brandLogo} />
+            </article>
+
+            <div className="home-hero__stats" aria-hidden="true">
+              {heroStats.map((fact) => (
+                <article key={fact.label} className="home-hero__stat">
+                  <p className="track-label">{fact.label}</p>
+                  <p className="home-hero__stat-value">{fact.value}</p>
+                </article>
+              ))}
             </div>
-          </div>
+
+            <div className="home-hero__direction-list">
+              {content.home.directions.slice(0, 3).map((item, index) => (
+                <article key={item.title} className="home-hero__direction-item">
+                  <p className="home-hero__direction-index">
+                    {String(index + 1).padStart(2, '0')}
+                  </p>
+                  <div className="home-hero__direction-copy">
+                    <h2>{item.title}</h2>
+                    <p>{item.detail}</p>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </aside>
         </div>
       </section>
 

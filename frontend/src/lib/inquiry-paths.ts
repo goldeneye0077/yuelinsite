@@ -19,6 +19,7 @@ export type InquirySource =
   | 'product-family'
   | 'industrial-sensor-group'
   | 'solutions'
+  | 'partners'
   | 'support'
 
 type InquiryPathOptions = {

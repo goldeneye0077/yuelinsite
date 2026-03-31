@@ -51,6 +51,8 @@ function resolveEntrySourceLabel(
       return content.productCenter.title
     case 'solutions':
       return content.solutions.title
+    case 'partners':
+      return content.partners.title
     case 'support':
       return content.support.title
     default:
