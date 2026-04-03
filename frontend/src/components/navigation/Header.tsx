@@ -20,17 +20,22 @@ export function Header({ content, locale, onOpenMenu }: HeaderProps) {
   const location = useLocation()
   const { theme, setTheme } = useTheme()
   const targetLocale = locale === 'zh' ? 'en' : 'zh'
+  const compactLocaleLabel = targetLocale === 'en' ? 'EN' : '中'
 
   return (
     <header className="site-header">
       <div className="header-inner">
-        <Link className="brand-lockup" to={buildLocalePath(locale)}>
+        <Link className="brand-lockup brand-lockup--header" to={buildLocalePath(locale)}>
           <span aria-hidden="true" className="brand-mark">
             <img alt="" className="brand-mark__image" src={brandLogo} />
           </span>
-          <span className="brand-copy">
-            <span className="brand-name">{content.meta.companyName}</span>
-            <span className="brand-line">{content.meta.brandLine}</span>
+          <span className="brand-copy brand-copy--header">
+            <span className="brand-name brand-name--company">
+              {content.meta.companyName}
+            </span>
+            <span className="brand-line brand-line--header">
+              {content.meta.brandLine}
+            </span>
           </span>
         </Link>
 
@@ -51,35 +56,42 @@ export function Header({ content, locale, onOpenMenu }: HeaderProps) {
 
         <div className="shell-controls">
           <Link
-            className="locale-switch"
+            aria-label={content.meta.switchLabel[targetLocale]}
+            className="locale-switch locale-switch--header"
             to={swapLocaleInPathname(location.pathname, targetLocale)}
           >
-            <Languages size={16} />
-            <span>{content.meta.switchLabel[targetLocale]}</span>
+            <Languages size={14} />
+            <span aria-hidden="true">{compactLocaleLabel}</span>
           </Link>
 
           <div
             aria-label={content.meta.themeLabel}
-            className="theme-switch"
+            className="theme-switch theme-switch--header"
             role="group"
           >
             <button
+              aria-label={content.meta.lightLabel}
               aria-pressed={theme === 'light'}
-              className={`theme-switch__button${theme === 'light' ? ' theme-switch__button--active' : ''}`}
+              className={`theme-switch__button theme-switch__button--header${theme === 'light' ? ' theme-switch__button--active' : ''}`}
               onClick={() => setTheme('light')}
               type="button"
             >
-              <SunMedium size={16} />
-              <span className="theme-switch__label">{content.meta.lightLabel}</span>
+              <SunMedium size={14} />
+              <span className="theme-switch__label theme-switch__label--header">
+                {content.meta.lightLabel}
+              </span>
             </button>
             <button
+              aria-label={content.meta.darkLabel}
               aria-pressed={theme === 'dark'}
-              className={`theme-switch__button${theme === 'dark' ? ' theme-switch__button--active' : ''}`}
+              className={`theme-switch__button theme-switch__button--header${theme === 'dark' ? ' theme-switch__button--active' : ''}`}
               onClick={() => setTheme('dark')}
               type="button"
             >
-              <MoonStar size={16} />
-              <span className="theme-switch__label">{content.meta.darkLabel}</span>
+              <MoonStar size={14} />
+              <span className="theme-switch__label theme-switch__label--header">
+                {content.meta.darkLabel}
+              </span>
             </button>
           </div>
 

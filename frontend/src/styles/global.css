@@ -2757,10 +2757,15 @@ body {
   border: 1px solid var(--color-border);
   border-radius: 26px;
   box-shadow: 0 16px 40px var(--color-shadow);
+  gap: 18px;
 }
 
 .brand-lockup {
   gap: 14px;
+}
+
+.brand-lockup--header {
+  flex: 0 0 auto;
 }
 
 .brand-mark {
@@ -2777,24 +2782,41 @@ body {
   letter-spacing: 0.01em;
 }
 
+.brand-copy--header {
+  gap: 2px;
+}
+
+.brand-name--company,
+.brand-line--header {
+  white-space: nowrap;
+}
+
+.brand-name--company {
+  line-height: 1.04;
+}
+
 .brand-line {
   margin-top: 2px;
   font-size: 0.76rem;
   letter-spacing: 0.12em;
 }
 
+.brand-line--header {
+  line-height: 1.1;
+}
+
 .primary-nav {
   gap: 6px;
-  margin-right: 8px;
+  margin-right: 2px;
 }
 
 .nav-link {
-  padding: 9px 12px;
-  font-size: 0.9rem;
+  padding: 8px 11px;
+  font-size: 0.88rem;
 }
 
 .shell-controls {
-  gap: 14px;
+  gap: 10px;
 }
 
 .nav-link--active::after {
@@ -2810,9 +2832,39 @@ body {
   background: color-mix(in srgb, var(--color-surface) 92%, transparent);
 }
 
+.locale-switch--header {
+  min-height: 34px;
+  padding: 0 11px;
+  gap: 6px;
+  font-size: 0.77rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+
+.locale-switch--header svg,
+.theme-switch__button--header svg {
+  flex-shrink: 0;
+}
+
+.theme-switch--header {
+  gap: 2px;
+  padding: 2px;
+}
+
+.theme-switch__button--header {
+  min-width: 34px;
+  min-height: 34px;
+  padding: 0 10px;
+}
+
+.theme-switch__label--header {
+  display: none;
+}
+
 .theme-switch__button--active {
   background: var(--color-accent-soft);
   color: var(--color-text);
+  box-shadow: none;
 }
 
 .page-band {
