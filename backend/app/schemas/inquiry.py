@@ -1,3 +1,4 @@
+import re
 from typing import Literal
 
 from pydantic import BaseModel, EmailStr, Field, field_validator
@@ -14,6 +15,7 @@ class InquirySubmissionRequest(BaseModel):
     message: str = Field(min_length=1, max_length=2000)
     locale: Locale
     sourcePage: str = Field(min_length=1, max_length=255)
+    sourceContext: str | None = Field(default=None, max_length=80)
     website: str = Field(default='', max_length=255)
     consentAccepted: bool = False
 
@@ -24,6 +26,7 @@ class InquirySubmissionRequest(BaseModel):
         'interestCategory',
         'message',
         'sourcePage',
+        'sourceContext',
         'website',
         mode='before',
     )
@@ -40,6 +43,22 @@ class InquirySubmissionRequest(BaseModel):
             raise ValueError('sourcePage must be an internal path.')
 
         return value
+
+    @field_validator('sourceContext')
+    @classmethod
+    def normalize_source_context(cls, value: str | None):
+        if value is None:
+            return None
+
+        normalized = value.strip().lower()
+
+        if not normalized:
+            return None
+
+        if re.fullmatch(r'[a-z0-9][a-z0-9-]{0,79}', normalized):
+            return normalized
+
+        return None
 
 
 class InquiryContractResponse(BaseModel):

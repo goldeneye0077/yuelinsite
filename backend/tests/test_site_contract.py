@@ -41,6 +41,7 @@ def test_inquiry_contract_returns_phase_five_notice(client):
             'consentAccepted': True,
             'locale': 'zh',
             'sourcePage': '/zh/contact',
+            'sourceContext': 'about',
         },
     )
 

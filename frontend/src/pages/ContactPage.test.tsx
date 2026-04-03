@@ -48,8 +48,7 @@ describe('ContactPage', () => {
       </AppProviders>,
     )
 
-    expect(await screen.findByText(content.contactPage.entryContextLabel)).toBeInTheDocument()
-    expect(await screen.findByText(content.solutions.title)).toBeInTheDocument()
+    expect(screen.queryByText(content.contactPage.entryContextLabel)).not.toBeInTheDocument()
     expect(
       screen.getByLabelText(content.contactPage.form.interestCategoryLabel),
     ).toHaveValue('technical-integration')
@@ -91,6 +90,7 @@ describe('ContactPage', () => {
         consentAccepted: true,
         locale: 'zh',
         sourcePage: '/zh/contact',
+        sourceContext: 'solutions',
       })
     })
 

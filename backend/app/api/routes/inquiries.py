@@ -95,6 +95,7 @@ def submit_inquiry(
         message=payload.message,
         locale=payload.locale,
         source_page=payload.sourcePage,
+        source_context=payload.sourceContext,
         consent_accepted=payload.consentAccepted,
         status='new',
         request_id=getattr(request.state, 'request_id', None),

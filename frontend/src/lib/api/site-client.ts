@@ -38,6 +38,7 @@ export interface InquirySubmissionInput {
   consentAccepted: boolean
   locale: Locale
   sourcePage: string
+  sourceContext?: string | null
 }
 
 export interface InquiryContractResponse {

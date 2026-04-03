@@ -18,6 +18,11 @@ class Inquiry(Base):
     message: Mapped[str] = mapped_column(Text())
     locale: Mapped[str] = mapped_column(String(2), index=True)
     source_page: Mapped[str] = mapped_column(String(255))
+    source_context: Mapped[str | None] = mapped_column(
+        String(80),
+        nullable=True,
+        index=True,
+    )
     consent_accepted: Mapped[bool] = mapped_column(Boolean(), default=True)
     status: Mapped[str] = mapped_column(String(24), default='new', index=True)
     request_id: Mapped[str | None] = mapped_column(String(64), nullable=True, index=True)

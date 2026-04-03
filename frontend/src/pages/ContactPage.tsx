@@ -38,28 +38,9 @@ function resolveRequestedCategory(
   return availableCategories[0]?.value ?? 'general-consultation'
 }
 
-function resolveEntrySourceLabel(
-  source: string | null,
-  content: ReturnType<typeof useSiteShellContext>['content'],
-) {
-  switch (source) {
-    case 'home':
-      return content.navigation.find((item) => item.key === 'home')?.label ?? null
-    case 'about':
-      return content.about.title
-    case 'product-center':
-    case 'product-family':
-    case 'industrial-sensor-group':
-      return content.productCenter.title
-    case 'solutions':
-      return content.solutions.title
-    case 'partners':
-      return content.partners.title
-    case 'support':
-      return content.support.title
-    default:
-      return null
-  }
+function resolveSourceContext(source: string | null) {
+  const normalized = source?.trim().toLowerCase() ?? ''
+  return normalized.length > 0 ? normalized : null
 }
 
 export function ContactPage() {
@@ -70,11 +51,6 @@ export function ContactPage() {
     searchParams.get('category'),
     content.contactPage.categoryOptions,
   )
-  const entrySourceLabel = resolveEntrySourceLabel(searchParams.get('source'), content)
-  const selectedCategoryLabel =
-    content.contactPage.categoryOptions.find(
-      (option) => option.value === defaultCategory,
-    )?.label ?? defaultCategory
   const [formState, setFormState] = useState<ContactFormState>(() =>
     createInitialFormState(defaultCategory),
   )
@@ -113,6 +89,7 @@ export function ContactPage() {
       ...formState,
       locale,
       sourcePage: location.pathname,
+      sourceContext: resolveSourceContext(searchParams.get('source')),
     })
   }
 
@@ -134,14 +111,6 @@ export function ContactPage() {
             </p>
             <p className="hero-summary">{content.contactPage.heroSummary}</p>
             <p className="hero-description">{content.contactPage.heroDescription}</p>
-            {entrySourceLabel ? (
-              <div className="contact-entry-context">
-                <p className="track-label">{content.contactPage.entryContextLabel}</p>
-                <p className="contact-entry-context__value">{entrySourceLabel}</p>
-                <p className="track-label">{content.contactPage.categoryContextLabel}</p>
-                <p className="contact-entry-context__value">{selectedCategoryLabel}</p>
-              </div>
-            ) : null}
             <div className="hero-actions">
               <a className="cta-link" href="#contact-form">
                 <span>{content.contact.primaryCta}</span>
