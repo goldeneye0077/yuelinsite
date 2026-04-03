@@ -12,6 +12,7 @@ import {
   normalizeLocale,
   type Locale,
 } from '../i18n/locales'
+import { RouteScrollManager } from './RouteScrollManager'
 
 export type SiteShellOutletContext = {
   locale: Locale
@@ -31,6 +32,7 @@ export function SiteShell() {
 
   return (
     <div className="site-shell">
+      <RouteScrollManager />
       <Header
         content={content}
         locale={locale}
