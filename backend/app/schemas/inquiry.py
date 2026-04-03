@@ -14,6 +14,8 @@ class InquirySubmissionRequest(BaseModel):
     message: str = Field(min_length=1, max_length=2000)
     locale: Locale
     sourcePage: str = Field(min_length=1, max_length=255)
+    website: str = Field(default='', max_length=255)
+    consentAccepted: bool = False
 
     @field_validator(
         'companyName',
@@ -22,12 +24,21 @@ class InquirySubmissionRequest(BaseModel):
         'interestCategory',
         'message',
         'sourcePage',
+        'website',
         mode='before',
     )
     @classmethod
     def strip_required_strings(cls, value: str):
         if isinstance(value, str):
             return value.strip()
+        return value
+
+    @field_validator('sourcePage')
+    @classmethod
+    def validate_source_page(cls, value: str):
+        if '://' in value or not value.startswith('/'):
+            raise ValueError('sourcePage must be an internal path.')
+
         return value
 
 

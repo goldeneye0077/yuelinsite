@@ -1,14 +1,17 @@
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.middleware.trustedhost import TrustedHostMiddleware
 from sqlalchemy import text
 
 from app.api.router import api_router
 from app.core.config import get_settings
+from app.core.http import RequestContextMiddleware, configure_logging
 from app.db.session import get_engine
 
 
 def create_app() -> FastAPI:
     settings = get_settings()
+    configure_logging(settings.log_level)
 
     app = FastAPI(
         title=settings.app_name,
@@ -18,12 +21,17 @@ def create_app() -> FastAPI:
     )
 
     app.add_middleware(
+        TrustedHostMiddleware,
+        allowed_hosts=settings.allowed_hosts,
+    )
+    app.add_middleware(
         CORSMiddleware,
         allow_origins=settings.cors_origins,
         allow_credentials=True,
         allow_methods=['*'],
         allow_headers=['*'],
     )
+    app.add_middleware(RequestContextMiddleware)
 
     @app.get(f'{settings.api_prefix}/health', tags=['health'])
     def healthcheck():

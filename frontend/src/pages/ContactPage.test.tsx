@@ -28,7 +28,7 @@ describe('ContactPage', () => {
     queryClient.clear()
   })
 
-  it('prefills the inquiry category from page context and renders success feedback', async () => {
+  it('prefills the inquiry category and submits the production-ready payload', async () => {
     const content = getSiteContent('zh')
     const user = userEvent.setup()
 
@@ -74,6 +74,7 @@ describe('ContactPage', () => {
       screen.getByLabelText(content.contactPage.form.messageLabel),
       'Need a technical-integration discussion for an automation line.',
     )
+    await user.click(screen.getByRole('checkbox'))
     await user.click(
       screen.getByRole('button', { name: content.contactPage.form.submitLabel }),
     )
@@ -86,6 +87,8 @@ describe('ContactPage', () => {
         phone: '13800000000',
         interestCategory: 'technical-integration',
         message: 'Need a technical-integration discussion for an automation line.',
+        website: '',
+        consentAccepted: true,
         locale: 'zh',
         sourcePage: '/zh/contact',
       })

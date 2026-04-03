@@ -1362,6 +1362,51 @@ img {
   resize: vertical;
 }
 
+.contact-honeypot {
+  position: absolute;
+  left: -9999px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.contact-consent {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 12px;
+  align-items: start;
+  padding: 16px 18px;
+  border: 1px solid rgba(141, 163, 181, 0.2);
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.72);
+}
+
+[data-theme='dark'] .contact-consent {
+  background: rgba(8, 16, 28, 0.66);
+}
+
+.contact-consent input[type='checkbox'] {
+  width: 18px;
+  height: 18px;
+  margin-top: 2px;
+  accent-color: var(--color-accent);
+}
+
+.contact-consent span {
+  display: grid;
+  gap: 6px;
+}
+
+.contact-consent strong {
+  font-size: 0.96rem;
+  color: var(--color-text);
+}
+
+.contact-consent small {
+  color: var(--color-text-muted);
+  font-size: 0.88rem;
+  line-height: 1.6;
+}
+
 .contact-form__meta,
 .contact-feedback__copy {
   display: grid;
@@ -1442,7 +1487,7 @@ img {
 
 .contact-submit:disabled {
   opacity: 0.72;
-  cursor: wait;
+  cursor: not-allowed;
 }
 
 .contact-side-panel {

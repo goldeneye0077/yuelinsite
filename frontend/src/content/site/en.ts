@@ -870,6 +870,9 @@ export const enSiteContent: SiteContent = {
       requiredHint: 'All fields are required for the first-pass intake.',
       helperNote:
         'If model numbers, target distance, safety constraints, or interface requirements are already known, include them here.',
+      consentLabel: 'I agree that Yuelin Technology may process this inquiry',
+      consentDetail:
+        'The submitted information is used only for inquiry follow-up, product selection discussion, and related response materials.',
       successLabel: 'Inquiry received',
       errorLabel: 'Submission issue',
       referenceLabel: 'Reference',

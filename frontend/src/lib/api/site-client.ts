@@ -34,6 +34,8 @@ export interface InquirySubmissionInput {
   phone: string
   interestCategory: string
   message: string
+  website: string
+  consentAccepted: boolean
   locale: Locale
   sourcePage: string
 }

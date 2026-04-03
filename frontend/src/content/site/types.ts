@@ -118,6 +118,8 @@ export type ContactFormCopy = {
   pendingLabel: string
   requiredHint: string
   helperNote: string
+  consentLabel: string
+  consentDetail: string
   successLabel: string
   errorLabel: string
   referenceLabel: string

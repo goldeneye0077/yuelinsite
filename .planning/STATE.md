@@ -5,14 +5,14 @@
 See: `.planning/PROJECT.md` (updated 2026-03-31)
 
 **Core value:** Help potential customers quickly understand what Yuelin Technology offers, what problems it can solve, and why it is worth contacting.  
-**Current focus:** Milestone complete and ready for delivery handoff
+**Current focus:** Delivery baseline complete, with production hardening baseline added
 
 ## Current Position
 
 Phase: 5 of 5 (Inquiry, QA & Launch Readiness)  
 Current plan: 05-04 complete  
-Status: Milestone complete  
-Last activity: 2026-03-31 - Completed responsive QA, fixed live inquiry delivery blockers, and finalized launch handoff documentation
+Status: Milestone complete with post-launch production hardening update  
+Last activity: 2026-04-03 - Hardened inquiry intake, production container runtime, compose health checks, and operations handoff materials
 
 Progress: 19 of 19 plans complete
 
@@ -55,16 +55,20 @@ Progress: 19 of 19 plans complete
 - Support custom frontend/backend ports in Compose so delivery is not blocked by local port collisions.
 - Keep `CORS_ORIGINS` in JSON-array format so backend startup stays stable across Compose environments.
 - Override vulnerable transitive `minimist` usage in the frontend dependency tree to remove the remaining `npm audit` critical findings.
+- Require production `ALLOWED_HOSTS` and add request IDs, security headers, and structured request logging at the API layer.
+- Keep inquiry protection lightweight in v1 by using consent enforcement, honeypot detection, metadata capture, and per-IP rate limiting instead of a full CRM or external anti-spam service.
+- Add production compose health checks and server-side backup/deploy scripts so the first live deployment has an operational baseline.
 
 ### Pending Todos
 
 - Replace placeholder product visuals, authorization graphics, downloadable files, and direct business contact assets before public launch.
 - Polish English copy once more before final publication.
+- Add domain, HTTPS termination, and offsite database backup scheduling before a broader public rollout.
 
 ### Blockers/Concerns
 
-- No platform blockers remain for v1 delivery.
-- Remaining follow-up items are content completeness items rather than build, startup, navigation, or inquiry-flow issues.
+- No code-level blockers remain for a first production deployment baseline.
+- Remaining follow-up items are mostly infrastructure and content completeness items rather than application build or inquiry-flow issues.
 
 ## Session Continuity
 

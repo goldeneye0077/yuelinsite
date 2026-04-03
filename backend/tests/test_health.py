@@ -7,3 +7,6 @@ def test_health_endpoint(client):
         'service': 'api',
         'environment': 'development',
     }
+    assert response.headers['x-content-type-options'] == 'nosniff'
+    assert response.headers['x-frame-options'] == 'DENY'
+    assert response.headers['x-request-id']

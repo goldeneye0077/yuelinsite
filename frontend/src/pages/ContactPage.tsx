@@ -3,9 +3,9 @@ import { useMutation } from '@tanstack/react-query'
 import { AlertCircle, ArrowRight, CheckCircle2, Send } from 'lucide-react'
 import { Link, useLocation, useSearchParams } from 'react-router-dom'
 
-import { type InquirySubmissionInput, submitInquiry } from '../lib/api/site-client'
 import { buildLocalePath } from '../i18n/locales'
 import { useSiteShellContext } from '../layouts/useSiteShellContext'
+import { type InquirySubmissionInput, submitInquiry } from '../lib/api/site-client'
 
 type ContactFormState = Omit<InquirySubmissionInput, 'locale' | 'sourcePage'>
 
@@ -19,6 +19,8 @@ function createInitialFormState(defaultCategory: string): ContactFormState {
     phone: '',
     interestCategory: defaultCategory,
     message: '',
+    website: '',
+    consentAccepted: false,
   }
 }
 
@@ -87,7 +89,12 @@ export function ContactPage() {
   function handleFieldChange(
     event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>,
   ) {
-    const { name, value } = event.currentTarget
+    const target = event.currentTarget
+    const { name } = target
+    const value =
+      target instanceof HTMLInputElement && target.type === 'checkbox'
+        ? target.checked
+        : target.value
 
     if (inquiryMutation.isSuccess || inquiryMutation.isError) {
       inquiryMutation.reset()
@@ -245,6 +252,32 @@ export function ContactPage() {
                 />
               </label>
 
+              <label className="contact-honeypot" htmlFor="website">
+                <span>Website</span>
+                <input
+                  autoComplete="off"
+                  id="website"
+                  name="website"
+                  onChange={handleFieldChange}
+                  tabIndex={-1}
+                  value={formState.website}
+                />
+              </label>
+
+              <label className="contact-consent">
+                <input
+                  checked={formState.consentAccepted}
+                  name="consentAccepted"
+                  onChange={handleFieldChange}
+                  required
+                  type="checkbox"
+                />
+                <span>
+                  <strong>{formCopy.consentLabel}</strong>
+                  <small>{formCopy.consentDetail}</small>
+                </span>
+              </label>
+
               <div className="contact-form__meta">
                 <p className="contact-form__hint">{formCopy.requiredHint}</p>
                 <p className="contact-form__note">{formCopy.helperNote}</p>
@@ -278,7 +311,7 @@ export function ContactPage() {
                         ? inquiryMutation.data.detail
                         : errorMessage}
                     </p>
-                    {inquiryMutation.isSuccess ? (
+                    {inquiryMutation.isSuccess && inquiryMutation.data.submissionId > 0 ? (
                       <p className="contact-feedback__reference">
                         {formCopy.referenceLabel} #{inquiryMutation.data.submissionId}
                       </p>
@@ -289,7 +322,7 @@ export function ContactPage() {
 
               <button
                 className="contact-submit"
-                disabled={inquiryMutation.isPending}
+                disabled={inquiryMutation.isPending || !formState.consentAccepted}
                 type="submit"
               >
                 <Send size={16} />

@@ -33,15 +33,19 @@ The repo also includes a production-focused stack:
 - `frontend/Dockerfile.prod`
 - `backend/Dockerfile.prod`
 - `.env.prod.example`
+- `OPERATIONS.md`
+- `ops/deploy-prod.sh`
+- `ops/backup-postgres.sh`
 
 Typical deployment flow:
 
 ```bash
 cp .env.prod.example .env.prod
-docker compose --env-file .env.prod -f compose.prod.yaml up --build -d
+./ops/deploy-prod.sh
 ```
 
 The production compose file avoids bind mounts, disables frontend dev server usage, and uses restart policies suitable for a long-running server.
+It also adds service health checks, stronger host validation defaults, and explicit inquiry rate-limit settings.
 
 ## Custom Ports
 
@@ -84,6 +88,7 @@ docker compose run --rm backend pytest -q
 - Environment defaults live in `.env.example`
 - Production server defaults live in `.env.prod.example`
 - Final smoke-test steps live in `LAUNCH_CHECKLIST.md`
+- Production operations notes live in `OPERATIONS.md`
 - Current planning and delivery history live under `.planning/`
 
 ## Repository Layout

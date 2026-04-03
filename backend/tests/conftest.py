@@ -4,6 +4,7 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.pool import StaticPool
 
+from app.core.rate_limit import get_inquiry_rate_limiter
 from app.db.base import Base
 from app.db.session import get_db
 from app.main import app
@@ -44,3 +45,11 @@ def client(session_factory):
         yield test_client
 
     app.dependency_overrides.clear()
+
+
+@pytest.fixture(autouse=True)
+def reset_inquiry_rate_limiter():
+    limiter = get_inquiry_rate_limiter()
+    limiter.reset()
+    yield
+    limiter.reset()

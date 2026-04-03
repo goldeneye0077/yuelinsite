@@ -37,6 +37,8 @@ def test_inquiry_contract_returns_phase_five_notice(client):
             'phone': '13800000000',
             'interestCategory': 'industrial-sensors',
             'message': 'Need a distance sensing option for a conveyor line.',
+            'website': '',
+            'consentAccepted': True,
             'locale': 'zh',
             'sourcePage': '/zh/contact',
         },
