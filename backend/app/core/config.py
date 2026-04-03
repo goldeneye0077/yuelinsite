@@ -1,11 +1,16 @@
 import json
 from functools import lru_cache
+from typing import ClassVar
 
 from pydantic import Field, field_validator, model_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
 class Settings(BaseSettings):
+    default_admin_username: ClassVar[str] = 'admin'
+    default_admin_password: ClassVar[str] = 'admin123456'
+    default_admin_session_secret: ClassVar[str] = 'development-admin-session-secret'
+
     app_name: str = Field(default='Yuelin Official Site API', alias='APP_NAME')
     app_env: str = Field(default='development', alias='APP_ENV')
     log_level: str = Field(default='INFO', alias='LOG_LEVEL')
@@ -34,6 +39,38 @@ class Settings(BaseSettings):
     inquiry_rate_limit_window_seconds: int = Field(
         default=300,
         alias='INQUIRY_RATE_LIMIT_WINDOW_SECONDS',
+    )
+    admin_username: str = Field(
+        default=default_admin_username,
+        alias='ADMIN_USERNAME',
+    )
+    admin_password: str = Field(
+        default=default_admin_password,
+        alias='ADMIN_PASSWORD',
+    )
+    admin_session_secret: str = Field(
+        default=default_admin_session_secret,
+        alias='ADMIN_SESSION_SECRET',
+    )
+    admin_session_cookie_name: str = Field(
+        default='yuelin_admin_session',
+        alias='ADMIN_SESSION_COOKIE_NAME',
+    )
+    admin_session_ttl_hours: int = Field(
+        default=12,
+        alias='ADMIN_SESSION_TTL_HOURS',
+    )
+    admin_session_cookie_secure: bool = Field(
+        default=False,
+        alias='ADMIN_SESSION_COOKIE_SECURE',
+    )
+    admin_login_rate_limit_max_requests: int = Field(
+        default=8,
+        alias='ADMIN_LOGIN_RATE_LIMIT_MAX_REQUESTS',
+    )
+    admin_login_rate_limit_window_seconds: int = Field(
+        default=900,
+        alias='ADMIN_LOGIN_RATE_LIMIT_WINDOW_SECONDS',
     )
 
     model_config = SettingsConfigDict(
@@ -69,6 +106,30 @@ class Settings(BaseSettings):
 
         return normalized
 
+    @field_validator(
+        'admin_username',
+        'admin_password',
+        'admin_session_secret',
+        'admin_session_cookie_name',
+    )
+    @classmethod
+    def strip_string_settings(cls, value: str):
+        return value.strip()
+
+    @field_validator(
+        'inquiry_rate_limit_max_requests',
+        'inquiry_rate_limit_window_seconds',
+        'admin_session_ttl_hours',
+        'admin_login_rate_limit_max_requests',
+        'admin_login_rate_limit_window_seconds',
+    )
+    @classmethod
+    def ensure_positive_integers(cls, value: int):
+        if value < 1:
+            raise ValueError('Rate limits and session duration must be positive integers.')
+
+        return value
+
     @model_validator(mode='after')
     def validate_production_settings(self):
         if self.app_env.lower() == 'production':
@@ -77,6 +138,12 @@ class Settings(BaseSettings):
 
             if not self.allowed_hosts:
                 raise ValueError('ALLOWED_HOSTS must not be empty in production.')
+
+            if self.admin_password == self.default_admin_password:
+                raise ValueError('ADMIN_PASSWORD must be overridden in production.')
+
+            if self.admin_session_secret == self.default_admin_session_secret:
+                raise ValueError('ADMIN_SESSION_SECRET must be overridden in production.')
 
         return self
 

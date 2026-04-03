@@ -8,7 +8,7 @@ from typing import Deque
 from app.core.config import get_settings
 
 
-class InquiryRateLimiter:
+class SlidingWindowRateLimiter:
     def __init__(self, *, max_requests: int, window_seconds: int):
         self.max_requests = max_requests
         self.window_seconds = window_seconds
@@ -37,10 +37,27 @@ class InquiryRateLimiter:
             self._buckets.clear()
 
 
+class InquiryRateLimiter(SlidingWindowRateLimiter):
+    pass
+
+
+class AdminLoginRateLimiter(SlidingWindowRateLimiter):
+    pass
+
+
 @lru_cache
 def get_inquiry_rate_limiter() -> InquiryRateLimiter:
     settings = get_settings()
     return InquiryRateLimiter(
         max_requests=settings.inquiry_rate_limit_max_requests,
         window_seconds=settings.inquiry_rate_limit_window_seconds,
+    )
+
+
+@lru_cache
+def get_admin_login_rate_limiter() -> AdminLoginRateLimiter:
+    settings = get_settings()
+    return AdminLoginRateLimiter(
+        max_requests=settings.admin_login_rate_limit_max_requests,
+        window_seconds=settings.admin_login_rate_limit_window_seconds,
     )

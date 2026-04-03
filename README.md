@@ -46,6 +46,7 @@ cp .env.prod.example .env.prod
 
 The production compose file avoids bind mounts, disables frontend dev server usage, and uses restart policies suitable for a long-running server.
 It also adds service health checks, stronger host validation defaults, and explicit inquiry rate-limit settings.
+It now also includes a protected administrator inquiry view at `/:locale/admin/inquiries`, backed by cookie-based admin sessions from `/api/v1/admin/*`.
 
 ## Custom Ports
 
@@ -65,6 +66,22 @@ VITE_API_BASE_URL=http://localhost:8100
 CORS_ORIGINS=["http://localhost:4173","http://127.0.0.1:4173"]
 docker compose up --build -d
 ```
+
+## Admin Inquiry Console
+
+The site includes a protected inquiry console for administrators:
+
+- Route: `http://localhost:5173/zh/admin/inquiries`
+- Backend session endpoints: `/api/v1/admin/session`
+- Backend inquiry list endpoint: `/api/v1/admin/inquiries`
+
+Required environment variables:
+
+- `ADMIN_USERNAME`
+- `ADMIN_PASSWORD`
+- `ADMIN_SESSION_SECRET`
+
+The current production deployment still uses plain HTTP, so `ADMIN_SESSION_COOKIE_SECURE` must remain `false` until HTTPS is added.
 
 ## Verification
 

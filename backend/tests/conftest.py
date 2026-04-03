@@ -4,7 +4,8 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.pool import StaticPool
 
-from app.core.rate_limit import get_inquiry_rate_limiter
+from app.core.config import get_settings
+from app.core.rate_limit import get_admin_login_rate_limiter, get_inquiry_rate_limiter
 from app.db.base import Base
 from app.db.session import get_db
 from app.main import app
@@ -53,3 +54,18 @@ def reset_inquiry_rate_limiter():
     limiter.reset()
     yield
     limiter.reset()
+
+
+@pytest.fixture(autouse=True)
+def reset_admin_login_rate_limiter():
+    limiter = get_admin_login_rate_limiter()
+    limiter.reset()
+    yield
+    limiter.reset()
+
+
+@pytest.fixture(autouse=True)
+def reset_settings_cache():
+    get_settings.cache_clear()
+    yield
+    get_settings.cache_clear()

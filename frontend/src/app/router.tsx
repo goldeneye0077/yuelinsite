@@ -11,6 +11,7 @@ import {
 } from '../i18n/locales'
 import { SiteShell } from '../layouts/SiteShell'
 import { AboutPage } from '../pages/AboutPage'
+import { AdminInquiriesPage } from '../pages/AdminInquiriesPage'
 import { ContactPage } from '../pages/ContactPage'
 import { HomeShellPage } from '../pages/HomeShellPage'
 import { PartnersPage } from '../pages/PartnersPage'
@@ -69,6 +70,10 @@ export function createAppRouter(options: RouterFactoryOptions = {}) {
         {
           path: 'contact',
           element: <ContactPage />,
+        },
+        {
+          path: 'admin/inquiries',
+          element: <AdminInquiriesPage />,
         },
       ],
     },
