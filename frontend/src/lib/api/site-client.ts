@@ -47,6 +47,15 @@ export interface InquiryContractResponse {
   status: 'received'
 }
 
+interface ApiEnvelope<T> {
+  success: boolean
+  data: T
+  meta: {
+    requestId: string | null
+    generatedAt: string
+  }
+}
+
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL ?? 'http://localhost:8000'
 
 export async function getSiteBootstrap(
@@ -65,7 +74,7 @@ export async function getSiteBootstrap(
     throw new Error(`Failed to load bootstrap contract for locale "${locale}"`)
   }
 
-  return (await response.json()) as SiteBootstrapResponse
+  return unwrapApiEnvelope<SiteBootstrapResponse>(await response.json())
 }
 
 export async function submitInquiry(
@@ -84,7 +93,12 @@ export async function submitInquiry(
     throw new Error(await getInquiryErrorMessage(response, payload.locale))
   }
 
-  return (await response.json()) as InquiryContractResponse
+  return unwrapApiEnvelope<InquiryContractResponse>(await response.json())
+}
+
+function unwrapApiEnvelope<T>(payload: unknown): T {
+  const envelope = payload as ApiEnvelope<T>
+  return envelope.data
 }
 
 async function getInquiryErrorMessage(response: Response, locale: Locale) {

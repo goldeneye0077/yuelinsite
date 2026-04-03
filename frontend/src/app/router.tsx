@@ -9,7 +9,7 @@ import {
   DEFAULT_LOCALE,
   SECTION_ROUTE_KEYS,
 } from '../i18n/locales'
-import { SiteShell } from '../layouts/SiteShell'
+import { Layout } from '../layouts/Layout'
 import { AboutPage } from '../pages/AboutPage'
 import { AdminInquiriesPage } from '../pages/AdminInquiriesPage'
 import { ContactPage } from '../pages/ContactPage'
@@ -33,7 +33,7 @@ export function createAppRouter(options: RouterFactoryOptions = {}) {
     },
     {
       path: '/:locale',
-      element: <SiteShell />,
+      element: <Layout />,
       children: [
         {
           index: true,

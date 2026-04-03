@@ -1,11 +1,14 @@
 @import './tokens.css';
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 :root {
   font-family: var(--font-sans);
   color: var(--color-text);
   background:
-    radial-gradient(circle at top left, rgba(86, 176, 232, 0.18), transparent 26%),
-    radial-gradient(circle at bottom right, rgba(216, 137, 43, 0.12), transparent 24%),
+    radial-gradient(circle at top left, rgba(99, 102, 241, 0.14), transparent 22%),
+    radial-gradient(circle at top right, rgba(14, 165, 233, 0.1), transparent 18%),
     linear-gradient(180deg, var(--color-bg) 0%, var(--color-bg-strong) 100%);
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -23,18 +26,36 @@ body,
   min-height: 100%;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   margin: 0;
   min-height: 100vh;
   color: var(--color-text);
   background:
-    radial-gradient(circle at top left, rgba(86, 176, 232, 0.18), transparent 26%),
-    radial-gradient(circle at bottom right, rgba(216, 137, 43, 0.12), transparent 24%),
+    radial-gradient(circle at top left, rgba(99, 102, 241, 0.12), transparent 22%),
+    radial-gradient(circle at top right, rgba(14, 165, 233, 0.08), transparent 18%),
+    linear-gradient(rgba(148, 163, 184, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(148, 163, 184, 0.08) 1px, transparent 1px),
     linear-gradient(180deg, var(--color-bg) 0%, var(--color-bg-strong) 100%);
+  background-size: auto, auto, 32px 32px, 32px 32px, auto;
   transition:
     background-color var(--transition-slow),
     color var(--transition-slow),
     border-color var(--transition-base);
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 16% 18%, rgba(99, 102, 241, 0.1), transparent 20%),
+    radial-gradient(circle at 84% 10%, rgba(14, 165, 233, 0.08), transparent 18%);
+  z-index: -1;
 }
 
 a {
@@ -4082,5 +4103,345 @@ body {
     animation: none !important;
     transition: none !important;
     scroll-behavior: auto !important;
+  }
+}
+
+.app-layout {
+  position: relative;
+  isolation: isolate;
+}
+
+.app-layout__backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  background:
+    radial-gradient(circle at top left, rgba(99, 102, 241, 0.08), transparent 24%),
+    radial-gradient(circle at top right, rgba(14, 165, 233, 0.08), transparent 20%);
+}
+
+.app-main {
+  position: relative;
+}
+
+.page-transition-frame {
+  min-height: 100%;
+}
+
+.field-error,
+.field-hint {
+  margin: 0;
+  font-size: 0.82rem;
+  line-height: 1.5;
+}
+
+.field-error {
+  color: var(--color-destructive);
+}
+
+.field-hint {
+  color: var(--color-text-muted);
+}
+
+.field-invalid {
+  animation: shake 240ms ease-in-out;
+}
+
+.field-invalid input,
+.field-invalid textarea,
+.field-invalid select {
+  border-color: color-mix(in srgb, var(--color-destructive) 72%, transparent);
+  box-shadow:
+    0 0 0 1px color-mix(in srgb, var(--color-destructive) 20%, transparent),
+    0 0 0 4px color-mix(in srgb, var(--color-destructive) 10%, transparent);
+}
+
+.site-header {
+  padding-top: 16px;
+}
+
+.header-inner {
+  background: color-mix(in srgb, var(--color-surface) 92%, transparent);
+  border-color: color-mix(in srgb, var(--color-border) 86%, transparent);
+  box-shadow: 0 12px 36px var(--color-shadow);
+  backdrop-filter: blur(18px);
+}
+
+.site-footer .page-band,
+.story-block,
+.about-section,
+.solutions-support-panel,
+.trust-ledger__panel,
+.support-panel,
+.contact-form-panel,
+.contact-sidebar,
+.contact-side-panel,
+.product-directory,
+.product-spotlight,
+.product-family-sheet,
+.product-detail-sidebar,
+.product-subgroup-main,
+.product-subgroup-sidebar,
+.product-detail-group,
+.product-card-detail,
+.product-series-row,
+.brand-context-item,
+.partner-item,
+.story-item,
+.assurance-item,
+.qualification-item,
+.support-quick-item,
+.contact-quick-item,
+.admin-panel,
+.admin-login-card,
+.admin-session-box,
+.admin-stat-card,
+.admin-inquiry-card {
+  background: color-mix(in srgb, var(--color-surface) 86%, transparent);
+  border-color: color-mix(in srgb, var(--color-border) 84%, transparent);
+  box-shadow: 0 12px 30px var(--color-shadow);
+  backdrop-filter: blur(18px);
+}
+
+.home-hero,
+.product-hero,
+.product-detail-hero,
+.about-hero,
+.solutions-hero,
+.support-hero,
+.contact-hero,
+.partners-hero {
+  position: relative;
+  overflow: hidden;
+  padding: 28px;
+  border: 1px solid color-mix(in srgb, var(--color-border) 82%, transparent);
+  border-radius: 24px;
+  background:
+    radial-gradient(circle at top right, color-mix(in srgb, var(--color-accent-secondary) 20%, transparent), transparent 30%),
+    radial-gradient(circle at top left, color-mix(in srgb, var(--color-accent) 18%, transparent), transparent 24%),
+    color-mix(in srgb, var(--color-surface) 82%, transparent);
+  box-shadow: 0 14px 32px var(--color-shadow);
+  backdrop-filter: blur(18px);
+}
+
+.home-hero {
+  margin-top: 12px;
+}
+
+.home-hero__poster,
+.home-hero__stat,
+.home-hero__direction-item,
+.product-hero__stat,
+.product-hero__family-link,
+.product-family-sheet__stats article,
+.product-family-sheet__group-item,
+.product-spotlight__item,
+.solution-track,
+.solution-track__action,
+.solution-track__transition,
+.solution-track-nav__item,
+.solution-coverage,
+.process-step,
+.contact-routing-item,
+.support-resource-item,
+.mobile-link,
+.admin-search-input {
+  background: color-mix(in srgb, var(--color-surface-elevated) 82%, transparent);
+  border-color: color-mix(in srgb, var(--color-border) 80%, transparent);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+}
+
+.home-hero__copy h1,
+.product-hero__copy h1,
+.product-detail-hero__main h1,
+.about-hero__copy h1,
+.solutions-hero__copy h1,
+.support-hero__copy h1,
+.contact-hero__copy h1,
+.partners-hero__copy h1,
+.placeholder-copy h1,
+.profile-title,
+.story-item h2,
+.partner-item h2,
+.final-cta h2 {
+  letter-spacing: -0.05em;
+  font-weight: 600;
+}
+
+.hero-summary,
+.hero-description,
+.story-intro,
+.story-item p,
+.partner-item p,
+.assurance-item p,
+.track-detail,
+.footer-summary,
+.footer-address,
+.footer-note,
+.status-item,
+.admin-panel p,
+.admin-inquiry-card__message p,
+.admin-inquiry-card__footer {
+  line-height: 1.8;
+}
+
+.track-label,
+.eyebrow,
+.section-caption,
+.admin-field-label,
+.admin-inquiry-card__eyebrow,
+.assurance-item__label {
+  color: color-mix(in srgb, var(--color-text-muted) 76%, var(--color-accent));
+}
+
+.cta-link,
+.contact-submit {
+  border: 1px solid color-mix(in srgb, var(--color-accent) 28%, transparent);
+  background: linear-gradient(
+    135deg,
+    var(--color-accent) 0%,
+    var(--color-accent-secondary) 100%
+  );
+  color: #ffffff;
+  box-shadow: 0 12px 24px color-mix(in srgb, var(--color-accent) 18%, transparent);
+}
+
+.secondary-link,
+.locale-switch,
+.theme-switch,
+.product-source-badge,
+.admin-badge,
+.admin-badge--muted {
+  border-color: color-mix(in srgb, var(--color-border) 76%, transparent);
+  background: color-mix(in srgb, var(--color-surface-elevated) 84%, transparent);
+}
+
+.secondary-link:hover,
+.secondary-link:focus-visible,
+.locale-switch:hover,
+.locale-switch:focus-visible,
+.theme-switch__button:hover,
+.theme-switch__button:focus-visible,
+.nav-link:hover,
+.nav-link:focus-visible,
+.product-hero__family-link:hover,
+.product-hero__family-link:focus-visible,
+.product-family-sheet__actions .secondary-link:hover,
+.product-family-sheet__actions .secondary-link:focus-visible,
+.solution-track-nav__item:hover,
+.solution-track-nav__item:focus-visible,
+.contact-routing-item:hover,
+.contact-routing-item:focus-visible,
+.mobile-link:hover,
+.mobile-link:focus-visible {
+  border-color: color-mix(in srgb, var(--color-accent) 32%, transparent);
+  background: color-mix(in srgb, var(--color-accent-soft) 62%, var(--color-surface-elevated));
+}
+
+.theme-switch__button--active,
+.nav-link--active {
+  color: var(--color-text);
+}
+
+.nav-link--active::after {
+  background: linear-gradient(
+    135deg,
+    var(--color-accent) 0%,
+    var(--color-accent-secondary) 100%
+  );
+}
+
+.contact-field input,
+.contact-field textarea,
+.contact-field select {
+  border-color: color-mix(in srgb, var(--color-border) 82%, transparent);
+  background: color-mix(in srgb, var(--color-surface-elevated) 82%, transparent);
+  box-shadow: none;
+}
+
+.contact-field input:focus,
+.contact-field textarea:focus,
+.contact-field select:focus,
+.admin-search-input:focus-within {
+  border-color: color-mix(in srgb, var(--color-accent) 42%, transparent);
+  box-shadow:
+    0 0 0 1px color-mix(in srgb, var(--color-accent) 16%, transparent),
+    0 0 0 4px color-mix(in srgb, var(--color-accent) 10%, transparent);
+}
+
+.theme-switch__button--active,
+.theme-switch__button--active:hover,
+.theme-switch__button--active:focus-visible {
+  background: color-mix(in srgb, var(--color-accent-soft) 84%, var(--color-surface));
+}
+
+.mobile-drawer__panel {
+  background:
+    radial-gradient(circle at top right, rgba(99, 102, 241, 0.16), transparent 34%),
+    rgba(9, 9, 11, 0.92);
+}
+
+.status-strip,
+.page-band--bordered,
+.solution-track-heading,
+.solution-track,
+.solution-track__block,
+.product-family-sheet__usecase,
+.footer-note {
+  border-color: color-mix(in srgb, var(--color-border) 72%, transparent);
+}
+
+.taxonomy-source a,
+.product-inline-link,
+.footer-link,
+.contact-routing-item,
+.cta-link,
+.secondary-link {
+  transition:
+    transform var(--transition-base),
+    border-color var(--transition-base),
+    background-color var(--transition-base),
+    color var(--transition-base);
+}
+
+.final-cta {
+  background:
+    linear-gradient(135deg, color-mix(in srgb, var(--color-accent-soft) 54%, var(--color-surface) 46%), color-mix(in srgb, var(--color-surface) 92%, transparent)),
+    color-mix(in srgb, var(--color-surface) 90%, transparent);
+}
+
+.admin-panel h1,
+.contact-section-heading,
+.story-block h2,
+.solutions-support-panel h2 {
+  text-wrap: balance;
+}
+
+@media (max-width: 1280px) {
+  .brand-name--company {
+    font-size: 0.94rem;
+  }
+
+  .brand-line--header {
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+  }
+
+  .nav-link {
+    padding-inline: 9px;
+    font-size: 0.84rem;
+  }
+}
+
+@media (max-width: 720px) {
+  .home-hero,
+  .product-hero,
+  .product-detail-hero,
+  .about-hero,
+  .solutions-hero,
+  .support-hero,
+  .contact-hero,
+  .partners-hero {
+    padding: 20px;
   }
 }

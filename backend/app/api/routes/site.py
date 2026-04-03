@@ -1,5 +1,7 @@
 from fastapi import APIRouter, Query
 
+from app.core.http import build_api_envelope
+from app.schemas.common import ApiEnvelope
 from app.schemas.site import (
     FooterGroup,
     NavigationItem,
@@ -34,7 +36,7 @@ def build_nav_items(locale: str, labels: dict[str, str]) -> list[NavigationItem]
     ]
 
 
-@router.get('/site/bootstrap', response_model=SiteBootstrapResponse)
+@router.get('/site/bootstrap', response_model=ApiEnvelope[SiteBootstrapResponse])
 def get_site_bootstrap(locale: str = Query(default='zh')):
     normalized_locale = 'en' if locale == 'en' else 'zh'
 
@@ -88,16 +90,18 @@ def get_site_bootstrap(locale: str = Query(default='zh')):
         ),
     ]
 
-    return SiteBootstrapResponse(
-        locale=normalized_locale,
-        supportedLocales=['zh', 'en'],
-        companyName=company_name,
-        brandName=brand_name,
-        address=address,
-        navItems=nav_items,
-        footerGroups=footer_groups,
-        themeOptions=[
-            ThemeOption(key='light', label=theme_labels[0]),
-            ThemeOption(key='dark', label=theme_labels[1]),
-        ],
+    return build_api_envelope(
+        SiteBootstrapResponse(
+            locale=normalized_locale,
+            supportedLocales=['zh', 'en'],
+            companyName=company_name,
+            brandName=brand_name,
+            address=address,
+            navItems=nav_items,
+            footerGroups=footer_groups,
+            themeOptions=[
+                ThemeOption(key='light', label=theme_labels[0]),
+                ThemeOption(key='dark', label=theme_labels[1]),
+            ],
+        )
     )

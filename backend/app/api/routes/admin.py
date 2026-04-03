@@ -13,13 +13,14 @@ from app.core.admin_auth import (
     serialize_admin_session,
 )
 from app.core.config import Settings, get_settings
-from app.core.http import extract_client_ip
+from app.core.http import build_api_envelope, extract_client_ip
 from app.core.rate_limit import (
     AdminLoginRateLimiter,
     get_admin_login_rate_limiter,
 )
 from app.db.session import get_db
 from app.models.inquiry import Inquiry
+from app.schemas.common import ApiEnvelope
 from app.schemas.admin import (
     AdminInquiryListResponse,
     AdminInquiryRecord,
@@ -31,7 +32,7 @@ from app.schemas.admin import (
 router = APIRouter(prefix='/admin', tags=['admin'])
 
 
-@router.post('/session', response_model=AdminSessionResponse)
+@router.post('/session', response_model=ApiEnvelope[AdminSessionResponse])
 def create_session(
     payload: AdminSessionRequest,
     request: Request,
@@ -58,33 +59,44 @@ def create_session(
     session = create_admin_session_token(payload.username, settings)
     persist_admin_session_cookie(response, serialize_admin_session(session, settings), settings)
 
-    return AdminSessionResponse(
-        authenticated=True,
-        username=session.username,
-        expiresAt=session.expires_at.astimezone(UTC),
+    return build_api_envelope(
+        AdminSessionResponse(
+            authenticated=True,
+            username=session.username,
+            expiresAt=session.expires_at.astimezone(UTC),
+        ),
+        request,
     )
 
 
-@router.get('/session', response_model=AdminSessionResponse)
-def get_session(identity=Depends(require_admin_session)):
-    return AdminSessionResponse(
-        authenticated=True,
-        username=identity.username,
-        expiresAt=identity.expires_at.astimezone(UTC),
+@router.get('/session', response_model=ApiEnvelope[AdminSessionResponse])
+def get_session(
+    request: Request,
+    identity=Depends(require_admin_session),
+):
+    return build_api_envelope(
+        AdminSessionResponse(
+            authenticated=True,
+            username=identity.username,
+            expiresAt=identity.expires_at.astimezone(UTC),
+        ),
+        request,
     )
 
 
-@router.delete('/session', response_model=AdminSessionLogoutResponse)
+@router.delete('/session', response_model=ApiEnvelope[AdminSessionLogoutResponse])
 def destroy_session(
+    request: Request,
     response: Response,
     settings: Settings = Depends(get_settings),
 ):
     clear_admin_session_cookie(response, settings)
-    return AdminSessionLogoutResponse(status='signed_out')
+    return build_api_envelope(AdminSessionLogoutResponse(status='signed_out'), request)
 
 
-@router.get('/inquiries', response_model=AdminInquiryListResponse)
+@router.get('/inquiries', response_model=ApiEnvelope[AdminInquiryListResponse])
 def list_inquiries(
+    request: Request,
     page: int = Query(default=1, ge=1),
     page_size: int = Query(default=20, ge=1, le=100, alias='pageSize'),
     query: str | None = Query(default=None, min_length=1, max_length=160),
@@ -139,31 +151,34 @@ def list_inquiries(
         .order_by(Inquiry.source_context.asc())
     ).all()
 
-    return AdminInquiryListResponse(
-        items=[
-            AdminInquiryRecord(
-                id=item.id,
-                companyName=item.company_name,
-                contactName=item.contact_name,
-                email=item.email,
-                phone=item.phone,
-                interestCategory=item.interest_category,
-                message=item.message,
-                locale=item.locale,
-                sourcePage=item.source_page,
-                sourceContext=item.source_context,
-                status=item.status,
-                requestId=item.request_id,
-                clientIp=item.client_ip,
-                referer=item.referer,
-                createdAt=item.created_at,
-            )
-            for item in items
-        ],
-        total=total,
-        page=page,
-        pageSize=page_size,
-        totalPages=total_pages,
-        availableCategories=available_categories,
-        availableSourceContexts=[value for value in available_source_contexts if value],
+    return build_api_envelope(
+        AdminInquiryListResponse(
+            items=[
+                AdminInquiryRecord(
+                    id=item.id,
+                    companyName=item.company_name,
+                    contactName=item.contact_name,
+                    email=item.email,
+                    phone=item.phone,
+                    interestCategory=item.interest_category,
+                    message=item.message,
+                    locale=item.locale,
+                    sourcePage=item.source_page,
+                    sourceContext=item.source_context,
+                    status=item.status,
+                    requestId=item.request_id,
+                    clientIp=item.client_ip,
+                    referer=item.referer,
+                    createdAt=item.created_at,
+                )
+                for item in items
+            ],
+            total=total,
+            page=page,
+            pageSize=page_size,
+            totalPages=total_pages,
+            availableCategories=available_categories,
+            availableSourceContexts=[value for value in available_source_contexts if value],
+        ),
+        request,
     )

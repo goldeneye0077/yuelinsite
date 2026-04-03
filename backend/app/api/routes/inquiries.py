@@ -2,10 +2,11 @@ from fastapi import APIRouter, Depends, HTTPException, Request, status
 from sqlalchemy.exc import SQLAlchemyError
 from sqlalchemy.orm import Session
 
-from app.core.http import extract_client_ip, get_logger
+from app.core.http import build_api_envelope, extract_client_ip, get_logger
 from app.core.rate_limit import InquiryRateLimiter, get_inquiry_rate_limiter
 from app.db.session import get_db
 from app.models.inquiry import Inquiry
+from app.schemas.common import ApiEnvelope
 from app.schemas.inquiry import InquiryContractResponse, InquirySubmissionRequest
 
 router = APIRouter(tags=['inquiries'])
@@ -42,7 +43,7 @@ def get_rate_limit_detail(locale: str) -> str:
 
 @router.post(
     '/inquiries',
-    response_model=InquiryContractResponse,
+    response_model=ApiEnvelope[InquiryContractResponse],
     status_code=status.HTTP_201_CREATED,
 )
 def submit_inquiry(
@@ -70,10 +71,13 @@ def submit_inquiry(
                 'referer': request.headers.get('referer'),
             },
         )
-        return InquiryContractResponse(
-            detail=success_detail,
-            submissionId=0,
-            status='received',
+        return build_api_envelope(
+            InquiryContractResponse(
+                detail=success_detail,
+                submissionId=0,
+                status='received',
+            ),
+            request,
         )
 
     client_ip = extract_client_ip(request)
@@ -125,8 +129,11 @@ def submit_inquiry(
             detail=get_failure_detail(payload.locale),
         ) from exc
 
-    return InquiryContractResponse(
-        detail=success_detail,
-        submissionId=inquiry.id,
-        status='received',
+    return build_api_envelope(
+        InquiryContractResponse(
+            detail=success_detail,
+            submissionId=inquiry.id,
+            status='received',
+        ),
+        request,
     )

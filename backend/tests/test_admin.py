@@ -35,8 +35,10 @@ def test_admin_session_login_sets_cookie(client):
 
     assert response.status_code == 200
     payload = response.json()
-    assert payload['authenticated'] is True
-    assert payload['username'] == 'admin'
+    assert payload['success'] is True
+    assert payload['data']['authenticated'] is True
+    assert payload['data']['username'] == 'admin'
+    assert payload['meta']['requestId']
     assert 'yuelin_admin_session=' in response.headers['set-cookie']
 
 
@@ -57,11 +59,12 @@ def test_admin_inquiries_returns_protected_records(client, session_factory):
 
     assert response.status_code == 200
     payload = response.json()
-    assert payload['total'] == 1
-    assert payload['items'][0]['companyName'] == 'Admin Visible Factory'
-    assert payload['items'][0]['sourceContext'] == 'about'
-    assert payload['availableCategories'] == ['general-consultation']
-    assert payload['availableSourceContexts'] == ['about']
+    assert payload['success'] is True
+    assert payload['data']['total'] == 1
+    assert payload['data']['items'][0]['companyName'] == 'Admin Visible Factory'
+    assert payload['data']['items'][0]['sourceContext'] == 'about'
+    assert payload['data']['availableCategories'] == ['general-consultation']
+    assert payload['data']['availableSourceContexts'] == ['about']
 
     with session_factory() as session:
         inquiry = session.scalar(select(Inquiry).where(Inquiry.id == 1))

@@ -1,15 +1,29 @@
-import { type ChangeEvent, type FormEvent, useState } from 'react'
+import { type ChangeEvent, type FormEvent, type ReactNode, useMemo, useState } from 'react'
+import { motion } from 'framer-motion'
 import { useMutation } from '@tanstack/react-query'
-import { AlertCircle, ArrowRight, CheckCircle2, Send } from 'lucide-react'
+import { ArrowRight, Send } from 'lucide-react'
+import { toast } from 'sonner'
 import { Link, useLocation, useSearchParams } from 'react-router-dom'
 
+import { Button } from '../components/ui/button'
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from '../components/ui/card'
+import { Field } from '../components/ui/field'
+import { Input } from '../components/ui/input'
+import { Select } from '../components/ui/select'
+import { Textarea } from '../components/ui/textarea'
 import { buildLocalePath } from '../i18n/locales'
 import { useSiteShellContext } from '../layouts/useSiteShellContext'
 import { type InquirySubmissionInput, submitInquiry } from '../lib/api/site-client'
 
 type ContactFormState = Omit<InquirySubmissionInput, 'locale' | 'sourcePage'>
-
-type ContactFormFieldName = keyof ContactFormState
+type ContactFieldName = keyof ContactFormState
+type ContactFieldErrors = Partial<Record<ContactFieldName, string>>
 
 function createInitialFormState(defaultCategory: string): ContactFormState {
   return {
@@ -43,6 +57,117 @@ function resolveSourceContext(source: string | null) {
   return normalized.length > 0 ? normalized : null
 }
 
+function getValidationMessages(locale: 'zh' | 'en') {
+  if (locale === 'zh') {
+    return {
+      companyName: '请输入公司名称。',
+      contactName: '请输入联系人姓名。',
+      email: '请输入有效邮箱。',
+      phone: '请输入联系电话。',
+      message: '请填写你的需求说明。',
+      consentAccepted: '提交前请先勾选信息处理同意项。',
+    }
+  }
+
+  return {
+    companyName: 'Please enter the company name.',
+    contactName: 'Please enter the contact name.',
+    email: 'Please enter a valid email address.',
+    phone: 'Please enter a phone number.',
+    message: 'Please describe the request.',
+    consentAccepted: 'Please confirm the consent checkbox before submitting.',
+  }
+}
+
+function validateForm(
+  formState: ContactFormState,
+  locale: 'zh' | 'en',
+): ContactFieldErrors {
+  const copy = getValidationMessages(locale)
+  const errors: ContactFieldErrors = {}
+  const emailPattern = /\S+@\S+\.\S+/
+
+  if (!formState.companyName.trim()) {
+    errors.companyName = copy.companyName
+  }
+
+  if (!formState.contactName.trim()) {
+    errors.contactName = copy.contactName
+  }
+
+  if (!emailPattern.test(formState.email.trim())) {
+    errors.email = copy.email
+  }
+
+  if (!formState.phone.trim()) {
+    errors.phone = copy.phone
+  }
+
+  if (!formState.message.trim()) {
+    errors.message = copy.message
+  }
+
+  if (!formState.consentAccepted) {
+    errors.consentAccepted = copy.consentAccepted
+  }
+
+  return errors
+}
+
+function clearFieldError(
+  currentErrors: ContactFieldErrors,
+  fieldName: ContactFieldName,
+  nextValue: string | boolean,
+  locale: 'zh' | 'en',
+) {
+  const nextErrors = { ...currentErrors }
+
+  if (fieldName === 'consentAccepted') {
+    if (nextValue === true) {
+      delete nextErrors.consentAccepted
+    }
+
+    return nextErrors
+  }
+
+  if (typeof nextValue === 'string' && nextValue.trim()) {
+    delete nextErrors[fieldName]
+  }
+
+  if (fieldName === 'email' && typeof nextValue === 'string') {
+    const emailPattern = /\S+@\S+\.\S+/
+
+    if (emailPattern.test(nextValue.trim())) {
+      delete nextErrors.email
+    } else if (currentErrors.email) {
+      nextErrors.email = getValidationMessages(locale).email
+    }
+  }
+
+  return nextErrors
+}
+
+function MotionSection({
+  children,
+  delay = 0,
+  className,
+}: {
+  children: ReactNode
+  delay?: number
+  className?: string
+}) {
+  return (
+    <motion.section
+      animate={{ opacity: 1, y: 0 }}
+      className={className}
+      initial={{ opacity: 0, y: 10 }}
+      transition={{ duration: 0.28, delay, ease: [0.22, 1, 0.36, 1] }}
+    >
+      {children}
+    </motion.section>
+  )
+}
+
 export function ContactPage() {
   const { locale, content } = useSiteShellContext()
   const location = useLocation()
@@ -54,11 +179,28 @@ export function ContactPage() {
   const [formState, setFormState] = useState<ContactFormState>(() =>
     createInitialFormState(defaultCategory),
   )
+  const [errors, setErrors] = useState<ContactFieldErrors>({})
+  const messages = useMemo(() => getValidationMessages(locale), [locale])
 
   const inquiryMutation = useMutation({
     mutationFn: submitInquiry,
-    onSuccess: () => {
+    onSuccess: (data) => {
+      toast.success(content.contactPage.form.successLabel, {
+        description:
+          data.submissionId > 0
+            ? `${data.detail} ${content.contactPage.form.referenceLabel} #${data.submissionId}`
+            : data.detail,
+      })
       setFormState(createInitialFormState(defaultCategory))
+      setErrors({})
+    },
+    onError: (error) => {
+      const description =
+        error instanceof Error ? error.message : content.contactPage.form.helperNote
+
+      toast.error(content.contactPage.form.errorLabel, {
+        description,
+      })
     },
   })
 
@@ -72,18 +214,27 @@ export function ContactPage() {
         ? target.checked
         : target.value
 
-    if (inquiryMutation.isSuccess || inquiryMutation.isError) {
-      inquiryMutation.reset()
-    }
-
     setFormState((current) => ({
       ...current,
-      [name as ContactFormFieldName]: value,
+      [name as ContactFieldName]: value,
     }))
+    setErrors((current) =>
+      clearFieldError(current, name as ContactFieldName, value, locale),
+    )
   }
 
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
+
+    const nextErrors = validateForm(formState, locale)
+
+    if (Object.keys(nextErrors).length > 0) {
+      setErrors(nextErrors)
+      toast.error(content.contactPage.form.errorLabel, {
+        description: Object.values(nextErrors)[0] ?? messages.consentAccepted,
+      })
+      return
+    }
 
     inquiryMutation.mutate({
       ...formState,
@@ -94,16 +245,12 @@ export function ContactPage() {
   }
 
   const formCopy = content.contactPage.form
-  const errorMessage =
-    inquiryMutation.error instanceof Error
-      ? inquiryMutation.error.message
-      : formCopy.helperNote
 
   return (
-    <>
-      <section className="page-band page-band--tight">
+    <div className="space-y-6">
+      <MotionSection className="page-band page-band--tight" delay={0.02}>
         <div className="contact-hero">
-          <div className="contact-hero__copy motion-rise motion-delay-1">
+          <div className="contact-hero__copy">
             <p className="eyebrow">{content.contactPage.eyebrow}</p>
             <h1>{content.contact.title}</h1>
             <p className="hero-signature hero-signature--surface">
@@ -112,239 +259,268 @@ export function ContactPage() {
             <p className="hero-summary">{content.contactPage.heroSummary}</p>
             <p className="hero-description">{content.contactPage.heroDescription}</p>
             <div className="hero-actions">
-              <a className="cta-link" href="#contact-form">
-                <span>{content.contact.primaryCta}</span>
-                <ArrowRight size={16} />
-              </a>
-              <Link className="secondary-link" to={buildLocalePath(locale, 'support')}>
-                {content.contact.secondaryCta}
-              </Link>
+              <Button asChild size="lg">
+                <a href="#contact-form">
+                  <span>{content.contact.primaryCta}</span>
+                  <ArrowRight size={16} />
+                </a>
+              </Button>
+              <Button asChild size="lg" variant="secondary">
+                <Link to={buildLocalePath(locale, 'support')}>
+                  {content.contact.secondaryCta}
+                </Link>
+              </Button>
             </div>
           </div>
 
-          <aside className="contact-hero__rail motion-rise motion-delay-2">
-            <p className="eyebrow">{content.contactPage.quickPanelTitle}</p>
-            <p className="story-intro">{content.contactPage.quickPanelSummary}</p>
-            <div className="contact-quick-list">
+          <Card className="contact-hero__rail">
+            <CardHeader>
+              <p className="eyebrow">{content.contactPage.quickPanelTitle}</p>
+              <CardDescription className="story-intro">
+                {content.contactPage.quickPanelSummary}
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="grid gap-4">
               {content.contactPage.quickPanelItems.map((item) => (
-                <article key={item.title} className="contact-quick-item">
-                  <p className="assurance-item__label">{item.label}</p>
-                  <h2>{item.title}</h2>
-                  <p>{item.detail}</p>
-                </article>
+                <Card key={item.title} className="contact-quick-item border-border/50 bg-card/70">
+                  <CardContent className="grid gap-2 p-5">
+                    <p className="assurance-item__label">{item.label}</p>
+                    <CardTitle className="text-lg">{item.title}</CardTitle>
+                    <CardDescription>{item.detail}</CardDescription>
+                  </CardContent>
+                </Card>
               ))}
-            </div>
-          </aside>
+            </CardContent>
+          </Card>
         </div>
-      </section>
+      </MotionSection>
 
-      <section className="page-band page-band--bordered">
+      <MotionSection className="page-band page-band--bordered" delay={0.06}>
         <div className="contact-layout">
-          <section className="contact-form-panel motion-rise motion-delay-2">
-            <div className="contact-section-heading">
+          <Card className="contact-form-panel">
+            <CardHeader className="contact-section-heading">
               <p className="eyebrow">{content.contactPage.formTitle}</p>
-              <p className="story-intro">{content.contactPage.formSummary}</p>
-            </div>
-
-            <form className="contact-form" id="contact-form" onSubmit={handleSubmit}>
-              <div className="contact-form__grid">
-                <label className="contact-field">
-                  <span>{formCopy.companyNameLabel}</span>
-                  <input
+              <CardTitle>{content.contactPage.formSummary}</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <form className="space-y-5" id="contact-form" onSubmit={handleSubmit}>
+                <div className="grid gap-5 md:grid-cols-2">
+                  <Field
+                    error={errors.companyName}
+                    htmlFor="companyName"
+                    label={formCopy.companyNameLabel}
                     required
-                    name="companyName"
-                    onChange={handleFieldChange}
-                    placeholder={formCopy.companyNamePlaceholder}
-                    value={formState.companyName}
-                  />
-                </label>
+                  >
+                    <Input
+                      aria-label={formCopy.companyNameLabel}
+                      id="companyName"
+                      invalid={Boolean(errors.companyName)}
+                      name="companyName"
+                      onChange={handleFieldChange}
+                      placeholder={formCopy.companyNamePlaceholder}
+                      value={formState.companyName}
+                    />
+                  </Field>
 
-                <label className="contact-field">
-                  <span>{formCopy.contactNameLabel}</span>
-                  <input
+                  <Field
+                    error={errors.contactName}
+                    htmlFor="contactName"
+                    label={formCopy.contactNameLabel}
                     required
-                    name="contactName"
-                    onChange={handleFieldChange}
-                    placeholder={formCopy.contactNamePlaceholder}
-                    value={formState.contactName}
-                  />
-                </label>
+                  >
+                    <Input
+                      aria-label={formCopy.contactNameLabel}
+                      id="contactName"
+                      invalid={Boolean(errors.contactName)}
+                      name="contactName"
+                      onChange={handleFieldChange}
+                      placeholder={formCopy.contactNamePlaceholder}
+                      value={formState.contactName}
+                    />
+                  </Field>
 
-                <label className="contact-field">
-                  <span>{formCopy.emailLabel}</span>
-                  <input
+                  <Field
+                    error={errors.email}
+                    htmlFor="email"
+                    label={formCopy.emailLabel}
                     required
-                    name="email"
-                    onChange={handleFieldChange}
-                    placeholder={formCopy.emailPlaceholder}
-                    type="email"
-                    value={formState.email}
-                  />
-                </label>
+                  >
+                    <Input
+                      aria-label={formCopy.emailLabel}
+                      id="email"
+                      invalid={Boolean(errors.email)}
+                      name="email"
+                      onChange={handleFieldChange}
+                      placeholder={formCopy.emailPlaceholder}
+                      type="email"
+                      value={formState.email}
+                    />
+                  </Field>
 
-                <label className="contact-field">
-                  <span>{formCopy.phoneLabel}</span>
-                  <input
+                  <Field
+                    error={errors.phone}
+                    htmlFor="phone"
+                    label={formCopy.phoneLabel}
                     required
-                    name="phone"
-                    onChange={handleFieldChange}
-                    placeholder={formCopy.phonePlaceholder}
-                    value={formState.phone}
-                  />
-                </label>
-              </div>
-
-              <label className="contact-field">
-                <span>{formCopy.interestCategoryLabel}</span>
-                <select
-                  name="interestCategory"
-                  onChange={handleFieldChange}
-                  value={formState.interestCategory}
-                >
-                  {content.contactPage.categoryOptions.map((option) => (
-                    <option key={option.value} value={option.value}>
-                      {option.label}
-                    </option>
-                  ))}
-                </select>
-              </label>
-
-              <label className="contact-field">
-                <span>{formCopy.messageLabel}</span>
-                <textarea
-                  required
-                  name="message"
-                  onChange={handleFieldChange}
-                  placeholder={formCopy.messagePlaceholder}
-                  rows={6}
-                  value={formState.message}
-                />
-              </label>
-
-              <label className="contact-honeypot" htmlFor="website">
-                <span>Website</span>
-                <input
-                  autoComplete="off"
-                  id="website"
-                  name="website"
-                  onChange={handleFieldChange}
-                  tabIndex={-1}
-                  value={formState.website}
-                />
-              </label>
-
-              <label className="contact-consent">
-                <input
-                  checked={formState.consentAccepted}
-                  name="consentAccepted"
-                  onChange={handleFieldChange}
-                  required
-                  type="checkbox"
-                />
-                <span>
-                  <strong>{formCopy.consentLabel}</strong>
-                  <small>{formCopy.consentDetail}</small>
-                </span>
-              </label>
-
-              <div className="contact-form__meta">
-                <p className="contact-form__hint">{formCopy.requiredHint}</p>
-                <p className="contact-form__note">{formCopy.helperNote}</p>
-              </div>
-
-              {(inquiryMutation.isSuccess || inquiryMutation.isError) && (
-                <div
-                  aria-live="polite"
-                  className={`contact-feedback ${
-                    inquiryMutation.isSuccess
-                      ? 'contact-feedback--success'
-                      : 'contact-feedback--error'
-                  }`}
-                  role="status"
-                >
-                  <div className="contact-feedback__icon">
-                    {inquiryMutation.isSuccess ? (
-                      <CheckCircle2 size={18} />
-                    ) : (
-                      <AlertCircle size={18} />
-                    )}
-                  </div>
-                  <div className="contact-feedback__copy">
-                    <p className="assurance-item__label">
-                      {inquiryMutation.isSuccess
-                        ? formCopy.successLabel
-                        : formCopy.errorLabel}
-                    </p>
-                    <p>
-                      {inquiryMutation.isSuccess
-                        ? inquiryMutation.data.detail
-                        : errorMessage}
-                    </p>
-                    {inquiryMutation.isSuccess && inquiryMutation.data.submissionId > 0 ? (
-                      <p className="contact-feedback__reference">
-                        {formCopy.referenceLabel} #{inquiryMutation.data.submissionId}
-                      </p>
-                    ) : null}
-                  </div>
+                  >
+                    <Input
+                      aria-label={formCopy.phoneLabel}
+                      id="phone"
+                      invalid={Boolean(errors.phone)}
+                      name="phone"
+                      onChange={handleFieldChange}
+                      placeholder={formCopy.phonePlaceholder}
+                      value={formState.phone}
+                    />
+                  </Field>
                 </div>
-              )}
 
-              <button
-                className="contact-submit"
-                disabled={inquiryMutation.isPending || !formState.consentAccepted}
-                type="submit"
-              >
-                <Send size={16} />
-                <span>
-                  {inquiryMutation.isPending
-                    ? formCopy.pendingLabel
-                    : formCopy.submitLabel}
-                </span>
-              </button>
-            </form>
-          </section>
+                <Field
+                  htmlFor="interestCategory"
+                  label={formCopy.interestCategoryLabel}
+                >
+                  <Select
+                    aria-label={formCopy.interestCategoryLabel}
+                    id="interestCategory"
+                    name="interestCategory"
+                    onChange={handleFieldChange}
+                    value={formState.interestCategory}
+                  >
+                    {content.contactPage.categoryOptions.map((option) => (
+                      <option key={option.value} value={option.value}>
+                        {option.label}
+                      </option>
+                    ))}
+                  </Select>
+                </Field>
 
-          <aside className="contact-sidebar motion-rise motion-delay-3">
-            <section className="contact-side-panel">
-              <p className="eyebrow">{content.contactPage.guidanceTitle}</p>
-              <p className="story-intro">{content.contactPage.guidanceSummary}</p>
-              <div className="story-list">
+                <Field
+                  error={errors.message}
+                  htmlFor="message"
+                  label={formCopy.messageLabel}
+                  required
+                >
+                  <Textarea
+                    aria-label={formCopy.messageLabel}
+                    id="message"
+                    invalid={Boolean(errors.message)}
+                    name="message"
+                    onChange={handleFieldChange}
+                    placeholder={formCopy.messagePlaceholder}
+                    rows={6}
+                    value={formState.message}
+                  />
+                </Field>
+
+                <div aria-hidden="true" className="hidden">
+                  <label htmlFor="website">Website</label>
+                  <Input
+                    autoComplete="off"
+                    id="website"
+                    name="website"
+                    onChange={handleFieldChange}
+                    tabIndex={-1}
+                    value={formState.website}
+                  />
+                </div>
+
+                <div
+                  className={`rounded-2xl border p-4 ${
+                    errors.consentAccepted
+                      ? 'field-invalid border-destructive/30 bg-destructive/5'
+                      : 'border-border/70 bg-secondary/60'
+                  }`}
+                >
+                  <label className="flex items-start gap-3 text-sm text-foreground/90">
+                    <input
+                      checked={formState.consentAccepted}
+                      className="mt-1 size-4 rounded border-border text-primary focus:ring-primary"
+                      name="consentAccepted"
+                      onChange={handleFieldChange}
+                      type="checkbox"
+                    />
+                    <span className="grid gap-1">
+                      <strong>{formCopy.consentLabel}</strong>
+                      <small className="text-sm leading-relaxed text-muted-foreground">
+                        {formCopy.consentDetail}
+                      </small>
+                    </span>
+                  </label>
+                  {errors.consentAccepted ? (
+                    <p className="field-error mt-3">{errors.consentAccepted}</p>
+                  ) : null}
+                </div>
+
+                <div className="flex flex-col gap-4 border-t border-border/70 pt-4 md:flex-row md:items-center md:justify-between">
+                  <div className="space-y-1">
+                    <p className="field-hint">{formCopy.requiredHint}</p>
+                    <p className="field-hint">{formCopy.helperNote}</p>
+                  </div>
+                  <Button
+                    className="min-w-[180px]"
+                    disabled={inquiryMutation.isPending}
+                    size="lg"
+                    type="submit"
+                  >
+                    <Send size={16} />
+                    <span>
+                      {inquiryMutation.isPending
+                        ? formCopy.pendingLabel
+                        : formCopy.submitLabel}
+                    </span>
+                  </Button>
+                </div>
+              </form>
+            </CardContent>
+          </Card>
+
+          <div className="contact-sidebar space-y-6">
+            <Card className="contact-side-panel">
+              <CardHeader>
+                <p className="eyebrow">{content.contactPage.guidanceTitle}</p>
+                <CardTitle>{content.contactPage.guidanceSummary}</CardTitle>
+              </CardHeader>
+              <CardContent className="grid gap-4">
                 {content.contactPage.guidanceItems.map((item) => (
-                  <article key={item.title} className="story-item">
-                    <h2>{item.title}</h2>
-                    <p>{item.detail}</p>
-                  </article>
+                  <Card key={item.title} className="story-item border-border/50 bg-card/70">
+                    <CardContent className="grid gap-2 p-5">
+                      <CardTitle className="text-lg">{item.title}</CardTitle>
+                      <CardDescription>{item.detail}</CardDescription>
+                    </CardContent>
+                  </Card>
                 ))}
-              </div>
-            </section>
+              </CardContent>
+            </Card>
 
-            <section className="contact-side-panel contact-side-panel--offset">
-              <p className="eyebrow">{content.contactPage.routingTitle}</p>
-              <p className="story-intro">{content.contactPage.routingSummary}</p>
-              <div className="contact-routing-list">
+            <Card className="contact-side-panel contact-side-panel--offset">
+              <CardHeader>
+                <p className="eyebrow">{content.contactPage.routingTitle}</p>
+                <CardTitle>{content.contactPage.routingSummary}</CardTitle>
+              </CardHeader>
+              <CardContent className="grid gap-3">
                 {content.contactPage.routingLinks.map((item) => (
                   <Link
                     key={item.section}
-                    className="contact-routing-item"
+                    className="contact-routing-item flex items-center justify-between rounded-xl border border-border/70 px-4 py-3 text-sm font-medium transition-all duration-200 hover:-translate-y-0.5"
                     to={buildLocalePath(locale, item.section)}
                   >
                     <span>{item.label}</span>
                     <ArrowRight size={16} />
                   </Link>
                 ))}
-              </div>
-            </section>
-          </aside>
-        </div>
-      </section>
-
-      <section className="page-band page-band--bordered">
-        <div className="contact-process motion-rise motion-delay-4">
-          <div className="contact-section-heading">
-            <p className="eyebrow">{content.contactPage.processTitle}</p>
-            <p className="story-intro">{content.contactPage.processSummary}</p>
+              </CardContent>
+            </Card>
           </div>
-          <div className="process-list">
+        </div>
+      </MotionSection>
+
+      <MotionSection className="page-band page-band--bordered" delay={0.1}>
+        <Card className="contact-process">
+          <CardHeader className="contact-section-heading">
+            <p className="eyebrow">{content.contactPage.processTitle}</p>
+            <CardTitle>{content.contactPage.processSummary}</CardTitle>
+          </CardHeader>
+          <CardContent className="process-list">
             {content.contactPage.processSteps.map((item) => (
               <article key={item.step} className="process-step">
                 <p className="process-step__index">{item.step}</p>
@@ -354,9 +530,9 @@ export function ContactPage() {
                 </div>
               </article>
             ))}
-          </div>
-        </div>
-      </section>
-    </>
+          </CardContent>
+        </Card>
+      </MotionSection>
+    </div>
   )
 }

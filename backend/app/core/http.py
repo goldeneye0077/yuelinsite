@@ -8,6 +8,8 @@ from uuid import uuid4
 from fastapi import Request
 from starlette.middleware.base import BaseHTTPMiddleware
 
+from app.schemas.common import ApiEnvelope, ApiMeta
+
 
 request_id_context: ContextVar[str] = ContextVar('request_id', default='-')
 
@@ -66,6 +68,20 @@ def extract_client_ip(request: Request) -> str:
         return request.client.host
 
     return 'unknown'
+
+
+def build_api_envelope(data, request: Request | None = None):
+    request_id = None
+
+    if request is not None:
+        request_id = getattr(request.state, 'request_id', None)
+
+    return ApiEnvelope(
+        data=data,
+        meta=ApiMeta(
+            requestId=request_id,
+        ),
+    )
 
 
 class RequestContextMiddleware(BaseHTTPMiddleware):

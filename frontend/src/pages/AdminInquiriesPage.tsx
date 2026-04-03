@@ -1,8 +1,31 @@
 import { useDeferredValue, useEffect, useMemo, useState } from 'react'
+import { motion } from 'framer-motion'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
-import { ArrowLeft, Lock, LogOut, RefreshCcw, Search } from 'lucide-react'
+import { formatDistanceToNow } from 'date-fns'
+import { enUS, zhCN } from 'date-fns/locale'
+import {
+  ArrowLeft,
+  LockKeyhole,
+  LogOut,
+  RefreshCcw,
+  Search,
+} from 'lucide-react'
+import { toast } from 'sonner'
 import { Link } from 'react-router-dom'
 
+import { Badge } from '../components/ui/badge'
+import { Button } from '../components/ui/button'
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from '../components/ui/card'
+import { Field } from '../components/ui/field'
+import { Input } from '../components/ui/input'
+import { Select } from '../components/ui/select'
+import { Skeleton } from '../components/ui/skeleton'
 import {
   AdminUnauthorizedError,
   createAdminSession,
@@ -21,11 +44,11 @@ const ADMIN_COPY = {
     eyebrow: '管理员后台',
     title: '询盘后台列表',
     summary:
-      '这个页面只给管理员查看，用来集中查看官网询盘、来源标签、联系信息和提交时间。',
+      '这个入口只给管理员查看，用来集中筛选官网询盘、来源标签、联系信息和提交时间。',
     description:
-      '访客前台看不到这里的询盘数据。登录成功后，列表会从后端受保护接口读取真实记录。',
+      '访客即使知道链接，也只能看到登录层。登录成功后，页面会从受保护接口读取真实询盘记录。',
     loginTitle: '管理员登录',
-    loginBody: '使用后台账号登录后，才能查看询盘列表与来源统计。',
+    loginBody: '使用后台账号解锁询盘列表、来源上下文和筛选面板。',
     usernameLabel: '管理员账号',
     passwordLabel: '管理员密码',
     submitLabel: '登录后台',
@@ -36,13 +59,13 @@ const ADMIN_COPY = {
     sourceLabel: '来源标签',
     allCategories: '全部分类',
     allSources: '全部来源',
-    emptySource: '未标记来源',
+    emptySource: '未记录',
     totalLabel: '总询盘数',
     sourceCountLabel: '来源标签数',
     pageLabel: '当前页',
     loadingSession: '正在确认管理员会话...',
     loadingInquiries: '正在读取询盘列表...',
-    noResults: '当前筛选条件下还没有询盘记录。',
+    noResults: '当前筛选条件下还没有匹配的询盘记录。',
     backToSite: '返回官网前台',
     refreshLabel: '刷新列表',
     previousPage: '上一页',
@@ -51,7 +74,7 @@ const ADMIN_COPY = {
     fieldCompany: '公司',
     fieldContact: '联系人',
     fieldCategory: '分类',
-    fieldSource: '来源',
+    fieldSource: '来源标签',
     fieldCreatedAt: '提交时间',
     fieldLocale: '语言',
     fieldStatus: '状态',
@@ -61,17 +84,19 @@ const ADMIN_COPY = {
     fieldReferer: 'Referer',
     sourcePageLabel: '提交页',
     signedInAs: '当前管理员',
-    loginErrorFallback: '管理员登录失败，请稍后再试。',
+    loginErrorFallback: '管理员登录失败，请稍后重试。',
+    loginSuccess: '后台登录成功',
+    logoutSuccess: '已退出后台会话',
   },
   en: {
     eyebrow: 'Admin console',
-    title: 'Inquiry admin list',
+    title: 'Inquiry console',
     summary:
-      'This route is reserved for administrators to review inquiries, source tags, contact details, and submission timing.',
+      'This route is reserved for administrators to review incoming inquiries, source tags, contact details, and submission timing.',
     description:
-      'Public visitors cannot see this data. After sign-in, the list is loaded from protected backend endpoints.',
+      'Visitors can reach the URL but cannot see any protected data until an administrator signs in.',
     loginTitle: 'Administrator sign-in',
-    loginBody: 'Use the admin account to unlock the inquiry list and source tracking.',
+    loginBody: 'Use the admin account to unlock inquiry records, source context, and filters.',
     usernameLabel: 'Username',
     passwordLabel: 'Password',
     submitLabel: 'Sign in',
@@ -82,12 +107,12 @@ const ADMIN_COPY = {
     sourceLabel: 'Source tag',
     allCategories: 'All categories',
     allSources: 'All sources',
-    emptySource: 'No source tag',
+    emptySource: 'Not recorded',
     totalLabel: 'Total inquiries',
-    sourceCountLabel: 'Tracked source tags',
+    sourceCountLabel: 'Tracked sources',
     pageLabel: 'Current page',
     loadingSession: 'Checking administrator session...',
-    loadingInquiries: 'Loading inquiry list...',
+    loadingInquiries: 'Loading inquiry records...',
     noResults: 'No inquiries match the current filters.',
     backToSite: 'Back to website',
     refreshLabel: 'Refresh list',
@@ -108,17 +133,12 @@ const ADMIN_COPY = {
     sourcePageLabel: 'Source page',
     signedInAs: 'Signed in as',
     loginErrorFallback: 'Administrator login failed. Please try again.',
+    loginSuccess: 'Administrator session unlocked',
+    logoutSuccess: 'Administrator session closed',
   },
 } as const
 
 type AdminLocaleCopy = (typeof ADMIN_COPY)[keyof typeof ADMIN_COPY]
-
-function formatTimestamp(value: string, locale: 'zh' | 'en') {
-  return new Intl.DateTimeFormat(locale === 'zh' ? 'zh-CN' : 'en-US', {
-    dateStyle: 'medium',
-    timeStyle: 'short',
-  }).format(new Date(value))
-}
 
 function renderPageSummary(copy: AdminLocaleCopy, page: number, totalPages: number) {
   return copy.pageSummary
@@ -133,6 +153,45 @@ function getCategoryLabel(
   return categories.find((category) => category.value === value)?.label ?? value
 }
 
+function formatRelativeTime(value: string, locale: 'zh' | 'en') {
+  return formatDistanceToNow(new Date(value), {
+    addSuffix: true,
+    locale: locale === 'zh' ? zhCN : enUS,
+  })
+}
+
+function LoadingState({ copy }: { copy: AdminLocaleCopy }) {
+  return (
+    <div className="grid gap-6">
+      <Card className="admin-panel admin-panel--muted">
+        <CardHeader>
+          <p className="eyebrow">{copy.eyebrow}</p>
+          <CardTitle>{copy.title}</CardTitle>
+          <CardDescription>{copy.loadingSession}</CardDescription>
+        </CardHeader>
+      </Card>
+
+      <div className="grid gap-6 lg:grid-cols-[1.3fr,0.7fr]">
+        <Card className="admin-panel">
+          <CardContent className="grid gap-4 p-6">
+            <Skeleton className="h-5 w-32" />
+            <Skeleton className="h-12 w-2/3" />
+            <Skeleton className="h-5 w-full" />
+            <Skeleton className="h-5 w-5/6" />
+          </CardContent>
+        </Card>
+        <Card className="admin-panel">
+          <CardContent className="grid gap-4 p-6">
+            <Skeleton className="h-10 w-full" />
+            <Skeleton className="h-10 w-full" />
+            <Skeleton className="h-11 w-40" />
+          </CardContent>
+        </Card>
+      </div>
+    </div>
+  )
+}
+
 function InquiryCard({
   copy,
   locale,
@@ -145,64 +204,64 @@ function InquiryCard({
   categoryLabel: string
 }) {
   return (
-    <article className="admin-inquiry-card">
-      <header className="admin-inquiry-card__header">
-        <div className="admin-inquiry-card__identity">
-          <p className="admin-inquiry-card__eyebrow">
-            {copy.fieldCompany} #{item.id}
-          </p>
-          <h2>{item.companyName}</h2>
-          <p>{item.contactName}</p>
+    <Card className="admin-inquiry-card">
+      <CardContent className="grid gap-5 p-6">
+        <div className="admin-inquiry-card__header">
+          <div className="admin-inquiry-card__identity">
+            <p className="admin-inquiry-card__eyebrow">
+              {copy.fieldCompany} #{item.id}
+            </p>
+            <h2>{item.companyName}</h2>
+            <p>{item.contactName}</p>
+          </div>
+          <div className="admin-inquiry-card__meta">
+            <Badge>{item.status}</Badge>
+            <Badge variant="muted">{formatRelativeTime(item.createdAt, locale)}</Badge>
+          </div>
         </div>
-        <div className="admin-inquiry-card__meta">
-          <span className="admin-badge">{item.status}</span>
-          <span className="admin-badge admin-badge--muted">
-            {formatTimestamp(item.createdAt, locale)}
+
+        <div className="admin-inquiry-card__grid">
+          <div>
+            <p className="admin-field-label">{copy.fieldContact}</p>
+            <p>{item.contactName}</p>
+            <p>{item.email}</p>
+            <p>{item.phone}</p>
+          </div>
+          <div>
+            <p className="admin-field-label">{copy.fieldCategory}</p>
+            <p>{categoryLabel}</p>
+            <p className="admin-field-label">{copy.fieldLocale}</p>
+            <p>{item.locale.toUpperCase()}</p>
+          </div>
+          <div>
+            <p className="admin-field-label">{copy.fieldSource}</p>
+            <p>{item.sourceContext ?? copy.emptySource}</p>
+            <p className="admin-field-label">{copy.sourcePageLabel}</p>
+            <p>{item.sourcePage}</p>
+          </div>
+          <div>
+            <p className="admin-field-label">{copy.fieldReference}</p>
+            <p>{item.requestId ?? '-'}</p>
+            <p className="admin-field-label">{copy.fieldClientIp}</p>
+            <p>{item.clientIp ?? '-'}</p>
+          </div>
+        </div>
+
+        <div className="admin-inquiry-card__message">
+          <p className="admin-field-label">{copy.fieldMessage}</p>
+          <p>{item.message}</p>
+        </div>
+
+        <div className="admin-inquiry-card__footer">
+          <span>
+            {copy.fieldReferer}: {item.referer ?? '-'}
+          </span>
+          <span>
+            {copy.fieldCreatedAt}: {formatRelativeTime(item.createdAt, locale)}
           </span>
         </div>
-      </header>
-
-      <div className="admin-inquiry-card__grid">
-        <div>
-          <p className="admin-field-label">{copy.fieldContact}</p>
-          <p>{item.contactName}</p>
-          <p>{item.email}</p>
-          <p>{item.phone}</p>
-        </div>
-        <div>
-          <p className="admin-field-label">{copy.fieldCategory}</p>
-          <p>{categoryLabel}</p>
-          <p className="admin-field-label">{copy.fieldLocale}</p>
-          <p>{item.locale.toUpperCase()}</p>
-        </div>
-        <div>
-          <p className="admin-field-label">{copy.fieldSource}</p>
-          <p>{item.sourceContext ?? copy.emptySource}</p>
-          <p className="admin-field-label">{copy.sourcePageLabel}</p>
-          <p>{item.sourcePage}</p>
-        </div>
-        <div>
-          <p className="admin-field-label">{copy.fieldReference}</p>
-          <p>{item.requestId ?? '-'}</p>
-          <p className="admin-field-label">{copy.fieldClientIp}</p>
-          <p>{item.clientIp ?? '-'}</p>
-        </div>
-      </div>
-
-      <div className="admin-inquiry-card__message">
-        <p className="admin-field-label">{copy.fieldMessage}</p>
-        <p>{item.message}</p>
-      </div>
-
-      <div className="admin-inquiry-card__footer">
-        <span>
-          {copy.fieldReferer}: {item.referer ?? '-'}
-        </span>
-        <span>
-          {copy.fieldCreatedAt}: {formatTimestamp(item.createdAt, locale)}
-        </span>
-      </div>
-    </article>
+      </CardContent>
+    </Card>
   )
 }
 
@@ -229,6 +288,15 @@ export function AdminInquiriesPage() {
       queryClient.setQueryData(['admin-session'], session)
       queryClient.removeQueries({ queryKey: ['admin-inquiries'] })
       setCredentials({ username: '', password: '' })
+      toast.success(copy.loginSuccess, {
+        description: session.username,
+      })
+    },
+    onError: (error) => {
+      toast.error(copy.submitLabel, {
+        description:
+          error instanceof Error ? error.message : copy.loginErrorFallback,
+      })
     },
   })
 
@@ -237,6 +305,7 @@ export function AdminInquiriesPage() {
     onSuccess: () => {
       queryClient.setQueryData(['admin-session'], null)
       queryClient.removeQueries({ queryKey: ['admin-inquiries'] })
+      toast.success(copy.logoutSuccess)
     },
   })
 
@@ -258,8 +327,11 @@ export function AdminInquiriesPage() {
     if (inquiriesQuery.error instanceof AdminUnauthorizedError) {
       queryClient.setQueryData(['admin-session'], null)
       queryClient.removeQueries({ queryKey: ['admin-inquiries'] })
+      toast.error(copy.logoutLabel, {
+        description: inquiriesQuery.error.message,
+      })
     }
-  }, [inquiriesQuery.error, queryClient])
+  }, [copy.logoutLabel, inquiriesQuery.error, queryClient])
 
   const categoryOptions = content.contactPage.categoryOptions
   const availableSourceContexts = inquiriesQuery.data?.availableSourceContexts ?? []
@@ -286,12 +358,8 @@ export function AdminInquiriesPage() {
   if (sessionQuery.isLoading) {
     return (
       <section className="page-band page-band--tight">
-        <div className="admin-shell admin-shell--single">
-          <div className="admin-panel admin-panel--muted">
-            <p className="eyebrow">{copy.eyebrow}</p>
-            <h1>{copy.title}</h1>
-            <p>{copy.loadingSession}</p>
-          </div>
+        <div className="admin-shell">
+          <LoadingState copy={copy} />
         </div>
       </section>
     )
@@ -301,246 +369,305 @@ export function AdminInquiriesPage() {
     return (
       <section className="page-band page-band--tight">
         <div className="admin-shell admin-shell--single">
-          <div className="admin-panel">
-            <p className="eyebrow">{copy.eyebrow}</p>
-            <h1>{copy.title}</h1>
-            <p className="hero-summary">{copy.summary}</p>
-            <p className="hero-description">{copy.description}</p>
+          <motion.div
+            animate={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, y: 10 }}
+            transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
+          >
+            <Card className="admin-panel">
+              <CardHeader className="space-y-3">
+                <p className="eyebrow">{copy.eyebrow}</p>
+                <CardTitle className="text-4xl leading-none">{copy.title}</CardTitle>
+                <CardDescription className="hero-summary">{copy.summary}</CardDescription>
+                <CardDescription className="hero-description">
+                  {copy.description}
+                </CardDescription>
+              </CardHeader>
 
-            <div className="admin-login-card">
-              <div className="admin-login-card__intro">
-                <p className="admin-field-label">{copy.loginTitle}</p>
-                <h2>{copy.loginBody}</h2>
-              </div>
+              <CardContent>
+                <Card className="admin-login-card">
+                  <CardHeader className="admin-login-card__intro">
+                    <p className="admin-field-label">{copy.loginTitle}</p>
+                    <CardTitle className="text-2xl">{copy.loginBody}</CardTitle>
+                  </CardHeader>
 
-              <form
-                className="admin-login-form"
-                onSubmit={(event) => {
-                  event.preventDefault()
-                  loginMutation.mutate(credentials)
-                }}
-              >
-                <label className="contact-field">
-                  <span>{copy.usernameLabel}</span>
-                  <input
-                    autoComplete="username"
-                    name="username"
-                    onChange={(event) => {
-                      const { value } = event.currentTarget
-                      setCredentials((current) => ({
-                        ...current,
-                        username: value,
-                      }))
-                    }}
-                    required
-                    value={credentials.username}
-                  />
-                </label>
+                  <CardContent>
+                    <form
+                      className="admin-login-form"
+                      onSubmit={(event) => {
+                        event.preventDefault()
+                        loginMutation.mutate(credentials)
+                      }}
+                    >
+                      <Field htmlFor="admin-username" label={copy.usernameLabel} required>
+                        <Input
+                          aria-label={copy.usernameLabel}
+                          autoComplete="username"
+                          id="admin-username"
+                          name="username"
+                          onChange={(event) => {
+                            const { value } = event.currentTarget
+                            setCredentials((current) => ({
+                              ...current,
+                              username: value,
+                            }))
+                          }}
+                          value={credentials.username}
+                        />
+                      </Field>
 
-                <label className="contact-field">
-                  <span>{copy.passwordLabel}</span>
-                  <input
-                    autoComplete="current-password"
-                    name="password"
-                    onChange={(event) => {
-                      const { value } = event.currentTarget
-                      setCredentials((current) => ({
-                        ...current,
-                        password: value,
-                      }))
-                    }}
-                    required
-                    type="password"
-                    value={credentials.password}
-                  />
-                </label>
+                      <Field htmlFor="admin-password" label={copy.passwordLabel} required>
+                        <Input
+                          aria-label={copy.passwordLabel}
+                          autoComplete="current-password"
+                          id="admin-password"
+                          name="password"
+                          onChange={(event) => {
+                            const { value } = event.currentTarget
+                            setCredentials((current) => ({
+                              ...current,
+                              password: value,
+                            }))
+                          }}
+                          type="password"
+                          value={credentials.password}
+                        />
+                      </Field>
 
-                {loginMutation.isError ? (
-                  <p className="admin-login-error" role="alert">
-                    {loginMutation.error instanceof Error
-                      ? loginMutation.error.message
-                      : copy.loginErrorFallback}
-                  </p>
-                ) : null}
-
-                <div className="admin-login-actions">
-                  <button className="contact-submit" type="submit">
-                    <Lock size={16} />
-                    <span>{copy.submitLabel}</span>
-                  </button>
-                  <Link className="secondary-link" to={buildLocalePath(locale)}>
-                    <ArrowLeft size={16} />
-                    <span>{copy.backToSite}</span>
-                  </Link>
-                </div>
-              </form>
-            </div>
-          </div>
+                      <div className="admin-login-actions">
+                        <Button
+                          disabled={loginMutation.isPending}
+                          size="lg"
+                          type="submit"
+                        >
+                          <LockKeyhole size={16} />
+                          <span>{copy.submitLabel}</span>
+                        </Button>
+                        <Button asChild size="lg" variant="secondary">
+                          <Link to={buildLocalePath(locale)}>
+                            <ArrowLeft size={16} />
+                            <span>{copy.backToSite}</span>
+                          </Link>
+                        </Button>
+                      </div>
+                    </form>
+                  </CardContent>
+                </Card>
+              </CardContent>
+            </Card>
+          </motion.div>
         </div>
       </section>
     )
   }
 
   return (
-    <>
+    <div className="space-y-6">
       <section className="page-band page-band--tight">
         <div className="admin-shell">
-          <div className="admin-panel">
-            <div className="admin-panel__header">
-              <div>
-                <p className="eyebrow">{copy.eyebrow}</p>
-                <h1>{copy.title}</h1>
-                <p className="hero-summary">{copy.summary}</p>
-                <p className="hero-description">{copy.description}</p>
+          <motion.div
+            animate={{ opacity: 1, y: 0 }}
+            className="grid gap-6"
+            initial={{ opacity: 0, y: 10 }}
+            transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
+          >
+            <Card className="admin-panel">
+              <div className="admin-panel__header">
+                <CardHeader className="space-y-3">
+                  <p className="eyebrow">{copy.eyebrow}</p>
+                  <CardTitle className="text-4xl leading-none">{copy.title}</CardTitle>
+                  <CardDescription className="hero-summary">{copy.summary}</CardDescription>
+                  <CardDescription className="hero-description">
+                    {copy.description}
+                  </CardDescription>
+                </CardHeader>
+                <Card className="admin-session-box">
+                  <CardContent className="grid gap-3 p-5">
+                    <p className="admin-field-label">{copy.signedInAs}</p>
+                    <h2>{sessionQuery.data.username}</h2>
+                    <p>{formatRelativeTime(sessionQuery.data.expiresAt, locale)}</p>
+                    <Button
+                      className="justify-start"
+                      onClick={() => logoutMutation.mutate()}
+                      variant="secondary"
+                    >
+                      <LogOut size={16} />
+                      <span>{copy.logoutLabel}</span>
+                    </Button>
+                  </CardContent>
+                </Card>
               </div>
-              <div className="admin-session-box">
-                <p className="admin-field-label">{copy.signedInAs}</p>
-                <h2>{sessionQuery.data.username}</h2>
-                <p>{formatTimestamp(sessionQuery.data.expiresAt, locale)}</p>
-                <button
-                  className="secondary-link"
-                  onClick={() => logoutMutation.mutate()}
-                  type="button"
-                >
-                  <LogOut size={16} />
-                  <span>{copy.logoutLabel}</span>
-                </button>
-              </div>
-            </div>
 
-            <div className="admin-stat-grid">
-              {stats.map((item) => (
-                <article key={item.label} className="admin-stat-card">
-                  <p className="admin-field-label">{item.label}</p>
-                  <h2>{item.value}</h2>
-                </article>
-              ))}
-            </div>
-          </div>
+              <CardContent className="admin-stat-grid">
+                {stats.map((item) => (
+                  <Card key={item.label} className="admin-stat-card">
+                    <CardContent className="grid gap-2 p-5">
+                      <p className="admin-field-label">{item.label}</p>
+                      <h2>{item.value}</h2>
+                    </CardContent>
+                  </Card>
+                ))}
+              </CardContent>
+            </Card>
+          </motion.div>
         </div>
       </section>
 
       <section className="page-band page-band--bordered">
         <div className="admin-shell">
-          <div className="admin-panel admin-panel--muted">
-            <div className="admin-filter-bar">
-              <label className="contact-field admin-filter-field">
-                <span>{copy.searchLabel}</span>
-                <div className="admin-search-input">
-                  <Search size={16} />
-                  <input
-                    onChange={(event) => {
-                      setQuery(event.currentTarget.value)
-                      setPage(1)
-                    }}
-                    placeholder={copy.searchPlaceholder}
-                    value={query}
-                  />
+          <motion.div
+            animate={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, y: 10 }}
+            transition={{ duration: 0.28, delay: 0.04, ease: [0.22, 1, 0.36, 1] }}
+          >
+            <Card className="admin-panel admin-panel--muted">
+              <CardContent className="grid gap-6 p-6">
+                <div className="admin-filter-bar">
+                  <Field className="admin-filter-field" label={copy.searchLabel}>
+                    <div className="admin-search-input">
+                      <Search size={16} />
+                      <input
+                        aria-label={copy.searchLabel}
+                        onChange={(event) => {
+                          setQuery(event.currentTarget.value)
+                          setPage(1)
+                        }}
+                        placeholder={copy.searchPlaceholder}
+                        value={query}
+                      />
+                    </div>
+                  </Field>
+
+                  <Field className="admin-filter-field" label={copy.categoryLabel}>
+                    <Select
+                      aria-label={copy.categoryLabel}
+                      onChange={(event) => {
+                        setCategory(event.currentTarget.value)
+                        setPage(1)
+                      }}
+                      value={category}
+                    >
+                      <option value="">{copy.allCategories}</option>
+                      {categoryOptions
+                        .filter((item) =>
+                          (inquiriesQuery.data?.availableCategories ?? []).includes(item.value),
+                        )
+                        .map((item) => (
+                          <option key={item.value} value={item.value}>
+                            {item.label}
+                          </option>
+                        ))}
+                    </Select>
+                  </Field>
+
+                  <Field className="admin-filter-field" label={copy.sourceLabel}>
+                    <Select
+                      aria-label={copy.sourceLabel}
+                      onChange={(event) => {
+                        setSourceContext(event.currentTarget.value)
+                        setPage(1)
+                      }}
+                      value={sourceContext}
+                    >
+                      <option value="">{copy.allSources}</option>
+                      {availableSourceContexts.map((item) => (
+                        <option key={item} value={item}>
+                          {item}
+                        </option>
+                      ))}
+                    </Select>
+                  </Field>
+
+                  <Button
+                    className="mt-auto"
+                    onClick={() => inquiriesQuery.refetch()}
+                    variant="secondary"
+                  >
+                    <RefreshCcw size={16} />
+                    <span>{copy.refreshLabel}</span>
+                  </Button>
                 </div>
-              </label>
 
-              <label className="contact-field admin-filter-field">
-                <span>{copy.categoryLabel}</span>
-                <select
-                  onChange={(event) => {
-                    setCategory(event.currentTarget.value)
-                    setPage(1)
-                  }}
-                  value={category}
-                >
-                  <option value="">{copy.allCategories}</option>
-                  {categoryOptions
-                    .filter((item) =>
-                      (inquiriesQuery.data?.availableCategories ?? []).includes(item.value),
-                    )
-                    .map((item) => (
-                      <option key={item.value} value={item.value}>
-                        {item.label}
-                      </option>
+                {inquiriesQuery.isLoading ? (
+                  <div className="grid gap-4">
+                    <p className="admin-loading-copy">{copy.loadingInquiries}</p>
+                    {Array.from({ length: 3 }).map((_, index) => (
+                      <Card key={index} className="admin-inquiry-card">
+                        <CardContent className="grid gap-4 p-6">
+                          <Skeleton className="h-5 w-28" />
+                          <Skeleton className="h-10 w-1/2" />
+                          <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+                            <Skeleton className="h-20 w-full" />
+                            <Skeleton className="h-20 w-full" />
+                            <Skeleton className="h-20 w-full" />
+                            <Skeleton className="h-20 w-full" />
+                          </div>
+                          <Skeleton className="h-24 w-full" />
+                        </CardContent>
+                      </Card>
                     ))}
-                </select>
-              </label>
-
-              <label className="contact-field admin-filter-field">
-                <span>{copy.sourceLabel}</span>
-                <select
-                  onChange={(event) => {
-                    setSourceContext(event.currentTarget.value)
-                    setPage(1)
-                  }}
-                  value={sourceContext}
-                >
-                  <option value="">{copy.allSources}</option>
-                  {availableSourceContexts.map((item) => (
-                    <option key={item} value={item}>
-                      {item}
-                    </option>
-                  ))}
-                </select>
-              </label>
-
-              <button
-                className="secondary-link"
-                onClick={() => inquiriesQuery.refetch()}
-                type="button"
-              >
-                <RefreshCcw size={16} />
-                <span>{copy.refreshLabel}</span>
-              </button>
-            </div>
-
-            {inquiriesQuery.isLoading ? (
-              <p className="admin-loading-copy">{copy.loadingInquiries}</p>
-            ) : null}
-
-            {inquiriesQuery.data?.items.length ? (
-              <div className="admin-inquiry-list">
-                {inquiriesQuery.data.items.map((item) => (
-                  <InquiryCard
-                    key={item.id}
-                    categoryLabel={getCategoryLabel(categoryOptions, item.interestCategory)}
-                    copy={copy}
-                    item={item}
-                    locale={locale}
-                  />
-                ))}
-              </div>
-            ) : inquiriesQuery.isLoading ? null : (
-              <p className="admin-empty-state">{copy.noResults}</p>
-            )}
-
-            <div className="admin-pagination">
-              <button
-                className="secondary-link"
-                disabled={page <= 1}
-                onClick={() => setPage((current) => Math.max(1, current - 1))}
-                type="button"
-              >
-                {copy.previousPage}
-              </button>
-              <p>
-                {renderPageSummary(
-                  copy,
-                  inquiriesQuery.data?.page ?? page,
-                  inquiriesQuery.data?.totalPages ?? 1,
+                  </div>
+                ) : inquiriesQuery.data?.items.length ? (
+                  <div className="admin-inquiry-list">
+                    {inquiriesQuery.data.items.map((item, index) => (
+                      <motion.div
+                        animate={{ opacity: 1, y: 0 }}
+                        initial={{ opacity: 0, y: 8 }}
+                        key={item.id}
+                        transition={{
+                          duration: 0.24,
+                          delay: Math.min(index * 0.04, 0.16),
+                          ease: [0.22, 1, 0.36, 1],
+                        }}
+                      >
+                        <InquiryCard
+                          categoryLabel={getCategoryLabel(
+                            categoryOptions,
+                            item.interestCategory,
+                          )}
+                          copy={copy}
+                          item={item}
+                          locale={locale}
+                        />
+                      </motion.div>
+                    ))}
+                  </div>
+                ) : (
+                  <p className="admin-empty-state">{copy.noResults}</p>
                 )}
-              </p>
-              <button
-                className="secondary-link"
-                disabled={page >= (inquiriesQuery.data?.totalPages ?? 1)}
-                onClick={() =>
-                  setPage((current) =>
-                    Math.min(inquiriesQuery.data?.totalPages ?? 1, current + 1),
-                  )
-                }
-                type="button"
-              >
-                {copy.nextPage}
-              </button>
-            </div>
-          </div>
+
+                <div className="admin-pagination">
+                  <Button
+                    disabled={page <= 1}
+                    onClick={() => setPage((current) => Math.max(1, current - 1))}
+                    variant="secondary"
+                  >
+                    {copy.previousPage}
+                  </Button>
+                  <p>
+                    {renderPageSummary(
+                      copy,
+                      inquiriesQuery.data?.page ?? page,
+                      inquiriesQuery.data?.totalPages ?? 1,
+                    )}
+                  </p>
+                  <Button
+                    disabled={page >= (inquiriesQuery.data?.totalPages ?? 1)}
+                    onClick={() =>
+                      setPage((current) =>
+                        Math.min(inquiriesQuery.data?.totalPages ?? 1, current + 1),
+                      )
+                    }
+                    variant="secondary"
+                  >
+                    {copy.nextPage}
+                  </Button>
+                </div>
+              </CardContent>
+            </Card>
+          </motion.div>
         </div>
       </section>
-    </>
+    </div>
   )
 }

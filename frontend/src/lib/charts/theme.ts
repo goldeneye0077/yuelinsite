@@ -17,31 +17,31 @@ type ShellChartTheme = {
 
 export const lightChartTheme: ShellChartTheme = {
   background: '#FFFFFF',
-  colorScheme: ['#0D4D7A', '#D8892B', '#6B7E90', '#5F8FB6'],
+  colorScheme: ['#6366F1', '#0EA5E9', '#334155', '#8B5CF6'],
   axis: {
-    labelColor: '#526679',
-    gridColor: '#D9E2EA',
-    domainColor: '#C3D0DA',
+    labelColor: '#64748B',
+    gridColor: '#E2E8F0',
+    domainColor: '#CBD5E1',
   },
   tooltip: {
     background: '#FFFFFF',
-    borderColor: '#C3D0DA',
-    textColor: '#112132',
+    borderColor: '#CBD5E1',
+    textColor: '#0F172A',
   },
 }
 
 export const darkChartTheme: ShellChartTheme = {
-  background: '#0E1B29',
-  colorScheme: ['#56B0E8', '#F0A94B', '#7F97AB', '#4BC0B7'],
+  background: '#09090B',
+  colorScheme: ['#818CF8', '#38BDF8', '#94A3B8', '#22D3EE'],
   axis: {
-    labelColor: '#A8B9C8',
-    gridColor: '#173248',
-    domainColor: '#2C455A',
+    labelColor: '#94A3B8',
+    gridColor: '#27272A',
+    domainColor: '#334155',
   },
   tooltip: {
-    background: '#14283A',
-    borderColor: '#2C455A',
-    textColor: '#F3F7FB',
+    background: '#18181B',
+    borderColor: '#334155',
+    textColor: '#F8FAFC',
   },
 }
 

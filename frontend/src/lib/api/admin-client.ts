@@ -56,6 +56,15 @@ export interface AdminInquiryListQuery {
   sourceContext?: string
 }
 
+interface ApiEnvelope<T> {
+  success: boolean
+  data: T
+  meta: {
+    requestId: string | null
+    generatedAt: string
+  }
+}
+
 export async function getAdminSession(): Promise<AdminSessionData | null> {
   const response = await fetch(`${API_BASE_URL}/api/v1/admin/session`, {
     credentials: 'include',
@@ -72,7 +81,7 @@ export async function getAdminSession(): Promise<AdminSessionData | null> {
     throw new Error(await getAdminErrorMessage(response))
   }
 
-  return (await response.json()) as AdminSessionData
+  return unwrapApiEnvelope<AdminSessionData>(await response.json())
 }
 
 export async function createAdminSession(
@@ -96,7 +105,7 @@ export async function createAdminSession(
     throw new Error(await getAdminErrorMessage(response))
   }
 
-  return (await response.json()) as AdminSessionData
+  return unwrapApiEnvelope<AdminSessionData>(await response.json())
 }
 
 export async function destroyAdminSession(): Promise<void> {
@@ -151,7 +160,7 @@ export async function getAdminInquiries(
     throw new Error(await getAdminErrorMessage(response))
   }
 
-  return (await response.json()) as AdminInquiryListResponse
+  return unwrapApiEnvelope<AdminInquiryListResponse>(await response.json())
 }
 
 async function getAdminErrorMessage(response: Response) {
@@ -165,4 +174,9 @@ async function getAdminErrorMessage(response: Response) {
   }
 
   return 'Administrator request failed.'
+}
+
+function unwrapApiEnvelope<T>(payload: unknown): T {
+  const envelope = payload as ApiEnvelope<T>
+  return envelope.data
 }

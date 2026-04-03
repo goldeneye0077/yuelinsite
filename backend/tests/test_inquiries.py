@@ -2,6 +2,14 @@ from sqlalchemy import func, select
 
 from app.models.inquiry import Inquiry
 
+ZH_CONSENT_DETAIL = (
+    '\u8bf7\u5148\u786e\u8ba4\u5df2\u540c\u610f\u8dc3\u9cde\u79d1\u6280\u5904\u7406'
+    '\u672c\u6b21\u54a8\u8be2\u4fe1\u606f\u3002'
+)
+ZH_RATE_LIMIT_DETAIL = (
+    '\u63d0\u4ea4\u8fc7\u4e8e\u9891\u7e41\uff0c\u8bf7\u7a0d\u540e\u518d\u8bd5\u3002'
+)
+
 
 def build_payload(**overrides):
     payload = {
@@ -34,11 +42,15 @@ def test_inquiry_submission_persists_to_database(client, session_factory):
 
     assert response.status_code == 201
     payload = response.json()
-    assert payload['status'] == 'received'
-    assert payload['detail'] == "Inquiry received. We'll get back to you shortly."
+    assert payload['success'] is True
+    assert payload['data']['status'] == 'received'
+    assert payload['data']['detail'] == "Inquiry received. We'll get back to you shortly."
+    assert payload['meta']['requestId']
 
     with session_factory() as session:
-        inquiry = session.scalar(select(Inquiry).where(Inquiry.id == payload['submissionId']))
+        inquiry = session.scalar(
+            select(Inquiry).where(Inquiry.id == payload['data']['submissionId'])
+        )
 
     assert inquiry is not None
     assert inquiry.company_name == 'Demo Factory'
@@ -103,7 +115,7 @@ def test_inquiry_submission_requires_consent(client):
     )
 
     assert response.status_code == 400
-    assert response.json()['detail'] == '请先确认已同意跃鳞科技处理本次咨询信息。'
+    assert response.json()['detail'] == ZH_CONSENT_DETAIL
 
 
 def test_inquiry_submission_honeypot_does_not_persist(client, session_factory):
@@ -113,7 +125,7 @@ def test_inquiry_submission_honeypot_does_not_persist(client, session_factory):
     )
 
     assert response.status_code == 201
-    assert response.json()['submissionId'] == 0
+    assert response.json()['data']['submissionId'] == 0
 
     with session_factory() as session:
         total = session.scalar(select(func.count()).select_from(Inquiry))
@@ -132,5 +144,5 @@ def test_inquiry_submission_rate_limits_repeated_requests(client):
     )
 
     assert limited_response.status_code == 429
-    assert limited_response.json()['detail'] == '提交过于频繁，请稍后再试。'
+    assert limited_response.json()['detail'] == ZH_RATE_LIMIT_DETAIL
     assert int(limited_response.headers['retry-after']) >= 1
