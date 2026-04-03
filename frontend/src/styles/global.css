@@ -2492,6 +2492,29 @@ img {
   font-size: 0.92rem;
 }
 
+.footer-hidden-entry {
+  display: inline-block;
+  color: inherit;
+  border-radius: 8px;
+  padding-inline: 1px;
+  transition:
+    color var(--transition-base),
+    background-color var(--transition-base),
+    box-shadow var(--transition-base);
+}
+
+.footer-hidden-entry:hover {
+  color: var(--color-text);
+  background: color-mix(in srgb, var(--color-accent-soft) 68%, transparent);
+}
+
+.footer-hidden-entry:focus-visible {
+  color: var(--color-text);
+  background: color-mix(in srgb, var(--color-accent-soft) 82%, transparent);
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--color-accent) 32%, transparent);
+  outline: none;
+}
+
 @keyframes heroLift {
   from {
     opacity: 0;

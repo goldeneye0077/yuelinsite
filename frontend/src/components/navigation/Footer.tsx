@@ -9,6 +9,36 @@ type FooterProps = {
   locale: Locale
 }
 
+const ADMIN_ENTRY_WORD = 'Yuelin'
+const ADMIN_ENTRY_TRIGGER = 'in'
+
+function renderFooterLegalNote(legal: string, locale: Locale) {
+  const wordIndex = legal.indexOf(ADMIN_ENTRY_WORD)
+
+  if (wordIndex === -1) {
+    return legal
+  }
+
+  const triggerStart = wordIndex + ADMIN_ENTRY_WORD.length - ADMIN_ENTRY_TRIGGER.length
+  const triggerEnd = triggerStart + ADMIN_ENTRY_TRIGGER.length
+  const adminLabel =
+    locale === 'zh' ? '打开管理员询盘后台' : 'Open administrator inquiry console'
+
+  return (
+    <>
+      <span>{legal.slice(0, triggerStart)}</span>
+      <Link
+        aria-label={adminLabel}
+        className="footer-hidden-entry"
+        to={`/${locale}/admin/inquiries`}
+      >
+        {legal.slice(triggerStart, triggerEnd)}
+      </Link>
+      <span>{legal.slice(triggerEnd)}</span>
+    </>
+  )
+}
+
 export function Footer({ content, locale }: FooterProps) {
   return (
     <footer className="site-footer">
@@ -50,7 +80,9 @@ export function Footer({ content, locale }: FooterProps) {
           ))}
         </div>
 
-        <div className="footer-note">{content.footer.legal}</div>
+        <div className="footer-note">
+          {renderFooterLegalNote(content.footer.legal, locale)}
+        </div>
       </div>
     </footer>
   )
