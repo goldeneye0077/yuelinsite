@@ -3,9 +3,9 @@ import { ArrowRight, ChevronLeft, ExternalLink } from 'lucide-react'
 import { Link, Navigate, useParams } from 'react-router-dom'
 
 import {
-  buildRepresentativeProducts,
   buildIndustrialSensorGroupPath,
   buildProductFamilyPath,
+  buildRepresentativeProducts,
   getIndustrialSensorFamily,
   getIndustrialSensorGroup,
   getProductTaxonomy,
@@ -29,7 +29,7 @@ export function ProductGroupPage() {
   const [activeProductId, setActiveProductId] = useState<string | null>(null)
   const activeProduct =
     products.find((item) => item.id === activeProductId) ?? products[0] ?? null
-  const isFiberSensors = normalizedGroupSlug === 'fiber-sensors'
+  const hasVisualProducts = products.some((item) => item.imageSrc)
   const siblingGroups = family?.groups.filter((item) => item.slug !== group?.slug) ?? []
 
   if (!normalizedGroupSlug) {
@@ -53,7 +53,7 @@ export function ProductGroupPage() {
   const applicationLabel = locale === 'zh' ? '应用场景' : 'Application'
   const seriesLabel = locale === 'zh' ? '代表系列' : 'Series'
   const referenceLabel = locale === 'zh' ? '参考来源' : 'Reference'
-  const previewTitle = locale === 'zh' ? '代表产品图' : 'Reference Products'
+  const previewTitle = locale === 'zh' ? '代表产品图' : 'Reference products'
 
   return (
     <>
@@ -263,7 +263,7 @@ export function ProductGroupPage() {
             <p className="eyebrow">{taxonomy.listingTemplateTitle}</p>
             <p className="story-intro">{taxonomy.listingTemplateSummary}</p>
             <div className="product-series-list">
-              {isFiberSensors
+              {hasVisualProducts
                 ? products.map((product, index) => (
                     <article
                       key={product.id}

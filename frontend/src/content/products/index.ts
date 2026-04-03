@@ -1,4 +1,11 @@
-import { fiberSensorVisuals } from '../media/referenceAssets'
+import {
+  fiberSensorVisuals,
+  type FiberSensorVisual,
+} from '../media/referenceAssets'
+import {
+  industrialSensorReferenceVisuals,
+  type IndustrialSensorReferenceVisual,
+} from '../media/industrialSensorReferenceVisuals'
 import { buildLocalePath, type Locale } from '../../i18n/locales'
 import { enProductTaxonomy } from './en'
 import { zhProductTaxonomy } from './zh'
@@ -7,6 +14,302 @@ import type { ProductFamilyKey, RepresentativeProduct } from './types'
 const productTaxonomyMap = {
   zh: zhProductTaxonomy,
   en: enProductTaxonomy,
+}
+
+const industrialSensorGroupCopy: Record<
+  string,
+  {
+    application: Record<Locale, string>
+    inquiryHint: Record<Locale, string>
+    highlights: Record<Locale, string[]>
+  }
+> = {
+  'photoelectric-sensors': {
+    application: {
+      zh: '适合产线有无检测、到位确认、计数分拣与一般反射型目标检测。',
+      en: 'Fits object presence checks, in-position confirmation, counting, and general reflective-target detection.',
+    },
+    inquiryHint: {
+      zh: '建议先说明检测距离、工件表面材质，以及是否需要背景抑制或窄光斑。',
+      en: 'Start with sensing distance, target surface material, and whether background suppression or a narrow beam is needed.',
+    },
+    highlights: {
+      zh: [
+        '适合作为光电检测项目的首轮选型样本。',
+        '便于先判断安装空间、光轴方向与输出接口。',
+        '后续可继续补齐支架、接插件与更细分型号。',
+      ],
+      en: [
+        'A practical first sample set for photoelectric detection projects.',
+        'Helps confirm mounting space, beam direction, and output interface early.',
+        'Ready for later enrichment with brackets, connectors, and finer model splits.',
+      ],
+    },
+  },
+  'displacement-sensors': {
+    application: {
+      zh: '适合高差、厚度、间隙、平面度与定位偏差这类精密位移测量场景。',
+      en: 'Suited to precision displacement work such as height, thickness, gap, flatness, and positioning deviation checks.',
+    },
+    inquiryHint: {
+      zh: '沟通时优先说明量程、重复精度要求、被测表面材质和安装距离。',
+      en: 'Lead with measurement range, repeatability target, surface material, and mounting distance.',
+    },
+    highlights: {
+      zh: [
+        '更适合对量程与精度要求已经比较明确的项目。',
+        '方便先锁定测量窗口、触发节拍和控制系统接口。',
+        '后续可继续细化采样速度、输出方式和安装支架。',
+      ],
+      en: [
+        'Best for projects with clearer range and accuracy expectations.',
+        'Helps align measurement window, trigger tempo, and controller interface early.',
+        'Can later be refined by sampling speed, output mode, and mounting hardware.',
+      ],
+    },
+  },
+  'slot-sensors': {
+    application: {
+      zh: '适合引脚、边缘、缺口、小件通过与包装片材定位这类槽型检测工位。',
+      en: 'Fits slot-based stations for lead, edge, notch, small-part pass-through, and sheet-position checks.',
+    },
+    inquiryHint: {
+      zh: '建议先说明槽宽需求、安装方向、工件通过节拍和线缆出线方式。',
+      en: 'Clarify slot width, mounting direction, part pass-through tempo, and cable-routing preference first.',
+    },
+    highlights: {
+      zh: [
+        '更利于快速比较不同槽宽和接线结构。',
+        '可先判断是连接器型、内置连接器还是电缆型更合适。',
+        '后续可继续补充外形尺寸图和支架配套。',
+      ],
+      en: [
+        'Makes it easier to compare slot widths and wiring structures.',
+        'Helps decide between connector, built-in connector, and cable versions early.',
+        'Ready for later expansion with dimensional drawings and bracket kits.',
+      ],
+    },
+  },
+  'color-and-label-sensors': {
+    application: {
+      zh: '适合颜色识别、色标定位、标签边缘判断与包装物料切换检测。',
+      en: 'Suited to color recognition, mark positioning, label-edge judgment, and packaging material changeover checks.',
+    },
+    inquiryHint: {
+      zh: '沟通时可先说明被测颜色数量、背景材质、运动速度以及安装距离。',
+      en: 'Share the number of target colors, background material, line speed, and mounting distance up front.',
+    },
+    highlights: {
+      zh: [
+        '适合作为颜色和标签识别工位的代表样本集。',
+        '方便先确认是否偏向颜色识别、色标检测还是标签透光检测。',
+        '后续可继续补充光斑尺寸、示教方式和报警逻辑。',
+      ],
+      en: [
+        'A good representative set for color and label recognition stations.',
+        'Helps distinguish whether the station leans toward color, mark, or label-through sensing.',
+        'Can later be extended with spot size, teach method, and alarm logic details.',
+      ],
+    },
+  },
+  'inductive-proximity-sensors': {
+    application: {
+      zh: '适合金属工件接近检测、夹具位置反馈、限位确认与节拍触发。',
+      en: 'Fits metal-target proximity checks, fixture position feedback, limit confirmation, and tempo triggering.',
+    },
+    inquiryHint: {
+      zh: '建议先说明目标金属材质、安装螺纹规格、检测距离和是否存在焊渣或油污。',
+      en: 'Start with target metal type, thread size, sensing distance, and whether weld slag or oil contamination is present.',
+    },
+    highlights: {
+      zh: [
+        '更适合做金属目标检测的首轮结构判断。',
+        '便于先比较环形、经济型和圆柱型等典型形态。',
+        '后续可继续细化屏蔽型、非屏蔽型和特殊防护需求。',
+      ],
+      en: [
+        'Well suited for the first structural pass on metal-target detection.',
+        'Makes it easy to compare ring, economy, and cylindrical form factors.',
+        'Can later be refined by shielded, unshielded, and special protection needs.',
+      ],
+    },
+  },
+  'capacitive-proximity-sensors': {
+    application: {
+      zh: '适合液位、非金属物料、包装片材和容器存在检测等电容式应用。',
+      en: 'Fits capacitive use cases such as liquid level, non-metal material presence, packaging sheets, and container detection.',
+    },
+    inquiryHint: {
+      zh: '沟通时先说明介质类型、容器材质、安装方式和现场湿度或腐蚀环境。',
+      en: 'Clarify media type, container material, mounting method, and humidity or corrosive conditions first.',
+    },
+    highlights: {
+      zh: [
+        '适合作为液位和非金属检测场景的代表样本。',
+        '方便快速比较管道型、扁平型和圆柱型结构。',
+        '后续可继续补耐腐蚀规格和动作距离细分。',
+      ],
+      en: [
+        'A strong sample set for liquid-level and non-metal sensing scenarios.',
+        'Makes it easy to compare pipe, flat, and cylindrical structures quickly.',
+        'Can later be expanded with corrosion-resistant specs and sensing-distance detail.',
+      ],
+    },
+  },
+  'industrial-code-readers': {
+    application: {
+      zh: '适合条码、二维码、追溯码采集，以及产线固定读取和手持补扫场景。',
+      en: 'Fits barcode, QR, and traceability code capture for both fixed line reading and handheld backup scanning.',
+    },
+    inquiryHint: {
+      zh: '建议先说明码制类型、读取距离、目标节拍，以及是固定式还是手持式工位。',
+      en: 'Start with code type, reading distance, line tempo, and whether the station is fixed or handheld.',
+    },
+    highlights: {
+      zh: [
+        '把固定式和手持式读码能力并列展示，更方便判断项目方向。',
+        '适合先确认读取距离、安装高度和现场照明条件。',
+        '后续可继续补镜头配置、触发方式和通信协议。',
+      ],
+      en: [
+        'Shows fixed and handheld code-reading paths side by side for quicker direction setting.',
+        'Helps confirm reading distance, mounting height, and ambient lighting early.',
+        'Can later be extended with lens, trigger, and communication details.',
+      ],
+    },
+  },
+  'vision-sensors': {
+    application: {
+      zh: '适合轻量视觉检测、外观判断、到位确认和 OK/NG 分类工位。',
+      en: 'Fits lightweight visual inspection, appearance judgment, in-position confirmation, and OK/NG classification stations.',
+    },
+    inquiryHint: {
+      zh: '沟通时请优先说明检测节拍、样本差异、光源条件和是否需要边缘计算。',
+      en: 'Lead with inspection tempo, sample variation, lighting conditions, and whether edge processing is needed.',
+    },
+    highlights: {
+      zh: [
+        '适合作为视觉判断型工位的切入样本。',
+        '便于先确认视野范围、安装高度和触发逻辑。',
+        '后续可继续细化算法任务、镜头视角和光源搭配。',
+      ],
+      en: [
+        'A practical starting sample for vision-led inspection stations.',
+        'Helps align field of view, mounting height, and trigger logic early.',
+        'Can later be refined by algorithm task, lens angle, and lighting pairing.',
+      ],
+    },
+  },
+  'pressure-sensors': {
+    application: {
+      zh: '适合气路、真空回路与工艺压力监测等需要稳定反馈的压力场景。',
+      en: 'Suited to pneumatic lines, vacuum circuits, and process pressure monitoring that requires stable feedback.',
+    },
+    inquiryHint: {
+      zh: '建议先说明介质类型、压力范围、接口规格，以及是否需要耐腐蚀或防水等级。',
+      en: 'Clarify media type, pressure range, port specification, and whether corrosion or waterproof protection is required.',
+    },
+    highlights: {
+      zh: [
+        '把双数显与耐腐蚀两类方向清晰分开，便于快速判断。',
+        '适合先锁定接口规格、量程和安装位置。',
+        '后续可继续补精度等级、响应速度和报警输出逻辑。',
+      ],
+      en: [
+        'Separates dual-display and corrosion-resistant paths clearly for fast triage.',
+        'Helps lock in port spec, range, and mounting position early.',
+        'Can later be extended with accuracy class, response time, and alarm-output logic.',
+      ],
+    },
+  },
+  'ultrasonic-sensors': {
+    application: {
+      zh: '适合透明物、薄片材、双张检测与一般距离感测场景。',
+      en: 'Fits transparent targets, thin-sheet handling, double-sheet detection, and general distance sensing.',
+    },
+    inquiryHint: {
+      zh: '沟通时优先说明目标材质、测距范围、工件宽度以及是否有单双张判断需求。',
+      en: 'Start with target material, sensing range, part width, and whether single/double-sheet judgment is needed.',
+    },
+    highlights: {
+      zh: [
+        '更适合透明、薄片类工件的补充检测方案。',
+        '方便先判断常规超声波还是单双张检测结构更匹配。',
+        '后续可继续补安装支架、波束角和响应节拍。',
+      ],
+      en: [
+        'Useful as a complementary sensing option for transparent or thin-sheet targets.',
+        'Helps decide between standard ultrasonic sensing and double-sheet inspection early.',
+        'Can later be refined with bracket, beam angle, and response-tempo details.',
+      ],
+    },
+  },
+  'contact-sensors': {
+    application: {
+      zh: '适合接触式尺寸检测、压入深度确认、轮廓跟踪与位移反馈场景。',
+      en: 'Fits contact-based dimension checks, press-fit depth confirmation, contour tracking, and displacement feedback.',
+    },
+    inquiryHint: {
+      zh: '建议先说明接触压力、行程范围、安装方向和被测件表面状态。',
+      en: 'Clarify contact force, stroke range, mounting direction, and target surface condition first.',
+    },
+    highlights: {
+      zh: [
+        '适合对接触式检测和位移反馈并行比较。',
+        '便于先判断行程、安装位与重复接触工况。',
+        '后续可继续补探头形式、寿命指标和防护等级。',
+      ],
+      en: [
+        'Good for comparing contact inspection and displacement-feedback paths side by side.',
+        'Helps confirm stroke, mounting position, and repeat-contact conditions early.',
+        'Can later be enriched with probe style, lifecycle, and protection ratings.',
+      ],
+    },
+  },
+  'magnetic-sensors': {
+    application: {
+      zh: '适合气缸行程反馈、夹具开合确认与磁感触发工位。',
+      en: 'Fits cylinder stroke feedback, clamp open/close confirmation, and magnetically triggered stations.',
+    },
+    inquiryHint: {
+      zh: '建议先说明气缸型号、槽型结构、输出方式和布线空间。',
+      en: 'Start with cylinder model, slot structure, output type, and wiring space.',
+    },
+    highlights: {
+      zh: [
+        '适合作为气缸磁性反馈工位的基础样本。',
+        '方便先确认安装槽型、动作位置和控制接口。',
+        '后续可继续补细分安装件和配套连接线。',
+      ],
+      en: [
+        'A practical baseline sample for cylinder magnetic feedback stations.',
+        'Helps confirm slot type, actuation position, and controller interface early.',
+        'Can later be extended with mounting accessories and matching cables.',
+      ],
+    },
+  },
+  accessories: {
+    application: {
+      zh: '适合在传感器项目里同步确认连接线、接插件与现场布线方式。',
+      en: 'Fits early confirmation of cabling, connectors, and field wiring alongside sensor projects.',
+    },
+    inquiryHint: {
+      zh: '沟通时先说明接口规格、线长需求、弯折空间和现场防护等级。',
+      en: 'Clarify connector spec, cable length, bend space, and required field protection first.',
+    },
+    highlights: {
+      zh: [
+        '把配件从主传感器页里单独提出，方便补齐整套清单。',
+        '适合先同步接口规格和走线方式，减少后期返工。',
+        '后续可继续补更多接插件和延长线规格。',
+      ],
+      en: [
+        'Pulls accessories into a dedicated lane so the full bill can be aligned earlier.',
+        'Helps synchronize connector specs and routing before late-stage rework.',
+        'Ready for later expansion with more connector and extension-cable options.',
+      ],
+    },
+  },
 }
 
 export const productFamilyKeys: ProductFamilyKey[] = [
@@ -82,6 +385,48 @@ function buildFiberSensorProducts(locale: Locale, status: string) {
   }))
 }
 
+function buildVisualSummary(
+  locale: Locale,
+  item: FiberSensorVisual | IndustrialSensorReferenceVisual,
+  groupName: string,
+) {
+  if (locale === 'zh') {
+    return `${item.title.zh} 作为 ${groupName} 下的代表系列，适合先确认安装空间、检测节拍和控制接口。`
+  }
+
+  return `${item.title.en} acts as a representative series inside ${groupName}, helping teams confirm mounting space, sensing tempo, and controller interface first.`
+}
+
+function buildReferenceProducts(
+  locale: Locale,
+  groupSlug: string,
+  status: string,
+  groupName: string,
+  familyUseCase: string,
+) {
+  const visuals = industrialSensorReferenceVisuals[groupSlug]
+  const copy = industrialSensorGroupCopy[groupSlug]
+
+  if (!visuals || visuals.length === 0 || !copy) {
+    return []
+  }
+
+  return visuals.map((item) => ({
+    id: item.id,
+    title: item.title[locale],
+    summary: buildVisualSummary(locale, item, groupName),
+    highlights: copy.highlights[locale],
+    focus: copy.application[locale] || familyUseCase,
+    inquiryHint: copy.inquiryHint[locale],
+    status,
+    seriesCode: item.seriesCode[locale],
+    application: copy.application[locale],
+    imageSrc: item.imageSrc,
+    imageAlt: item.imageAlt[locale],
+    sourceUrl: item.sourceUrl,
+  }))
+}
+
 export function buildRepresentativeProducts(
   locale: Locale,
   groupSlug: string,
@@ -98,6 +443,18 @@ export function buildRepresentativeProducts(
     return buildFiberSensorProducts(locale, taxonomy.listingReadyLabel)
   }
 
+  const referenceProducts = buildReferenceProducts(
+    locale,
+    groupSlug,
+    taxonomy.listingReadyLabel,
+    group.name,
+    family.useCase,
+  )
+
+  if (referenceProducts.length > 0) {
+    return referenceProducts
+  }
+
   return group.series.map((series, index) => {
     const order = index + 1
 
@@ -105,11 +462,11 @@ export function buildRepresentativeProducts(
       return {
         id: `${group.slug}-${order}`,
         title: series,
-        summary: `${series} 作为 ${group.name} 下的代表系列，适合先做选型沟通、安装空间判断与接口预确认。`,
+        summary: `${series} 作为 ${group.name} 下的代表系列，适合先做选型沟通、安装空间判断和接口确认。`,
         highlights: [
-          `聚焦 ${group.name} 的典型部署场景`,
-          `延续“${family.useCase}”这条应用主线`,
-          '后续可继续补型号、参数、图片与下载资料',
+          `聚焦 ${group.name} 的典型安装与检测节奏。`,
+          `延续“${family.useCase}”这条应用主线。`,
+          '后续可继续补型号、参数、图片和下载资料。',
         ],
         focus: family.useCase,
         inquiryHint: '沟通时可先说明检测对象、安装位置和现有控制接口。',
@@ -122,9 +479,9 @@ export function buildRepresentativeProducts(
       title: series,
       summary: `${series} is treated as a representative series inside ${group.name}, ready for early selection discussions, mounting checks, and interface alignment.`,
       highlights: [
-        `Focused on the core ${group.name.toLowerCase()} deployment path`,
-        `Stays aligned with ${family.useCase.toLowerCase()}`,
-        'Ready for later model, spec, image, and download enrichment',
+        `Focused on the core ${group.name.toLowerCase()} deployment path.`,
+        `Stays aligned with ${family.useCase.toLowerCase()}.`,
+        'Ready for later model, spec, image, and download enrichment.',
       ],
       focus: family.useCase,
       inquiryHint:

@@ -50,4 +50,41 @@ describe('ProductGroupPage', () => {
         .some((button) => button.getAttribute('aria-pressed') === 'true'),
     ).toBe(true)
   })
+
+  it('renders other industrial sensor subgroup pages with the same visual product pattern', async () => {
+    const products = buildRepresentativeProducts('zh', 'photoelectric-sensors')
+    const router = createAppRouter({
+      initialEntries: ['/zh/products/industrial-sensors/photoelectric-sensors'],
+    })
+
+    render(
+      <AppProviders>
+        <RouterProvider router={router} />
+      </AppProviders>,
+    )
+
+    expect((await screen.findAllByText('光电传感器')).length).toBeGreaterThan(0)
+    expect(
+      (
+        await screen.findAllByAltText(products[0].imageAlt ?? products[0].title)
+      ).length,
+    ).toBeGreaterThan(0)
+    expect((await screen.findAllByText('LS100 系列')).length).toBeGreaterThan(0)
+
+    fireEvent.click(
+      screen.getAllByRole('button', {
+        name: new RegExp(products[1].title, 'i'),
+      })[0],
+    )
+
+    expect((await screen.findAllByText('LS200 系列')).length).toBeGreaterThan(0)
+    expect(
+      (await screen.findAllByText(products[1].highlights[0])).length,
+    ).toBeGreaterThan(0)
+    expect(
+      screen
+        .getAllByRole('button', { name: new RegExp(products[1].title, 'i') })
+        .some((button) => button.getAttribute('aria-pressed') === 'true'),
+    ).toBe(true)
+  })
 })
