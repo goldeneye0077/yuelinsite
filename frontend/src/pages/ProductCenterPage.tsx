@@ -25,6 +25,16 @@ function getSeriesCount(family: ProductFamily) {
   return family.groups.reduce((total, group) => total + group.series.length, 0)
 }
 
+function buildGroupSeriesPreview(series: string[], locale: 'zh' | 'en') {
+  const preview = series.slice(0, 3).join(' / ')
+
+  if (series.length <= 3) {
+    return preview
+  }
+
+  return locale === 'zh' ? `${preview} 等` : `${preview} and more`
+}
+
 export function ProductCenterPage() {
   const { locale, content } = useSiteShellContext()
   const taxonomy = getProductTaxonomy(locale)
@@ -102,7 +112,7 @@ export function ProductCenterPage() {
                         )}
                       </span>
                     </div>
-                    <p>{family.summary}</p>
+                    <p className="product-hero__family-summary">{family.summary}</p>
                     <p className="product-hero__family-meta">
                       {family.groups.length} {taxonomy.categoryMetaGroupsLabel.toLowerCase()}
                     </p>
@@ -143,7 +153,9 @@ export function ProductCenterPage() {
                     </span>
                   </div>
                   <h2>{family.name}</h2>
-                  <p className="story-intro">{family.summary}</p>
+                  <p className="story-intro product-family-sheet__summary">
+                    {family.summary}
+                  </p>
                   <p className="product-family-sheet__usecase">{family.useCase}</p>
                 </div>
 
@@ -170,7 +182,7 @@ export function ProductCenterPage() {
                     ))}
                   </div>
 
-                  <div className="section-actions">
+                  <div className="section-actions product-family-sheet__actions">
                     <Link
                       className="cta-link"
                       to={buildProductFamilyPath(locale, family.key)}
@@ -214,7 +226,9 @@ export function ProductCenterPage() {
               <article key={group.slug} className="product-spotlight__item">
                 <h3>{group.name}</h3>
                 <p>{group.summary}</p>
-                <p className="product-spotlight__series">{group.series.join(' / ')}</p>
+                <p className="product-spotlight__series">
+                  {buildGroupSeriesPreview(group.series, locale)}
+                </p>
               </article>
             ))}
           </div>
