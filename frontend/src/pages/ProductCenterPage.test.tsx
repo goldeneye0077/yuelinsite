@@ -19,6 +19,13 @@ describe('ProductCenterPage', () => {
     )
 
     expect(await screen.findByText(taxonomy.title)).toBeInTheDocument()
+    expect(await screen.findByText(taxonomy.directoryTitle)).toBeInTheDocument()
+    expect(
+      screen.queryByRole('heading', {
+        level: 2,
+        name: '产品中心 / Product Center',
+      }),
+    ).not.toBeInTheDocument()
     expect(
       (await screen.findAllByText(taxonomy.categories[0].name)).length,
     ).toBeGreaterThan(0)
@@ -29,6 +36,11 @@ describe('ProductCenterPage', () => {
       (await screen.findAllByText(taxonomy.categories[0].groups[0].name)).length,
     ).toBeGreaterThan(0)
     expect(await screen.findAllByText(taxonomy.consultCtaLabel)).not.toHaveLength(0)
+    expect(
+      await screen.findAllByRole('link', {
+        name: taxonomy.familyConsultCtaLabel,
+      }),
+    ).not.toHaveLength(0)
     expect(
       (
         await screen.findAllByRole('link', {

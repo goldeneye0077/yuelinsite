@@ -9,6 +9,7 @@ import {
   SECTION_ROUTE_KEYS,
   SUPPORTED_LOCALES,
 } from '../i18n/locales'
+import { getProductTaxonomy } from '../content/products'
 import { getSiteContent } from '../content/site'
 import { routeContentKeyMap } from '../content/site/types'
 
@@ -38,6 +39,10 @@ describe('createAppRouter', () => {
         const router = createAppRouter({
           initialEntries: [buildLocalePath(locale, section)],
         })
+        const expectedHeading =
+          section === 'products'
+            ? getProductTaxonomy(locale).title
+            : content[routeContentKeyMap[section]].title
 
         const { unmount } = render(
           <AppProviders>
@@ -47,7 +52,7 @@ describe('createAppRouter', () => {
 
         expect(
           await screen.findByRole('heading', {
-            name: content[routeContentKeyMap[section]].title,
+            name: expectedHeading,
           }),
         ).toBeInTheDocument()
 

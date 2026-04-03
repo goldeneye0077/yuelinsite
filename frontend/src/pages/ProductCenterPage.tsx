@@ -117,9 +117,10 @@ export function ProductCenterPage() {
       <section className="page-band page-band--bordered">
         <div className="product-directory">
           <div className="product-directory__intro motion-rise motion-delay-1">
-            <p className="eyebrow">{taxonomy.categoriesTitle}</p>
-            <h2 className="profile-title">{content.productCenter.title}</h2>
+            <p className="eyebrow">{taxonomy.directoryEyebrow}</p>
+            <h2 className="profile-title">{taxonomy.directoryTitle}</h2>
             <p className="story-intro">{taxonomy.categoriesSummary}</p>
+            <p className="track-detail">{taxonomy.directoryDescription}</p>
           </div>
 
           <div className="product-family-sheet-list">
@@ -184,7 +185,7 @@ export function ProductCenterPage() {
                         source: 'product-center',
                       })}
                     >
-                      {content.productCenter.primaryCta}
+                      {taxonomy.familyConsultCtaLabel}
                     </Link>
                   </div>
                 </div>
@@ -224,7 +225,7 @@ export function ProductCenterPage() {
         <div className="final-cta motion-rise motion-delay-4">
           <div>
             <p className="eyebrow">{taxonomy.consultTitle}</p>
-            <h2>{content.productCenter.summary}</h2>
+            <h2>{taxonomy.consultHeading}</h2>
             <p>{taxonomy.consultBody}</p>
           </div>
           <div className="section-actions">

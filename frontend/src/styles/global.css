@@ -3415,6 +3415,62 @@ body {
   display: none;
 }
 
+.product-directory__intro {
+  display: grid;
+  gap: 12px;
+  max-width: min(720px, 100%);
+}
+
+.product-directory__intro .profile-title,
+.product-hero__copy h1,
+.product-hero__family-header h2,
+.product-family-sheet__lead h2,
+.product-family-sheet__group-item h3,
+.product-spotlight__item h3 {
+  min-width: 0;
+  overflow-wrap: anywhere;
+  text-wrap: balance;
+}
+
+.product-hero__family-copy,
+.product-family-sheet__lead,
+.product-family-sheet__body,
+.product-family-sheet__group-item {
+  min-width: 0;
+}
+
+.product-hero__family-link {
+  padding: 18px;
+  border: 1px solid rgba(141, 163, 181, 0.2);
+  border-radius: 22px;
+  background: color-mix(in srgb, var(--color-surface) 98%, transparent);
+}
+
+.product-hero__family-link:first-child {
+  border-top-color: rgba(141, 163, 181, 0.2);
+}
+
+.product-source-badge {
+  max-width: 100%;
+  justify-content: center;
+  line-height: 1.35;
+  text-align: center;
+  white-space: normal;
+}
+
+.product-hero__stats .track-label,
+.product-family-sheet__stats .track-label {
+  margin-bottom: 8px;
+  line-height: 1.45;
+  overflow-wrap: anywhere;
+  white-space: normal;
+}
+
+.product-hero__stat,
+.product-family-sheet__stats article {
+  align-content: start;
+}
+
 @media (max-width: 1080px) {
   .home-hero__inner,
   .about-hero,

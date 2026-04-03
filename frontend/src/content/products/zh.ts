@@ -11,13 +11,19 @@ export const zhProductTaxonomy: ProductTaxonomyContent = {
   sourceLabel: '参考目录来源',
   sourceUrl: 'https://www.hyfcn.com/product.html',
   categoriesTitle: '五大产品主轴',
+  directoryEyebrow: '五大一级分类总览',
+  directoryTitle: '按一级类快速判断产品范围',
+  directoryDescription:
+    '这一层把五大主轴的业务边界、细分类深度和咨询入口并排铺开，先帮助客户判断方向，再继续进入具体子类和系列。',
   categoriesSummary:
     '一级分类按照跃鳞科技的业务表达来组织，工业传感器内部细分优先对齐参考站的传感产品目录。',
   industrialSensorsTitle: '工业传感器细分',
   industrialSensorsSummary:
     '这一层先承接参考目录里最成熟的传感器分组，后续 03-03 会继续展开子类导航和列表模板。',
   familyCtaLabel: '查看分类',
+  familyConsultCtaLabel: '咨询此分类',
   consultTitle: '需要选型或项目沟通',
+  consultHeading: '先明确需求范围，再进入具体型号',
   consultBody:
     '如果你已经有目标场景、设备结构或替换需求，可以先从这里发起咨询，后续再补型号、图纸和更细的技术资料。',
   consultCtaLabel: '发起咨询',

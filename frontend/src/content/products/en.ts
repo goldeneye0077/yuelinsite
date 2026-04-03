@@ -11,13 +11,19 @@ export const enProductTaxonomy: ProductTaxonomyContent = {
   sourceLabel: 'Reference source',
   sourceUrl: 'https://www.hyfcn.com/product.html',
   categoriesTitle: 'Five primary families',
+  directoryEyebrow: 'Primary family overview',
+  directoryTitle: 'Scan the five families before drilling into subgroups',
+  directoryDescription:
+    'This layer lays out business scope, subgroup depth, and inquiry paths side by side so visitors can confirm direction first and narrow into the right series next.',
   categoriesSummary:
     'Top-level categories follow Yuelin Technology’s business framing, while industrial sensor subgrouping stays aligned with the reference sensor catalog.',
   industrialSensorsTitle: 'Industrial sensor depth',
   industrialSensorsSummary:
     'This layer keeps the most mature sensor groupings from the reference structure. Phase 03-03 will expand it into subcategory navigation and listing templates.',
   familyCtaLabel: 'Open category',
+  familyConsultCtaLabel: 'Discuss this family',
   consultTitle: 'Need selection support or a project discussion',
+  consultHeading: 'Clarify the requirement first, then narrow into the right model',
   consultBody:
     'If you already know the scenario, equipment structure, or replacement target, start with an inquiry here and refine the exact model or documentation in the next step.',
   consultCtaLabel: 'Request consultation',

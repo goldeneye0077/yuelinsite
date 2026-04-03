@@ -45,11 +45,16 @@ export type ProductTaxonomyContent = {
   sourceLabel: string
   sourceUrl: string
   categoriesTitle: string
+  directoryEyebrow: string
+  directoryTitle: string
+  directoryDescription: string
   categoriesSummary: string
   industrialSensorsTitle: string
   industrialSensorsSummary: string
   familyCtaLabel: string
+  familyConsultCtaLabel: string
   consultTitle: string
+  consultHeading: string
   consultBody: string
   consultCtaLabel: string
   backToCatalogLabel: string
