@@ -17,6 +17,7 @@ import { Field } from '../components/ui/field'
 import { Input } from '../components/ui/input'
 import { Select } from '../components/ui/select'
 import { Textarea } from '../components/ui/textarea'
+import { getLocalizedAlt, siteReferenceImages } from '../content/media/referenceAssets'
 import { buildLocalePath } from '../i18n/locales'
 import { useSiteShellContext } from '../layouts/useSiteShellContext'
 import { type InquirySubmissionInput, submitInquiry } from '../lib/api/site-client'
@@ -170,6 +171,7 @@ function MotionSection({
 
 export function ContactPage() {
   const { locale, content } = useSiteShellContext()
+  const heroImage = siteReferenceImages.contactHero
   const location = useLocation()
   const [searchParams] = useSearchParams()
   const defaultCategory = resolveRequestedCategory(
@@ -275,6 +277,17 @@ export function ContactPage() {
 
           <Card className="contact-hero__rail">
             <CardHeader>
+              <figure className="surface-media-card surface-media-card--hero">
+                <img
+                  alt={getLocalizedAlt(heroImage, locale)}
+                  className="surface-media-card__image"
+                  src={heroImage.src}
+                />
+                <figcaption className="surface-media-card__caption">
+                  <span>{content.contactPage.quickPanelTitle}</span>
+                  <strong>{content.meta.brandName}</strong>
+                </figcaption>
+              </figure>
               <p className="eyebrow">{content.contactPage.quickPanelTitle}</p>
               <CardDescription className="story-intro">
                 {content.contactPage.quickPanelSummary}

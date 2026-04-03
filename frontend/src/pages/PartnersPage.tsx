@@ -1,12 +1,14 @@
 import { ArrowRight } from 'lucide-react'
 import { Link } from 'react-router-dom'
 
+import { getLocalizedAlt, siteReferenceImages } from '../content/media/referenceAssets'
 import { buildLocalePath } from '../i18n/locales'
 import { useSiteShellContext } from '../layouts/useSiteShellContext'
 import { buildInquiryPath } from '../lib/inquiry-paths'
 
 export function PartnersPage() {
   const { locale, content } = useSiteShellContext()
+  const heroImage = siteReferenceImages.partnersHero
 
   return (
     <>
@@ -38,6 +40,17 @@ export function PartnersPage() {
           </div>
 
           <aside className="partners-hero__rail motion-rise motion-delay-2">
+            <figure className="surface-media-card surface-media-card--hero">
+              <img
+                alt={getLocalizedAlt(heroImage, locale)}
+                className="surface-media-card__image"
+                src={heroImage.src}
+              />
+              <figcaption className="surface-media-card__caption">
+                <span>{content.solutionsPage.partnershipTitle}</span>
+                <strong>{content.solutionsPage.partnerBrands[0]?.name}</strong>
+              </figcaption>
+            </figure>
             <p className="eyebrow">{content.solutionsPage.partnershipTitle}</p>
             <p className="story-intro">{content.home.partnersSummary}</p>
             <div className="partners-mini-list">

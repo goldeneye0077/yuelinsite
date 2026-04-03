@@ -2,12 +2,14 @@ import { ArrowRight } from 'lucide-react'
 import { Link } from 'react-router-dom'
 
 import brandLogo from '../assets/logo6.png'
+import { getLocalizedAlt, siteReferenceImages } from '../content/media/referenceAssets'
 import { buildLocalePath } from '../i18n/locales'
 import { useSiteShellContext } from '../layouts/useSiteShellContext'
 import { buildInquiryPath } from '../lib/inquiry-paths'
 
 export function AboutPage() {
   const { locale, content } = useSiteShellContext()
+  const aboutHeroImage = siteReferenceImages.aboutHero
 
   return (
     <>
@@ -39,6 +41,17 @@ export function AboutPage() {
           </div>
 
           <aside className="about-hero__rail motion-rise motion-delay-2">
+            <figure className="surface-media-card surface-media-card--hero">
+              <img
+                alt={getLocalizedAlt(aboutHeroImage, locale)}
+                className="surface-media-card__image"
+                src={aboutHeroImage.src}
+              />
+              <figcaption className="surface-media-card__caption">
+                <span>{content.aboutPage.companyTitle}</span>
+                <strong>{content.meta.brandName}</strong>
+              </figcaption>
+            </figure>
             <div className="about-hero__logo-frame">
               <img alt="" className="about-hero__logo" src={brandLogo} />
             </div>

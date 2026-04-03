@@ -25,6 +25,11 @@ export type RepresentativeProduct = {
   focus: string
   inquiryHint: string
   status: string
+  seriesCode?: string
+  application?: string
+  imageSrc?: string
+  imageAlt?: string
+  sourceUrl?: string
 }
 
 export type ProductFamily = {

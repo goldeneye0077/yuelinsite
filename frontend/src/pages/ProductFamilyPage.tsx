@@ -8,6 +8,7 @@ import {
   getProductTaxonomy,
   normalizeProductFamilyKey,
 } from '../content/products'
+import { getLocalizedAlt, siteReferenceImages } from '../content/media/referenceAssets'
 import type { ProductFamily, ProductSourceType } from '../content/products/types'
 import { buildLocalePath } from '../i18n/locales'
 import { useSiteShellContext } from '../layouts/useSiteShellContext'
@@ -49,6 +50,9 @@ export function ProductFamilyPage() {
   )
   const isIndustrialSensorFamily = family.key === 'industrial-sensors'
   const inquiryCategory = getInquiryCategoryForProductFamily(family.key)
+  const familyHeroImage = isIndustrialSensorFamily
+    ? siteReferenceImages.industrialSensorsFamily
+    : siteReferenceImages.productCenterHero
 
   return (
     <>
@@ -81,6 +85,17 @@ export function ProductFamilyPage() {
           </div>
 
           <aside className="product-detail-hero__rail">
+            <figure className="surface-media-card surface-media-card--hero">
+              <img
+                alt={getLocalizedAlt(familyHeroImage, locale)}
+                className="surface-media-card__image"
+                src={familyHeroImage.src}
+              />
+              <figcaption className="surface-media-card__caption">
+                <span>{taxonomy.categoriesTitle}</span>
+                <strong>{family.name}</strong>
+              </figcaption>
+            </figure>
             <div className="product-detail-hero__rail-header">
               <span className="product-source-badge">
                 {getSourceLabel(

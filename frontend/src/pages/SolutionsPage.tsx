@@ -1,6 +1,7 @@
 import { ArrowRight } from 'lucide-react'
 import { Link } from 'react-router-dom'
 
+import { getLocalizedAlt, siteReferenceImages } from '../content/media/referenceAssets'
 import { buildLocalePath } from '../i18n/locales'
 import { useSiteShellContext } from '../layouts/useSiteShellContext'
 import {
@@ -10,6 +11,7 @@ import {
 
 export function SolutionsPage() {
   const { locale, content } = useSiteShellContext()
+  const heroImage = siteReferenceImages.solutionsHero
 
   return (
     <>
@@ -43,6 +45,17 @@ export function SolutionsPage() {
           </div>
 
           <aside className="solutions-hero__rail motion-rise motion-delay-2">
+            <figure className="surface-media-card surface-media-card--hero">
+              <img
+                alt={getLocalizedAlt(heroImage, locale)}
+                className="surface-media-card__image"
+                src={heroImage.src}
+              />
+              <figcaption className="surface-media-card__caption">
+                <span>{content.solutionsPage.coverageTitle}</span>
+                <strong>{content.solutionsPage.tracks[0]?.title}</strong>
+              </figcaption>
+            </figure>
             <p className="eyebrow">{content.solutionsPage.coverageTitle}</p>
             <p className="story-intro">{content.solutionsPage.coverageSummary}</p>
             <div className="solution-coverage-list">

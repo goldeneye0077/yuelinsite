@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { ArrowRight, ChevronLeft } from 'lucide-react'
+import { ArrowRight, ChevronLeft, ExternalLink } from 'lucide-react'
 import { Link, Navigate, useParams } from 'react-router-dom'
 
 import {
@@ -26,11 +26,11 @@ export function ProductGroupPage() {
   const products = normalizedGroupSlug
     ? buildRepresentativeProducts(locale, normalizedGroupSlug)
     : []
-  const [activeProductId, setActiveProductId] = useState<string | null>(
-    products[0]?.id ?? null,
-  )
+  const [activeProductId, setActiveProductId] = useState<string | null>(null)
   const activeProduct =
     products.find((item) => item.id === activeProductId) ?? products[0] ?? null
+  const isFiberSensors = normalizedGroupSlug === 'fiber-sensors'
+  const siblingGroups = family?.groups.filter((item) => item.slug !== group?.slug) ?? []
 
   if (!normalizedGroupSlug) {
     return (
@@ -50,7 +50,10 @@ export function ProductGroupPage() {
     )
   }
 
-  const siblingGroups = family.groups.filter((item) => item.slug !== group.slug)
+  const applicationLabel = locale === 'zh' ? '应用场景' : 'Application'
+  const seriesLabel = locale === 'zh' ? '代表系列' : 'Series'
+  const referenceLabel = locale === 'zh' ? '参考来源' : 'Reference'
+  const previewTitle = locale === 'zh' ? '代表产品图' : 'Reference Products'
 
   return (
     <>
@@ -89,6 +92,19 @@ export function ProductGroupPage() {
           </div>
 
           <aside className="product-detail-hero__rail">
+            {activeProduct?.imageSrc ? (
+              <figure className="surface-media-card surface-media-card--hero product-detail-hero__media">
+                <img
+                  alt={activeProduct.imageAlt ?? activeProduct.title}
+                  className="surface-media-card__image"
+                  src={activeProduct.imageSrc}
+                />
+                <figcaption className="surface-media-card__caption">
+                  <span>{previewTitle}</span>
+                  <strong>{activeProduct.seriesCode ?? activeProduct.title}</strong>
+                </figcaption>
+              </figure>
+            ) : null}
             <div className="product-detail-hero__rail-header">
               <span className="product-source-badge">
                 {taxonomy.sourceSyncedLabel}
@@ -104,12 +120,25 @@ export function ProductGroupPage() {
                 <p className="product-family-sheet__stat-value">{family.groups.length}</p>
               </article>
             </div>
-            <div className="product-detail-hero__preview">
-              {group.series.slice(0, 3).map((series) => (
-                <article key={series} className="product-detail-hero__preview-item">
-                  <h2>{series}</h2>
-                  <p>{taxonomy.listingReadyLabel}</p>
-                </article>
+            <div className="product-detail-hero__preview product-detail-hero__preview--media">
+              {products.slice(0, 3).map((product) => (
+                <button
+                  key={product.id}
+                  aria-pressed={product.id === activeProduct?.id}
+                  className={`product-detail-hero__preview-item${product.id === activeProduct?.id ? ' product-detail-hero__preview-item--active' : ''}`}
+                  onClick={() => setActiveProductId(product.id)}
+                  type="button"
+                >
+                  {product.imageSrc ? (
+                    <div className="product-detail-hero__preview-thumb">
+                      <img alt="" src={product.imageSrc} />
+                    </div>
+                  ) : null}
+                  <div className="product-detail-hero__preview-copy">
+                    <h2>{product.title}</h2>
+                    <p>{product.seriesCode ?? taxonomy.listingReadyLabel}</p>
+                  </div>
+                </button>
               ))}
             </div>
           </aside>
@@ -128,23 +157,58 @@ export function ProductGroupPage() {
                   <button
                     aria-pressed={product.id === activeProduct?.id}
                     key={product.id}
-                    className={`product-card${product.id === activeProduct?.id ? ' product-card--active' : ''}`}
+                    className={`product-card product-card--media${product.id === activeProduct?.id ? ' product-card--active' : ''}`}
                     onClick={() => setActiveProductId(product.id)}
                     type="button"
                   >
-                    <p className="product-card__status">{product.status}</p>
-                    <h3>{product.title}</h3>
-                    <p className="product-card__summary">{product.summary}</p>
-                    <p className="product-card__cta">{taxonomy.productCardCtaLabel}</p>
+                    {product.imageSrc ? (
+                      <div className="product-card__thumb">
+                        <img alt="" src={product.imageSrc} />
+                      </div>
+                    ) : null}
+                    <div className="product-card__body">
+                      <p className="product-card__status">
+                        {product.seriesCode ?? product.status}
+                      </p>
+                      <h3>{product.title}</h3>
+                      <p className="product-card__summary">{product.summary}</p>
+                      {product.application ? (
+                        <p className="product-card__application">{product.application}</p>
+                      ) : null}
+                      <p className="product-card__cta">{taxonomy.productCardCtaLabel}</p>
+                    </div>
                   </button>
                 ))}
               </div>
 
               {activeProduct ? (
                 <aside className="product-card-detail">
-                  <p className="eyebrow">{taxonomy.productDetailPanelTitle}</p>
-                  <h3>{activeProduct.title}</h3>
+                  {activeProduct.imageSrc ? (
+                    <figure className="product-card-detail__media">
+                      <img
+                        alt={activeProduct.imageAlt ?? activeProduct.title}
+                        className="product-card-detail__image"
+                        src={activeProduct.imageSrc}
+                      />
+                    </figure>
+                  ) : null}
+                  <div className="product-card-detail__header">
+                    <p className="eyebrow">{taxonomy.productDetailPanelTitle}</p>
+                    <h3>{activeProduct.title}</h3>
+                    <div className="product-card-detail__badges">
+                      {activeProduct.seriesCode ? (
+                        <span className="product-source-badge">{activeProduct.seriesCode}</span>
+                      ) : null}
+                      <span className="product-source-badge">{activeProduct.status}</span>
+                    </div>
+                  </div>
                   <p className="story-intro">{activeProduct.summary}</p>
+                  {activeProduct.application ? (
+                    <div className="product-card-detail__block">
+                      <p className="track-label">{applicationLabel}</p>
+                      <p className="product-card-detail__paragraph">{activeProduct.application}</p>
+                    </div>
+                  ) : null}
                   <div className="product-card-detail__block">
                     <p className="track-label">{taxonomy.productHighlightsLabel}</p>
                     <div className="product-card-detail__highlights">
@@ -163,6 +227,17 @@ export function ProductGroupPage() {
                       <p>{activeProduct.inquiryHint}</p>
                     </article>
                   </div>
+                  {activeProduct.sourceUrl ? (
+                    <a
+                      className="product-card-detail__source"
+                      href={activeProduct.sourceUrl}
+                      rel="noreferrer"
+                      target="_blank"
+                    >
+                      <span>{referenceLabel}</span>
+                      <ExternalLink size={15} />
+                    </a>
+                  ) : null}
                   <div className="section-actions">
                     <Link
                       className="cta-link"
@@ -188,27 +263,69 @@ export function ProductGroupPage() {
             <p className="eyebrow">{taxonomy.listingTemplateTitle}</p>
             <p className="story-intro">{taxonomy.listingTemplateSummary}</p>
             <div className="product-series-list">
-              {group.series.map((series, index) => (
-                <article key={series} className="product-series-row">
-                  <p className="product-series-row__index">
-                    {String(index + 1).padStart(2, '0')}
-                  </p>
-                  <div className="product-series-row__name">
-                    <h3>{series}</h3>
-                    <p>{group.summary}</p>
-                  </div>
-                  <div className="product-series-row__meta">
-                    <div>
-                      <p className="track-label">{taxonomy.listingFocusLabel}</p>
-                      <p>{family.useCase}</p>
-                    </div>
-                    <div>
-                      <p className="track-label">{taxonomy.listingStatusLabel}</p>
-                      <p>{taxonomy.listingReadyLabel}</p>
-                    </div>
-                  </div>
-                </article>
-              ))}
+              {isFiberSensors
+                ? products.map((product, index) => (
+                    <article
+                      key={product.id}
+                      className="product-series-row product-series-row--visual"
+                    >
+                      <p className="product-series-row__index">
+                        {String(index + 1).padStart(2, '0')}
+                      </p>
+                      {product.imageSrc ? (
+                        <div className="product-series-row__media">
+                          <img alt={product.imageAlt ?? product.title} src={product.imageSrc} />
+                        </div>
+                      ) : null}
+                      <div className="product-series-row__name">
+                        <p className="track-label">{seriesLabel}</p>
+                        <h3>{product.title}</h3>
+                        <p>{product.summary}</p>
+                      </div>
+                      <div className="product-series-row__meta">
+                        <div>
+                          <p className="track-label">{taxonomy.listingFocusLabel}</p>
+                          <p>{product.application ?? product.focus}</p>
+                        </div>
+                        <div>
+                          <p className="track-label">{taxonomy.productInquiryHintLabel}</p>
+                          <p>{product.inquiryHint}</p>
+                        </div>
+                        {product.sourceUrl ? (
+                          <a
+                            className="product-inline-link"
+                            href={product.sourceUrl}
+                            rel="noreferrer"
+                            target="_blank"
+                          >
+                            <span>{referenceLabel}</span>
+                            <ExternalLink size={15} />
+                          </a>
+                        ) : null}
+                      </div>
+                    </article>
+                  ))
+                : group.series.map((series, index) => (
+                    <article key={series} className="product-series-row">
+                      <p className="product-series-row__index">
+                        {String(index + 1).padStart(2, '0')}
+                      </p>
+                      <div className="product-series-row__name">
+                        <h3>{series}</h3>
+                        <p>{group.summary}</p>
+                      </div>
+                      <div className="product-series-row__meta">
+                        <div>
+                          <p className="track-label">{taxonomy.listingFocusLabel}</p>
+                          <p>{family.useCase}</p>
+                        </div>
+                        <div>
+                          <p className="track-label">{taxonomy.listingStatusLabel}</p>
+                          <p>{taxonomy.listingReadyLabel}</p>
+                        </div>
+                      </div>
+                    </article>
+                  ))}
             </div>
           </section>
 

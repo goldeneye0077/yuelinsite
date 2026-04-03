@@ -5,6 +5,7 @@ import {
   buildProductFamilyPath,
   getProductTaxonomy,
 } from '../content/products'
+import { getLocalizedAlt, siteReferenceImages } from '../content/media/referenceAssets'
 import type { ProductFamily, ProductSourceType } from '../content/products/types'
 import { buildLocalePath } from '../i18n/locales'
 import { useSiteShellContext } from '../layouts/useSiteShellContext'
@@ -38,6 +39,7 @@ function buildGroupSeriesPreview(series: string[], locale: 'zh' | 'en') {
 export function ProductCenterPage() {
   const { locale, content } = useSiteShellContext()
   const taxonomy = getProductTaxonomy(locale)
+  const heroImage = siteReferenceImages.productCenterHero
   const totalGroups = taxonomy.categories.reduce(
     (total, family) => total + family.groups.length,
     0,
@@ -76,6 +78,18 @@ export function ProductCenterPage() {
           </div>
 
           <div className="product-hero__rail">
+            <figure className="surface-media-card surface-media-card--hero">
+              <img
+                alt={getLocalizedAlt(heroImage, locale)}
+                className="surface-media-card__image"
+                src={heroImage.src}
+              />
+              <figcaption className="surface-media-card__caption">
+                <span>{taxonomy.industrialSensorsTitle}</span>
+                <strong>{taxonomy.categories[0]?.name}</strong>
+              </figcaption>
+            </figure>
+
             <div className="product-hero__stats" aria-hidden="true">
               <article className="product-hero__stat">
                 <p className="track-label">{taxonomy.categoriesTitle}</p>

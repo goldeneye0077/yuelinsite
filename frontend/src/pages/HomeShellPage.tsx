@@ -2,12 +2,14 @@ import { ArrowRight } from 'lucide-react'
 import { Link } from 'react-router-dom'
 
 import brandLogo from '../assets/logo6.png'
+import { getLocalizedAlt, siteReferenceImages } from '../content/media/referenceAssets'
 import { buildLocalePath } from '../i18n/locales'
 import { useSiteShellContext } from '../layouts/useSiteShellContext'
 import { buildInquiryPath } from '../lib/inquiry-paths'
 
 export function HomeShellPage() {
   const { locale, content } = useSiteShellContext()
+  const heroImage = siteReferenceImages.homeHero
   const heroStats =
     locale === 'zh'
       ? [
@@ -57,6 +59,18 @@ export function HomeShellPage() {
               </div>
               <img alt="" className="home-hero__logo" src={brandLogo} />
             </article>
+
+            <figure className="surface-media-card surface-media-card--hero">
+              <img
+                alt={getLocalizedAlt(heroImage, locale)}
+                className="surface-media-card__image"
+                src={heroImage.src}
+              />
+              <figcaption className="surface-media-card__caption">
+                <span>{content.home.visualLabel}</span>
+                <strong>{content.home.directions[0]?.title}</strong>
+              </figcaption>
+            </figure>
 
             <div className="home-hero__stats" aria-hidden="true">
               {heroStats.map((fact) => (

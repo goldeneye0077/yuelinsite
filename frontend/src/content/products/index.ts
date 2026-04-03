@@ -1,3 +1,4 @@
+import { fiberSensorVisuals } from '../media/referenceAssets'
 import { buildLocalePath, type Locale } from '../../i18n/locales'
 import { enProductTaxonomy } from './en'
 import { zhProductTaxonomy } from './zh'
@@ -64,6 +65,23 @@ export function buildIndustrialSensorGroupPath(locale: Locale, slug: string) {
   return `${buildProductFamilyPath(locale, 'industrial-sensors')}/${slug}`
 }
 
+function buildFiberSensorProducts(locale: Locale, status: string) {
+  return fiberSensorVisuals.map((item) => ({
+    id: item.id,
+    title: item.title[locale],
+    summary: item.summary[locale],
+    highlights: item.highlights[locale],
+    focus: item.application[locale],
+    inquiryHint: item.inquiryHint[locale],
+    status,
+    seriesCode: item.seriesCode[locale],
+    application: item.application[locale],
+    imageSrc: item.imageSrc,
+    imageAlt: item.imageAlt[locale],
+    sourceUrl: item.sourceUrl,
+  }))
+}
+
 export function buildRepresentativeProducts(
   locale: Locale,
   groupSlug: string,
@@ -74,6 +92,10 @@ export function buildRepresentativeProducts(
 
   if (!taxonomy || !family || !group) {
     return []
+  }
+
+  if (groupSlug === 'fiber-sensors') {
+    return buildFiberSensorProducts(locale, taxonomy.listingReadyLabel)
   }
 
   return group.series.map((series, index) => {
