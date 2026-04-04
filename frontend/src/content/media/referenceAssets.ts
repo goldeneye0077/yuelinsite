@@ -1,4 +1,5 @@
 import buildingExterior from '../../assets/reference/building-exterior.jpg'
+import officeWorker from '../../assets/reference/company/office-worker.jpg'
 import fiberDualDisplay from '../../assets/reference/fiber-dual-display.png'
 import fiberEconomyDigital from '../../assets/reference/fiber-economy-digital.png'
 import fiberUnits from '../../assets/reference/fiber-units.png'
@@ -13,6 +14,13 @@ export const siteReferenceImages = {
     alt: {
       zh: '自动化产线中的工业传感工作场景',
       en: 'Industrial sensing scene on an automated production line',
+    },
+  },
+  homePoster: {
+    src: officeWorker,
+    alt: {
+      zh: '现代办公室内正在工作的白领人员',
+      en: 'White-collar professional working inside a modern office',
     },
   },
   aboutHero: {

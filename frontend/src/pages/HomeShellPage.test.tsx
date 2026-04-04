@@ -29,5 +29,13 @@ describe('HomeShellPage', () => {
           '/zh/contact?category=general-consultation&source=home',
       ),
     ).toBe(true)
+
+    expect(
+      screen.getByRole('heading', { level: 1, name: content.meta.brandName }),
+    ).toBeInTheDocument()
+    expect(screen.getAllByText(content.meta.companyName).length).toBeGreaterThan(0)
+    expect(
+      screen.getByAltText('现代办公室内正在工作的白领人员'),
+    ).toBeInTheDocument()
   })
 })

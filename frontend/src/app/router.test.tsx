@@ -40,7 +40,9 @@ describe('createAppRouter', () => {
           initialEntries: [buildLocalePath(locale, section)],
         })
         const expectedHeading =
-          section === 'products'
+          section === 'home'
+            ? content.meta.brandName
+            : section === 'products'
             ? getProductTaxonomy(locale).title
             : content[routeContentKeyMap[section]].title
 
@@ -50,11 +52,20 @@ describe('createAppRouter', () => {
           </AppProviders>,
         )
 
-        expect(
-          await screen.findByRole('heading', {
-            name: expectedHeading,
-          }),
-        ).toBeInTheDocument()
+        if (section === 'home') {
+          expect(
+            await screen.findByRole('heading', {
+              level: 1,
+              name: expectedHeading,
+            }),
+          ).toBeInTheDocument()
+        } else {
+          expect(
+            await screen.findByRole('heading', {
+              name: expectedHeading,
+            }),
+          ).toBeInTheDocument()
+        }
 
         unmount()
       }

@@ -1,7 +1,6 @@
 import { ArrowRight } from 'lucide-react'
 import { Link } from 'react-router-dom'
 
-import brandLogo from '../assets/logo6.png'
 import { getLocalizedAlt, siteReferenceImages } from '../content/media/referenceAssets'
 import { buildLocalePath } from '../i18n/locales'
 import { useSiteShellContext } from '../layouts/useSiteShellContext'
@@ -10,6 +9,7 @@ import { buildInquiryPath } from '../lib/inquiry-paths'
 export function HomeShellPage() {
   const { locale, content } = useSiteShellContext()
   const heroImage = siteReferenceImages.homeHero
+  const posterImage = siteReferenceImages.homePoster
   const heroStats =
     locale === 'zh'
       ? [
@@ -29,7 +29,8 @@ export function HomeShellPage() {
         <div className="home-hero__inner">
           <div className="home-hero__copy">
             <p className="eyebrow">{content.home.eyebrow}</p>
-            <h1>{content.home.title}</h1>
+            <h1>{content.meta.brandName}</h1>
+            <p className="home-hero__company-name">{content.meta.companyName}</p>
             <p className="hero-signature">{content.meta.crossLocaleCompanyName}</p>
             <p className="hero-summary">{content.home.summary}</p>
             <p className="hero-description">{content.home.description}</p>
@@ -55,9 +56,16 @@ export function HomeShellPage() {
               <div className="home-hero__poster-copy">
                 <p className="hero-visual__label">{content.home.visualLabel}</p>
                 <h2>{content.meta.brandName}</h2>
+                <p className="home-hero__poster-company">{content.meta.companyName}</p>
                 <p>{content.home.profileSummary}</p>
               </div>
-              <img alt="" className="home-hero__logo" src={brandLogo} />
+              <figure className="home-hero__poster-media">
+                <img
+                  alt={getLocalizedAlt(posterImage, locale)}
+                  className="home-hero__poster-image"
+                  src={posterImage.src}
+                />
+              </figure>
             </article>
 
             <figure className="surface-media-card surface-media-card--hero">
