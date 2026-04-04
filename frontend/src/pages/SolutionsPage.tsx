@@ -17,9 +17,6 @@ export function SolutionsPage() {
           <div className="solutions-hero__copy motion-rise motion-delay-1">
             <p className="eyebrow">{content.solutionsPage.eyebrow}</p>
             <h1>{content.solutions.title}</h1>
-            <p className="hero-signature hero-signature--surface">
-              {content.meta.companyName} / {content.meta.crossLocaleCompanyName}
-            </p>
             <p className="hero-summary">{content.solutionsPage.heroSummary}</p>
             <p className="hero-description">
               {content.solutionsPage.heroDescription}
@@ -71,37 +68,37 @@ export function SolutionsPage() {
       <section className="page-band page-band--bordered page-band--solutions-body">
         <div className="solutions-operating-frame motion-rise motion-delay-4">
           <div className="solutions-support-grid">
-          <section className="solutions-support-panel" id="solution-intake">
-            <p className="eyebrow">{content.solutionsPage.coordinationTitle}</p>
-            <p className="story-intro">{content.solutionsPage.coordinationSummary}</p>
-            <div className="story-list">
-              {content.solutionsPage.coordinationItems.map((item) => (
-                <article key={item.title} className="story-item">
-                  <h2>{item.title}</h2>
-                  <p>{item.detail}</p>
-                </article>
-              ))}
-            </div>
-          </section>
-
-          <section
-            className="solutions-support-panel solutions-support-panel--offset"
-            id="solution-delivery-rhythm"
-          >
-            <p className="eyebrow">{content.solutionsPage.processTitle}</p>
-            <p className="story-intro">{content.solutionsPage.processSummary}</p>
-            <div className="process-list">
-              {content.solutionsPage.processSteps.map((item) => (
-                <article key={item.step} className="process-step">
-                  <p className="process-step__index">{item.step}</p>
-                  <div className="process-step__copy">
+            <section className="solutions-support-panel" id="solution-intake">
+              <p className="eyebrow">{content.solutionsPage.coordinationTitle}</p>
+              <p className="story-intro">{content.solutionsPage.coordinationSummary}</p>
+              <div className="story-list">
+                {content.solutionsPage.coordinationItems.map((item) => (
+                  <article key={item.title} className="story-item">
                     <h2>{item.title}</h2>
                     <p>{item.detail}</p>
-                  </div>
-                </article>
-              ))}
-            </div>
-          </section>
+                  </article>
+                ))}
+              </div>
+            </section>
+
+            <section
+              className="solutions-support-panel solutions-support-panel--offset"
+              id="solution-delivery-rhythm"
+            >
+              <p className="eyebrow">{content.solutionsPage.processTitle}</p>
+              <p className="story-intro">{content.solutionsPage.processSummary}</p>
+              <div className="process-list">
+                {content.solutionsPage.processSteps.map((item) => (
+                  <article key={item.step} className="process-step">
+                    <p className="process-step__index">{item.step}</p>
+                    <div className="process-step__copy">
+                      <h2>{item.title}</h2>
+                      <p>{item.detail}</p>
+                    </div>
+                  </article>
+                ))}
+              </div>
+            </section>
           </div>
 
           <div className="final-cta final-cta--nested motion-rise motion-delay-5">

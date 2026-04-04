@@ -219,11 +219,11 @@ export const zhSiteContent: SiteContent = {
     secondaryCta: '\u8fd4\u56de\u9996\u9875',
   },
   solutions: {
-    title: '解决方案 / Solutions',
+    title: '解决方案',
     summary:
-      '围绕工业自动化解决方案、软件开发与技术集成三条主线，帮助客户把产品选型、控制逻辑与项目落地串成同一条路径。',
+      '围绕工业自动化、软件开发与技术集成，建立更清晰的项目沟通入口。',
     description:
-      '本页先建立双语解决方案框架，让设备制造商、系统集成商和终端工厂客户都能快速判断适配场景、服务边界与沟通入口。',
+      '帮助设备制造商、系统集成商和终端工厂客户快速判断适配场景、服务边界与咨询方向。',
     primaryCta: 'Request Consultation / \u83b7\u53d6\u54a8\u8be2',
     secondaryCta: '查看产品中心',
   },
@@ -236,14 +236,14 @@ export const zhSiteContent: SiteContent = {
     secondaryCta: '查看解决方案',
   },
   solutionsPage: {
-    eyebrow: '解决方案与实施路径',
+    eyebrow: '工业自动化与项目协同',
     heroSummary:
-      '从工业传感器选型到软件联动与现场集成，跃鳞科技把项目沟通压缩成更适合工业客户阅读的三条服务主线。',
+      '围绕工业传感、软件配合与技术集成，提供更适合设备项目推进的解决方案路径。',
     heroDescription:
-      '这一页不只解释我们能做什么，还会告诉客户应该从哪条路线开始、下一步应该点向哪里、以及如果需求继续扩展该如何顺滑切换到下一条主线。',
+      '先判断场景，再进入沟通与实施，让选型、接口与交付边界更快对齐。',
     coverageTitle: '适配客户与项目阶段',
     coverageSummary:
-      '无论是新设备开发、既有产线改造，还是需要把传感、执行与控制系统串起来的项目，都可以先从这里判断合作边界。',
+      '面向设备制造、系统集成与产线升级等项目，帮助客户先看清合作范围，再进入正式咨询。',
     coverageItems: [
       {
         label: '设备制造商',

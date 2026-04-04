@@ -218,9 +218,9 @@ export const enSiteContent: SiteContent = {
   solutions: {
     title: 'Solutions',
     summary:
-      'Industrial automation solutions, software development, and technical integration are framed as one connected path from selection to project delivery.',
+      'Industrial automation, software development, and technical integration are presented as one clear project entry point.',
     description:
-      'This page establishes the bilingual solutions structure first, so equipment makers, integrators, and factory-side teams can quickly judge fit, scope, and next steps.',
+      'It helps equipment makers, integrators, and factory-side teams judge fit, scope, and the right consultation route quickly.',
     primaryCta: 'Request Consultation / \u83b7\u53d6\u54a8\u8be2',
     secondaryCta: 'View product center',
   },
@@ -234,14 +234,14 @@ export const enSiteContent: SiteContent = {
     secondaryCta: 'View solutions',
   },
   solutionsPage: {
-    eyebrow: 'Solutions and delivery paths',
+    eyebrow: 'Automation and project delivery',
     heroSummary:
-      'From industrial sensor selection to software coordination and field integration, Yuelin Technology presents three service tracks that are easier for industrial buyers to scan and compare.',
+      'Solutions built around sensing, software coordination, and technical integration for industrial projects.',
     heroDescription:
-      'The page no longer stops at capability framing. It now tells visitors which route to enter first, where each track should lead next, and how a project can move cleanly from one direction into another without losing context.',
+      'Start from the right scenario, align interfaces and delivery boundaries earlier, then move into consultation with less friction.',
     coverageTitle: 'Customer fit and project stage',
     coverageSummary:
-      'Whether the need is a new machine, a line-side upgrade, or a project that must connect sensing, execution, and control, this view should make the collaboration boundary easier to read.',
+      'Useful for new machines, system integration, and line-side upgrades where the project boundary needs to be judged quickly.',
     coverageItems: [
       {
         label: 'Equipment makers',
