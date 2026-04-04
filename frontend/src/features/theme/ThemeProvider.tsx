@@ -1,44 +1,13 @@
-import {
-  useEffect,
-  useMemo,
-  useState,
-  type PropsWithChildren,
-} from 'react'
+import { useEffect, useMemo, useState, type PropsWithChildren } from 'react'
 
 import { ThemeContext, type ThemeContextValue } from './theme-context'
-import {
-  THEME_STORAGE_KEY,
-  resolveThemePreference,
-  type ThemeMode,
-} from './theme-utils'
-
-function readStoredTheme(): string | null {
-  if (typeof window === 'undefined') {
-    return null
-  }
-
-  try {
-    return window.localStorage.getItem(THEME_STORAGE_KEY)
-  } catch {
-    return null
-  }
-}
+import { type ThemeMode } from './theme-utils'
 
 export function ThemeProvider({ children }: PropsWithChildren) {
-  const [theme, setTheme] = useState<ThemeMode>(() =>
-    resolveThemePreference({
-      storedTheme: readStoredTheme(),
-    }),
-  )
+  const [theme, setTheme] = useState<ThemeMode>('light')
 
   useEffect(() => {
     document.documentElement.dataset.theme = theme
-
-    try {
-      window.localStorage.setItem(THEME_STORAGE_KEY, theme)
-    } catch {
-      // Ignore storage availability issues and keep the in-memory theme.
-    }
   }, [theme])
 
   const value = useMemo<ThemeContextValue>(

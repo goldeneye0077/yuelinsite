@@ -3,7 +3,7 @@ import { useEffect } from 'react'
 import { vi } from 'vitest'
 
 import { ThemeProvider } from './ThemeProvider'
-import { THEME_STORAGE_KEY, resolveThemePreference } from './theme-utils'
+import { resolveThemePreference } from './theme-utils'
 import { useTheme } from './useTheme'
 
 function ThemeProbe() {
@@ -16,28 +16,38 @@ function ThemeProbe() {
   return <p>{theme}</p>
 }
 
+function ThemeToggleProbe() {
+  const { theme, toggleTheme } = useTheme()
+
+  return (
+    <>
+      <p>{theme}</p>
+      <button onClick={toggleTheme} type="button">
+        toggle
+      </button>
+    </>
+  )
+}
+
 describe('ThemeProvider', () => {
   beforeEach(() => {
-    window.localStorage.clear()
     delete document.documentElement.dataset.theme
     delete document.body.dataset.themeProbe
     vi.unstubAllGlobals()
   })
 
-  it('uses the persisted theme selection', () => {
-    window.localStorage.setItem(THEME_STORAGE_KEY, 'dark')
-
+  it('always starts in light mode on entry', () => {
     render(
       <ThemeProvider>
         <ThemeProbe />
       </ThemeProvider>,
     )
 
-    expect(screen.getByText('dark')).toBeInTheDocument()
-    expect(document.documentElement.dataset.theme).toBe('dark')
+    expect(screen.getByText('light')).toBeInTheDocument()
+    expect(document.documentElement.dataset.theme).toBe('light')
   })
 
-  it('defaults to light mode when nothing is stored', () => {
+  it('still allows switching to dark mode after load', async () => {
     vi.stubGlobal(
       'matchMedia',
       vi.fn().mockReturnValue({
@@ -49,12 +59,17 @@ describe('ThemeProvider', () => {
 
     render(
       <ThemeProvider>
-        <ThemeProbe />
+        <ThemeToggleProbe />
       </ThemeProvider>,
     )
 
     expect(screen.getByText('light')).toBeInTheDocument()
     expect(document.documentElement.dataset.theme).toBe('light')
+
+    await screen.getByRole('button', { name: 'toggle' }).click()
+
+    expect(screen.getByText('dark')).toBeInTheDocument()
+    expect(document.documentElement.dataset.theme).toBe('dark')
     expect(resolveThemePreference({ prefersDark: true })).toBe('dark')
   })
 })
