@@ -1,7 +1,9 @@
 import { useState } from 'react'
 import { ArrowRight, ChevronLeft, ExternalLink } from 'lucide-react'
 import { Link, Navigate, useParams } from 'react-router-dom'
+import { toast } from 'sonner'
 
+import { Button } from '../components/ui/button'
 import {
   buildProductFamilyPath,
   buildProductGroupPath,
@@ -14,6 +16,7 @@ import {
   normalizeProductFamilyKey,
   normalizeProductGroupSlug,
 } from '../content/products'
+import { getProjectLineInquiryAssist } from '../content/products/projectLineInquiryAssist'
 import { useSiteShellContext } from '../layouts/useSiteShellContext'
 import {
   buildInquiryPath,
@@ -77,6 +80,34 @@ export function ProductGroupPage() {
   const seriesLabel = locale === 'zh' ? '代表系列' : 'Series'
   const referenceLabel = locale === 'zh' ? '参考来源' : 'Reference'
   const previewTitle = locale === 'zh' ? '代表产品图' : 'Reference products'
+
+  const inquiryAssist =
+    group.source === 'project-inferred'
+      ? getProjectLineInquiryAssist(locale, group.slug, group.name)
+      : null
+  const inquiryAssistPath = `${buildInquiryPath(locale, {
+    category: inquiryCategory,
+    source: 'product-family',
+  })}#contact-form`
+
+  async function handleCopyInquiryTemplate() {
+    if (!inquiryAssist) {
+      return
+    }
+
+    try {
+      if (!navigator.clipboard?.writeText) {
+        throw new Error('Clipboard unavailable')
+      }
+
+      await navigator.clipboard.writeText(inquiryAssist.templateLines.join('\n'))
+      toast.success(inquiryAssist.copySuccessTitle, {
+        description: inquiryAssist.copySuccessDescription,
+      })
+    } catch {
+      toast.error(inquiryAssist.copyErrorTitle)
+    }
+  }
 
   return (
     <>
@@ -289,6 +320,56 @@ export function ProductGroupPage() {
                 </aside>
               ) : null}
             </div>
+
+            {inquiryAssist ? (
+              <section className="product-inquiry-assist">
+                <div className="product-inquiry-assist__intro">
+                  <p className="eyebrow">{inquiryAssist.sectionEyebrow}</p>
+                  <h2 className="profile-title">{inquiryAssist.sectionTitle}</h2>
+                  <p className="story-intro">{inquiryAssist.sectionSummary}</p>
+                </div>
+
+                <div className="product-inquiry-assist__grid">
+                  <article className="product-inquiry-assist__panel">
+                    <div className="product-inquiry-assist__heading">
+                      <p className="eyebrow">{inquiryAssist.specTitle}</p>
+                      <p className="story-intro">{inquiryAssist.specSummary}</p>
+                    </div>
+
+                    <div className="product-spec-list">
+                      {inquiryAssist.specFields.map((field) => (
+                        <article className="product-spec-item" key={field.label}>
+                          <h3>{field.label}</h3>
+                          <p>{field.detail}</p>
+                        </article>
+                      ))}
+                    </div>
+
+                    <Button asChild size="lg">
+                      <Link to={inquiryAssistPath}>
+                        <span>{inquiryAssist.inquiryCtaLabel}</span>
+                        <ArrowRight size={16} />
+                      </Link>
+                    </Button>
+                  </article>
+
+                  <article className="product-inquiry-assist__panel">
+                    <div className="product-inquiry-assist__heading">
+                      <p className="eyebrow">{inquiryAssist.templateTitle}</p>
+                      <p className="story-intro">{inquiryAssist.templateSummary}</p>
+                    </div>
+
+                    <pre className="product-template-box">
+                      {inquiryAssist.templateLines.join('\n')}
+                    </pre>
+
+                    <Button onClick={handleCopyInquiryTemplate} size="lg" variant="secondary">
+                      {inquiryAssist.copyLabel}
+                    </Button>
+                  </article>
+                </div>
+              </section>
+            ) : null}
 
             <p className="eyebrow">{taxonomy.listingTemplateTitle}</p>
             <p className="story-intro">{taxonomy.listingTemplateSummary}</p>

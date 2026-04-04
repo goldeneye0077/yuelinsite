@@ -6,6 +6,14 @@ Object.defineProperty(window, 'scrollTo', {
   value: vi.fn(),
 })
 
+Object.defineProperty(navigator, 'clipboard', {
+  configurable: true,
+  value: {
+    writeText: vi.fn().mockResolvedValue(undefined),
+  },
+})
+
 beforeEach(() => {
   vi.mocked(window.scrollTo).mockClear()
+  vi.mocked(navigator.clipboard.writeText).mockClear()
 })

@@ -1,4 +1,4 @@
-import { fireEvent, render, screen } from '@testing-library/react'
+import { fireEvent, render, screen, waitFor } from '@testing-library/react'
 import { RouterProvider } from 'react-router-dom'
 
 import { createAppRouter } from '../app/router'
@@ -155,5 +155,31 @@ describe('ProductGroupPage', () => {
     expect(
       (await screen.findAllByText(products[1].application ?? '')).length,
     ).toBeGreaterThan(0)
+  })
+
+  it('renders inquiry assist blocks for project-inferred product groups and copies the template', async () => {
+    const router = createAppRouter({
+      initialEntries: ['/en/products/pneumatic-components/cylinders'],
+    })
+
+    render(
+      <AppProviders>
+        <RouterProvider router={router} />
+      </AppProviders>,
+    )
+
+    expect(await screen.findByText('Specs to prepare first')).toBeInTheDocument()
+    expect(await screen.findByText('Bore and stroke')).toBeInTheDocument()
+    expect(await screen.findByText('Recommended inquiry template')).toBeInTheDocument()
+
+    fireEvent.click(screen.getByRole('button', { name: 'Copy template' }))
+
+    await waitFor(() => {
+      expect(navigator.clipboard.writeText).toHaveBeenCalled()
+    })
+
+    expect(navigator.clipboard.writeText).toHaveBeenCalledWith(
+      expect.stringContaining('Bore and stroke'),
+    )
   })
 })
