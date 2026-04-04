@@ -11,7 +11,7 @@ export function SolutionsPage() {
   const heroImage = siteReferenceImages.solutionsHero
 
   return (
-    <>
+    <div className="solutions-page">
       <section className="page-band page-band--tight">
         <div className="solutions-hero">
           <div className="solutions-hero__copy motion-rise motion-delay-1">
@@ -50,7 +50,7 @@ export function SolutionsPage() {
               />
               <figcaption className="surface-media-card__caption">
                 <span>{content.solutionsPage.coverageTitle}</span>
-                <strong>{content.solutionsPage.tracks[0]?.title}</strong>
+                <strong>{content.solutionsPage.coverageItems[0]?.title}</strong>
               </figcaption>
             </figure>
             <p className="eyebrow">{content.solutionsPage.coverageTitle}</p>
@@ -68,8 +68,9 @@ export function SolutionsPage() {
         </div>
       </section>
 
-      <section className="page-band page-band--bordered">
-        <div className="solutions-support-grid motion-rise motion-delay-4">
+      <section className="page-band page-band--bordered page-band--solutions-body">
+        <div className="solutions-operating-frame motion-rise motion-delay-4">
+          <div className="solutions-support-grid">
           <section className="solutions-support-panel" id="solution-intake">
             <p className="eyebrow">{content.solutionsPage.coordinationTitle}</p>
             <p className="story-intro">{content.solutionsPage.coordinationSummary}</p>
@@ -101,33 +102,32 @@ export function SolutionsPage() {
               ))}
             </div>
           </section>
-        </div>
-      </section>
+          </div>
 
-      <section className="page-band page-band--bordered">
-        <div className="final-cta motion-rise motion-delay-5">
-          <div>
-            <p className="eyebrow">{content.meta.brandName}</p>
-            <h2>{content.solutionsPage.finalCtaTitle}</h2>
-            <p>{content.solutionsPage.finalCtaBody}</p>
-          </div>
-          <div className="section-actions">
-            <Link
-              className="cta-link"
-              to={buildInquiryPath(locale, {
-                category: 'general-consultation',
-                source: 'solutions',
-              })}
-            >
-              <span>{content.solutions.primaryCta}</span>
-              <ArrowRight size={16} />
-            </Link>
-            <Link className="secondary-link" to={buildLocalePath(locale, 'products')}>
-              {content.navigation.find((item) => item.key === 'products')?.label}
-            </Link>
+          <div className="final-cta final-cta--nested motion-rise motion-delay-5">
+            <div>
+              <p className="eyebrow">{content.meta.brandName}</p>
+              <h2>{content.solutionsPage.finalCtaTitle}</h2>
+              <p>{content.solutionsPage.finalCtaBody}</p>
+            </div>
+            <div className="section-actions">
+              <Link
+                className="cta-link"
+                to={buildInquiryPath(locale, {
+                  category: 'general-consultation',
+                  source: 'solutions',
+                })}
+              >
+                <span>{content.solutions.primaryCta}</span>
+                <ArrowRight size={16} />
+              </Link>
+              <Link className="secondary-link" to={buildLocalePath(locale, 'products')}>
+                {content.navigation.find((item) => item.key === 'products')?.label}
+              </Link>
+            </div>
           </div>
         </div>
       </section>
-    </>
+    </div>
   )
 }

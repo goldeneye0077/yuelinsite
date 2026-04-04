@@ -22,8 +22,8 @@ describe('SolutionsPage', () => {
       await screen.findByRole('heading', { name: content.solutions.title }),
     ).toBeInTheDocument()
     expect(
-      await screen.findByText(content.solutionsPage.coverageItems[0].title),
-    ).toBeInTheDocument()
+      (await screen.findAllByText(content.solutionsPage.coverageItems[0].title)).length,
+    ).toBeGreaterThan(0)
     expect(
       await screen.findByText(content.solutionsPage.processTitle),
     ).toBeInTheDocument()

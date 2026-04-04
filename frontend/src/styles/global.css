@@ -5137,3 +5137,122 @@ body {
   }
 
 }
+
+.solutions-page .page-band--tight {
+  padding-bottom: 24px;
+}
+
+.solutions-page .page-band--solutions-body {
+  padding-top: 28px;
+}
+
+.solutions-page .solutions-hero {
+  gap: 32px;
+}
+
+.solutions-page .solutions-hero__copy,
+.solutions-page .solutions-hero__rail {
+  gap: 16px;
+}
+
+.solutions-page .solutions-operating-frame {
+  position: relative;
+  overflow: hidden;
+  padding: 28px 30px 30px;
+  border: 1px solid color-mix(in srgb, var(--color-border) 82%, transparent);
+  border-radius: 32px;
+  background: color-mix(in srgb, var(--color-surface) 96%, transparent);
+  box-shadow: 0 18px 42px var(--color-shadow);
+}
+
+.solutions-page .solutions-operating-frame::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(135deg, rgba(244, 195, 24, 0.08), transparent 24%),
+    repeating-linear-gradient(
+      118deg,
+      rgba(98, 91, 80, 0.05),
+      rgba(98, 91, 80, 0.05) 1px,
+      transparent 1px,
+      transparent 38px
+    );
+  pointer-events: none;
+}
+
+.solutions-page .solutions-operating-frame > * {
+  position: relative;
+  z-index: 1;
+}
+
+.solutions-page .solutions-support-grid {
+  gap: 18px;
+  background: none;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.solutions-page .solutions-support-grid::before {
+  display: none;
+}
+
+.solutions-page .solutions-support-panel {
+  min-height: 100%;
+  padding: 24px;
+  border: 1px solid color-mix(in srgb, var(--color-border) 82%, transparent);
+  border-top: 0;
+  border-radius: 24px;
+  background: color-mix(in srgb, var(--color-surface-elevated) 86%, transparent);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+}
+
+.solutions-page .solutions-support-panel--offset {
+  padding-left: 24px;
+  border-left: 0;
+}
+
+.solutions-page .final-cta--nested {
+  margin-top: 18px;
+  padding: 24px 26px;
+  border-top: 1px solid color-mix(in srgb, var(--color-border) 74%, transparent);
+  border-radius: 24px;
+  background:
+    linear-gradient(
+      135deg,
+      color-mix(in srgb, var(--color-accent-soft) 42%, var(--color-surface) 58%),
+      color-mix(in srgb, var(--color-surface) 96%, transparent)
+    ),
+    color-mix(in srgb, var(--color-surface) 92%, transparent);
+}
+
+@media (max-width: 1080px) {
+  .solutions-page .solutions-operating-frame {
+    padding: 24px;
+  }
+
+  .solutions-page .solutions-support-grid,
+  .solutions-page .final-cta--nested {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 720px) {
+  .solutions-page .page-band--tight {
+    padding-bottom: 20px;
+  }
+
+  .solutions-page .page-band--solutions-body {
+    padding-top: 20px;
+  }
+
+  .solutions-page .solutions-operating-frame {
+    padding: 20px;
+  }
+
+  .solutions-page .solutions-support-panel,
+  .solutions-page .final-cta--nested {
+    padding: 20px;
+  }
+}
