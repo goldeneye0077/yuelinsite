@@ -120,4 +120,40 @@ describe('ProductGroupPage', () => {
     ).toBeGreaterThan(0)
     expect((await screen.findAllByText('SDS 系列')).length).toBeGreaterThan(0)
   })
+  it('renders project-inferred product groups with the same rich visual detail pattern', async () => {
+    const products = buildRepresentativeProducts(
+      'zh',
+      'pneumatic-components',
+      'cylinders',
+    )
+    const router = createAppRouter({
+      initialEntries: ['/zh/products/pneumatic-components/cylinders'],
+    })
+
+    render(
+      <AppProviders>
+        <RouterProvider router={router} />
+      </AppProviders>,
+    )
+
+    expect((await screen.findAllByText('气缸')).length).toBeGreaterThan(0)
+    expect(
+      (
+        await screen.findAllByAltText(products[0].imageAlt ?? products[0].title)
+      ).length,
+    ).toBeGreaterThan(0)
+
+    fireEvent.click(
+      screen.getAllByRole('button', {
+        name: new RegExp(products[1].title, 'i'),
+      })[0],
+    )
+
+    expect(
+      (await screen.findAllByText(products[1].highlights[0])).length,
+    ).toBeGreaterThan(0)
+    expect(
+      (await screen.findAllByText(products[1].application ?? '')).length,
+    ).toBeGreaterThan(0)
+  })
 })

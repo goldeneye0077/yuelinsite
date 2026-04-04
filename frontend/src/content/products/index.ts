@@ -6,6 +6,7 @@ import {
   familyGroupReferenceVisuals,
   type ProductGroupReferenceVisual,
 } from '../media/familyGroupReferenceVisuals'
+import { projectLineVisuals } from '../media/projectLineVisuals'
 import {
   industrialSensorReferenceVisuals,
 } from '../media/industrialSensorReferenceVisuals'
@@ -36,6 +37,226 @@ const groupCopyMap: Record<
     highlights: Record<Locale, string[]>
   }
 > = {
+  'linear-guides': {
+    application: {
+      zh: '适合设备直线导向、重复定位与中等载荷搬运工位。',
+      en: 'Fits straight-line guidance, repeat positioning, and medium-load transfer stations.',
+    },
+    inquiryHint: {
+      zh: '沟通时先说明行程、负载、安装方向，以及是否需要防尘、预压或高速运行。',
+      en: 'Start with travel, load, mounting direction, and whether dust protection, preload, or higher speed is required.',
+    },
+    highlights: {
+      zh: [
+        '先判断导轨宽度、滑块数量和安装基准，能更快缩小范围。',
+        '适合对重复定位、运行平顺性和维护周期有要求的工位。',
+        '后续可继续补充长度、精度等级和安装尺寸图。',
+      ],
+      en: [
+        'Confirm rail width, carriage count, and datum faces early to narrow selection faster.',
+        'Well suited to stations that care about repeatability, smooth running, and maintenance interval.',
+        'Ready for later enrichment with length, accuracy grade, and mounting drawings.',
+      ],
+    },
+  },
+  'slide-modules': {
+    application: {
+      zh: '适合单轴搬运、夹治具进退与紧凑型直线运动单元。',
+      en: 'Fits single-axis transfer, fixture advance-retract tasks, and compact linear motion units.',
+    },
+    inquiryHint: {
+      zh: '优先说明行程、节拍、安装空间，以及是否需要电机侧预留或防护罩。',
+      en: 'Lead with travel, cycle time, mounting space, and whether motor-side clearance or protective covers are needed.',
+    },
+    highlights: {
+      zh: [
+        '更适合先判断紧凑型、标准型还是高刚性模组路线。',
+        '便于同步确认电机安装方向与感应器布线空间。',
+        '后续可继续补充负载曲线和允许偏载说明。',
+      ],
+      en: [
+        'Helps decide quickly between compact, standard, and higher-rigidity module paths.',
+        'Makes it easier to align motor orientation and sensor cable clearance.',
+        'Can later be expanded with load curves and offset-load guidance.',
+      ],
+    },
+  },
+  'ball-screw-modules': {
+    application: {
+      zh: '适合高精度定位、压装进给和需要较高重复性的直线机构。',
+      en: 'Fits high-precision positioning, press-fit feeding, and linear axes that need stronger repeatability.',
+    },
+    inquiryHint: {
+      zh: '建议先说明定位精度、推力、速度和是否存在垂直安装或外部导向。',
+      en: 'Clarify positioning accuracy, thrust, speed, and whether vertical mounting or external guidance is involved.',
+    },
+    highlights: {
+      zh: [
+        '更利于先区分标准滚珠丝杆与高精度定位模组的路线。',
+        '适合需要兼顾推力、定位精度和结构刚性的工位。',
+        '后续可继续补充导程、丝杆直径和防护等级。',
+      ],
+      en: [
+        'Makes it easier to separate standard screw modules from higher-precision positioning paths.',
+        'Good for stations that need thrust, positioning accuracy, and structural rigidity together.',
+        'Ready for later detail on lead, screw diameter, and protection rating.',
+      ],
+    },
+  },
+  'belt-driven-modules': {
+    application: {
+      zh: '适合长行程搬运、高速往返与节拍优先的输送定位场景。',
+      en: 'Fits long-stroke transfer, high-speed shuttle motion, and cycle-time-first positioning scenarios.',
+    },
+    inquiryHint: {
+      zh: '沟通时请先说明总行程、最高速度、负载重心，以及是否需要同步多轴。',
+      en: 'Share total stroke, top speed, load center of gravity, and whether multi-axis synchronization is required.',
+    },
+    highlights: {
+      zh: [
+        '适合先比较高速型与长行程型皮带模组的结构差异。',
+        '便于提前确认张紧结构、支撑方式和线缆拖链路线。',
+        '后续可继续补充重复定位与最大悬臂条件。',
+      ],
+      en: [
+        'Helps compare higher-speed and longer-stroke belt module structures early.',
+        'Useful for aligning tensioning layout, support method, and cable-chain path.',
+        'Can later be refined by repeatability and maximum cantilever condition.',
+      ],
+    },
+  },
+  'positioning-stages': {
+    application: {
+      zh: '适合精密对位、视觉校正、工装微调与多轴组合定位平台。',
+      en: 'Fits precision alignment, vision correction, fixture fine-tuning, and multi-axis positioning platforms.',
+    },
+    inquiryHint: {
+      zh: '优先说明轴数、分辨率、平台尺寸，以及是否需要手动微调或电动控制。',
+      en: 'Start with axis count, resolution, platform size, and whether manual trim or motorized control is needed.',
+    },
+    highlights: {
+      zh: [
+        '更适合先区分单轴平台和多轴组合平台的结构方向。',
+        '有助于提前确认负载面尺寸、行程组合和安装基准。',
+        '后续可继续补充限位、原点和视觉治具接口。',
+      ],
+      en: [
+        'Helps separate single-axis stages from multi-axis platform structures earlier.',
+        'Useful for confirming top-surface size, travel combination, and mounting datums.',
+        'Ready for later addition of limits, home position, and vision-fixture interfaces.',
+      ],
+    },
+  },
+  cylinders: {
+    application: {
+      zh: '适合夹紧、推出、搬运与治具动作等常规气动执行场景。',
+      en: 'Fits common pneumatic actuation such as clamping, pushing, transfer, and fixture motion.',
+    },
+    inquiryHint: {
+      zh: '请先说明缸径、行程、安装形式，以及是否需要磁性开关或缓冲结构。',
+      en: 'Start with bore size, stroke, mounting style, and whether magnetic switches or cushioning are needed.',
+    },
+    highlights: {
+      zh: [
+        '适合先比较标准、薄型和导杆三类典型气缸结构。',
+        '便于同步确认安装耳环、法兰与感应器布线空间。',
+        '后续可继续补充使用压力范围和推力估算。',
+      ],
+      en: [
+        'Helps compare standard, compact, and guided cylinder structures side by side.',
+        'Makes it easier to align clevis, flange, and switch-routing requirements.',
+        'Can later be extended with working-pressure range and force estimates.',
+      ],
+    },
+  },
+  'solenoid-valves': {
+    application: {
+      zh: '适合气路换向控制、多工位集中配气与设备动作节拍管理。',
+      en: 'Fits pneumatic directional control, centralized multi-station air supply, and machine motion timing.',
+    },
+    inquiryHint: {
+      zh: '沟通时先说明阀位机能、接口口径、电压规格，以及是否需要阀岛集中安装。',
+      en: 'Clarify function type, port size, voltage, and whether manifold-style centralized mounting is required.',
+    },
+    highlights: {
+      zh: [
+        '更适合先判断单阀、多联阀组还是手动阀的配置方向。',
+        '便于提前确认接线方式、安装底板和维护更换空间。',
+        '后续可继续补充流量、响应速度和 IP 防护信息。',
+      ],
+      en: [
+        'Helps decide between single valves, manifolds, and manual valve routes early.',
+        'Useful for aligning wiring, sub-base choice, and service clearance.',
+        'Ready for later flow, response-time, and IP-rating detail.',
+      ],
+    },
+  },
+  'air-preparation': {
+    application: {
+      zh: '适合压缩空气过滤、稳压、润滑与前端气源品质管理。',
+      en: 'Fits compressed-air filtration, pressure regulation, lubrication, and upstream air-quality control.',
+    },
+    inquiryHint: {
+      zh: '优先说明进气压力、接口规格、安装空间，以及是否需要排水、排污或油雾功能。',
+      en: 'Lead with inlet pressure, port spec, mounting space, and whether draining, purge, or lubrication is required.',
+    },
+    highlights: {
+      zh: [
+        '适合先区分过滤减压阀、三联件和独立压力表的搭配方式。',
+        '便于提前确认配气柜空间和维护换芯频率。',
+        '后续可继续补充过滤精度和压力稳定范围。',
+      ],
+      en: [
+        'Helps separate filter regulators, FRL units, and standalone gauge combinations.',
+        'Useful for checking cabinet space and maintenance cartridge intervals early.',
+        'Can later be refined by filtration accuracy and pressure-stability range.',
+      ],
+    },
+  },
+  'fittings-and-tubing': {
+    application: {
+      zh: '适合现场气路布线、快速接驳、转接分流与管径统一管理。',
+      en: 'Fits field pneumatic routing, quick connection, split distribution, and tube-size standardization.',
+    },
+    inquiryHint: {
+      zh: '先说明管径、接口螺纹、弯折空间，以及是否需要耐油、耐弯折或阻燃管材。',
+      en: 'Start with tube size, thread spec, bend radius, and whether oil-resistant, flex-rated, or flame-retardant tubing is needed.',
+    },
+    highlights: {
+      zh: [
+        '适合先把快插接头、PU 管和分气接头拆开判断。',
+        '便于同步现场布管方向和维修替换便利性。',
+        '后续可继续补充颜色管理、长度清单和特殊材质版本。',
+      ],
+      en: [
+        'Helps evaluate push-in fittings, PU tube, and branch connectors separately first.',
+        'Makes it easier to align routing direction and maintenance replacement access.',
+        'Ready for later color coding, cut-length lists, and specialty material options.',
+      ],
+    },
+  },
+  'vacuum-components': {
+    application: {
+      zh: '适合吸附搬运、纸箱上料、片材抓取与轻量化真空取放场景。',
+      en: 'Fits suction transfer, carton feeding, sheet pickup, and lightweight vacuum pick-and-place work.',
+    },
+    inquiryHint: {
+      zh: '建议先说明工件材质、表面平整度、节拍，以及是否需要分散式真空或集中真空源。',
+      en: 'Clarify workpiece material, surface flatness, cycle time, and whether distributed or centralized vacuum is preferred.',
+    },
+    highlights: {
+      zh: [
+        '适合先比较真空发生器、吸盘和过滤器三类典型构成。',
+        '便于提前判断吸附面积、负压稳定性和安装接口。',
+        '后续可继续补充吸盘材质、过滤精度和报警监测。',
+      ],
+      en: [
+        'Helps compare ejectors, suction cups, and vacuum filters as a working set.',
+        'Useful for confirming suction area, vacuum stability, and interface choice earlier.',
+        'Can later be expanded with cup material, filtration accuracy, and alarm monitoring.',
+      ],
+    },
+  },
   'photoelectric-sensors': {
     application: {
       zh: '适合产线有无检测、到位确认、计数分拣与一般反射型目标检测。',
@@ -595,6 +816,50 @@ function buildReferenceProducts(
   }))
 }
 
+function buildProjectLineSummary(
+  locale: Locale,
+  series: string,
+  groupName: string,
+) {
+  if (locale === 'zh') {
+    return `${series} 作为 ${groupName} 下的代表系列，适合先确认安装空间、动作节拍和控制接口。`
+  }
+
+  return `${series} is treated as a representative series inside ${groupName}, helping teams confirm mounting space, motion tempo, and control interface first.`
+}
+
+function buildProjectLineProducts(
+  locale: Locale,
+  status: string,
+  family: ProductFamily,
+  groupSlug: string,
+) {
+  const group = getProductGroup(locale, family.key, groupSlug)
+  const visual = projectLineVisuals[groupSlug]
+  const copy = groupCopyMap[groupSlug]
+
+  if (!group || !visual || !copy) {
+    return []
+  }
+
+  return group.series.map((series, index) => ({
+    id: `${group.slug}-${index + 1}`,
+    title: series,
+    summary: buildProjectLineSummary(locale, series, group.name),
+    highlights: copy.highlights[locale],
+    focus: copy.application[locale] || family.useCase,
+    inquiryHint: copy.inquiryHint[locale],
+    status,
+    seriesCode: series,
+    application: copy.application[locale],
+    imageSrc: visual.imageSrc,
+    imageAlt:
+      locale === 'zh'
+        ? `${series} - ${visual.imageAlt.zh}`
+        : `${series} - ${visual.imageAlt.en}`,
+  }))
+}
+
 export function buildRepresentativeProducts(
   locale: Locale,
   familyKey: ProductFamilyKey,
@@ -621,6 +886,17 @@ export function buildRepresentativeProducts(
 
   if (referenceProducts.length > 0) {
     return referenceProducts
+  }
+
+  const projectLineProducts = buildProjectLineProducts(
+    locale,
+    taxonomy.listingReadyLabel,
+    family,
+    groupSlug,
+  )
+
+  if (projectLineProducts.length > 0) {
+    return projectLineProducts
   }
 
   return group.series.map((series, index) => {

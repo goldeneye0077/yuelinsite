@@ -17,6 +17,21 @@ import {
   buildInquiryPath,
   getInquiryCategoryForProductFamily,
 } from '../lib/inquiry-paths'
+import type { ProductSourceType, RepresentativeProduct } from '../content/products/types'
+
+function getSourceLabel(
+  source: ProductSourceType,
+  syncedLabel: string,
+  inferredLabel: string,
+) {
+  return source === 'reference-synced' ? syncedLabel : inferredLabel
+}
+
+function getProductMetaLabel(product: RepresentativeProduct) {
+  return product.seriesCode && product.seriesCode !== product.title
+    ? product.seriesCode
+    : product.application ?? product.focus
+}
 
 export function ProductGroupPage() {
   const { locale } = useSiteShellContext()
@@ -112,7 +127,13 @@ export function ProductGroupPage() {
               </figure>
             ) : null}
             <div className="product-detail-hero__rail-header">
-              <span className="product-source-badge">{taxonomy.sourceSyncedLabel}</span>
+              <span className="product-source-badge">
+                {getSourceLabel(
+                  group.source,
+                  taxonomy.sourceSyncedLabel,
+                  taxonomy.projectInferredLabel,
+                )}
+              </span>
             </div>
             <div className="product-detail-hero__stats">
               <article>
@@ -140,7 +161,7 @@ export function ProductGroupPage() {
                   ) : null}
                   <div className="product-detail-hero__preview-copy">
                     <h2>{product.title}</h2>
-                    <p>{product.seriesCode ?? taxonomy.listingReadyLabel}</p>
+                    <p>{getProductMetaLabel(product)}</p>
                   </div>
                 </button>
               ))}
@@ -172,7 +193,9 @@ export function ProductGroupPage() {
                     ) : null}
                     <div className="product-card__body">
                       <p className="product-card__status">
-                        {product.seriesCode ?? product.status}
+                        {product.seriesCode && product.seriesCode !== product.title
+                          ? product.seriesCode
+                          : product.status}
                       </p>
                       <h3>{product.title}</h3>
                       <p className="product-card__summary">{product.summary}</p>
@@ -200,7 +223,8 @@ export function ProductGroupPage() {
                     <p className="eyebrow">{taxonomy.productDetailPanelTitle}</p>
                     <h3>{activeProduct.title}</h3>
                     <div className="product-card-detail__badges">
-                      {activeProduct.seriesCode ? (
+                      {activeProduct.seriesCode &&
+                      activeProduct.seriesCode !== activeProduct.title ? (
                         <span className="product-source-badge">{activeProduct.seriesCode}</span>
                       ) : null}
                       <span className="product-source-badge">{activeProduct.status}</span>

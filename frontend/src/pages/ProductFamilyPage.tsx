@@ -165,7 +165,12 @@ export function ProductFamilyPage() {
                   ) : null}
                   <div className="product-detail-hero__preview-copy">
                     <h2>{entry.group.name}</h2>
-                    <p>{entry.product.seriesCode ?? entry.group.summary}</p>
+                    <p>
+                      {entry.product.seriesCode &&
+                      entry.product.seriesCode !== entry.product.title
+                        ? entry.product.seriesCode
+                        : entry.product.title}
+                    </p>
                   </div>
                 </Link>
               ))}

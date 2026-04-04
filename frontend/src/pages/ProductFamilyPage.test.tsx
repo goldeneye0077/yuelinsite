@@ -55,4 +55,26 @@ describe('ProductFamilyPage', () => {
       screen.getAllByRole('link', { name: /光幕与区域传感器/i }).length,
     ).toBeGreaterThan(0)
   })
+  it('renders linear guide families with illustrated subgroup previews', async () => {
+    const taxonomy = getProductTaxonomy('zh')
+    const linearFamily = taxonomy.categories.find(
+      (category) => category.key === 'linear-guides-and-modules',
+    )
+    const router = createAppRouter({
+      initialEntries: ['/zh/products/linear-guides-and-modules'],
+    })
+
+    render(
+      <AppProviders>
+        <RouterProvider router={router} />
+      </AppProviders>,
+    )
+
+    expect(linearFamily).toBeDefined()
+    expect((await screen.findAllByText(linearFamily!.name)).length).toBeGreaterThan(0)
+    expect(
+      (await screen.findAllByText(linearFamily!.groups[0].series[0])).length,
+    ).toBeGreaterThan(0)
+    expect(screen.getAllByRole('link', { name: /线性滑轨/i }).length).toBeGreaterThan(0)
+  })
 })
