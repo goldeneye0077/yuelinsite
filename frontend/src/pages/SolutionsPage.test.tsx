@@ -31,12 +31,6 @@ describe('SolutionsPage', () => {
       await screen.findByText(content.solutionsPage.processTitle),
     ).toBeInTheDocument()
     expect(
-      await screen.findByText(content.solutionsPage.partnershipTitle),
-    ).toBeInTheDocument()
-    expect(
-      await screen.findByText(content.solutionsPage.partnerBrands[0].name),
-    ).toBeInTheDocument()
-    expect(
       await screen.findByRole('link', { name: content.solutionsPage.tracks[0].primaryCta.label }),
     ).toBeInTheDocument()
     expect(
@@ -51,5 +45,11 @@ describe('SolutionsPage', () => {
     expect(
       await screen.findByRole('link', { name: content.solutionsPage.tracks[1].transition.ctaLabel }),
     ).toHaveAttribute('href', `#${content.solutionsPage.tracks[1].transition.targetId}`)
+    expect(
+      screen.queryByText(content.solutionsPage.partnershipTitle),
+    ).not.toBeInTheDocument()
+    expect(
+      screen.queryByText(content.solutionsPage.partnershipModesTitle),
+    ).not.toBeInTheDocument()
   })
 })
