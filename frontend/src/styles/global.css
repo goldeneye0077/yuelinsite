@@ -2645,6 +2645,14 @@ img {
     min-height: auto;
   }
 
+  .home-hero__copy {
+    padding-top: 0;
+  }
+
+  .home-hero__support-item p {
+    white-space: normal;
+  }
+
   .home-hero__visual {
     justify-content: stretch;
   }
@@ -2742,6 +2750,15 @@ img {
   .product-detail-hero__main h1 {
     font-size: clamp(2.6rem, 15vw, 4rem);
     max-width: none;
+  }
+
+  .home-hero__support {
+    padding: 20px;
+  }
+
+  .home-hero__support-item {
+    grid-template-columns: 1fr;
+    gap: 10px;
   }
 
   .hero-actions,
@@ -3101,8 +3118,8 @@ body {
 .product-detail-hero,
 .product-hero__inner {
   display: grid;
-  grid-template-columns: minmax(0, 1.15fr) minmax(320px, 0.85fr);
-  gap: 32px;
+  grid-template-columns: minmax(0, 0.84fr) minmax(460px, 1.16fr);
+  gap: 36px;
   align-items: start;
 }
 
@@ -3120,6 +3137,103 @@ body {
   line-height: 0.98;
   letter-spacing: -0.03em;
   margin: 0 0 18px;
+}
+
+.home-hero__inner {
+  min-height: 0;
+  align-items: stretch;
+}
+
+.home-hero__copy {
+  max-width: none;
+  gap: 22px;
+  padding-top: 10px;
+}
+
+.home-hero__copy h1 {
+  max-width: 8.8ch;
+  margin-bottom: 6px;
+}
+
+.home-hero .hero-summary {
+  max-width: 17ch;
+  font-size: clamp(1.24rem, 2vw, 1.64rem);
+  line-height: 1.48;
+  color: var(--color-text);
+}
+
+.home-hero .hero-description {
+  max-width: 38ch;
+  font-size: 1rem;
+  line-height: 1.82;
+}
+
+.home-hero__support {
+  display: grid;
+  gap: 16px;
+  margin-top: 6px;
+  padding: 22px 24px 18px;
+  border: 1px solid color-mix(in srgb, var(--color-border) 84%, transparent);
+  border-radius: 24px;
+  background:
+    linear-gradient(
+      135deg,
+      color-mix(in srgb, var(--color-accent-soft) 14%, var(--color-surface) 86%),
+      color-mix(in srgb, var(--color-surface-elevated) 90%, transparent)
+    );
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+.home-hero__support-header {
+  display: grid;
+  gap: 10px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid color-mix(in srgb, var(--color-border) 74%, transparent);
+}
+
+.home-hero__support-header .eyebrow {
+  margin-bottom: 0;
+}
+
+.home-hero__support-intro {
+  margin: 0;
+  color: var(--color-text-muted);
+  line-height: 1.7;
+}
+
+.home-hero__support-list {
+  display: grid;
+  gap: 0;
+}
+
+.home-hero__support-item {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 14px;
+  align-items: start;
+  padding: 14px 0;
+  border-top: 1px solid color-mix(in srgb, var(--color-border) 68%, transparent);
+}
+
+.home-hero__support-item:first-child {
+  padding-top: 2px;
+  border-top: 0;
+}
+
+.home-hero__support-index {
+  margin: 0;
+  padding-top: 3px;
+  color: color-mix(in srgb, var(--color-text-muted) 70%, var(--color-accent));
+  font-family: var(--font-display);
+  font-size: 1.06rem;
+  line-height: 1;
+}
+
+.home-hero__support-item p {
+  margin: 0;
+  color: var(--color-text);
+  line-height: 1.6;
+  white-space: nowrap;
 }
 
 .home-hero__visual-frame,
@@ -3423,15 +3537,15 @@ body {
   position: static;
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 12px;
+  gap: 10px;
 }
 
 .home-hero__stat {
   display: grid;
   gap: 10px;
   align-content: start;
-  min-height: 0;
-  padding: 16px 18px 18px;
+  min-height: 106px;
+  padding: 16px 18px;
   border: 1px solid color-mix(in srgb, var(--color-border) 82%, transparent);
   border-radius: 20px;
   background: color-mix(in srgb, var(--color-surface) 98%, transparent);
@@ -3441,8 +3555,14 @@ body {
   margin: 0;
   color: var(--color-text);
   font-family: var(--font-display);
-  font-size: 1.56rem;
+  font-size: clamp(1.52rem, 2.2vw, 1.92rem);
   line-height: 1;
+}
+
+.home-hero__rail {
+  display: grid;
+  gap: 14px;
+  align-content: start;
 }
 
 .home-hero__direction-list {
@@ -3455,6 +3575,7 @@ body {
   grid-template-columns: auto minmax(0, 1fr);
   gap: 14px;
   padding: 16px 18px;
+  min-height: 100px;
   border: 1px solid var(--color-border);
   border-radius: 20px;
   background: color-mix(in srgb, var(--color-surface) 98%, transparent);
@@ -3485,6 +3606,14 @@ body {
   margin: 0;
   color: var(--color-text-muted);
   line-height: 1.55;
+}
+
+.surface-media-card--hero {
+  min-height: 412px;
+}
+
+.surface-media-card--hero .surface-media-card__image {
+  object-position: center 58%;
 }
 
 .home-story-grid .story-block .eyebrow,

@@ -45,6 +45,28 @@ export function HomeShellPage() {
                 {content.home.secondaryCta}
               </Link>
             </div>
+
+            <div className="home-hero__support">
+              <div className="home-hero__support-header">
+                <p className="eyebrow">{content.home.statusLabel}</p>
+                <p className="home-hero__support-intro">
+                  {locale === 'zh'
+                    ? '围绕选型、联动、实施和交付，把首页首屏直接收束成客户最关心的三类问题。'
+                    : 'The first fold is organized around the three questions buyers usually bring first: selection, integration, and delivery.'}
+                </p>
+              </div>
+
+              <div className="home-hero__support-list">
+                {content.home.statusItems.map((item, index) => (
+                  <article key={item} className="home-hero__support-item">
+                    <span className="home-hero__support-index">
+                      {String(index + 1).padStart(2, '0')}
+                    </span>
+                    <p>{item}</p>
+                  </article>
+                ))}
+              </div>
+            </div>
           </div>
 
           <aside className="home-hero__rail">
@@ -86,19 +108,8 @@ export function HomeShellPage() {
         </div>
       </section>
 
-      <section className="page-band page-band--tight">
-        <p className="eyebrow">{content.home.statusLabel}</p>
-        <div className="status-strip status-strip--audience motion-rise motion-delay-1">
-          {content.home.statusItems.map((item) => (
-            <p key={item} className="status-item">
-              {item}
-            </p>
-          ))}
-        </div>
-      </section>
-
       <section className="page-band page-band--bordered">
-        <div className="home-story-grid motion-rise motion-delay-2">
+        <div className="home-story-grid motion-rise motion-delay-1">
           <section className="story-block">
             <p className="eyebrow">{content.home.strengthsTitle}</p>
             <div className="story-list">
@@ -126,7 +137,7 @@ export function HomeShellPage() {
       </section>
 
       <section className="page-band page-band--bordered">
-        <div className="home-story-grid home-story-grid--single motion-rise motion-delay-3">
+        <div className="home-story-grid home-story-grid--single motion-rise motion-delay-2">
           <section className="story-block">
             <p className="eyebrow">{content.home.partnersTitle}</p>
             <p className="story-intro">{content.home.partnersSummary}</p>
@@ -143,7 +154,7 @@ export function HomeShellPage() {
       </section>
 
       <section className="page-band page-band--bordered">
-        <div className="final-cta motion-rise motion-delay-4">
+        <div className="final-cta motion-rise motion-delay-3">
           <div>
             <p className="eyebrow">{content.meta.brandName}</p>
             <h2>{content.home.finalCtaTitle}</h2>
