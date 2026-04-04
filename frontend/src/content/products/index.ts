@@ -3,20 +3,32 @@ import {
   type FiberSensorVisual,
 } from '../media/referenceAssets'
 import {
+  familyGroupReferenceVisuals,
+  type ProductGroupReferenceVisual,
+} from '../media/familyGroupReferenceVisuals'
+import {
   industrialSensorReferenceVisuals,
-  type IndustrialSensorReferenceVisual,
 } from '../media/industrialSensorReferenceVisuals'
 import { buildLocalePath, type Locale } from '../../i18n/locales'
 import { enProductTaxonomy } from './en'
 import { zhProductTaxonomy } from './zh'
-import type { ProductFamilyKey, RepresentativeProduct } from './types'
+import type {
+  ProductFamily,
+  ProductFamilyKey,
+  RepresentativeProduct,
+} from './types'
 
 const productTaxonomyMap = {
   zh: zhProductTaxonomy,
   en: enProductTaxonomy,
 }
 
-const industrialSensorGroupCopy: Record<
+const groupReferenceVisuals = {
+  ...industrialSensorReferenceVisuals,
+  ...familyGroupReferenceVisuals,
+}
+
+const groupCopyMap: Record<
   string,
   {
     application: Record<Locale, string>
@@ -233,7 +245,7 @@ const industrialSensorGroupCopy: Record<
     },
     highlights: {
       zh: [
-        '更适合透明、薄片类工件的补充检测方案。',
+        '更适合作为透明、薄片类工件的补充检测方案。',
         '方便先判断常规超声波还是单双张检测结构更匹配。',
         '后续可继续补安装支架、波束角和响应节拍。',
       ],
@@ -310,6 +322,138 @@ const industrialSensorGroupCopy: Record<
       ],
     },
   },
+  'light-curtains-and-area-sensors': {
+    application: {
+      zh: '适合危险区域防护、作业区进入检测、AGV 避障和区域计数。',
+      en: 'Fits hazardous-area protection, work-zone entry detection, AGV obstacle avoidance, and area counting.',
+    },
+    inquiryHint: {
+      zh: '建议先说明防护高度、光轴间距、安装位置，以及是设备防护还是移动设备避障。',
+      en: 'Start with protection height, beam spacing, mounting position, and whether the use case is machine guarding or mobile obstacle avoidance.',
+    },
+    highlights: {
+      zh: [
+        '覆盖光幕、区域检测与激光扫描三类安全防护路径。',
+        '适合先判断现场安全范围、检测距离和输出联锁方式。',
+        '后续可继续补安全等级、控制器接线和支架配置。',
+      ],
+      en: [
+        'Covers light curtains, area sensing, and laser scanning in one safety lane.',
+        'Helps confirm safety coverage, detection distance, and interlock output early.',
+        'Can later be expanded with safety level, controller wiring, and bracket details.',
+      ],
+    },
+  },
+  'safety-door-lock-switches': {
+    application: {
+      zh: '适合自动化设备防护门锁定、门位状态监控和人员进入互锁场景。',
+      en: 'Fits protective-door locking, door-status monitoring, and personnel entry interlock scenarios on automation equipment.',
+    },
+    inquiryHint: {
+      zh: '沟通时优先说明门型结构、锁定力需求、复位方式和安全回路架构。',
+      en: 'Clarify door structure, required locking force, reset method, and safety-circuit architecture first.',
+    },
+    highlights: {
+      zh: [
+        '适合先区分标准门锁、小型门开关与高强度系列门锁。',
+        '便于快速比较锁定力、安装方向和编码方式。',
+        '后续可继续补钥匙结构、诊断信号和接线图。',
+      ],
+      en: [
+        'Helps separate standard locks, compact switches, and higher-strength lock families early.',
+        'Makes it easy to compare holding force, mounting direction, and coding method.',
+        'Can later be extended with actuator style, diagnostics, and wiring drawings.',
+      ],
+    },
+  },
+  'safety-relay-and-non-contact-switches': {
+    application: {
+      zh: '适合安全回路切断、门位非接触检测、门磁监控与状态可视化。',
+      en: 'Fits safety-circuit shutdown, non-contact door detection, magnetic door monitoring, and status visualization.',
+    },
+    inquiryHint: {
+      zh: '建议先说明所需安全功能、回路数量、门数规模，以及是否需要串联诊断。',
+      en: 'Start with required safety function, number of circuits, number of doors, and whether serial diagnostics are needed.',
+    },
+    highlights: {
+      zh: [
+        '把安全继电器、非接触门开关和门磁检测分开展示，更便于选型。',
+        '适合先确认是做安全回路控制，还是门位状态采集。',
+        '后续可继续补控制器适配、联锁逻辑和布线方式。',
+      ],
+      en: [
+        'Separates safety relays, non-contact door switches, and magnetic door sensing for faster selection.',
+        'Helps decide whether the job centers on circuit control or door-status acquisition.',
+        'Can later be refined by controller compatibility, interlock logic, and wiring method.',
+      ],
+    },
+  },
+  'laser-ranging': {
+    application: {
+      zh: '适合长距离测距、物流定位、料框到位检测和一般激光点位确认。',
+      en: 'Fits long-range distance sensing, logistics positioning, tote arrival confirmation, and general laser spot verification.',
+    },
+    inquiryHint: {
+      zh: '沟通时先说明检测距离、目标表面反射情况、通信接口和安装空间。',
+      en: 'Clarify sensing distance, target reflectivity, communication interface, and mounting space first.',
+    },
+    highlights: {
+      zh: [
+        '把测距、通用激光和背景抑制激光并排展示，便于快速判断。',
+        '适合先锁定量程、光斑、安装角度和通信方式。',
+        '后续可继续补精度、重复性和固定支架方案。',
+      ],
+      en: [
+        'Shows ranging, general laser, and background-suppression laser paths side by side.',
+        'Helps lock in range, spot size, mounting angle, and communication mode early.',
+        'Can later be extended with accuracy, repeatability, and mounting-bracket detail.',
+      ],
+    },
+  },
+  'tof-laser-sensors': {
+    application: {
+      zh: '适合中远距离高速检测、物流分拣、非标自动化和空间避障。',
+      en: 'Fits mid-to-long distance high-speed sensing, logistics sorting, custom automation, and spatial obstacle avoidance.',
+    },
+    inquiryHint: {
+      zh: '建议先说明检测频率、最大距离、输出形式，以及现场是否有强环境光干扰。',
+      en: 'Start with sensing frequency, maximum range, output type, and whether strong ambient light is present.',
+    },
+    highlights: {
+      zh: [
+        '适合对 TOF 检测节拍和量程有明确要求的项目。',
+        '方便先比较标准 TOF 与全金属 TOF 的安装和性能差异。',
+        '后续可继续补 RS485、开关量和协议适配说明。',
+      ],
+      en: [
+        'Works well for projects with clearer TOF tempo and range demands.',
+        'Makes it easy to compare standard and full-metal TOF variants.',
+        'Can later be enriched with RS485, switching, and protocol compatibility details.',
+      ],
+    },
+  },
+  'laser-displacement': {
+    application: {
+      zh: '适合高精度距离、厚度、轮廓与装配间隙测量场景。',
+      en: 'Fits high-precision distance, thickness, contour, and assembly-gap measurement scenarios.',
+    },
+    inquiryHint: {
+      zh: '沟通时优先说明精度要求、量程范围、目标材质和控制器接口。',
+      en: 'Lead with accuracy target, range, target material, and controller interface.',
+    },
+    highlights: {
+      zh: [
+        '适合对精度、稳定性和体积都有要求的测量任务。',
+        '方便快速比较微型位移与高精度位移两种路径。',
+        '后续可继续细化重复精度、采样率和模拟量或总线输出。',
+      ],
+      en: [
+        'Fits measurement tasks that demand accuracy, stability, and compact size together.',
+        'Makes it easy to compare micro and high-precision displacement paths.',
+        'Can later be refined by repeatability, sample rate, and analog or bus output.',
+      ],
+    },
+  },
 }
 
 export const productFamilyKeys: ProductFamilyKey[] = [
@@ -344,6 +488,35 @@ export function buildProductFamilyPath(locale: Locale, key: ProductFamilyKey) {
   return `${buildLocalePath(locale, 'products')}/${key}`
 }
 
+export function getProductGroup(
+  locale: Locale,
+  familyKey: ProductFamilyKey,
+  slug: string,
+) {
+  return getProductFamily(locale, familyKey)?.groups.find((group) => group.slug === slug)
+}
+
+export function normalizeProductGroupSlug(
+  locale: Locale,
+  familyKey: ProductFamilyKey,
+  value?: string | null,
+) {
+  if (!value) {
+    return null
+  }
+
+  const family = getProductFamily(locale, familyKey)
+  return family?.groups.some((group) => group.slug === value) ? value : null
+}
+
+export function buildProductGroupPath(
+  locale: Locale,
+  familyKey: ProductFamilyKey,
+  slug: string,
+) {
+  return `${buildProductFamilyPath(locale, familyKey)}/${slug}`
+}
+
 export function getIndustrialSensorFamily(locale: Locale) {
   return getProductFamily(locale, 'industrial-sensors')
 }
@@ -352,20 +525,15 @@ export function normalizeIndustrialSensorGroupSlug(
   locale: Locale,
   value?: string | null,
 ) {
-  if (!value) {
-    return null
-  }
-
-  const family = getIndustrialSensorFamily(locale)
-  return family?.groups.some((group) => group.slug === value) ? value : null
+  return normalizeProductGroupSlug(locale, 'industrial-sensors', value)
 }
 
 export function getIndustrialSensorGroup(locale: Locale, slug: string) {
-  return getIndustrialSensorFamily(locale)?.groups.find((group) => group.slug === slug)
+  return getProductGroup(locale, 'industrial-sensors', slug)
 }
 
 export function buildIndustrialSensorGroupPath(locale: Locale, slug: string) {
-  return `${buildProductFamilyPath(locale, 'industrial-sensors')}/${slug}`
+  return buildProductGroupPath(locale, 'industrial-sensors', slug)
 }
 
 function buildFiberSensorProducts(locale: Locale, status: string) {
@@ -387,7 +555,7 @@ function buildFiberSensorProducts(locale: Locale, status: string) {
 
 function buildVisualSummary(
   locale: Locale,
-  item: FiberSensorVisual | IndustrialSensorReferenceVisual,
+  item: FiberSensorVisual | ProductGroupReferenceVisual,
   groupName: string,
 ) {
   if (locale === 'zh') {
@@ -399,24 +567,24 @@ function buildVisualSummary(
 
 function buildReferenceProducts(
   locale: Locale,
-  groupSlug: string,
   status: string,
-  groupName: string,
-  familyUseCase: string,
+  family: ProductFamily,
+  groupSlug: string,
 ) {
-  const visuals = industrialSensorReferenceVisuals[groupSlug]
-  const copy = industrialSensorGroupCopy[groupSlug]
+  const group = getProductGroup(locale, family.key, groupSlug)
+  const visuals = groupReferenceVisuals[groupSlug]
+  const copy = groupCopyMap[groupSlug]
 
-  if (!visuals || visuals.length === 0 || !copy) {
+  if (!group || !visuals || visuals.length === 0 || !copy) {
     return []
   }
 
   return visuals.map((item) => ({
     id: item.id,
     title: item.title[locale],
-    summary: buildVisualSummary(locale, item, groupName),
+    summary: buildVisualSummary(locale, item, group.name),
     highlights: copy.highlights[locale],
-    focus: copy.application[locale] || familyUseCase,
+    focus: copy.application[locale] || family.useCase,
     inquiryHint: copy.inquiryHint[locale],
     status,
     seriesCode: item.seriesCode[locale],
@@ -429,26 +597,26 @@ function buildReferenceProducts(
 
 export function buildRepresentativeProducts(
   locale: Locale,
+  familyKey: ProductFamilyKey,
   groupSlug: string,
 ): RepresentativeProduct[] {
   const taxonomy = getProductTaxonomy(locale)
-  const family = getIndustrialSensorFamily(locale)
-  const group = getIndustrialSensorGroup(locale, groupSlug)
+  const family = getProductFamily(locale, familyKey)
+  const group = getProductGroup(locale, familyKey, groupSlug)
 
   if (!taxonomy || !family || !group) {
     return []
   }
 
-  if (groupSlug === 'fiber-sensors') {
+  if (familyKey === 'industrial-sensors' && groupSlug === 'fiber-sensors') {
     return buildFiberSensorProducts(locale, taxonomy.listingReadyLabel)
   }
 
   const referenceProducts = buildReferenceProducts(
     locale,
-    groupSlug,
     taxonomy.listingReadyLabel,
-    group.name,
-    family.useCase,
+    family,
+    groupSlug,
   )
 
   if (referenceProducts.length > 0) {

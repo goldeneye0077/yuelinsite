@@ -35,4 +35,24 @@ describe('ProductFamilyPage', () => {
       (await screen.findAllByText(taxonomy.backToCatalogLabel)).length,
     ).toBeGreaterThan(0)
   })
+
+  it('renders safety family pages with subgroup preview media and deep links', async () => {
+    const taxonomy = getProductTaxonomy('zh')
+    const safetyFamily = taxonomy.categories[1]
+    const router = createAppRouter({
+      initialEntries: ['/zh/products/safety-protection-sensors'],
+    })
+
+    render(
+      <AppProviders>
+        <RouterProvider router={router} />
+      </AppProviders>,
+    )
+
+    expect((await screen.findAllByText(safetyFamily.name)).length).toBeGreaterThan(0)
+    expect((await screen.findAllByText('H3EL 系列')).length).toBeGreaterThan(0)
+    expect(
+      screen.getAllByRole('link', { name: /光幕与区域传感器/i }).length,
+    ).toBeGreaterThan(0)
+  })
 })

@@ -44,7 +44,7 @@ export function createAppRouter(options: RouterFactoryOptions = {}) {
           element: <ProductCenterPage />,
         },
         {
-          path: 'products/industrial-sensors/:groupSlug',
+          path: 'products/:familyKey/:groupSlug',
           element: <ProductGroupPage />,
         },
         {

@@ -3,51 +3,57 @@ import { ArrowRight, ChevronLeft, ExternalLink } from 'lucide-react'
 import { Link, Navigate, useParams } from 'react-router-dom'
 
 import {
-  buildIndustrialSensorGroupPath,
   buildProductFamilyPath,
+  buildProductGroupPath,
   buildRepresentativeProducts,
-  getIndustrialSensorFamily,
-  getIndustrialSensorGroup,
+  getProductFamily,
+  getProductGroup,
   getProductTaxonomy,
-  normalizeIndustrialSensorGroupSlug,
+  normalizeProductFamilyKey,
+  normalizeProductGroupSlug,
 } from '../content/products'
 import { useSiteShellContext } from '../layouts/useSiteShellContext'
-import { buildInquiryPath } from '../lib/inquiry-paths'
+import {
+  buildInquiryPath,
+  getInquiryCategoryForProductFamily,
+} from '../lib/inquiry-paths'
 
 export function ProductGroupPage() {
   const { locale } = useSiteShellContext()
-  const { groupSlug } = useParams()
-  const normalizedGroupSlug = normalizeIndustrialSensorGroupSlug(locale, groupSlug)
-  const taxonomy = getProductTaxonomy(locale)
-  const family = getIndustrialSensorFamily(locale)
-  const group = normalizedGroupSlug
-    ? getIndustrialSensorGroup(locale, normalizedGroupSlug)
-    : null
-  const products = normalizedGroupSlug
-    ? buildRepresentativeProducts(locale, normalizedGroupSlug)
-    : []
+  const { familyKey, groupSlug } = useParams()
   const [activeProductId, setActiveProductId] = useState<string | null>(null)
+  const normalizedFamilyKey = normalizeProductFamilyKey(familyKey)
+
+  if (!normalizedFamilyKey) {
+    return <Navigate replace to={buildProductFamilyPath(locale, 'industrial-sensors')} />
+  }
+
+  const normalizedGroupSlug = normalizeProductGroupSlug(
+    locale,
+    normalizedFamilyKey,
+    groupSlug,
+  )
+  const taxonomy = getProductTaxonomy(locale)
+  const family = getProductFamily(locale, normalizedFamilyKey)
+  const group = normalizedGroupSlug
+    ? getProductGroup(locale, normalizedFamilyKey, normalizedGroupSlug)
+    : null
+  const products =
+    normalizedGroupSlug && normalizedFamilyKey
+      ? buildRepresentativeProducts(locale, normalizedFamilyKey, normalizedGroupSlug)
+      : []
   const activeProduct =
     products.find((item) => item.id === activeProductId) ?? products[0] ?? null
   const hasVisualProducts = products.some((item) => item.imageSrc)
   const siblingGroups = family?.groups.filter((item) => item.slug !== group?.slug) ?? []
+  const inquiryCategory = getInquiryCategoryForProductFamily(normalizedFamilyKey)
 
   if (!normalizedGroupSlug) {
-    return (
-      <Navigate
-        replace
-        to={buildProductFamilyPath(locale, 'industrial-sensors')}
-      />
-    )
+    return <Navigate replace to={buildProductFamilyPath(locale, normalizedFamilyKey)} />
   }
 
   if (!family || !group) {
-    return (
-      <Navigate
-        replace
-        to={buildProductFamilyPath(locale, 'industrial-sensors')}
-      />
-    )
+    return <Navigate replace to={buildProductFamilyPath(locale, normalizedFamilyKey)} />
   }
 
   const applicationLabel = locale === 'zh' ? '应用场景' : 'Application'
@@ -62,7 +68,7 @@ export function ProductGroupPage() {
           <div className="product-detail-hero__main">
             <Link
               className="product-back-link"
-              to={buildProductFamilyPath(locale, 'industrial-sensors')}
+              to={buildProductFamilyPath(locale, normalizedFamilyKey)}
             >
               <ChevronLeft size={16} />
               <span>{family.name}</span>
@@ -75,8 +81,8 @@ export function ProductGroupPage() {
               <Link
                 className="cta-link"
                 to={buildInquiryPath(locale, {
-                  category: 'industrial-sensors',
-                  source: 'industrial-sensor-group',
+                  category: inquiryCategory,
+                  source: 'product-family',
                 })}
               >
                 <span>{taxonomy.consultCtaLabel}</span>
@@ -84,7 +90,7 @@ export function ProductGroupPage() {
               </Link>
               <Link
                 className="secondary-link"
-                to={buildProductFamilyPath(locale, 'industrial-sensors')}
+                to={buildProductFamilyPath(locale, normalizedFamilyKey)}
               >
                 {taxonomy.backToCatalogLabel}
               </Link>
@@ -106,9 +112,7 @@ export function ProductGroupPage() {
               </figure>
             ) : null}
             <div className="product-detail-hero__rail-header">
-              <span className="product-source-badge">
-                {taxonomy.sourceSyncedLabel}
-              </span>
+              <span className="product-source-badge">{taxonomy.sourceSyncedLabel}</span>
             </div>
             <div className="product-detail-hero__stats">
               <article>
@@ -242,8 +246,8 @@ export function ProductGroupPage() {
                     <Link
                       className="cta-link"
                       to={buildInquiryPath(locale, {
-                        category: 'industrial-sensors',
-                        source: 'industrial-sensor-group',
+                        category: inquiryCategory,
+                        source: 'product-family',
                       })}
                     >
                       <span>{taxonomy.consultCtaLabel}</span>
@@ -251,7 +255,7 @@ export function ProductGroupPage() {
                     </Link>
                     <Link
                       className="secondary-link"
-                      to={buildProductFamilyPath(locale, 'industrial-sensors')}
+                      to={buildProductFamilyPath(locale, normalizedFamilyKey)}
                     >
                       {family.name}
                     </Link>
@@ -339,7 +343,7 @@ export function ProductGroupPage() {
                 <Link
                   key={item.slug}
                   className={`product-subnav__item${item.slug === group.slug ? ' product-subnav__item--active' : ''}`}
-                  to={buildIndustrialSensorGroupPath(locale, item.slug)}
+                  to={buildProductGroupPath(locale, normalizedFamilyKey, item.slug)}
                 >
                   <span className="product-subnav__title">{item.name}</span>
                   <span className="product-subnav__meta">
@@ -371,7 +375,7 @@ export function ProductGroupPage() {
               <Link
                 key={item.slug}
                 className="product-related__item"
-                to={buildIndustrialSensorGroupPath(locale, item.slug)}
+                to={buildProductGroupPath(locale, normalizedFamilyKey, item.slug)}
               >
                 <h3>{item.name}</h3>
                 <p>{item.summary}</p>

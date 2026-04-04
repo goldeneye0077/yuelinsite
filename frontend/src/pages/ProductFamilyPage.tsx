@@ -1,9 +1,10 @@
-import { ArrowRight, ChevronLeft } from 'lucide-react'
+import { ArrowRight, ChevronLeft, ExternalLink } from 'lucide-react'
 import { Link, Navigate, useParams } from 'react-router-dom'
 
 import {
-  buildIndustrialSensorGroupPath,
   buildProductFamilyPath,
+  buildProductGroupPath,
+  buildRepresentativeProducts,
   getProductFamily,
   getProductTaxonomy,
   normalizeProductFamilyKey,
@@ -48,11 +49,32 @@ export function ProductFamilyPage() {
   const relatedFamilies = taxonomy.categories.filter(
     (category) => category.key !== family.key,
   )
-  const isIndustrialSensorFamily = family.key === 'industrial-sensors'
   const inquiryCategory = getInquiryCategoryForProductFamily(family.key)
-  const familyHeroImage = isIndustrialSensorFamily
-    ? siteReferenceImages.industrialSensorsFamily
-    : siteReferenceImages.productCenterHero
+  const familyPreviewProducts = family.groups
+    .map((group) => {
+      const [firstProduct] = buildRepresentativeProducts(locale, family.key, group.slug)
+      return firstProduct
+        ? {
+            group,
+            product: firstProduct,
+          }
+        : null
+    })
+    .filter(
+      (
+        entry,
+      ): entry is {
+        group: ProductFamily['groups'][number]
+        product: ReturnType<typeof buildRepresentativeProducts>[number]
+      } => entry !== null,
+    )
+
+  const fallbackHeroImage =
+    family.key === 'industrial-sensors'
+      ? siteReferenceImages.industrialSensorsFamily
+      : siteReferenceImages.productCenterHero
+
+  const heroProduct = familyPreviewProducts[0]
 
   return (
     <>
@@ -85,17 +107,31 @@ export function ProductFamilyPage() {
           </div>
 
           <aside className="product-detail-hero__rail">
-            <figure className="surface-media-card surface-media-card--hero">
-              <img
-                alt={getLocalizedAlt(familyHeroImage, locale)}
-                className="surface-media-card__image"
-                src={familyHeroImage.src}
-              />
-              <figcaption className="surface-media-card__caption">
-                <span>{taxonomy.categoriesTitle}</span>
-                <strong>{family.name}</strong>
-              </figcaption>
-            </figure>
+            {heroProduct?.product.imageSrc ? (
+              <figure className="surface-media-card surface-media-card--hero">
+                <img
+                  alt={heroProduct.product.imageAlt ?? heroProduct.product.title}
+                  className="surface-media-card__image"
+                  src={heroProduct.product.imageSrc}
+                />
+                <figcaption className="surface-media-card__caption">
+                  <span>{taxonomy.categoriesTitle}</span>
+                  <strong>{heroProduct.product.seriesCode ?? family.name}</strong>
+                </figcaption>
+              </figure>
+            ) : (
+              <figure className="surface-media-card surface-media-card--hero">
+                <img
+                  alt={getLocalizedAlt(fallbackHeroImage, locale)}
+                  className="surface-media-card__image"
+                  src={fallbackHeroImage.src}
+                />
+                <figcaption className="surface-media-card__caption">
+                  <span>{taxonomy.categoriesTitle}</span>
+                  <strong>{family.name}</strong>
+                </figcaption>
+              </figure>
+            )}
             <div className="product-detail-hero__rail-header">
               <span className="product-source-badge">
                 {getSourceLabel(
@@ -115,12 +151,23 @@ export function ProductFamilyPage() {
                 <p className="product-family-sheet__stat-value">{getSeriesCount(family)}</p>
               </article>
             </div>
-            <div className="product-detail-hero__preview">
-              {family.groups.slice(0, 3).map((group) => (
-                <article key={group.slug} className="product-detail-hero__preview-item">
-                  <h2>{group.name}</h2>
-                  <p>{group.summary}</p>
-                </article>
+            <div className="product-detail-hero__preview product-detail-hero__preview--media">
+              {familyPreviewProducts.slice(0, 3).map((entry) => (
+                <Link
+                  key={entry.group.slug}
+                  className="product-detail-hero__preview-item"
+                  to={buildProductGroupPath(locale, family.key, entry.group.slug)}
+                >
+                  {entry.product.imageSrc ? (
+                    <div className="product-detail-hero__preview-thumb">
+                      <img alt="" src={entry.product.imageSrc} />
+                    </div>
+                  ) : null}
+                  <div className="product-detail-hero__preview-copy">
+                    <h2>{entry.group.name}</h2>
+                    <p>{entry.product.seriesCode ?? entry.group.summary}</p>
+                  </div>
+                </Link>
               ))}
             </div>
           </aside>
@@ -130,61 +177,70 @@ export function ProductFamilyPage() {
       <section className="page-band page-band--bordered">
         <div className="product-detail-grid">
           <section className="product-detail-section motion-rise motion-delay-2">
-            <p className="eyebrow">
-              {isIndustrialSensorFamily
-                ? taxonomy.subgroupNavigatorTitle
-                : taxonomy.categoriesTitle}
-            </p>
-            {isIndustrialSensorFamily ? (
-              <p className="story-intro">{taxonomy.subgroupNavigatorSummary}</p>
-            ) : null}
-            {isIndustrialSensorFamily ? (
-              <div className="product-subnav">
-                {family.groups.map((group) => (
-                  <Link
-                    key={group.slug}
-                    className="product-subnav__item"
-                    to={buildIndustrialSensorGroupPath(locale, group.slug)}
-                  >
-                    <span className="product-subnav__title">{group.name}</span>
-                    <span className="product-subnav__meta">
-                      {group.series.length} {taxonomy.categoryMetaSeriesLabel.toLowerCase()}
-                    </span>
-                  </Link>
-                ))}
-              </div>
-            ) : null}
+            <p className="eyebrow">{taxonomy.subgroupNavigatorTitle}</p>
+            <p className="story-intro">{taxonomy.subgroupNavigatorSummary}</p>
             <div className="product-detail-group-list">
-              {family.groups.map((group) => (
-                <article key={group.slug} className="product-detail-group">
-                  <div className="product-detail-group__header">
-                    <h2>{group.name}</h2>
-                    <span className="product-source-badge">
-                      {getSourceLabel(
-                        group.source,
-                        taxonomy.sourceSyncedLabel,
-                        taxonomy.projectInferredLabel,
-                      )}
-                    </span>
-                  </div>
-                  <p className="story-intro">{group.summary}</p>
-                  <p className="track-label">{taxonomy.categoryMetaSeriesLabel}</p>
-                  <p className="product-detail-group__series">
-                    {group.series.join(' / ')}
-                  </p>
-                  {isIndustrialSensorFamily ? (
-                    <div className="product-detail-group__actions">
-                      <Link
-                        className="product-inline-link"
-                        to={buildIndustrialSensorGroupPath(locale, group.slug)}
-                      >
-                        <span>{taxonomy.subgroupCtaLabel}</span>
-                        <ArrowRight size={15} />
-                      </Link>
+              {family.groups.map((group) => {
+                const [groupProduct] = buildRepresentativeProducts(locale, family.key, group.slug)
+
+                return (
+                  <article
+                    key={group.slug}
+                    className={`product-detail-group${groupProduct?.imageSrc ? ' product-detail-group--media' : ''}`}
+                  >
+                    {groupProduct?.imageSrc ? (
+                      <div className="product-detail-group__media">
+                        <img alt={groupProduct.imageAlt ?? groupProduct.title} src={groupProduct.imageSrc} />
+                      </div>
+                    ) : null}
+                    <div className="product-detail-group__content">
+                      <div className="product-detail-group__header">
+                        <h2>{group.name}</h2>
+                        <span className="product-source-badge">
+                          {getSourceLabel(
+                            group.source,
+                            taxonomy.sourceSyncedLabel,
+                            taxonomy.projectInferredLabel,
+                          )}
+                        </span>
+                      </div>
+                      <p className="story-intro">{group.summary}</p>
+                      <p className="track-label">{taxonomy.categoryMetaSeriesLabel}</p>
+                      <p className="product-detail-group__series">
+                        {group.series.join(' / ')}
+                      </p>
+                      {groupProduct?.application ? (
+                        <div className="product-detail-group__meta">
+                          <div>
+                            <p className="track-label">{taxonomy.listingFocusLabel}</p>
+                            <p>{groupProduct.application}</p>
+                          </div>
+                          {groupProduct.sourceUrl ? (
+                            <a
+                              className="product-inline-link"
+                              href={groupProduct.sourceUrl}
+                              rel="noreferrer"
+                              target="_blank"
+                            >
+                              <span>{locale === 'zh' ? '参考来源' : 'Reference'}</span>
+                              <ExternalLink size={15} />
+                            </a>
+                          ) : null}
+                        </div>
+                      ) : null}
+                      <div className="product-detail-group__actions">
+                        <Link
+                          className="product-inline-link"
+                          to={buildProductGroupPath(locale, family.key, group.slug)}
+                        >
+                          <span>{taxonomy.subgroupCtaLabel}</span>
+                          <ArrowRight size={15} />
+                        </Link>
+                      </div>
                     </div>
-                  ) : null}
-                </article>
-              ))}
+                  </article>
+                )
+              })}
             </div>
           </section>
 

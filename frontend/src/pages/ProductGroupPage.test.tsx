@@ -9,7 +9,11 @@ describe('ProductGroupPage', () => {
   it('renders an industrial sensor subgroup page with product visuals, detail content, and sibling navigation', async () => {
     const taxonomy = getProductTaxonomy('zh')
     const group = taxonomy.categories[0].groups[0]
-    const products = buildRepresentativeProducts('zh', 'fiber-sensors')
+    const products = buildRepresentativeProducts(
+      'zh',
+      'industrial-sensors',
+      'fiber-sensors',
+    )
     const router = createAppRouter({
       initialEntries: ['/zh/products/industrial-sensors/fiber-sensors'],
     })
@@ -52,7 +56,11 @@ describe('ProductGroupPage', () => {
   })
 
   it('renders other industrial sensor subgroup pages with the same visual product pattern', async () => {
-    const products = buildRepresentativeProducts('zh', 'photoelectric-sensors')
+    const products = buildRepresentativeProducts(
+      'zh',
+      'industrial-sensors',
+      'photoelectric-sensors',
+    )
     const router = createAppRouter({
       initialEntries: ['/zh/products/industrial-sensors/photoelectric-sensors'],
     })
@@ -86,5 +94,30 @@ describe('ProductGroupPage', () => {
         .getAllByRole('button', { name: new RegExp(products[1].title, 'i') })
         .some((button) => button.getAttribute('aria-pressed') === 'true'),
     ).toBe(true)
+  })
+
+  it('renders a safety subgroup page with media-rich detail content', async () => {
+    const products = buildRepresentativeProducts(
+      'zh',
+      'safety-protection-sensors',
+      'safety-door-lock-switches',
+    )
+    const router = createAppRouter({
+      initialEntries: ['/zh/products/safety-protection-sensors/safety-door-lock-switches'],
+    })
+
+    render(
+      <AppProviders>
+        <RouterProvider router={router} />
+      </AppProviders>,
+    )
+
+    expect((await screen.findAllByText('安全门锁开关')).length).toBeGreaterThan(0)
+    expect(
+      (
+        await screen.findAllByAltText(products[0].imageAlt ?? products[0].title)
+      ).length,
+    ).toBeGreaterThan(0)
+    expect((await screen.findAllByText('SDS 系列')).length).toBeGreaterThan(0)
   })
 })
