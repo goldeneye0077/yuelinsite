@@ -34,6 +34,7 @@ describe('HomeShellPage', () => {
       screen.getByRole('heading', { level: 1, name: content.meta.brandName }),
     ).toBeInTheDocument()
     expect(screen.getAllByText(content.meta.companyName).length).toBeGreaterThan(0)
-    expect(container.querySelector('.home-hero__poster-image')).toBeInTheDocument()
+    expect(container.querySelector('.surface-media-card__image')).toBeInTheDocument()
+    expect(container.querySelector('.home-hero__poster')).not.toBeInTheDocument()
   })
 })

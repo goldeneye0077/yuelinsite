@@ -1,7 +1,7 @@
 import { ArrowRight } from 'lucide-react'
 import { Link } from 'react-router-dom'
 
-import { getLocalizedAlt, siteReferenceImages } from '../content/media/referenceAssets'
+import { siteReferenceImages } from '../content/media/referenceAssets'
 import { buildLocalePath } from '../i18n/locales'
 import { useSiteShellContext } from '../layouts/useSiteShellContext'
 import { buildInquiryPath } from '../lib/inquiry-paths'
@@ -9,7 +9,6 @@ import { buildInquiryPath } from '../lib/inquiry-paths'
 export function HomeShellPage() {
   const { locale, content } = useSiteShellContext()
   const heroImage = siteReferenceImages.homeHero
-  const posterImage = siteReferenceImages.homePoster
   const heroStats =
     locale === 'zh'
       ? [
@@ -27,22 +26,6 @@ export function HomeShellPage() {
     <>
       <section className="home-hero">
         <div className="home-hero__inner">
-          <article className="home-hero__poster">
-            <div className="home-hero__poster-copy">
-              <p className="hero-visual__label">{content.home.visualLabel}</p>
-              <h2>{content.meta.brandName}</h2>
-              <p className="home-hero__poster-company">{content.meta.companyName}</p>
-              <p className="home-hero__poster-summary">{content.home.profileSummary}</p>
-            </div>
-            <figure className="home-hero__poster-media">
-              <img
-                alt={getLocalizedAlt(posterImage, locale)}
-                className="home-hero__poster-image"
-                src={posterImage.src}
-              />
-            </figure>
-          </article>
-
           <div className="home-hero__copy">
             <p className="eyebrow">{content.home.eyebrow}</p>
             <h1>{content.meta.brandName}</h1>
@@ -70,7 +53,7 @@ export function HomeShellPage() {
           <aside className="home-hero__rail">
             <figure className="surface-media-card surface-media-card--hero">
               <img
-                alt={getLocalizedAlt(heroImage, locale)}
+                alt={heroImage.alt[locale]}
                 className="surface-media-card__image"
                 src={heroImage.src}
               />
