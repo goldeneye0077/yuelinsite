@@ -32,7 +32,7 @@ export function HomeShellPage() {
               <p className="hero-visual__label">{content.home.visualLabel}</p>
               <h2>{content.meta.brandName}</h2>
               <p className="home-hero__poster-company">{content.meta.companyName}</p>
-              <p>{content.home.profileSummary}</p>
+              <p className="home-hero__poster-summary">{content.home.profileSummary}</p>
             </div>
             <figure className="home-hero__poster-media">
               <img
