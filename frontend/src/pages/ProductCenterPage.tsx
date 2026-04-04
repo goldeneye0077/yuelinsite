@@ -183,12 +183,6 @@ export function ProductCenterPage() {
             <p className="eyebrow">{pageCopy.industrialSensorsTitle}</p>
             <h2 className="profile-title">{spotlightFamily?.name}</h2>
             <p className="story-intro">{pageCopy.industrialSensorsSummary}</p>
-            <p className="taxonomy-source">
-              <span>{taxonomy.sourceLabel}</span>
-              <a href={taxonomy.sourceUrl} rel="noreferrer" target="_blank">
-                {taxonomy.sourceUrl}
-              </a>
-            </p>
           </div>
 
           <div className="product-spotlight__list">
