@@ -43,6 +43,7 @@ export function ProductCenterPage() {
   const { locale, content } = useSiteShellContext()
   const taxonomy = getProductTaxonomy(locale)
   const heroImage = siteReferenceImages.productCenterHero
+  const spotlightFamily = taxonomy.categories[0]
   const totalGroups = taxonomy.categories.reduce(
     (total, family) => total + family.groups.length,
     0,
@@ -51,101 +52,131 @@ export function ProductCenterPage() {
     (total, family) => total + getSeriesCount(family),
     0,
   )
-  const spotlightGroups = taxonomy.categories[0]?.groups.slice(0, 6) ?? []
+  const spotlightGroups = spotlightFamily?.groups.slice(0, 6) ?? []
 
   return (
     <>
       <section className="product-hero">
         <div className="product-hero__inner">
-          <div className="product-hero__copy">
-            <p className="eyebrow">{taxonomy.eyebrow}</p>
-            <h1>{taxonomy.title}</h1>
-            <p className="hero-signature">{content.meta.crossLocaleCompanyName}</p>
-            <p className="hero-summary">{taxonomy.summary}</p>
-            <p className="hero-description">{taxonomy.description}</p>
-            <div className="hero-actions">
-              <Link
-                className="cta-link"
-                to={buildInquiryPath(locale, {
-                  category: 'general-consultation',
-                  source: 'product-center',
-                })}
-              >
-                <span>{taxonomy.consultCtaLabel}</span>
-                <ArrowRight size={16} />
-              </Link>
-              <Link className="secondary-link" to={buildLocalePath(locale, 'solutions')}>
-                {content.navigation.find((item) => item.key === 'solutions')?.label}
-              </Link>
+          <div className="product-hero__intro">
+            <div className="product-hero__copy">
+              <p className="eyebrow">{taxonomy.eyebrow}</p>
+              <h1>{taxonomy.title}</h1>
+              <p className="hero-signature">{content.meta.crossLocaleCompanyName}</p>
+              <p className="hero-summary">{taxonomy.summary}</p>
+              <p className="hero-description">{taxonomy.description}</p>
+              <div className="hero-actions">
+                <Link
+                  className="cta-link"
+                  to={buildInquiryPath(locale, {
+                    category: 'general-consultation',
+                    source: 'product-center',
+                  })}
+                >
+                  <span>{taxonomy.consultCtaLabel}</span>
+                  <ArrowRight size={16} />
+                </Link>
+                <Link className="secondary-link" to={buildLocalePath(locale, 'solutions')}>
+                  {content.navigation.find((item) => item.key === 'solutions')?.label}
+                </Link>
+              </div>
             </div>
-          </div>
 
-          <div className="product-hero__rail">
-            <figure className="surface-media-card surface-media-card--hero">
+            <figure className="surface-media-card surface-media-card--product-sensor">
               <img
                 alt={getLocalizedAlt(heroImage, locale)}
                 className="surface-media-card__image"
                 src={heroImage.src}
               />
               <figcaption className="surface-media-card__caption">
-                <span>{taxonomy.industrialSensorsTitle}</span>
-                <strong>{taxonomy.categories[0]?.name}</strong>
+                <span>
+                  {locale === 'zh' ? '传感器实物展示' : 'Physical product showcase'}
+                </span>
+                <strong>{spotlightFamily?.groups[0]?.name ?? spotlightFamily?.name}</strong>
               </figcaption>
             </figure>
+          </div>
 
-            <div className="product-hero__stats" aria-hidden="true">
-              <article className="product-hero__stat">
-                <p className="track-label">{taxonomy.categoriesTitle}</p>
-                <p className="product-hero__stat-value">{taxonomy.categories.length}</p>
-              </article>
-              <article className="product-hero__stat">
-                <p className="track-label">{taxonomy.categoryMetaGroupsLabel}</p>
-                <p className="product-hero__stat-value">{totalGroups}</p>
-              </article>
-              <article className="product-hero__stat">
-                <p className="track-label">{taxonomy.categoryMetaSeriesLabel}</p>
-                <p className="product-hero__stat-value">{totalSeries}</p>
-              </article>
-            </div>
+          <div className="product-hero__stats" aria-hidden="true">
+            <article className="product-hero__stat">
+              <p className="track-label">{taxonomy.categoriesTitle}</p>
+              <p className="product-hero__stat-value">{taxonomy.categories.length}</p>
+            </article>
+            <article className="product-hero__stat">
+              <p className="track-label">{taxonomy.categoryMetaGroupsLabel}</p>
+              <p className="product-hero__stat-value">{totalGroups}</p>
+            </article>
+            <article className="product-hero__stat">
+              <p className="track-label">{taxonomy.categoryMetaSeriesLabel}</p>
+              <p className="product-hero__stat-value">{totalSeries}</p>
+            </article>
+          </div>
 
-            <div className="product-hero__family-list">
-              {taxonomy.categories.map((family, index) => (
-                <Link
-                  key={family.key}
-                  className="product-hero__family-link"
-                  to={buildProductFamilyPath(locale, family.key)}
-                >
-                  <p className="product-hero__family-index">
-                    {String(index + 1).padStart(2, '0')}
-                  </p>
-                  <div className="product-hero__family-copy">
-                    <div className="product-hero__family-header">
-                      <h2>{family.name}</h2>
-                      <span className="product-source-badge">
-                        {getSourceLabel(
-                          family.source,
-                          taxonomy.sourceSyncedLabel,
-                          taxonomy.projectInferredLabel,
-                        )}
-                      </span>
-                    </div>
-                    <p className="product-hero__family-summary">
-                      {getProductFamilyDisplaySummary(locale, family)}
-                    </p>
-                    <p className="product-hero__family-meta">
-                      {family.groups.length} {taxonomy.categoryMetaGroupsLabel.toLowerCase()}
-                    </p>
+          <div className="product-hero__family-list">
+            {taxonomy.categories.map((family, index) => (
+              <Link
+                key={family.key}
+                className="product-hero__family-link"
+                to={buildProductFamilyPath(locale, family.key)}
+              >
+                <p className="product-hero__family-index">
+                  {String(index + 1).padStart(2, '0')}
+                </p>
+                <div className="product-hero__family-copy">
+                  <div className="product-hero__family-header">
+                    <h2>{family.name}</h2>
+                    <span className="product-source-badge">
+                      {getSourceLabel(
+                        family.source,
+                        taxonomy.sourceSyncedLabel,
+                        taxonomy.projectInferredLabel,
+                      )}
+                    </span>
                   </div>
-                </Link>
-              ))}
-            </div>
+                  <p className="product-hero__family-summary">
+                    {getProductFamilyDisplaySummary(locale, family)}
+                  </p>
+                  <p className="product-hero__family-meta">
+                    {family.groups.length} {taxonomy.categoryMetaGroupsLabel.toLowerCase()}
+                  </p>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="page-band page-band--bordered">
+        <div className="product-spotlight motion-rise motion-delay-1">
+          <div className="product-spotlight__copy">
+            <p className="eyebrow">{taxonomy.industrialSensorsTitle}</p>
+            <h2 className="profile-title">{spotlightFamily?.name}</h2>
+            <p className="story-intro">{taxonomy.industrialSensorsSummary}</p>
+            <p className="taxonomy-source">
+              <span>{taxonomy.sourceLabel}</span>
+              <a href={taxonomy.sourceUrl} rel="noreferrer" target="_blank">
+                {taxonomy.sourceUrl}
+              </a>
+            </p>
+          </div>
+
+          <div className="product-spotlight__list">
+            {spotlightGroups.map((group) => (
+              <article key={group.slug} className="product-spotlight__item">
+                <h3>{group.name}</h3>
+                <p>{group.summary}</p>
+                <p className="product-spotlight__series">
+                  {buildGroupSeriesPreview(group.series, locale)}
+                </p>
+              </article>
+            ))}
           </div>
         </div>
       </section>
 
       <section className="page-band page-band--bordered">
         <div className="product-directory">
-          <div className="product-directory__intro motion-rise motion-delay-1">
+          <div className="product-directory__intro motion-rise motion-delay-2">
             <p className="eyebrow">{taxonomy.directoryEyebrow}</p>
             <h2 className="profile-title">{taxonomy.directoryTitle}</h2>
             <p className="story-intro">{taxonomy.categoriesSummary}</p>
@@ -156,7 +187,7 @@ export function ProductCenterPage() {
             {taxonomy.categories.map((family, index) => (
               <article
                 key={family.key}
-                className={`product-family-sheet motion-rise motion-delay-${Math.min(index + 2, 5)}`}
+                className={`product-family-sheet motion-rise motion-delay-${Math.min(index + 3, 5)}`}
               >
                 <div className="product-family-sheet__lead">
                   <div className="product-family-sheet__meta">
@@ -204,10 +235,7 @@ export function ProductCenterPage() {
                   </div>
 
                   <div className="section-actions product-family-sheet__actions">
-                    <Link
-                      className="cta-link"
-                      to={buildProductFamilyPath(locale, family.key)}
-                    >
+                    <Link className="cta-link" to={buildProductFamilyPath(locale, family.key)}>
                       <span>{taxonomy.familyCtaLabel}</span>
                       <ArrowRight size={16} />
                     </Link>
@@ -222,34 +250,6 @@ export function ProductCenterPage() {
                     </Link>
                   </div>
                 </div>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="page-band page-band--bordered">
-        <div className="product-spotlight motion-rise motion-delay-3">
-          <div className="product-spotlight__copy">
-            <p className="eyebrow">{taxonomy.industrialSensorsTitle}</p>
-            <h2 className="profile-title">{taxonomy.categories[0]?.name}</h2>
-            <p className="story-intro">{taxonomy.industrialSensorsSummary}</p>
-            <p className="taxonomy-source">
-              <span>{taxonomy.sourceLabel}</span>
-              <a href={taxonomy.sourceUrl} rel="noreferrer" target="_blank">
-                {taxonomy.sourceUrl}
-              </a>
-            </p>
-          </div>
-
-          <div className="product-spotlight__list">
-            {spotlightGroups.map((group) => (
-              <article key={group.slug} className="product-spotlight__item">
-                <h3>{group.name}</h3>
-                <p>{group.summary}</p>
-                <p className="product-spotlight__series">
-                  {buildGroupSeriesPreview(group.series, locale)}
-                </p>
               </article>
             ))}
           </div>

@@ -52,10 +52,10 @@ export const siteReferenceImages = {
     },
   },
   productCenterHero: {
-    src: sceneGateInspection,
+    src: fiberDualDisplay,
     alt: {
-      zh: '工业传感器在自动化场景中的应用示意',
-      en: 'Industrial sensors applied in an automation scenario',
+      zh: '工业传感器实物图',
+      en: 'Physical product shot of an industrial sensor',
     },
   },
   industrialSensorsFamily: {
