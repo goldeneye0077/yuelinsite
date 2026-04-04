@@ -6,7 +6,7 @@ import { AppProviders } from '../app/providers'
 import { getSiteContent } from '../content/site'
 
 describe('SolutionsPage', () => {
-  it('renders the dedicated bilingual solutions surface with three service tracks', async () => {
+  it('renders the streamlined solutions surface without the three-track card block', async () => {
     const content = getSiteContent('zh')
     const router = createAppRouter({
       initialEntries: ['/zh/solutions'],
@@ -25,13 +25,7 @@ describe('SolutionsPage', () => {
       await screen.findByText(content.solutionsPage.coverageItems[0].title),
     ).toBeInTheDocument()
     expect(
-      (await screen.findAllByText(content.solutionsPage.tracks[0].title)).length,
-    ).toBeGreaterThan(0)
-    expect(
       await screen.findByText(content.solutionsPage.processTitle),
-    ).toBeInTheDocument()
-    expect(
-      await screen.findByRole('link', { name: content.solutionsPage.tracks[0].primaryCta.label }),
     ).toBeInTheDocument()
     expect(
       (
@@ -43,13 +37,19 @@ describe('SolutionsPage', () => {
       ),
     ).toBe(true)
     expect(
-      await screen.findByRole('link', { name: content.solutionsPage.tracks[1].transition.ctaLabel }),
-    ).toHaveAttribute('href', `#${content.solutionsPage.tracks[1].transition.targetId}`)
-    expect(
       screen.queryByText(content.solutionsPage.partnershipTitle),
     ).not.toBeInTheDocument()
     expect(
       screen.queryByText(content.solutionsPage.partnershipModesTitle),
+    ).not.toBeInTheDocument()
+    expect(
+      screen.queryByText(content.solutionsPage.tracksTitle),
+    ).not.toBeInTheDocument()
+    expect(
+      screen.queryByRole('link', { name: content.solutionsPage.tracks[0].primaryCta.label }),
+    ).not.toBeInTheDocument()
+    expect(
+      screen.queryByText(content.solutionsPage.tracks[0].summary),
     ).not.toBeInTheDocument()
   })
 })

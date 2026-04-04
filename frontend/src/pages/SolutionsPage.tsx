@@ -4,10 +4,7 @@ import { Link } from 'react-router-dom'
 import { getLocalizedAlt, siteReferenceImages } from '../content/media/referenceAssets'
 import { buildLocalePath } from '../i18n/locales'
 import { useSiteShellContext } from '../layouts/useSiteShellContext'
-import {
-  buildInquiryPath,
-  getInquiryCategoryForSolutionAnchor,
-} from '../lib/inquiry-paths'
+import { buildInquiryPath } from '../lib/inquiry-paths'
 
 export function SolutionsPage() {
   const { locale, content } = useSiteShellContext()
@@ -68,98 +65,6 @@ export function SolutionsPage() {
               ))}
             </div>
           </aside>
-        </div>
-      </section>
-
-      <section className="page-band page-band--bordered">
-        <div className="solution-track-heading motion-rise motion-delay-2">
-          <p className="eyebrow">{content.solutionsPage.tracksTitle}</p>
-          <p className="story-intro">{content.solutionsPage.tracksSummary}</p>
-        </div>
-        <nav
-          aria-label={content.solutionsPage.trackNavLabel}
-          className="solution-track-nav motion-rise motion-delay-3"
-        >
-          {content.solutionsPage.tracks.map((track) => (
-            <a key={track.anchor} className="solution-track-nav__item" href={`#${track.anchor}`}>
-              <span className="solution-track-nav__index">{track.step}</span>
-              <span className="solution-track-nav__title">{track.title}</span>
-              <span className="solution-track-nav__summary">{track.summary}</span>
-            </a>
-          ))}
-        </nav>
-        <div className="solution-track-list motion-rise motion-delay-3">
-          {content.solutionsPage.tracks.map((track) => (
-            <article key={track.step} className="solution-track" id={track.anchor}>
-              <div className="solution-track__lead">
-                <p className="solution-track__index">{track.step}</p>
-                <div className="solution-track__copy">
-                  <h2>{track.title}</h2>
-                  <p className="solution-track__summary">{track.summary}</p>
-                  <p className="track-label">{track.scenarioTitle}</p>
-                  <p className="solution-track__scenario">{track.scenario}</p>
-                </div>
-              </div>
-
-              <div className="solution-track__body">
-                <section className="solution-track__block">
-                  <p className="track-label">{track.scopeTitle}</p>
-                  <ul className="solution-track__list">
-                    {track.scope.map((item) => (
-                      <li key={item}>{item}</li>
-                    ))}
-                  </ul>
-                </section>
-
-                <section className="solution-track__block">
-                  <p className="track-label">{track.valueTitle}</p>
-                  <ul className="solution-track__list">
-                    {track.value.map((item) => (
-                      <li key={item}>{item}</li>
-                    ))}
-                  </ul>
-                </section>
-
-                <aside className="solution-track__rail">
-                  <section className="solution-track__action">
-                    <p className="assurance-item__label">{track.actionTitle}</p>
-                    <p className="solution-track__action-copy">{track.actionBody}</p>
-                    <div className="section-actions">
-                      <Link
-                        className="cta-link"
-                        to={
-                          track.primaryCta.section === 'contact'
-                            ? buildInquiryPath(locale, {
-                                category: getInquiryCategoryForSolutionAnchor(track.anchor),
-                                source: 'solutions',
-                              })
-                            : buildLocalePath(locale, track.primaryCta.section)
-                        }
-                      >
-                        <span>{track.primaryCta.label}</span>
-                        <ArrowRight size={16} />
-                      </Link>
-                      <Link
-                        className="secondary-link"
-                        to={buildLocalePath(locale, track.secondaryCta.section)}
-                      >
-                        {track.secondaryCta.label}
-                      </Link>
-                    </div>
-                  </section>
-
-                  <section className="solution-track__transition">
-                    <p className="track-label">{track.transition.label}</p>
-                    <h3>{track.transition.title}</h3>
-                    <p>{track.transition.detail}</p>
-                    <a className="product-inline-link" href={`#${track.transition.targetId}`}>
-                      {track.transition.ctaLabel}
-                    </a>
-                  </section>
-                </aside>
-              </div>
-            </article>
-          ))}
         </div>
       </section>
 
