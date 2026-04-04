@@ -47,11 +47,9 @@ export function SupportPage() {
                 src={heroImage.src}
               />
               <figcaption className="surface-media-card__caption">
-                <span>{content.supportPage.quickPanelTitle}</span>
                 <strong>{content.supportPage.capabilities[0]?.title}</strong>
               </figcaption>
             </figure>
-            <p className="eyebrow">{content.supportPage.quickPanelTitle}</p>
             <p className="story-intro">{content.supportPage.quickPanelSummary}</p>
             <div className="support-quick-list">
               {content.supportPage.quickPanelItems.map((item) => (

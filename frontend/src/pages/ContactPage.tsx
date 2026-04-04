@@ -284,7 +284,6 @@ export function ContactPage() {
                   src={heroImage.src}
                 />
                 <figcaption className="surface-media-card__caption">
-                  <span>{content.contactPage.quickPanelTitle}</span>
                   <strong>{content.meta.brandName}</strong>
                 </figcaption>
               </figure>

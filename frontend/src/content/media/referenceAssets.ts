@@ -38,10 +38,10 @@ export const siteReferenceImages = {
     },
   },
   supportHero: {
-    src: sceneConveyorDetection,
+    src: officeWorker,
     alt: {
-      zh: '产线检测与通过识别场景',
-      en: 'Conveyor line detection and pass-through sensing scenario',
+      zh: '客服人员在电脑前处理支持咨询',
+      en: 'Customer support professional working at a computer',
     },
   },
   partnersHero: {

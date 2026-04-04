@@ -46,7 +46,6 @@ export function SolutionsPage() {
                 src={heroImage.src}
               />
               <figcaption className="surface-media-card__caption">
-                <span>{content.solutionsPage.coverageTitle}</span>
                 <strong>{content.solutionsPage.coverageItems[0]?.title}</strong>
               </figcaption>
             </figure>

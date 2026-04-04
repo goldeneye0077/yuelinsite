@@ -73,7 +73,6 @@ export function HomeShellPage() {
                 src={heroImage.src}
               />
               <figcaption className="surface-media-card__caption">
-                <span>{content.home.visualLabel}</span>
                 <strong>{content.home.directions[0]?.title}</strong>
               </figcaption>
             </figure>
