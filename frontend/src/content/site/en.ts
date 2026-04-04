@@ -47,16 +47,18 @@ export const enSiteContent: SiteContent = {
     eyebrow: 'Industrial sensing and automation integration',
     title: 'Shenzhen Yuelin Technology Co., Ltd.',
     summary:
-      'Industrial sensors, automation-focused components, and technical integration support for equipment makers, integrators, and factory buyers.',
+      'Industrial sensing, motion components, and automation support for equipment makers, integrators, and factory teams.',
     description:
-      'Yuelin Technology combines industrial sensor supply, safety protection, laser ranging, linear motion components, pneumatic products, software development, and technical integration into one clear consulting path.',
+      'Focused on sensors, safety protection, laser ranging, linear motion, pneumatic products, and integration support.',
     primaryCta: 'Request Consultation / \u83b7\u53d6\u54a8\u8be2',
     secondaryCta: 'View product structure',
     statusLabel: 'Who we serve',
+    supportSummary:
+      'Built around the three questions buyers usually bring first: selection, interfaces, and delivery.',
     statusItems: [
-      'Equipment makers: sensing, linkage, and production-line upgrades',
-      'System integrators: interface alignment, control paths, and implementation support',
-      'Factory-side buyers: reliable supply, technical guidance, and responsive delivery',
+      'Equipment makers: selection alignment and line-side sensing',
+      'System integrators: interface review and implementation support',
+      'Factory-side teams: reliable supply and responsive delivery',
     ],
     visualLabel: 'Live logo and industrial flow anchor',
     strengthsTitle: 'Core strengths',
@@ -107,7 +109,7 @@ export const enSiteContent: SiteContent = {
     ],
     partnersTitle: 'Partner brands',
     partnersSummary:
-      'The homepage should present partner capability with context, building trust through recognizable industrial references instead of logo-only decoration.',
+      'Partner brands stay in context as industrial references, not just a logo strip.',
     partners: [
       {
         name: 'Huayifeng',

@@ -168,6 +168,7 @@ export interface SiteContent {
   home: RoutePageContent & {
     eyebrow: string
     statusLabel: string
+    supportSummary: string
     statusItems: [string, string, string]
     visualLabel: string
     strengthsTitle: string

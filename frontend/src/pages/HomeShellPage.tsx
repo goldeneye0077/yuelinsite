@@ -49,11 +49,7 @@ export function HomeShellPage() {
             <div className="home-hero__support">
               <div className="home-hero__support-header">
                 <p className="eyebrow">{content.home.statusLabel}</p>
-                <p className="home-hero__support-intro">
-                  {locale === 'zh'
-                    ? '围绕选型、联动、实施和交付，把首页首屏直接收束成客户最关心的三类问题。'
-                    : 'The first fold is organized around the three questions buyers usually bring first: selection, integration, and delivery.'}
-                </p>
+                <p className="home-hero__support-intro">{content.home.supportSummary}</p>
               </div>
 
               <div className="home-hero__support-list">

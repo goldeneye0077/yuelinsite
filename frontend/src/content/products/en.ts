@@ -3,29 +3,29 @@ import type { ProductTaxonomyContent } from './types'
 export const enProductTaxonomy: ProductTaxonomyContent = {
   locale: 'en',
   eyebrow: 'Product Center',
-  title: 'Industrial sensing and motion component catalog',
+  title: 'Industrial sensing and motion components',
   summary:
-    'The bilingual product center is organized around five primary families while preserving deeper industrial sensor taxonomy.',
+    'Five product families covering industrial sensor depth and execution-side components.',
   description:
-    'This stage stabilizes the catalog logic, browsing hierarchy, and inquiry path first. Real models, images, datasheets, and downloads can be attached later without changing the IA.',
+    'Judge the product direction first, then move into families, subgroups, and inquiry.',
   sourceLabel: 'Reference source',
   sourceUrl: 'https://www.hyfcn.com/product.html',
   categoriesTitle: 'Five primary families',
   directoryEyebrow: 'Primary family overview',
-  directoryTitle: 'Scan the five families before drilling into subgroups',
+  directoryTitle: 'Scan the five families',
   directoryDescription:
-    'This layer lays out business scope, subgroup depth, and inquiry paths side by side so visitors can confirm direction first and narrow into the right series next.',
+    'Confirm direction first, then move into subgroups, series, and inquiry.',
   categoriesSummary:
-    'Top-level categories follow Yuelin Technology’s business framing, while industrial sensor subgrouping stays aligned with the reference sensor catalog.',
+    'The five families follow Yuelin business framing, while industrial sensor depth stays aligned with the reference catalog.',
   industrialSensorsTitle: 'Industrial sensor depth',
   industrialSensorsSummary:
-    'This layer keeps the most mature sensor groupings from the reference structure. Phase 03-03 will expand it into subcategory navigation and listing templates.',
+    'Keeps the strongest sensor groupings visible so buyers can judge direction before drilling into series.',
   familyCtaLabel: 'Open category',
   familyConsultCtaLabel: 'Discuss this family',
-  consultTitle: 'Need selection support or a project discussion',
-  consultHeading: 'Clarify the requirement first, then narrow into the right model',
+  consultTitle: 'Need selection support',
+  consultHeading: 'Confirm the scenario, then narrow the model',
   consultBody:
-    'If you already know the scenario, equipment structure, or replacement target, start with an inquiry here and refine the exact model or documentation in the next step.',
+    'Start with the application, equipment structure, or replacement target and refine the exact model next.',
   consultCtaLabel: 'Request consultation',
   backToCatalogLabel: 'Back to product center',
   relatedFamiliesTitle: 'Related primary families',
@@ -368,3 +368,4 @@ export const enProductTaxonomy: ProductTaxonomyContent = {
     },
   ],
 }
+

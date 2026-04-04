@@ -43,6 +43,38 @@ export function ProductCenterPage() {
   const { locale, content } = useSiteShellContext()
   const taxonomy = getProductTaxonomy(locale)
   const heroImage = siteReferenceImages.productCenterHero
+  const pageCopy =
+    locale === 'zh'
+      ? {
+          eyebrow: '产品中心',
+          title: '工业传感与执行元件',
+          summary: '五大一级类目录，覆盖工业传感器细分与自动化执行元件。',
+          description: '先判断产品方向，再进入分类、子类与咨询沟通。',
+          directoryEyebrow: '一级分类总览',
+          directoryTitle: '按一级类判断产品范围',
+          categoriesSummary: '五大一级类按跃鳞科技业务组织，工业传感器细分对齐参考目录。',
+          directoryDescription: '先看分类边界，再进入子类、系列与咨询入口。',
+          industrialSensorsTitle: '工业传感器细分',
+          industrialSensorsSummary: '承接最成熟的传感器分组，便于先看方向再进系列。',
+          consultTitle: '需要选型支持',
+          consultHeading: '先确认场景，再收敛型号',
+          consultBody: '适合围绕应用场景、设备结构或替换需求先发起沟通。',
+        }
+      : {
+          eyebrow: taxonomy.eyebrow,
+          title: taxonomy.title,
+          summary: taxonomy.summary,
+          description: taxonomy.description,
+          directoryEyebrow: taxonomy.directoryEyebrow,
+          directoryTitle: taxonomy.directoryTitle,
+          categoriesSummary: taxonomy.categoriesSummary,
+          directoryDescription: taxonomy.directoryDescription,
+          industrialSensorsTitle: taxonomy.industrialSensorsTitle,
+          industrialSensorsSummary: taxonomy.industrialSensorsSummary,
+          consultTitle: taxonomy.consultTitle,
+          consultHeading: taxonomy.consultHeading,
+          consultBody: taxonomy.consultBody,
+        }
   const spotlightFamily = taxonomy.categories[0]
   const totalGroups = taxonomy.categories.reduce(
     (total, family) => total + family.groups.length,
@@ -60,11 +92,10 @@ export function ProductCenterPage() {
         <div className="product-hero__inner">
           <div className="product-hero__intro">
             <div className="product-hero__copy">
-              <p className="eyebrow">{taxonomy.eyebrow}</p>
-              <h1>{taxonomy.title}</h1>
-              <p className="hero-signature">{content.meta.crossLocaleCompanyName}</p>
-              <p className="hero-summary">{taxonomy.summary}</p>
-              <p className="hero-description">{taxonomy.description}</p>
+              <p className="eyebrow">{pageCopy.eyebrow}</p>
+              <h1>{pageCopy.title}</h1>
+              <p className="hero-summary">{pageCopy.summary}</p>
+              <p className="hero-description">{pageCopy.description}</p>
               <div className="hero-actions">
                 <Link
                   className="cta-link"
@@ -149,9 +180,9 @@ export function ProductCenterPage() {
       <section className="page-band page-band--bordered">
         <div className="product-spotlight motion-rise motion-delay-1">
           <div className="product-spotlight__copy">
-            <p className="eyebrow">{taxonomy.industrialSensorsTitle}</p>
+            <p className="eyebrow">{pageCopy.industrialSensorsTitle}</p>
             <h2 className="profile-title">{spotlightFamily?.name}</h2>
-            <p className="story-intro">{taxonomy.industrialSensorsSummary}</p>
+            <p className="story-intro">{pageCopy.industrialSensorsSummary}</p>
             <p className="taxonomy-source">
               <span>{taxonomy.sourceLabel}</span>
               <a href={taxonomy.sourceUrl} rel="noreferrer" target="_blank">
@@ -177,10 +208,10 @@ export function ProductCenterPage() {
       <section className="page-band page-band--bordered">
         <div className="product-directory">
           <div className="product-directory__intro motion-rise motion-delay-2">
-            <p className="eyebrow">{taxonomy.directoryEyebrow}</p>
-            <h2 className="profile-title">{taxonomy.directoryTitle}</h2>
-            <p className="story-intro">{taxonomy.categoriesSummary}</p>
-            <p className="track-detail">{taxonomy.directoryDescription}</p>
+            <p className="eyebrow">{pageCopy.directoryEyebrow}</p>
+            <h2 className="profile-title">{pageCopy.directoryTitle}</h2>
+            <p className="story-intro">{pageCopy.categoriesSummary}</p>
+            <p className="track-detail">{pageCopy.directoryDescription}</p>
           </div>
 
           <div className="product-family-sheet-list">
@@ -259,9 +290,9 @@ export function ProductCenterPage() {
       <section className="page-band page-band--bordered">
         <div className="final-cta motion-rise motion-delay-4">
           <div>
-            <p className="eyebrow">{taxonomy.consultTitle}</p>
-            <h2>{taxonomy.consultHeading}</h2>
-            <p>{taxonomy.consultBody}</p>
+            <p className="eyebrow">{pageCopy.consultTitle}</p>
+            <h2>{pageCopy.consultHeading}</h2>
+            <p>{pageCopy.consultBody}</p>
           </div>
           <div className="section-actions">
             <Link
