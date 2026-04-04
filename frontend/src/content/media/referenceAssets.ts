@@ -3,8 +3,8 @@ import officeWorker from '../../assets/reference/company/office-worker.jpg'
 import fiberDualDisplay from '../../assets/reference/fiber-dual-display.png'
 import fiberEconomyDigital from '../../assets/reference/fiber-economy-digital.png'
 import fiberUnits from '../../assets/reference/fiber-units.png'
+import businessHandshake from '../../assets/reference/solutions/business-handshake.jpg'
 import sceneConveyorDetection from '../../assets/reference/scene-conveyor-detection.jpg'
-import sceneGateInspection from '../../assets/reference/scene-gate-inspection.jpg'
 import sceneProductionLine from '../../assets/reference/scene-production-line.jpg'
 import type { Locale } from '../../i18n/locales'
 
@@ -31,10 +31,10 @@ export const siteReferenceImages = {
     },
   },
   solutionsHero: {
-    src: sceneGateInspection,
+    src: businessHandshake,
     alt: {
-      zh: '安全检测与物流识别场景',
-      en: 'Safety inspection and logistics sensing scenario',
+      zh: '商务人士在现代办公环境中的握手合作场景',
+      en: 'Business professionals shaking hands in a modern office setting',
     },
   },
   supportHero: {

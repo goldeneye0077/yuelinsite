@@ -37,7 +37,7 @@ describe('ThemeProvider', () => {
     expect(document.documentElement.dataset.theme).toBe('dark')
   })
 
-  it('falls back to the system preference when nothing is stored', () => {
+  it('defaults to light mode when nothing is stored', () => {
     vi.stubGlobal(
       'matchMedia',
       vi.fn().mockReturnValue({
@@ -53,8 +53,8 @@ describe('ThemeProvider', () => {
       </ThemeProvider>,
     )
 
-    expect(screen.getByText('dark')).toBeInTheDocument()
-    expect(document.documentElement.dataset.theme).toBe('dark')
+    expect(screen.getByText('light')).toBeInTheDocument()
+    expect(document.documentElement.dataset.theme).toBe('light')
     expect(resolveThemePreference({ prefersDark: true })).toBe('dark')
   })
 })

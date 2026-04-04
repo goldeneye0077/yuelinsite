@@ -24,19 +24,10 @@ function readStoredTheme(): string | null {
   }
 }
 
-function getSystemPrefersDark() {
-  if (typeof window === 'undefined' || typeof window.matchMedia !== 'function') {
-    return false
-  }
-
-  return window.matchMedia('(prefers-color-scheme: dark)').matches
-}
-
 export function ThemeProvider({ children }: PropsWithChildren) {
   const [theme, setTheme] = useState<ThemeMode>(() =>
     resolveThemePreference({
       storedTheme: readStoredTheme(),
-      prefersDark: getSystemPrefersDark(),
     }),
   )
 
