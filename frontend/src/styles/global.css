@@ -5155,6 +5155,95 @@ body {
   gap: 16px;
 }
 
+.solutions-page .solutions-hero__rail,
+.support-hero__rail,
+.contact-hero__rail {
+  gap: 14px;
+}
+
+.solutions-page .surface-media-card--hero,
+.support-hero .surface-media-card--hero,
+.contact-hero .surface-media-card--hero {
+  min-height: 286px;
+}
+
+.solutions-page .surface-media-card--hero .surface-media-card__image {
+  object-position: center 50%;
+}
+
+.support-hero .surface-media-card--hero .surface-media-card__image {
+  object-position: center 28%;
+}
+
+.contact-hero .surface-media-card--hero .surface-media-card__image {
+  object-position: center 52%;
+}
+
+.solutions-page .solutions-hero__rail > .story-intro,
+.support-hero__rail > .story-intro,
+.contact-hero__rail > .story-intro {
+  margin: 0;
+  max-width: none;
+}
+
+.solutions-page .solution-coverage-list,
+.support-quick-list,
+.contact-quick-list {
+  gap: 12px;
+}
+
+.solutions-page .solution-coverage,
+.support-quick-item,
+.contact-quick-item {
+  position: relative;
+  overflow: hidden;
+  display: grid;
+  gap: 8px;
+  padding: 16px 18px;
+  border: 1px solid color-mix(in srgb, var(--color-border) 82%, transparent);
+  border-top: 1px solid color-mix(in srgb, var(--color-border) 82%, transparent);
+  border-radius: 20px;
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--color-surface) 98%, transparent), color-mix(in srgb, var(--color-surface-elevated) 88%, transparent)),
+    color-mix(in srgb, var(--color-surface) 96%, transparent);
+  box-shadow: 0 12px 24px var(--color-shadow);
+}
+
+.solutions-page .solution-coverage::before,
+.support-quick-item::before,
+.contact-quick-item::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, color-mix(in srgb, var(--color-accent-soft) 14%, transparent), transparent 42%);
+  pointer-events: none;
+}
+
+.solutions-page .solution-coverage > *,
+.support-quick-item > *,
+.contact-quick-item > * {
+  position: relative;
+  z-index: 1;
+}
+
+.solutions-page .solution-coverage h2,
+.support-quick-item h2,
+.contact-quick-item h2 {
+  font-size: clamp(1.08rem, 1.3vw, 1.24rem);
+  line-height: 1.24;
+}
+
+.solutions-page .solution-coverage p,
+.support-quick-item p,
+.contact-quick-item p {
+  margin: 0;
+}
+
+.contact-hero__header {
+  gap: 14px;
+  padding-bottom: 0;
+}
+
 .solutions-page .solutions-operating-frame {
   position: relative;
   overflow: hidden;

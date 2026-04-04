@@ -1,8 +1,10 @@
 import buildingExterior from '../../assets/reference/building-exterior.jpg'
 import officeWorker from '../../assets/reference/company/office-worker.jpg'
+import contactMeetingRoom from '../../assets/reference/contact/contact-meeting-room.jpg'
 import fiberDualDisplay from '../../assets/reference/fiber-dual-display.png'
 import fiberEconomyDigital from '../../assets/reference/fiber-economy-digital.png'
 import fiberUnits from '../../assets/reference/fiber-units.png'
+import supportAgentHeadset from '../../assets/reference/support/support-agent-headset.jpg'
 import businessHandshake from '../../assets/reference/solutions/business-handshake.jpg'
 import sceneConveyorDetection from '../../assets/reference/scene-conveyor-detection.jpg'
 import sceneProductionLine from '../../assets/reference/scene-production-line.jpg'
@@ -38,10 +40,10 @@ export const siteReferenceImages = {
     },
   },
   supportHero: {
-    src: officeWorker,
+    src: supportAgentHeadset,
     alt: {
-      zh: '客服人员在电脑前处理支持咨询',
-      en: 'Customer support professional working at a computer',
+      zh: '女性客服佩戴耳机在电脑前通话处理支持咨询',
+      en: 'Female customer service professional on a headset call at her computer',
     },
   },
   partnersHero: {
@@ -66,10 +68,10 @@ export const siteReferenceImages = {
     },
   },
   contactHero: {
-    src: buildingExterior,
+    src: contactMeetingRoom,
     alt: {
-      zh: '现代科技企业办公与接待环境',
-      en: 'Modern business-tech office and reception environment',
+      zh: '商务人士在会议室开会沟通项目细节',
+      en: 'Business professionals in a conference room meeting',
     },
   },
 } as const

@@ -276,7 +276,7 @@ export function ContactPage() {
           </div>
 
           <Card className="contact-hero__rail">
-            <CardHeader>
+            <CardHeader className="contact-hero__header">
               <figure className="surface-media-card surface-media-card--hero">
                 <img
                   alt={getLocalizedAlt(heroImage, locale)}
@@ -292,7 +292,7 @@ export function ContactPage() {
                 {content.contactPage.quickPanelSummary}
               </CardDescription>
             </CardHeader>
-            <CardContent className="grid gap-4">
+            <CardContent className="contact-quick-list">
               {content.contactPage.quickPanelItems.map((item) => (
                 <Card key={item.title} className="contact-quick-item border-border/50 bg-card/70">
                   <CardContent className="grid gap-2 p-5">
