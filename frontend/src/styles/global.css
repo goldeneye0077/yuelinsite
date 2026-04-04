@@ -3390,14 +3390,19 @@ body {
 
 .home-hero__inner {
   min-height: auto;
-  grid-template-columns: minmax(0, 0.86fr) minmax(470px, 1.14fr);
-  gap: 30px;
-  align-items: stretch;
+  grid-template-columns: minmax(0, 0.82fr) minmax(0, 1.18fr);
+  grid-template-areas:
+    'poster poster'
+    'copy rail';
+  gap: 22px 28px;
+  align-items: start;
 }
 
 .home-hero__copy {
+  grid-area: copy;
   gap: 16px;
-  justify-content: center;
+  justify-content: start;
+  padding-top: 8px;
 }
 
 .home-hero__copy > * {
@@ -3434,20 +3439,21 @@ body {
 }
 
 .home-hero__rail {
+  grid-area: rail;
   display: grid;
   gap: 14px;
   align-content: start;
 }
 
 .home-hero__poster {
+  grid-area: poster;
   display: grid;
-  grid-template-columns: minmax(0, 1.55fr) minmax(248px, 0.9fr);
-  gap: 18px;
-  justify-self: start;
-  width: calc(100% + 92px);
-  margin-left: -92px;
-  min-height: 254px;
-  padding: 24px 26px 24px 24px;
+  grid-template-columns: minmax(0, 1.55fr) minmax(320px, 0.72fr);
+  gap: 22px;
+  width: 100%;
+  min-height: 228px;
+  margin: 0 0 2px;
+  padding: 22px 24px 22px 28px;
   border: 1px solid var(--color-border);
   border-radius: 28px;
   background:
@@ -3464,7 +3470,7 @@ body {
   display: grid;
   gap: 10px;
   align-content: center;
-  padding-right: 4px;
+  padding-right: 8px;
 }
 
 .home-hero__poster-copy h2 {
@@ -3486,8 +3492,8 @@ body {
 .home-hero__poster-copy p {
   margin: 0;
   color: var(--color-text-muted);
-  max-width: 36ch;
-  line-height: 1.68;
+  max-width: 42ch;
+  line-height: 1.66;
 }
 
 .hero-visual__label {
@@ -3500,7 +3506,7 @@ body {
 .home-hero__poster-media {
   position: relative;
   margin: 0;
-  min-height: 206px;
+  min-height: 184px;
   overflow: hidden;
   border: 1px solid color-mix(in srgb, var(--color-border) 76%, transparent);
   border-radius: 22px;

@@ -27,6 +27,22 @@ export function HomeShellPage() {
     <>
       <section className="home-hero">
         <div className="home-hero__inner">
+          <article className="home-hero__poster">
+            <div className="home-hero__poster-copy">
+              <p className="hero-visual__label">{content.home.visualLabel}</p>
+              <h2>{content.meta.brandName}</h2>
+              <p className="home-hero__poster-company">{content.meta.companyName}</p>
+              <p>{content.home.profileSummary}</p>
+            </div>
+            <figure className="home-hero__poster-media">
+              <img
+                alt={getLocalizedAlt(posterImage, locale)}
+                className="home-hero__poster-image"
+                src={posterImage.src}
+              />
+            </figure>
+          </article>
+
           <div className="home-hero__copy">
             <p className="eyebrow">{content.home.eyebrow}</p>
             <h1>{content.meta.brandName}</h1>
@@ -52,22 +68,6 @@ export function HomeShellPage() {
           </div>
 
           <aside className="home-hero__rail">
-            <article className="home-hero__poster">
-              <div className="home-hero__poster-copy">
-                <p className="hero-visual__label">{content.home.visualLabel}</p>
-                <h2>{content.meta.brandName}</h2>
-                <p className="home-hero__poster-company">{content.meta.companyName}</p>
-                <p>{content.home.profileSummary}</p>
-              </div>
-              <figure className="home-hero__poster-media">
-                <img
-                  alt={getLocalizedAlt(posterImage, locale)}
-                  className="home-hero__poster-image"
-                  src={posterImage.src}
-                />
-              </figure>
-            </article>
-
             <figure className="surface-media-card surface-media-card--hero">
               <img
                 alt={getLocalizedAlt(heroImage, locale)}
