@@ -19,10 +19,8 @@ describe('App', () => {
     expect(
       (await screen.findAllByRole('link', { name: /request consultation/i })).length,
     ).toBeGreaterThan(0)
-    expect(
-      (await screen.findAllByText(content.meta.crossLocaleCompanyName)).length,
-    ).toBeGreaterThan(0)
+    expect((await screen.findAllByText(content.home.partnersTitle)).length).toBeGreaterThan(0)
     expect(await screen.findByText(/Panasonic/i)).toBeInTheDocument()
-    expect(await screen.findByText(content.home.assuranceTitle)).toBeInTheDocument()
+    expect(await screen.findByText(content.home.directionsTitle)).toBeInTheDocument()
   })
 })
