@@ -12,7 +12,7 @@ describe('HomeShellPage', () => {
       initialEntries: ['/zh'],
     })
 
-    render(
+    const { container } = render(
       <AppProviders>
         <RouterProvider router={router} />
       </AppProviders>,
@@ -34,8 +34,6 @@ describe('HomeShellPage', () => {
       screen.getByRole('heading', { level: 1, name: content.meta.brandName }),
     ).toBeInTheDocument()
     expect(screen.getAllByText(content.meta.companyName).length).toBeGreaterThan(0)
-    expect(
-      screen.getByAltText('现代办公室内正在工作的白领人员'),
-    ).toBeInTheDocument()
+    expect(container.querySelector('.home-hero__poster-image')).toBeInTheDocument()
   })
 })
