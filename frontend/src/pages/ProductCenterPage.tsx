@@ -3,6 +3,9 @@ import { Link } from 'react-router-dom'
 
 import {
   buildProductFamilyPath,
+  getProductFamilyDisplaySummary,
+  getProductFamilyDisplayUseCase,
+  getProductGroupDisplaySummary,
   getProductTaxonomy,
 } from '../content/products'
 import { getLocalizedAlt, siteReferenceImages } from '../content/media/referenceAssets'
@@ -126,7 +129,9 @@ export function ProductCenterPage() {
                         )}
                       </span>
                     </div>
-                    <p className="product-hero__family-summary">{family.summary}</p>
+                    <p className="product-hero__family-summary">
+                      {getProductFamilyDisplaySummary(locale, family)}
+                    </p>
                     <p className="product-hero__family-meta">
                       {family.groups.length} {taxonomy.categoryMetaGroupsLabel.toLowerCase()}
                     </p>
@@ -168,9 +173,11 @@ export function ProductCenterPage() {
                   </div>
                   <h2>{family.name}</h2>
                   <p className="story-intro product-family-sheet__summary">
-                    {family.summary}
+                    {getProductFamilyDisplaySummary(locale, family)}
                   </p>
-                  <p className="product-family-sheet__usecase">{family.useCase}</p>
+                  <p className="product-family-sheet__usecase">
+                    {getProductFamilyDisplayUseCase(locale, family)}
+                  </p>
                 </div>
 
                 <div className="product-family-sheet__body">
@@ -191,7 +198,7 @@ export function ProductCenterPage() {
                     {family.groups.slice(0, 4).map((group) => (
                       <article key={group.slug} className="product-family-sheet__group-item">
                         <h3>{group.name}</h3>
-                        <p>{group.summary}</p>
+                        <p>{getProductGroupDisplaySummary(locale, group)}</p>
                       </article>
                     ))}
                   </div>

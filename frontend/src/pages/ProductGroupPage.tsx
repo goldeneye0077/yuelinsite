@@ -7,7 +7,9 @@ import {
   buildProductGroupPath,
   buildRepresentativeProducts,
   getProductFamily,
+  getProductFamilyDisplayUseCase,
   getProductGroup,
+  getProductGroupDisplaySummary,
   getProductTaxonomy,
   normalizeProductFamilyKey,
   normalizeProductGroupSlug,
@@ -90,8 +92,8 @@ export function ProductGroupPage() {
             </Link>
             <p className="eyebrow">{taxonomy.subgroupNavigatorTitle}</p>
             <h1>{group.name}</h1>
-            <p className="hero-summary">{group.summary}</p>
-            <p className="hero-description">{family.useCase}</p>
+            <p className="hero-summary">{getProductGroupDisplaySummary(locale, group)}</p>
+            <p className="hero-description">{getProductFamilyDisplayUseCase(locale, family)}</p>
             <div className="section-actions">
               <Link
                 className="cta-link"
@@ -340,12 +342,12 @@ export function ProductGroupPage() {
                       </p>
                       <div className="product-series-row__name">
                         <h3>{series}</h3>
-                        <p>{group.summary}</p>
+                        <p>{getProductGroupDisplaySummary(locale, group)}</p>
                       </div>
                       <div className="product-series-row__meta">
                         <div>
                           <p className="track-label">{taxonomy.listingFocusLabel}</p>
-                          <p>{family.useCase}</p>
+                          <p>{getProductFamilyDisplayUseCase(locale, family)}</p>
                         </div>
                         <div>
                           <p className="track-label">{taxonomy.listingStatusLabel}</p>
@@ -402,7 +404,7 @@ export function ProductGroupPage() {
                 to={buildProductGroupPath(locale, normalizedFamilyKey, item.slug)}
               >
                 <h3>{item.name}</h3>
-                <p>{item.summary}</p>
+                <p>{getProductGroupDisplaySummary(locale, item)}</p>
               </Link>
             ))}
           </div>

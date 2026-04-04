@@ -6,6 +6,9 @@ import {
   buildProductGroupPath,
   buildRepresentativeProducts,
   getProductFamily,
+  getProductFamilyDisplaySummary,
+  getProductFamilyDisplayUseCase,
+  getProductGroupDisplaySummary,
   getProductTaxonomy,
   normalizeProductFamilyKey,
 } from '../content/products'
@@ -87,8 +90,8 @@ export function ProductFamilyPage() {
             </Link>
             <p className="eyebrow">{content.productCenter.title}</p>
             <h1>{family.name}</h1>
-            <p className="hero-summary">{family.summary}</p>
-            <p className="hero-description">{family.useCase}</p>
+            <p className="hero-summary">{getProductFamilyDisplaySummary(locale, family)}</p>
+            <p className="hero-description">{getProductFamilyDisplayUseCase(locale, family)}</p>
             <div className="section-actions">
               <Link
                 className="cta-link"
@@ -209,7 +212,7 @@ export function ProductFamilyPage() {
                           )}
                         </span>
                       </div>
-                      <p className="story-intro">{group.summary}</p>
+                      <p className="story-intro">{getProductGroupDisplaySummary(locale, group)}</p>
                       <p className="track-label">{taxonomy.categoryMetaSeriesLabel}</p>
                       <p className="product-detail-group__series">
                         {group.series.join(' / ')}
@@ -295,7 +298,7 @@ export function ProductFamilyPage() {
                 to={buildProductFamilyPath(locale, category.key)}
               >
                 <h3>{category.name}</h3>
-                <p>{category.summary}</p>
+                <p>{getProductFamilyDisplaySummary(locale, category)}</p>
               </Link>
             ))}
           </div>

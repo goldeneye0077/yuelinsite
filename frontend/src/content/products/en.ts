@@ -268,42 +268,48 @@ export const enProductTaxonomy: ProductTaxonomyContent = {
       key: 'linear-guides-and-modules',
       name: 'Linear guides and modules',
       summary:
-        'The reference source does not cover linear modules, so this family uses a first-pass structure that can later be replaced with the real catalog.',
-      useCase: 'For motion positioning, slide modules, and equipment structure upgrades.',
+        'Built around linear guidance, actuator modules, and precision positioning so buyers can screen structure options first and move into the right series next.',
+      useCase:
+        'For motion positioning, transfer-module upgrades, tooling revamps, and linear-axis selection in automation equipment.',
       source: 'project-inferred',
       groups: [
         {
           slug: 'linear-guides',
           name: 'Linear guides',
-          summary: 'Used for baseline guiding, sliding, and precise linear support.',
+          summary:
+            'Used for guidance, repeat positioning, and carriage support when load, accuracy, and mounting datums need to be confirmed early.',
           source: 'project-inferred',
           series: ['Standard guides', 'Miniature guides', 'Heavy-load guides'],
         },
         {
           slug: 'slide-modules',
           name: 'Slide modules',
-          summary: 'Addresses packaged linear units for equipment-side motion requirements.',
+          summary:
+            'Fits single-axis transfer, fixture advance-retract motion, and compact actuator units where travel and motor orientation matter first.',
           source: 'project-inferred',
           series: ['Single-axis slide modules', 'Compact slide modules', 'High-rigidity slide modules'],
         },
         {
           slug: 'ball-screw-modules',
           name: 'Ball screw modules',
-          summary: 'Leans toward higher-precision positioning and repeatability use cases.',
+          summary:
+            'Leans toward higher-precision positioning and stronger thrust requirements where repeatability and structural rigidity are key.',
           source: 'project-inferred',
           series: ['Ball screw modules', 'High-precision positioning modules'],
         },
         {
           slug: 'belt-driven-modules',
           name: 'Belt-driven modules',
-          summary: 'Fits long-travel, high-tempo, and transfer-oriented linear motion.',
+          summary:
+            'Fits long-travel, higher-speed transfer motion and gantry-style layouts where stroke, speed, and synchronization lead the discussion.',
           source: 'project-inferred',
           series: ['High-speed belt modules', 'Long-travel modules'],
         },
         {
           slug: 'positioning-stages',
           name: 'Positioning stages',
-          summary: 'Keeps room for future dual-axis or platform-based positioning structures.',
+          summary:
+            'Supports precision alignment, vision correction, and multi-axis platform concepts where axis count and table size need early alignment.',
           source: 'project-inferred',
           series: ['Positioning stages', 'Multi-axis combination stages'],
         },
@@ -313,42 +319,48 @@ export const enProductTaxonomy: ProductTaxonomyContent = {
       key: 'pneumatic-components',
       name: 'Pneumatic components',
       summary:
-        'Builds a first-pass pneumatic directory around execution, control, and air preparation so it can later connect with sensing and integration flows.',
-      useCase: 'For actuators, valve control, and pneumatic routing scenarios.',
+        'Organized around actuation, valve control, and air distribution so customers can quickly narrow the right pneumatic route by motion type and piping structure.',
+      useCase:
+        'For clamping, transfer motion, directional control, air preparation, and vacuum pick-and-place scenarios.',
       source: 'project-inferred',
       groups: [
         {
           slug: 'cylinders',
           name: 'Cylinders',
-          summary: 'Covers standard, compact, guided, and slim cylinder structures.',
+          summary:
+            'Covers standard, slim, and guided structures so bore, stroke, mounting, and cushioning needs can be clarified first.',
           source: 'project-inferred',
           series: ['Standard cylinders', 'Slim cylinders', 'Guided cylinders'],
         },
         {
           slug: 'solenoid-valves',
           name: 'Solenoid valves',
-          summary: 'Core valve components for pneumatic switching and execution control.',
+          summary:
+            'Built for directional switching and manifold control, making it easier to compare function type, voltage, and port size early.',
           source: 'project-inferred',
           series: ['5-port 2-position solenoid valves', 'Valve manifolds', 'Manual valves'],
         },
         {
           slug: 'air-preparation',
           name: 'Air preparation units',
-          summary: 'Keeps filtration, pressure reduction, and lubrication units in place.',
+          summary:
+            'Covers filtration, pressure regulation, lubrication, and pressure monitoring where inlet quality and service intervals matter.',
           source: 'project-inferred',
           series: ['Filter regulators', 'FRL sets', 'Pressure gauges'],
         },
         {
           slug: 'fittings-and-tubing',
           name: 'Fittings and tubing',
-          summary: 'Supports pneumatic routing, branching, and installation.',
+          summary:
+            'Supports routing, branching, and quick connections so tube size, thread standard, and installation space can be unified early.',
           source: 'project-inferred',
           series: ['Quick fittings', 'PU tubing', 'Branch connectors'],
         },
         {
           slug: 'vacuum-components',
           name: 'Vacuum components',
-          summary: 'Reserves a vacuum branch for pick-and-place and negative-pressure control.',
+          summary:
+            'Prepared for suction transfer and negative-pressure control where workpiece material, suction area, and vacuum layout need early discussion.',
           source: 'project-inferred',
           series: ['Vacuum generators', 'Suction cups', 'Vacuum filters'],
         },
