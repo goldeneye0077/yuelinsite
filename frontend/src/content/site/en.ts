@@ -22,9 +22,7 @@ export const enSiteContent: SiteContent = {
     { key: 'home', label: 'Home' },
     { key: 'products', label: 'Product Center' },
     { key: 'solutions', label: 'Solutions' },
-    { key: 'partners', label: 'Partners' },
     { key: 'support', label: 'Support' },
-    { key: 'about', label: 'About' },
     { key: 'contact', label: 'Contact' },
   ],
   foundationTracks: [
@@ -963,7 +961,7 @@ export const enSiteContent: SiteContent = {
         title: 'Connect',
         items: [
           { label: 'Support', section: 'support' },
-          { label: 'About', section: 'about' },
+          { label: 'Solutions', section: 'solutions' },
           { label: 'Contact', section: 'contact' },
         ],
       },

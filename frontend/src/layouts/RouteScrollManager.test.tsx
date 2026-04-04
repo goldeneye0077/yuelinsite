@@ -29,12 +29,12 @@ describe('RouteScrollManager', () => {
 
     await user.click(
       (await screen.findAllByRole('link', {
-        name: '关于我们',
+        name: '服务与支持',
       }))[0],
     )
 
     await waitFor(() => {
-      expect(router.state.location.pathname).toBe('/zh/about')
+      expect(router.state.location.pathname).toBe('/zh/support')
     })
 
     expect(window.scrollTo).toHaveBeenCalledWith({

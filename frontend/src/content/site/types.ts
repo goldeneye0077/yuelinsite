@@ -315,8 +315,6 @@ export const routeContentKeyMap: Record<SectionRouteKey, SiteContentKey> = {
   home: 'home',
   products: 'productCenter',
   solutions: 'solutions',
-  partners: 'partners',
   support: 'support',
-  about: 'about',
   contact: 'contact',
 }

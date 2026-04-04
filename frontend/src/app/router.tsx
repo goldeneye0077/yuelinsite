@@ -10,11 +10,9 @@ import {
   SECTION_ROUTE_KEYS,
 } from '../i18n/locales'
 import { Layout } from '../layouts/Layout'
-import { AboutPage } from '../pages/AboutPage'
 import { AdminInquiriesPage } from '../pages/AdminInquiriesPage'
 import { ContactPage } from '../pages/ContactPage'
 import { HomeShellPage } from '../pages/HomeShellPage'
-import { PartnersPage } from '../pages/PartnersPage'
 import { ProductCenterPage } from '../pages/ProductCenterPage'
 import { ProductFamilyPage } from '../pages/ProductFamilyPage'
 import { ProductGroupPage } from '../pages/ProductGroupPage'
@@ -57,7 +55,7 @@ export function createAppRouter(options: RouterFactoryOptions = {}) {
         },
         {
           path: 'partners',
-          element: <PartnersPage />,
+          element: <Navigate relative="path" replace to=".." />,
         },
         {
           path: 'support',
@@ -65,7 +63,7 @@ export function createAppRouter(options: RouterFactoryOptions = {}) {
         },
         {
           path: 'about',
-          element: <AboutPage />,
+          element: <Navigate relative="path" replace to=".." />,
         },
         {
           path: 'contact',

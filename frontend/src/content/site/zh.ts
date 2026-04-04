@@ -22,9 +22,7 @@ export const zhSiteContent: SiteContent = {
     { key: 'home', label: '\u9996\u9875' },
     { key: 'products', label: '\u4ea7\u54c1\u4e2d\u5fc3' },
     { key: 'solutions', label: '\u89e3\u51b3\u65b9\u6848' },
-    { key: 'partners', label: '\u54c1\u724c\u5408\u4f5c' },
     { key: 'support', label: '\u670d\u52a1\u4e0e\u652f\u6301' },
-    { key: 'about', label: '\u5173\u4e8e\u6211\u4eec' },
     { key: 'contact', label: '\u8054\u7cfb\u6211\u4eec' },
   ],
   foundationTracks: [
@@ -963,7 +961,7 @@ export const zhSiteContent: SiteContent = {
         title: '\u670d\u52a1\u8def\u5f84',
         items: [
           { label: '\u670d\u52a1\u4e0e\u652f\u6301', section: 'support' },
-          { label: '\u5173\u4e8e\u6211\u4eec', section: 'about' },
+          { label: '\u89e3\u51b3\u65b9\u6848', section: 'solutions' },
           { label: '\u8054\u7cfb\u6211\u4eec', section: 'contact' },
         ],
       },

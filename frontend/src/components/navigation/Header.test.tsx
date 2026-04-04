@@ -21,9 +21,7 @@ describe('Header', () => {
 
     expect(screen.getByRole('link', { name: '\u4ea7\u54c1\u4e2d\u5fc3' })).toBeInTheDocument()
     expect(screen.getByRole('link', { name: '\u89e3\u51b3\u65b9\u6848' })).toBeInTheDocument()
-    expect(screen.getByRole('link', { name: '\u54c1\u724c\u5408\u4f5c' })).toBeInTheDocument()
     expect(screen.getByRole('link', { name: '\u670d\u52a1\u4e0e\u652f\u6301' })).toBeInTheDocument()
-    expect(screen.getByRole('link', { name: '\u5173\u4e8e\u6211\u4eec' })).toBeInTheDocument()
     expect(screen.getByRole('link', { name: '\u8054\u7cfb\u6211\u4eec' })).toBeInTheDocument()
   })
 

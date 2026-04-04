@@ -6,18 +6,14 @@ export type SectionRouteKey =
   | 'home'
   | 'products'
   | 'solutions'
-  | 'partners'
   | 'support'
-  | 'about'
   | 'contact'
 
 export const SECTION_ROUTE_KEYS: SectionRouteKey[] = [
   'home',
   'products',
   'solutions',
-  'partners',
   'support',
-  'about',
   'contact',
 ]
 
@@ -25,9 +21,7 @@ const sectionPathMap: Record<SectionRouteKey, string> = {
   home: '',
   products: 'products',
   solutions: 'solutions',
-  partners: 'partners',
   support: 'support',
-  about: 'about',
   contact: 'contact',
 }
 

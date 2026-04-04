@@ -274,8 +274,8 @@ export function ProductCenterPage() {
               <span>{taxonomy.consultCtaLabel}</span>
               <ArrowRight size={16} />
             </Link>
-            <Link className="secondary-link" to={buildLocalePath(locale, 'about')}>
-              {content.navigation.find((item) => item.key === 'about')?.label}
+            <Link className="secondary-link" to={buildLocalePath(locale, 'support')}>
+              {content.navigation.find((item) => item.key === 'support')?.label}
             </Link>
           </div>
         </div>

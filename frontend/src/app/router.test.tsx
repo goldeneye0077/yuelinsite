@@ -30,6 +30,25 @@ describe('createAppRouter', () => {
       })
   })
 
+  it.each(['/zh/about', '/zh/partners', '/en/about', '/en/partners'])(
+    'redirects removed legacy section %s back to locale home',
+    async (pathname) => {
+      const router = createAppRouter({
+        initialEntries: [pathname],
+      })
+
+      render(
+        <AppProviders>
+          <RouterProvider router={router} />
+        </AppProviders>,
+      )
+
+      await waitFor(() => {
+        expect(router.state.location.pathname).toBe(pathname.startsWith('/en') ? '/en' : '/zh')
+      })
+    },
+  )
+
   it.each(SUPPORTED_LOCALES)(
     'renders the expected sections under %s routes',
     async (locale) => {
