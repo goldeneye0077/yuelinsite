@@ -1,111 +1,169 @@
-import { useState } from 'react'
-import { ArrowRight, ChevronLeft, ExternalLink } from 'lucide-react'
-import { Link, Navigate, useParams } from 'react-router-dom'
-import { toast } from 'sonner'
+import { useState } from "react";
+import { ArrowRight, ChevronLeft, ExternalLink } from "lucide-react";
+import { Link, Navigate, useParams } from "react-router-dom";
+import { toast } from "sonner";
 
-import { Button } from '../components/ui/button'
+import { Button } from "../components/ui/button";
 import {
   buildProductFamilyPath,
   buildProductGroupPath,
   buildRepresentativeProducts,
   getProductFamily,
-  getProductFamilyDisplayUseCase,
   getProductGroup,
-  getProductGroupDisplaySummary,
   getProductTaxonomy,
   normalizeProductFamilyKey,
   normalizeProductGroupSlug,
-} from '../content/products'
-import { getProjectLineInquiryAssist } from '../content/products/projectLineInquiryAssist'
-import { useSiteShellContext } from '../layouts/useSiteShellContext'
+} from "../content/products";
+import {
+  getCompactFamilyUseCase,
+  getCompactGroupSummary,
+} from "../content/products/pageCopy";
+import { getProjectLineInquiryAssist } from "../content/products/projectLineInquiryAssist";
+import { useSiteShellContext } from "../layouts/useSiteShellContext";
 import {
   buildInquiryPath,
   getInquiryCategoryForProductFamily,
-} from '../lib/inquiry-paths'
-import type { ProductSourceType, RepresentativeProduct } from '../content/products/types'
+} from "../lib/inquiry-paths";
+import type {
+  ProductSourceType,
+  RepresentativeProduct,
+} from "../content/products/types";
 
 function getSourceLabel(
   source: ProductSourceType,
   syncedLabel: string,
   inferredLabel: string,
 ) {
-  return source === 'reference-synced' ? syncedLabel : inferredLabel
+  return source === "reference-synced" ? syncedLabel : inferredLabel;
 }
 
 function getProductMetaLabel(product: RepresentativeProduct) {
   return product.seriesCode && product.seriesCode !== product.title
     ? product.seriesCode
-    : product.application ?? product.focus
+    : (product.application ?? product.focus);
 }
 
 export function ProductGroupPage() {
-  const { locale } = useSiteShellContext()
-  const { familyKey, groupSlug } = useParams()
-  const [activeProductId, setActiveProductId] = useState<string | null>(null)
-  const normalizedFamilyKey = normalizeProductFamilyKey(familyKey)
+  const { locale } = useSiteShellContext();
+  const { familyKey, groupSlug } = useParams();
+  const [activeProductId, setActiveProductId] = useState<string | null>(null);
+  const normalizedFamilyKey = normalizeProductFamilyKey(familyKey);
 
   if (!normalizedFamilyKey) {
-    return <Navigate replace to={buildProductFamilyPath(locale, 'industrial-sensors')} />
+    return (
+      <Navigate
+        replace
+        to={buildProductFamilyPath(locale, "industrial-sensors")}
+      />
+    );
   }
 
   const normalizedGroupSlug = normalizeProductGroupSlug(
     locale,
     normalizedFamilyKey,
     groupSlug,
-  )
-  const taxonomy = getProductTaxonomy(locale)
-  const family = getProductFamily(locale, normalizedFamilyKey)
+  );
+  const taxonomy = getProductTaxonomy(locale);
+  const family = getProductFamily(locale, normalizedFamilyKey);
   const group = normalizedGroupSlug
     ? getProductGroup(locale, normalizedFamilyKey, normalizedGroupSlug)
-    : null
+    : null;
   const products =
     normalizedGroupSlug && normalizedFamilyKey
-      ? buildRepresentativeProducts(locale, normalizedFamilyKey, normalizedGroupSlug)
-      : []
+      ? buildRepresentativeProducts(
+          locale,
+          normalizedFamilyKey,
+          normalizedGroupSlug,
+        )
+      : [];
   const activeProduct =
-    products.find((item) => item.id === activeProductId) ?? products[0] ?? null
-  const hasVisualProducts = products.some((item) => item.imageSrc)
-  const siblingGroups = family?.groups.filter((item) => item.slug !== group?.slug) ?? []
-  const inquiryCategory = getInquiryCategoryForProductFamily(normalizedFamilyKey)
+    products.find((item) => item.id === activeProductId) ?? products[0] ?? null;
+  const hasVisualProducts = products.some((item) => item.imageSrc);
+  const siblingGroups =
+    family?.groups.filter((item) => item.slug !== group?.slug) ?? [];
+  const inquiryCategory =
+    getInquiryCategoryForProductFamily(normalizedFamilyKey);
 
   if (!normalizedGroupSlug) {
-    return <Navigate replace to={buildProductFamilyPath(locale, normalizedFamilyKey)} />
+    return (
+      <Navigate
+        replace
+        to={buildProductFamilyPath(locale, normalizedFamilyKey)}
+      />
+    );
   }
 
   if (!family || !group) {
-    return <Navigate replace to={buildProductFamilyPath(locale, normalizedFamilyKey)} />
+    return (
+      <Navigate
+        replace
+        to={buildProductFamilyPath(locale, normalizedFamilyKey)}
+      />
+    );
   }
 
-  const applicationLabel = locale === 'zh' ? '应用场景' : 'Application'
-  const seriesLabel = locale === 'zh' ? '代表系列' : 'Series'
-  const referenceLabel = locale === 'zh' ? '参考来源' : 'Reference'
-  const previewTitle = locale === 'zh' ? '代表产品图' : 'Reference products'
+  const bodyCopy =
+    locale === "zh"
+      ? {
+          applicationLabel: "应用场景",
+          seriesLabel: "代表系列",
+          referenceLabel: "参考",
+          previewTitle: "代表产品图",
+          heroDescription: getCompactFamilyUseCase(locale, family.key),
+          featuredProductsSummary: "先看代表系列，再决定是否继续询盘。",
+          listingTemplateSummary:
+            "系列区保留图片、重点和询盘提示，方便继续判断。",
+          subgroupNavigatorTitle: "同级切换",
+          subgroupNavigatorSummary:
+            "如果当前子类不够准确，可以直接切到同级方向继续看。",
+          siblingGroupsTitle: "继续看其他子类",
+          siblingGroupsSummary: "同一一级类下的其他子类也可以直接横向比较。",
+        }
+      : {
+          applicationLabel: "Application",
+          seriesLabel: "Series",
+          referenceLabel: "Reference",
+          previewTitle: "Reference products",
+          heroDescription: getCompactFamilyUseCase(locale, family.key),
+          featuredProductsSummary:
+            "Review the featured series first, then decide whether to inquire.",
+          listingTemplateSummary:
+            "The series area keeps the image, focus, and inquiry hint together for quick review.",
+          subgroupNavigatorTitle: "Same-level Switch",
+          subgroupNavigatorSummary:
+            "If this subgroup is not the right fit, move across the sibling directions directly.",
+          siblingGroupsTitle: "Explore Other Subgroups",
+          siblingGroupsSummary:
+            "Other subgroups in the same family can also be compared side by side.",
+        };
 
   const inquiryAssist =
-    group.source === 'project-inferred'
+    group.source === "project-inferred"
       ? getProjectLineInquiryAssist(locale, group.slug, group.name)
-      : null
+      : null;
   const inquiryAssistPath = `${buildInquiryPath(locale, {
     category: inquiryCategory,
-    source: 'product-family',
-  })}#contact-form`
+    source: "product-family",
+  })}#contact-form`;
 
   async function handleCopyInquiryTemplate() {
     if (!inquiryAssist) {
-      return
+      return;
     }
 
     try {
       if (!navigator.clipboard?.writeText) {
-        throw new Error('Clipboard unavailable')
+        throw new Error("Clipboard unavailable");
       }
 
-      await navigator.clipboard.writeText(inquiryAssist.templateLines.join('\n'))
+      await navigator.clipboard.writeText(
+        inquiryAssist.templateLines.join("\n"),
+      );
       toast.success(inquiryAssist.copySuccessTitle, {
         description: inquiryAssist.copySuccessDescription,
-      })
+      });
     } catch {
-      toast.error(inquiryAssist.copyErrorTitle)
+      toast.error(inquiryAssist.copyErrorTitle);
     }
   }
 
@@ -121,16 +179,18 @@ export function ProductGroupPage() {
               <ChevronLeft size={16} />
               <span>{family.name}</span>
             </Link>
-            <p className="eyebrow">{taxonomy.subgroupNavigatorTitle}</p>
+            <p className="eyebrow">{bodyCopy.subgroupNavigatorTitle}</p>
             <h1>{group.name}</h1>
-            <p className="hero-summary">{getProductGroupDisplaySummary(locale, group)}</p>
-            <p className="hero-description">{getProductFamilyDisplayUseCase(locale, family)}</p>
+            <p className="hero-summary">
+              {getCompactGroupSummary(locale, group.slug)}
+            </p>
+            <p className="hero-description">{bodyCopy.heroDescription}</p>
             <div className="section-actions">
               <Link
                 className="cta-link"
                 to={buildInquiryPath(locale, {
                   category: inquiryCategory,
-                  source: 'product-family',
+                  source: "product-family",
                 })}
               >
                 <span>{taxonomy.consultCtaLabel}</span>
@@ -154,8 +214,10 @@ export function ProductGroupPage() {
                   src={activeProduct.imageSrc}
                 />
                 <figcaption className="surface-media-card__caption">
-                  <span>{previewTitle}</span>
-                  <strong>{activeProduct.seriesCode ?? activeProduct.title}</strong>
+                  <span>{bodyCopy.previewTitle}</span>
+                  <strong>
+                    {activeProduct.seriesCode ?? activeProduct.title}
+                  </strong>
                 </figcaption>
               </figure>
             ) : null}
@@ -170,12 +232,20 @@ export function ProductGroupPage() {
             </div>
             <div className="product-detail-hero__stats">
               <article>
-                <p className="track-label">{taxonomy.categoryMetaSeriesLabel}</p>
-                <p className="product-family-sheet__stat-value">{group.series.length}</p>
+                <p className="track-label">
+                  {taxonomy.categoryMetaSeriesLabel}
+                </p>
+                <p className="product-family-sheet__stat-value">
+                  {group.series.length}
+                </p>
               </article>
               <article>
-                <p className="track-label">{taxonomy.categoryMetaGroupsLabel}</p>
-                <p className="product-family-sheet__stat-value">{family.groups.length}</p>
+                <p className="track-label">
+                  {taxonomy.categoryMetaGroupsLabel}
+                </p>
+                <p className="product-family-sheet__stat-value">
+                  {family.groups.length}
+                </p>
               </article>
             </div>
             <div className="product-detail-hero__preview product-detail-hero__preview--media">
@@ -183,7 +253,7 @@ export function ProductGroupPage() {
                 <button
                   key={product.id}
                   aria-pressed={product.id === activeProduct?.id}
-                  className={`product-detail-hero__preview-item${product.id === activeProduct?.id ? ' product-detail-hero__preview-item--active' : ''}`}
+                  className={`product-detail-hero__preview-item${product.id === activeProduct?.id ? " product-detail-hero__preview-item--active" : ""}`}
                   onClick={() => setActiveProductId(product.id)}
                   type="button"
                 >
@@ -208,14 +278,14 @@ export function ProductGroupPage() {
           <section className="product-subgroup-main motion-rise motion-delay-2">
             <p className="eyebrow">{taxonomy.featuredProductsTitle}</p>
             <h2 className="profile-title">{group.name}</h2>
-            <p className="story-intro">{taxonomy.featuredProductsSummary}</p>
+            <p className="story-intro">{bodyCopy.featuredProductsSummary}</p>
             <div className="product-card-stage">
               <div className="product-card-grid">
                 {products.map((product) => (
                   <button
                     aria-pressed={product.id === activeProduct?.id}
                     key={product.id}
-                    className={`product-card product-card--media${product.id === activeProduct?.id ? ' product-card--active' : ''}`}
+                    className={`product-card product-card--media${product.id === activeProduct?.id ? " product-card--active" : ""}`}
                     onClick={() => setActiveProductId(product.id)}
                     type="button"
                   >
@@ -226,16 +296,21 @@ export function ProductGroupPage() {
                     ) : null}
                     <div className="product-card__body">
                       <p className="product-card__status">
-                        {product.seriesCode && product.seriesCode !== product.title
+                        {product.seriesCode &&
+                        product.seriesCode !== product.title
                           ? product.seriesCode
                           : product.status}
                       </p>
                       <h3>{product.title}</h3>
                       <p className="product-card__summary">{product.summary}</p>
                       {product.application ? (
-                        <p className="product-card__application">{product.application}</p>
+                        <p className="product-card__application">
+                          {product.application}
+                        </p>
                       ) : null}
-                      <p className="product-card__cta">{taxonomy.productCardCtaLabel}</p>
+                      <p className="product-card__cta">
+                        {taxonomy.productCardCtaLabel}
+                      </p>
                     </div>
                   </button>
                 ))}
@@ -253,25 +328,35 @@ export function ProductGroupPage() {
                     </figure>
                   ) : null}
                   <div className="product-card-detail__header">
-                    <p className="eyebrow">{taxonomy.productDetailPanelTitle}</p>
+                    <p className="eyebrow">
+                      {taxonomy.productDetailPanelTitle}
+                    </p>
                     <h3>{activeProduct.title}</h3>
                     <div className="product-card-detail__badges">
                       {activeProduct.seriesCode &&
                       activeProduct.seriesCode !== activeProduct.title ? (
-                        <span className="product-source-badge">{activeProduct.seriesCode}</span>
+                        <span className="product-source-badge">
+                          {activeProduct.seriesCode}
+                        </span>
                       ) : null}
-                      <span className="product-source-badge">{activeProduct.status}</span>
+                      <span className="product-source-badge">
+                        {activeProduct.status}
+                      </span>
                     </div>
                   </div>
                   <p className="story-intro">{activeProduct.summary}</p>
                   {activeProduct.application ? (
                     <div className="product-card-detail__block">
-                      <p className="track-label">{applicationLabel}</p>
-                      <p className="product-card-detail__paragraph">{activeProduct.application}</p>
+                      <p className="track-label">{bodyCopy.applicationLabel}</p>
+                      <p className="product-card-detail__paragraph">
+                        {activeProduct.application}
+                      </p>
                     </div>
                   ) : null}
                   <div className="product-card-detail__block">
-                    <p className="track-label">{taxonomy.productHighlightsLabel}</p>
+                    <p className="track-label">
+                      {taxonomy.productHighlightsLabel}
+                    </p>
                     <div className="product-card-detail__highlights">
                       {activeProduct.highlights.map((highlight) => (
                         <p key={highlight}>{highlight}</p>
@@ -280,11 +365,15 @@ export function ProductGroupPage() {
                   </div>
                   <div className="product-card-detail__meta">
                     <article>
-                      <p className="track-label">{taxonomy.listingFocusLabel}</p>
+                      <p className="track-label">
+                        {taxonomy.listingFocusLabel}
+                      </p>
                       <p>{activeProduct.focus}</p>
                     </article>
                     <article>
-                      <p className="track-label">{taxonomy.productInquiryHintLabel}</p>
+                      <p className="track-label">
+                        {taxonomy.productInquiryHintLabel}
+                      </p>
                       <p>{activeProduct.inquiryHint}</p>
                     </article>
                   </div>
@@ -295,7 +384,7 @@ export function ProductGroupPage() {
                       rel="noreferrer"
                       target="_blank"
                     >
-                      <span>{referenceLabel}</span>
+                      <span>{bodyCopy.referenceLabel}</span>
                       <ExternalLink size={15} />
                     </a>
                   ) : null}
@@ -304,7 +393,7 @@ export function ProductGroupPage() {
                       className="cta-link"
                       to={buildInquiryPath(locale, {
                         category: inquiryCategory,
-                        source: 'product-family',
+                        source: "product-family",
                       })}
                     >
                       <span>{taxonomy.consultCtaLabel}</span>
@@ -325,7 +414,9 @@ export function ProductGroupPage() {
               <section className="product-inquiry-assist">
                 <div className="product-inquiry-assist__intro">
                   <p className="eyebrow">{inquiryAssist.sectionEyebrow}</p>
-                  <h2 className="profile-title">{inquiryAssist.sectionTitle}</h2>
+                  <h2 className="profile-title">
+                    {inquiryAssist.sectionTitle}
+                  </h2>
                   <p className="story-intro">{inquiryAssist.sectionSummary}</p>
                 </div>
 
@@ -338,7 +429,10 @@ export function ProductGroupPage() {
 
                     <div className="product-spec-list">
                       {inquiryAssist.specFields.map((field) => (
-                        <article className="product-spec-item" key={field.label}>
+                        <article
+                          className="product-spec-item"
+                          key={field.label}
+                        >
                           <h3>{field.label}</h3>
                           <p>{field.detail}</p>
                         </article>
@@ -356,14 +450,20 @@ export function ProductGroupPage() {
                   <article className="product-inquiry-assist__panel">
                     <div className="product-inquiry-assist__heading">
                       <p className="eyebrow">{inquiryAssist.templateTitle}</p>
-                      <p className="story-intro">{inquiryAssist.templateSummary}</p>
+                      <p className="story-intro">
+                        {inquiryAssist.templateSummary}
+                      </p>
                     </div>
 
                     <pre className="product-template-box">
-                      {inquiryAssist.templateLines.join('\n')}
+                      {inquiryAssist.templateLines.join("\n")}
                     </pre>
 
-                    <Button onClick={handleCopyInquiryTemplate} size="lg" variant="secondary">
+                    <Button
+                      onClick={handleCopyInquiryTemplate}
+                      size="lg"
+                      variant="secondary"
+                    >
                       {inquiryAssist.copyLabel}
                     </Button>
                   </article>
@@ -372,7 +472,7 @@ export function ProductGroupPage() {
             ) : null}
 
             <p className="eyebrow">{taxonomy.listingTemplateTitle}</p>
-            <p className="story-intro">{taxonomy.listingTemplateSummary}</p>
+            <p className="story-intro">{bodyCopy.listingTemplateSummary}</p>
             <div className="product-series-list">
               {hasVisualProducts
                 ? products.map((product, index) => (
@@ -381,25 +481,32 @@ export function ProductGroupPage() {
                       className="product-series-row product-series-row--visual"
                     >
                       <p className="product-series-row__index">
-                        {String(index + 1).padStart(2, '0')}
+                        {String(index + 1).padStart(2, "0")}
                       </p>
                       {product.imageSrc ? (
                         <div className="product-series-row__media">
-                          <img alt={product.imageAlt ?? product.title} src={product.imageSrc} />
+                          <img
+                            alt={product.imageAlt ?? product.title}
+                            src={product.imageSrc}
+                          />
                         </div>
                       ) : null}
                       <div className="product-series-row__name">
-                        <p className="track-label">{seriesLabel}</p>
+                        <p className="track-label">{bodyCopy.seriesLabel}</p>
                         <h3>{product.title}</h3>
                         <p>{product.summary}</p>
                       </div>
                       <div className="product-series-row__meta">
                         <div>
-                          <p className="track-label">{taxonomy.listingFocusLabel}</p>
+                          <p className="track-label">
+                            {taxonomy.listingFocusLabel}
+                          </p>
                           <p>{product.application ?? product.focus}</p>
                         </div>
                         <div>
-                          <p className="track-label">{taxonomy.productInquiryHintLabel}</p>
+                          <p className="track-label">
+                            {taxonomy.productInquiryHintLabel}
+                          </p>
                           <p>{product.inquiryHint}</p>
                         </div>
                         {product.sourceUrl ? (
@@ -409,7 +516,7 @@ export function ProductGroupPage() {
                             rel="noreferrer"
                             target="_blank"
                           >
-                            <span>{referenceLabel}</span>
+                            <span>{bodyCopy.referenceLabel}</span>
                             <ExternalLink size={15} />
                           </a>
                         ) : null}
@@ -419,19 +526,23 @@ export function ProductGroupPage() {
                 : group.series.map((series, index) => (
                     <article key={series} className="product-series-row">
                       <p className="product-series-row__index">
-                        {String(index + 1).padStart(2, '0')}
+                        {String(index + 1).padStart(2, "0")}
                       </p>
                       <div className="product-series-row__name">
                         <h3>{series}</h3>
-                        <p>{getProductGroupDisplaySummary(locale, group)}</p>
+                        <p>{getCompactGroupSummary(locale, group.slug)}</p>
                       </div>
                       <div className="product-series-row__meta">
                         <div>
-                          <p className="track-label">{taxonomy.listingFocusLabel}</p>
-                          <p>{getProductFamilyDisplayUseCase(locale, family)}</p>
+                          <p className="track-label">
+                            {taxonomy.listingFocusLabel}
+                          </p>
+                          <p>{bodyCopy.heroDescription}</p>
                         </div>
                         <div>
-                          <p className="track-label">{taxonomy.listingStatusLabel}</p>
+                          <p className="track-label">
+                            {taxonomy.listingStatusLabel}
+                          </p>
                           <p>{taxonomy.listingReadyLabel}</p>
                         </div>
                       </div>
@@ -442,19 +553,24 @@ export function ProductGroupPage() {
 
           <aside className="product-subgroup-sidebar motion-rise motion-delay-3">
             <div className="product-subgroup-sidebar__block">
-              <p className="eyebrow">{taxonomy.subgroupNavigatorTitle}</p>
-              <p className="story-intro">{taxonomy.subgroupNavigatorSummary}</p>
+              <p className="eyebrow">{bodyCopy.subgroupNavigatorTitle}</p>
+              <p className="story-intro">{bodyCopy.subgroupNavigatorSummary}</p>
             </div>
             <div className="product-subnav product-subnav--stacked">
               {family.groups.map((item) => (
                 <Link
                   key={item.slug}
-                  className={`product-subnav__item${item.slug === group.slug ? ' product-subnav__item--active' : ''}`}
-                  to={buildProductGroupPath(locale, normalizedFamilyKey, item.slug)}
+                  className={`product-subnav__item${item.slug === group.slug ? " product-subnav__item--active" : ""}`}
+                  to={buildProductGroupPath(
+                    locale,
+                    normalizedFamilyKey,
+                    item.slug,
+                  )}
                 >
                   <span className="product-subnav__title">{item.name}</span>
                   <span className="product-subnav__meta">
-                    {item.series.length} {taxonomy.categoryMetaSeriesLabel.toLowerCase()}
+                    {item.series.length}{" "}
+                    {taxonomy.categoryMetaSeriesLabel.toLowerCase()}
                   </span>
                 </Link>
               ))}
@@ -472,9 +588,9 @@ export function ProductGroupPage() {
       <section className="page-band page-band--bordered">
         <div className="product-related motion-rise motion-delay-4">
           <div className="product-related__copy">
-            <p className="eyebrow">{taxonomy.siblingGroupsTitle}</p>
+            <p className="eyebrow">{bodyCopy.siblingGroupsTitle}</p>
             <h2 className="profile-title">{family.name}</h2>
-            <p className="story-intro">{taxonomy.siblingGroupsSummary}</p>
+            <p className="story-intro">{bodyCopy.siblingGroupsSummary}</p>
           </div>
 
           <div className="product-related__list">
@@ -482,15 +598,19 @@ export function ProductGroupPage() {
               <Link
                 key={item.slug}
                 className="product-related__item"
-                to={buildProductGroupPath(locale, normalizedFamilyKey, item.slug)}
+                to={buildProductGroupPath(
+                  locale,
+                  normalizedFamilyKey,
+                  item.slug,
+                )}
               >
                 <h3>{item.name}</h3>
-                <p>{getProductGroupDisplaySummary(locale, item)}</p>
+                <p>{getCompactGroupSummary(locale, item.slug)}</p>
               </Link>
             ))}
           </div>
         </div>
       </section>
     </>
-  )
+  );
 }

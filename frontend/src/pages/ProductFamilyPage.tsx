@@ -1,109 +1,156 @@
-import { ArrowRight, ChevronLeft, ExternalLink } from 'lucide-react'
-import { Link, Navigate, useParams } from 'react-router-dom'
+import { ArrowRight, ChevronLeft, ExternalLink } from "lucide-react";
+import { Link, Navigate, useParams } from "react-router-dom";
 
 import {
   buildProductFamilyPath,
   buildProductGroupPath,
   buildRepresentativeProducts,
   getProductFamily,
-  getProductFamilyDisplaySummary,
-  getProductFamilyDisplayUseCase,
-  getProductGroupDisplaySummary,
   getProductTaxonomy,
   normalizeProductFamilyKey,
-} from '../content/products'
-import { getLocalizedAlt, siteReferenceImages } from '../content/media/referenceAssets'
-import type { ProductFamily, ProductSourceType } from '../content/products/types'
-import { buildLocalePath } from '../i18n/locales'
-import { useSiteShellContext } from '../layouts/useSiteShellContext'
+} from "../content/products";
+import {
+  getCompactFamilySummary,
+  getCompactFamilyUseCase,
+  getCompactGroupSummary,
+} from "../content/products/pageCopy";
+import {
+  getLocalizedAlt,
+  siteReferenceImages,
+} from "../content/media/referenceAssets";
+import type {
+  ProductFamily,
+  ProductSourceType,
+} from "../content/products/types";
+import { buildLocalePath } from "../i18n/locales";
+import { useSiteShellContext } from "../layouts/useSiteShellContext";
 import {
   buildInquiryPath,
   getInquiryCategoryForProductFamily,
-} from '../lib/inquiry-paths'
+} from "../lib/inquiry-paths";
 
 function getSourceLabel(
   source: ProductSourceType,
   syncedLabel: string,
   inferredLabel: string,
 ) {
-  return source === 'reference-synced' ? syncedLabel : inferredLabel
+  return source === "reference-synced" ? syncedLabel : inferredLabel;
 }
 
 function getSeriesCount(family: ProductFamily) {
-  return family.groups.reduce((total, group) => total + group.series.length, 0)
+  return family.groups.reduce((total, group) => total + group.series.length, 0);
 }
 
 export function ProductFamilyPage() {
-  const { locale, content } = useSiteShellContext()
-  const { familyKey } = useParams()
-  const normalizedKey = normalizeProductFamilyKey(familyKey)
+  const { locale, content } = useSiteShellContext();
+  const { familyKey } = useParams();
+  const normalizedKey = normalizeProductFamilyKey(familyKey);
 
   if (!normalizedKey) {
-    return <Navigate replace to={buildLocalePath(locale, 'products')} />
+    return <Navigate replace to={buildLocalePath(locale, "products")} />;
   }
 
-  const taxonomy = getProductTaxonomy(locale)
-  const family = getProductFamily(locale, normalizedKey)
+  const taxonomy = getProductTaxonomy(locale);
+  const family = getProductFamily(locale, normalizedKey);
 
   if (!family) {
-    return <Navigate replace to={buildLocalePath(locale, 'products')} />
+    return <Navigate replace to={buildLocalePath(locale, "products")} />;
   }
 
   const relatedFamilies = taxonomy.categories.filter(
     (category) => category.key !== family.key,
-  )
-  const inquiryCategory = getInquiryCategoryForProductFamily(family.key)
+  );
+  const inquiryCategory = getInquiryCategoryForProductFamily(family.key);
   const familyPreviewProducts = family.groups
     .map((group) => {
-      const [firstProduct] = buildRepresentativeProducts(locale, family.key, group.slug)
+      const [firstProduct] = buildRepresentativeProducts(
+        locale,
+        family.key,
+        group.slug,
+      );
       return firstProduct
         ? {
             group,
             product: firstProduct,
           }
-        : null
+        : null;
     })
     .filter(
       (
         entry,
       ): entry is {
-        group: ProductFamily['groups'][number]
-        product: ReturnType<typeof buildRepresentativeProducts>[number]
+        group: ProductFamily["groups"][number];
+        product: ReturnType<typeof buildRepresentativeProducts>[number];
       } => entry !== null,
-    )
+    );
 
   const fallbackHeroImage =
-    family.key === 'industrial-sensors'
+    family.key === "industrial-sensors"
       ? siteReferenceImages.industrialSensorsFamily
-      : siteReferenceImages.productCenterHero
+      : siteReferenceImages.productCenterHero;
 
-  const heroProduct = familyPreviewProducts[0]
+  const heroProduct = familyPreviewProducts[0];
+  const bodyCopy =
+    locale === "zh"
+      ? {
+          subgroupNavigatorTitle: "细分方向",
+          subgroupNavigatorSummary:
+            "先看子类方向，再进入系列、图片和询盘入口。",
+          consultTitle: "选型支持",
+          consultBody: "如果方向已明确，下一步就把应用场景和结构条件带进沟通。",
+          relatedFamiliesTitle: "继续看其他一级类",
+          relatedFamiliesSummary:
+            "如果这一类还不够准确，可以继续横向判断其他产品线。",
+          referenceLabel: "参考",
+        }
+      : {
+          subgroupNavigatorTitle: "Subgroups",
+          subgroupNavigatorSummary:
+            "Start from the subgroup direction, then move into series, visuals, and inquiry.",
+          consultTitle: "Selection Support",
+          consultBody:
+            "If the direction is clear, bring the application and structure limits into the conversation.",
+          relatedFamiliesTitle: "Explore Other Families",
+          relatedFamiliesSummary:
+            "If this family is not the right fit yet, continue comparing the other product lines.",
+          referenceLabel: "Reference",
+        };
 
   return (
     <>
       <section className="page-band page-band--tight">
         <div className="product-detail-hero motion-rise motion-delay-1">
           <div className="product-detail-hero__main">
-            <Link className="product-back-link" to={buildLocalePath(locale, 'products')}>
+            <Link
+              className="product-back-link"
+              to={buildLocalePath(locale, "products")}
+            >
               <ChevronLeft size={16} />
               <span>{taxonomy.backToCatalogLabel}</span>
             </Link>
             <p className="eyebrow">{content.productCenter.title}</p>
             <h1>{family.name}</h1>
-            <p className="hero-summary">{getProductFamilyDisplaySummary(locale, family)}</p>
-            <p className="hero-description">{getProductFamilyDisplayUseCase(locale, family)}</p>
+            <p className="hero-summary">
+              {getCompactFamilySummary(locale, family.key)}
+            </p>
+            <p className="hero-description">
+              {getCompactFamilyUseCase(locale, family.key)}
+            </p>
             <div className="section-actions">
               <Link
                 className="cta-link"
                 to={buildInquiryPath(locale, {
                   category: inquiryCategory,
-                  source: 'product-family',
+                  source: "product-family",
                 })}
               >
                 <span>{taxonomy.consultCtaLabel}</span>
                 <ArrowRight size={16} />
               </Link>
-              <Link className="secondary-link" to={buildLocalePath(locale, 'products')}>
+              <Link
+                className="secondary-link"
+                to={buildLocalePath(locale, "products")}
+              >
                 {taxonomy.backToCatalogLabel}
               </Link>
             </div>
@@ -113,13 +160,17 @@ export function ProductFamilyPage() {
             {heroProduct?.product.imageSrc ? (
               <figure className="surface-media-card surface-media-card--hero">
                 <img
-                  alt={heroProduct.product.imageAlt ?? heroProduct.product.title}
+                  alt={
+                    heroProduct.product.imageAlt ?? heroProduct.product.title
+                  }
                   className="surface-media-card__image"
                   src={heroProduct.product.imageSrc}
                 />
                 <figcaption className="surface-media-card__caption">
                   <span>{taxonomy.categoriesTitle}</span>
-                  <strong>{heroProduct.product.seriesCode ?? family.name}</strong>
+                  <strong>
+                    {heroProduct.product.seriesCode ?? family.name}
+                  </strong>
                 </figcaption>
               </figure>
             ) : (
@@ -146,12 +197,20 @@ export function ProductFamilyPage() {
             </div>
             <div className="product-detail-hero__stats">
               <article>
-                <p className="track-label">{taxonomy.categoryMetaGroupsLabel}</p>
-                <p className="product-family-sheet__stat-value">{family.groups.length}</p>
+                <p className="track-label">
+                  {taxonomy.categoryMetaGroupsLabel}
+                </p>
+                <p className="product-family-sheet__stat-value">
+                  {family.groups.length}
+                </p>
               </article>
               <article>
-                <p className="track-label">{taxonomy.categoryMetaSeriesLabel}</p>
-                <p className="product-family-sheet__stat-value">{getSeriesCount(family)}</p>
+                <p className="track-label">
+                  {taxonomy.categoryMetaSeriesLabel}
+                </p>
+                <p className="product-family-sheet__stat-value">
+                  {getSeriesCount(family)}
+                </p>
               </article>
             </div>
             <div className="product-detail-hero__preview product-detail-hero__preview--media">
@@ -159,7 +218,11 @@ export function ProductFamilyPage() {
                 <Link
                   key={entry.group.slug}
                   className="product-detail-hero__preview-item"
-                  to={buildProductGroupPath(locale, family.key, entry.group.slug)}
+                  to={buildProductGroupPath(
+                    locale,
+                    family.key,
+                    entry.group.slug,
+                  )}
                 >
                   {entry.product.imageSrc ? (
                     <div className="product-detail-hero__preview-thumb">
@@ -185,20 +248,27 @@ export function ProductFamilyPage() {
       <section className="page-band page-band--bordered">
         <div className="product-detail-grid">
           <section className="product-detail-section motion-rise motion-delay-2">
-            <p className="eyebrow">{taxonomy.subgroupNavigatorTitle}</p>
-            <p className="story-intro">{taxonomy.subgroupNavigatorSummary}</p>
+            <p className="eyebrow">{bodyCopy.subgroupNavigatorTitle}</p>
+            <p className="story-intro">{bodyCopy.subgroupNavigatorSummary}</p>
             <div className="product-detail-group-list">
               {family.groups.map((group) => {
-                const [groupProduct] = buildRepresentativeProducts(locale, family.key, group.slug)
+                const [groupProduct] = buildRepresentativeProducts(
+                  locale,
+                  family.key,
+                  group.slug,
+                );
 
                 return (
                   <article
                     key={group.slug}
-                    className={`product-detail-group${groupProduct?.imageSrc ? ' product-detail-group--media' : ''}`}
+                    className={`product-detail-group${groupProduct?.imageSrc ? " product-detail-group--media" : ""}`}
                   >
                     {groupProduct?.imageSrc ? (
                       <div className="product-detail-group__media">
-                        <img alt={groupProduct.imageAlt ?? groupProduct.title} src={groupProduct.imageSrc} />
+                        <img
+                          alt={groupProduct.imageAlt ?? groupProduct.title}
+                          src={groupProduct.imageSrc}
+                        />
                       </div>
                     ) : null}
                     <div className="product-detail-group__content">
@@ -212,15 +282,21 @@ export function ProductFamilyPage() {
                           )}
                         </span>
                       </div>
-                      <p className="story-intro">{getProductGroupDisplaySummary(locale, group)}</p>
-                      <p className="track-label">{taxonomy.categoryMetaSeriesLabel}</p>
+                      <p className="story-intro">
+                        {getCompactGroupSummary(locale, group.slug)}
+                      </p>
+                      <p className="track-label">
+                        {taxonomy.categoryMetaSeriesLabel}
+                      </p>
                       <p className="product-detail-group__series">
-                        {group.series.join(' / ')}
+                        {group.series.join(" / ")}
                       </p>
                       {groupProduct?.application ? (
                         <div className="product-detail-group__meta">
                           <div>
-                            <p className="track-label">{taxonomy.listingFocusLabel}</p>
+                            <p className="track-label">
+                              {taxonomy.listingFocusLabel}
+                            </p>
                             <p>{groupProduct.application}</p>
                           </div>
                           {groupProduct.sourceUrl ? (
@@ -230,7 +306,7 @@ export function ProductFamilyPage() {
                               rel="noreferrer"
                               target="_blank"
                             >
-                              <span>{locale === 'zh' ? '参考来源' : 'Reference'}</span>
+                              <span>{bodyCopy.referenceLabel}</span>
                               <ExternalLink size={15} />
                             </a>
                           ) : null}
@@ -239,7 +315,11 @@ export function ProductFamilyPage() {
                       <div className="product-detail-group__actions">
                         <Link
                           className="product-inline-link"
-                          to={buildProductGroupPath(locale, family.key, group.slug)}
+                          to={buildProductGroupPath(
+                            locale,
+                            family.key,
+                            group.slug,
+                          )}
                         >
                           <span>{taxonomy.subgroupCtaLabel}</span>
                           <ArrowRight size={15} />
@@ -247,14 +327,14 @@ export function ProductFamilyPage() {
                       </div>
                     </div>
                   </article>
-                )
+                );
               })}
             </div>
           </section>
 
           <aside className="product-detail-sidebar motion-rise motion-delay-3">
-            <p className="eyebrow">{taxonomy.consultTitle}</p>
-            <p className="story-intro">{taxonomy.consultBody}</p>
+            <p className="eyebrow">{bodyCopy.consultTitle}</p>
+            <p className="story-intro">{bodyCopy.consultBody}</p>
             <div className="placeholder-facts">
               {content.aboutPage.facts.slice(0, 3).map((fact) => (
                 <article key={fact.label} className="placeholder-fact">
@@ -268,14 +348,20 @@ export function ProductFamilyPage() {
                 className="cta-link"
                 to={buildInquiryPath(locale, {
                   category: inquiryCategory,
-                  source: 'product-family',
+                  source: "product-family",
                 })}
               >
                 <span>{taxonomy.consultCtaLabel}</span>
                 <ArrowRight size={16} />
               </Link>
-              <Link className="secondary-link" to={buildLocalePath(locale, 'support')}>
-                {content.navigation.find((item) => item.key === 'support')?.label}
+              <Link
+                className="secondary-link"
+                to={buildLocalePath(locale, "support")}
+              >
+                {
+                  content.navigation.find((item) => item.key === "support")
+                    ?.label
+                }
               </Link>
             </div>
           </aside>
@@ -285,9 +371,9 @@ export function ProductFamilyPage() {
       <section className="page-band page-band--bordered">
         <div className="product-related motion-rise motion-delay-4">
           <div className="product-related__copy">
-            <p className="eyebrow">{taxonomy.relatedFamiliesTitle}</p>
+            <p className="eyebrow">{bodyCopy.relatedFamiliesTitle}</p>
             <h2 className="profile-title">{content.productCenter.title}</h2>
-            <p className="story-intro">{taxonomy.relatedFamiliesSummary}</p>
+            <p className="story-intro">{bodyCopy.relatedFamiliesSummary}</p>
           </div>
 
           <div className="product-related__list">
@@ -298,12 +384,12 @@ export function ProductFamilyPage() {
                 to={buildProductFamilyPath(locale, category.key)}
               >
                 <h3>{category.name}</h3>
-                <p>{getProductFamilyDisplaySummary(locale, category)}</p>
+                <p>{getCompactFamilySummary(locale, category.key)}</p>
               </Link>
             ))}
           </div>
         </div>
       </section>
     </>
-  )
+  );
 }
