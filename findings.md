@@ -42,6 +42,7 @@
 - Product family and product group detail pages were compressed again and deployed at commit `3c54787`.
 - English product detail copy still reads more like utility copy than polished enterprise-site language in some sections.
 - English product detail pages now use more formal phrases such as `Subgroup Map`, `Other Product Families`, and `Review the featured series first, then move into inquiry when the direction is clear.` in code and tests.
+- Chinese support/contact live pages should use pure Chinese H1 titles without the `/ Support` or `/ Contact` suffixes.
 - Live spot checks confirmed the shorter copy is visible on:
   - `/zh/products/industrial-sensors`
   - `/zh/products/industrial-sensors/fiber-sensors`

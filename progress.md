@@ -34,6 +34,8 @@
   - Reworked English family/group copy into a more formal enterprise voice
   - Added English assertions for family and subgroup pages
   - Removed `/ Support` and `/ Contact` suffixes from the Chinese support/contact page titles
+  - Pushed commit `4b939b6` and redeployed the production server after the title cleanup
+  - Verified the live Chinese support/contact pages in a browser snapshot after deploy
 - Files created/modified:
   - `task_plan.md`
   - `findings.md`
@@ -51,6 +53,7 @@
 | Homepage copy pass | `npm run test -- --run src/pages/HomeShellPage.test.tsx src/pages/ProductCenterPage.test.tsx` | Homepage/product center tests pass | Passed | PASS |
 | Detail page copy pass | `npm run test -- --run src/pages/ProductFamilyPage.test.tsx src/pages/ProductGroupPage.test.tsx` | Detail page tests pass | Passed | PASS |
 | English detail tone pass | `npm run test -- --run src/pages/ProductFamilyPage.test.tsx src/pages/ProductGroupPage.test.tsx` | English assertions pass | Passed after one query fix | PASS |
+| Support/contact title cleanup | `npm run test -- --run src/pages/SupportPage.test.tsx src/pages/ContactPage.test.tsx` | Support/contact pages still render after title cleanup | Passed | PASS |
 | Frontend typing | `npm run typecheck` | No TS errors | Passed after copy map typing fix | PASS |
 | Frontend lint | `npm run lint` | No lint errors | Passed | PASS |
 | Frontend build | `npm run build` | Production build succeeds | Passed with known chunk-size warning | PASS |
