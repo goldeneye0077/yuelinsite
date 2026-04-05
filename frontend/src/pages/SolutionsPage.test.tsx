@@ -8,6 +8,7 @@ import { getSiteContent } from '../content/site'
 describe('SolutionsPage', () => {
   it('renders the streamlined solutions surface without the three-track card block', async () => {
     const content = getSiteContent('zh')
+    const heroPrimaryCta = '发起咨询'
     const router = createAppRouter({
       initialEntries: ['/zh/solutions'],
     })
@@ -29,13 +30,14 @@ describe('SolutionsPage', () => {
     ).toBeInTheDocument()
     expect(
       (
-        await screen.findAllByRole('link', { name: content.solutions.primaryCta })
+        await screen.findAllByRole('link', { name: heroPrimaryCta })
       ).some(
         (link) =>
           link.getAttribute('href') ===
           '/zh/contact?category=general-consultation&source=solutions',
       ),
     ).toBe(true)
+    expect(screen.queryByText(content.solutionsPage.coverageTitle)).not.toBeInTheDocument()
     expect(
       screen.queryByText(content.solutionsPage.partnershipTitle),
     ).not.toBeInTheDocument()

@@ -52,6 +52,10 @@ describe('ContactPage', () => {
 
       expect(screen.queryByText(content.contactPage.entryContextLabel)).not.toBeInTheDocument()
       expect(
+        screen.queryByText(`${content.meta.companyName} / ${content.meta.crossLocaleCompanyName}`),
+      ).not.toBeInTheDocument()
+      expect(screen.queryByText(content.contactPage.quickPanelTitle)).not.toBeInTheDocument()
+      expect(
         screen.getByLabelText(content.contactPage.form.interestCategoryLabel),
       ).toHaveValue('technical-integration')
 

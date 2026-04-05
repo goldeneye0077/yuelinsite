@@ -8,6 +8,7 @@ import { getSiteContent } from '../content/site'
 describe('SupportPage', () => {
   it('renders the dedicated support surface with capability and resource-entry modules', async () => {
     const content = getSiteContent('zh')
+    const heroPrimaryCta = '获取支持'
     const router = createAppRouter({
       initialEntries: ['/zh/support'],
     })
@@ -38,7 +39,7 @@ describe('SupportPage', () => {
     expect(
       (
         await screen.findAllByRole('link', {
-          name: content.support.primaryCta,
+          name: heroPrimaryCta,
         })
       ).some(
         (link) =>
@@ -46,5 +47,8 @@ describe('SupportPage', () => {
           '/zh/contact?category=general-consultation&source=support',
       ),
     ).toBe(true)
+    expect(
+      screen.queryByText(`${content.meta.companyName} / ${content.meta.crossLocaleCompanyName}`),
+    ).not.toBeInTheDocument()
   })
 })

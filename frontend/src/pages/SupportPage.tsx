@@ -9,19 +9,37 @@ import { buildInquiryPath } from '../lib/inquiry-paths'
 export function SupportPage() {
   const { locale, content } = useSiteShellContext()
   const heroImage = siteReferenceImages.supportHero
+  const heroCopy =
+    locale === 'zh'
+      ? {
+          eyebrow: '支持入口',
+          summary: '把资料申请、技术沟通和项目跟进收成一条清楚的支持路径。',
+          description: '让客户先判断该申请资料、沟通技术，还是进入项目协同。',
+          railSummary: '打开这页时，应该一眼看清资料入口、准备状态和下一步沟通方式。',
+          primaryCta: '获取支持',
+          secondaryCta: '产品中心',
+        }
+      : {
+          eyebrow: 'Support route',
+          summary:
+            'A clearer route for technical files, project follow-up, and implementation-side support.',
+          description:
+            'It helps customers decide whether the next step is material access, technical clarification, or project coordination.',
+          railSummary:
+            'At a glance, the page should show the material route, the preparation status, and the right next conversation.',
+          primaryCta: 'Get support',
+          secondaryCta: 'Product center',
+        }
 
   return (
     <>
       <section className="page-band page-band--tight">
         <div className="support-hero">
           <div className="support-hero__copy motion-rise motion-delay-1">
-            <p className="eyebrow">{content.supportPage.eyebrow}</p>
+            <p className="eyebrow">{heroCopy.eyebrow}</p>
             <h1>{content.support.title}</h1>
-            <p className="hero-signature hero-signature--surface">
-              {content.meta.companyName} / {content.meta.crossLocaleCompanyName}
-            </p>
-            <p className="hero-summary">{content.supportPage.heroSummary}</p>
-            <p className="hero-description">{content.supportPage.heroDescription}</p>
+            <p className="hero-summary">{heroCopy.summary}</p>
+            <p className="hero-description">{heroCopy.description}</p>
             <div className="hero-actions">
               <Link
                 className="cta-link"
@@ -30,11 +48,11 @@ export function SupportPage() {
                   source: 'support',
                 })}
               >
-                <span>{content.support.primaryCta}</span>
+                <span>{heroCopy.primaryCta}</span>
                 <ArrowRight size={16} />
               </Link>
               <Link className="secondary-link" to={buildLocalePath(locale, 'products')}>
-                {content.support.secondaryCta}
+                {heroCopy.secondaryCta}
               </Link>
             </div>
           </div>
@@ -50,7 +68,7 @@ export function SupportPage() {
                 <strong>{content.supportPage.capabilities[0]?.title}</strong>
               </figcaption>
             </figure>
-            <p className="story-intro">{content.supportPage.quickPanelSummary}</p>
+            <p className="story-intro">{heroCopy.railSummary}</p>
             <div className="support-quick-list">
               {content.supportPage.quickPanelItems.map((item) => (
                 <article key={item.title} className="support-quick-item">
@@ -166,7 +184,7 @@ export function SupportPage() {
                   source: 'support',
                 })}
               >
-                <span>{content.support.primaryCta}</span>
+                <span>{heroCopy.primaryCta}</span>
                 <ArrowRight size={16} />
               </Link>
               <Link className="secondary-link" to={buildLocalePath(locale, 'solutions')}>

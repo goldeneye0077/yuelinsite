@@ -172,6 +172,27 @@ function MotionSection({
 export function ContactPage() {
   const { locale, content } = useSiteShellContext()
   const heroImage = siteReferenceImages.contactHero
+  const heroCopy =
+    locale === 'zh'
+      ? {
+          eyebrow: '询盘入口',
+          summary: '项目方向明确后，可以直接在这里提交企业信息和需求边界。',
+          description: '适用于产品选型、方案沟通、技术集成跟进和资料申请。',
+          railSummary: '公司坐标、需求范围和受理方式会在这里一次说清。',
+          primaryCta: '提交需求',
+          secondaryCta: '服务与支持',
+        }
+      : {
+          eyebrow: 'Inquiry route',
+          summary:
+            'When the project direction is clear, use this form to send the business boundary first.',
+          description:
+            'Use it for product selection, solution consultation, integration follow-up, and material requests.',
+          railSummary:
+            'The page makes the office location, request scope, and intake route clear before the form is submitted.',
+          primaryCta: 'Submit inquiry',
+          secondaryCta: 'Support',
+        }
   const location = useLocation()
   const [searchParams] = useSearchParams()
   const defaultCategory = resolveRequestedCategory(
@@ -253,23 +274,20 @@ export function ContactPage() {
       <MotionSection className="page-band page-band--tight" delay={0.02}>
         <div className="contact-hero">
           <div className="contact-hero__copy">
-            <p className="eyebrow">{content.contactPage.eyebrow}</p>
+            <p className="eyebrow">{heroCopy.eyebrow}</p>
             <h1>{content.contact.title}</h1>
-            <p className="hero-signature hero-signature--surface">
-              {content.meta.companyName} / {content.meta.crossLocaleCompanyName}
-            </p>
-            <p className="hero-summary">{content.contactPage.heroSummary}</p>
-            <p className="hero-description">{content.contactPage.heroDescription}</p>
+            <p className="hero-summary">{heroCopy.summary}</p>
+            <p className="hero-description">{heroCopy.description}</p>
             <div className="hero-actions">
-              <Button asChild size="lg">
+              <Button asChild>
                 <a href="#contact-form">
-                  <span>{content.contact.primaryCta}</span>
+                  <span>{heroCopy.primaryCta}</span>
                   <ArrowRight size={16} />
                 </a>
               </Button>
-              <Button asChild size="lg" variant="secondary">
+              <Button asChild variant="secondary">
                 <Link to={buildLocalePath(locale, 'support')}>
-                  {content.contact.secondaryCta}
+                  {heroCopy.secondaryCta}
                 </Link>
               </Button>
             </div>
@@ -287,10 +305,7 @@ export function ContactPage() {
                   <strong>{content.meta.brandName}</strong>
                 </figcaption>
               </figure>
-              <p className="eyebrow">{content.contactPage.quickPanelTitle}</p>
-              <CardDescription className="story-intro">
-                {content.contactPage.quickPanelSummary}
-              </CardDescription>
+              <CardDescription className="story-intro">{heroCopy.railSummary}</CardDescription>
             </CardHeader>
             <CardContent className="contact-quick-list">
               {content.contactPage.quickPanelItems.map((item) => (

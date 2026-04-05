@@ -9,18 +9,37 @@ import { buildInquiryPath } from '../lib/inquiry-paths'
 export function SolutionsPage() {
   const { locale, content } = useSiteShellContext()
   const heroImage = siteReferenceImages.solutionsHero
+  const heroCopy =
+    locale === 'zh'
+      ? {
+          eyebrow: '项目路径',
+          summary: '围绕工业自动化、软件配合与技术集成，先帮项目判断正确路径。',
+          description: '从场景切入，让选型、接口与交付边界更快对齐。',
+          railSummary: '适用于设备开发、系统集成与产线升级项目，先看清合作范围，再进入正式沟通。',
+          primaryCta: '发起咨询',
+          secondaryCta: '产品中心',
+        }
+      : {
+          eyebrow: 'Project route',
+          summary:
+            'A clearer route for industrial automation, software coordination, and technical integration.',
+          description:
+            'Start from the scenario and align interfaces, scope, and delivery rhythm earlier.',
+          railSummary:
+            'Useful for new machines, integration work, and line-side upgrades where the first project read needs to be fast.',
+          primaryCta: 'Start inquiry',
+          secondaryCta: 'Product center',
+        }
 
   return (
     <div className="solutions-page">
       <section className="page-band page-band--tight">
         <div className="solutions-hero">
           <div className="solutions-hero__copy motion-rise motion-delay-1">
-            <p className="eyebrow">{content.solutionsPage.eyebrow}</p>
+            <p className="eyebrow">{heroCopy.eyebrow}</p>
             <h1>{content.solutions.title}</h1>
-            <p className="hero-summary">{content.solutionsPage.heroSummary}</p>
-            <p className="hero-description">
-              {content.solutionsPage.heroDescription}
-            </p>
+            <p className="hero-summary">{heroCopy.summary}</p>
+            <p className="hero-description">{heroCopy.description}</p>
             <div className="hero-actions">
               <Link
                 className="cta-link"
@@ -29,11 +48,11 @@ export function SolutionsPage() {
                   source: 'solutions',
                 })}
               >
-                <span>{content.solutions.primaryCta}</span>
+                <span>{heroCopy.primaryCta}</span>
                 <ArrowRight size={16} />
               </Link>
               <Link className="secondary-link" to={buildLocalePath(locale, 'products')}>
-                {content.solutions.secondaryCta}
+                {heroCopy.secondaryCta}
               </Link>
             </div>
           </div>
@@ -49,8 +68,7 @@ export function SolutionsPage() {
                 <strong>{content.solutionsPage.coverageItems[0]?.title}</strong>
               </figcaption>
             </figure>
-            <p className="eyebrow">{content.solutionsPage.coverageTitle}</p>
-            <p className="story-intro">{content.solutionsPage.coverageSummary}</p>
+            <p className="story-intro">{heroCopy.railSummary}</p>
             <div className="solution-coverage-list">
               {content.solutionsPage.coverageItems.map((item) => (
                 <article key={item.title} className="solution-coverage">
@@ -114,11 +132,11 @@ export function SolutionsPage() {
                   source: 'solutions',
                 })}
               >
-                <span>{content.solutions.primaryCta}</span>
+                <span>{heroCopy.primaryCta}</span>
                 <ArrowRight size={16} />
               </Link>
               <Link className="secondary-link" to={buildLocalePath(locale, 'products')}>
-                {content.navigation.find((item) => item.key === 'products')?.label}
+                {heroCopy.secondaryCta}
               </Link>
             </div>
           </div>

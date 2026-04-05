@@ -223,8 +223,8 @@ export const enSiteContent: SiteContent = {
       'Industrial automation, software development, and technical integration are presented as one clear project entry point.',
     description:
       'It helps equipment makers, integrators, and factory-side teams judge fit, scope, and the right consultation route quickly.',
-    primaryCta: 'Request Consultation / \u83b7\u53d6\u54a8\u8be2',
-    secondaryCta: 'View product center',
+    primaryCta: 'Start inquiry',
+    secondaryCta: 'Product center',
   },
   partners: {
     title: 'Partners',
@@ -238,12 +238,12 @@ export const enSiteContent: SiteContent = {
   solutionsPage: {
     eyebrow: 'Automation and project delivery',
     heroSummary:
-      'Solutions built around sensing, software coordination, and technical integration for industrial projects.',
+      'A clearer route for industrial automation, software coordination, and technical integration.',
     heroDescription:
-      'Start from the right scenario, align interfaces and delivery boundaries earlier, then move into consultation with less friction.',
+      'Start from the scenario and align interfaces, scope, and delivery rhythm earlier.',
     coverageTitle: 'Customer fit and project stage',
     coverageSummary:
-      'Useful for new machines, system integration, and line-side upgrades where the project boundary needs to be judged quickly.',
+      'Useful for new machines, integration work, and line-side upgrades where the first project read needs to be fast.',
     coverageItems: [
       {
         label: 'Equipment makers',
@@ -517,18 +517,18 @@ export const enSiteContent: SiteContent = {
       'Catalog requests, resource access, and technical coordination now share one clearer support route.',
     description:
       'The support page is structured as an industrial service desk: what help is available, which materials can be requested, and how the next support step should be started.',
-    primaryCta: 'Request Support / 获取支持',
-    secondaryCta: 'View product center',
+    primaryCta: 'Get support',
+    secondaryCta: 'Product center',
   },
   supportPage: {
     eyebrow: 'Service and support routes',
     heroSummary:
-      'The support page turns post-selection questions into a readable route: what can be requested now, what materials are still in preparation, and how technical follow-up should begin.',
+      'A clearer route for technical files, project follow-up, and implementation-side support.',
     heroDescription:
-      'Instead of hiding support behind a single contact button, this page gives industrial buyers a clearer service desk with visible entry points for catalogs, data preparation, and coordination needs.',
+      'It helps customers decide whether the next step is material access, technical clarification, or project coordination.',
     quickPanelTitle: 'Quick support view',
     quickPanelSummary:
-      'Three things should be readable at a glance: what materials are requestable, what is still in preparation, and how fast the next technical conversation can start.',
+      'At a glance, the page should show the material route, the preparation status, and the right next conversation.',
     quickPanelItems: [
       {
         label: 'Catalog route',
@@ -815,20 +815,20 @@ export const enSiteContent: SiteContent = {
       'Use one dedicated contact surface to move from product interest into a real inquiry.',
     description:
       'The contact page now combines company coordinates, project-intake guidance, and real submission feedback in one place.',
-    primaryCta: 'Start Inquiry',
-    secondaryCta: 'View Support',
+    primaryCta: 'Submit inquiry',
+    secondaryCta: 'Support',
   },
   contactPage: {
     eyebrow: 'Inquiry channel',
     heroSummary:
-      'When the project direction is clear enough to start a real conversation, use this form to send the core business boundary first.',
+      'When the project direction is clear, use this form to send the business boundary first.',
     heroDescription:
-      'This route is built for product selection requests, solution consultations, and integration follow-up. Keep the message practical and we can align the right next step faster.',
+      'Use it for product selection, solution consultation, integration follow-up, and material requests.',
     entryContextLabel: 'Entry route',
     categoryContextLabel: 'Default category',
     quickPanelTitle: 'Direct contact view',
     quickPanelSummary:
-      'The page works like an intake desk: company coordinates stay visible, project scope can be stated clearly, and the inquiry now lands in the backend instead of stopping at a placeholder contract.',
+      'The page makes the office location, request scope, and intake route clear before the form is submitted.',
     quickPanelItems: [
       {
         label: 'Office location',

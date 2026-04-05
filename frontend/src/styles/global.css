@@ -5161,6 +5161,28 @@ body {
   gap: 14px;
 }
 
+.solutions-page .hero-actions,
+.support-hero .hero-actions,
+.contact-hero .hero-actions {
+  gap: 10px;
+  margin-top: 4px;
+}
+
+.solutions-page .hero-actions .cta-link,
+.solutions-page .hero-actions .secondary-link,
+.support-hero .hero-actions .cta-link,
+.support-hero .hero-actions .secondary-link,
+.contact-hero .hero-actions > a {
+  min-height: 44px;
+  padding-inline: 16px;
+  font-size: 0.94rem;
+  border-radius: 14px;
+}
+
+.contact-hero .hero-actions > a {
+  padding-block: 10px;
+}
+
 .solutions-page .surface-media-card--hero,
 .support-hero .surface-media-card--hero,
 .contact-hero .surface-media-card--hero {
