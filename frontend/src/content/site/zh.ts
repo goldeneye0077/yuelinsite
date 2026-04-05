@@ -514,7 +514,7 @@ export const zhSiteContent: SiteContent = {
       '告诉我们设备类型、检测目标、控制方式或改造目的，我们会先按最合适的解决方案方向帮你收敛路径。',
   },
   support: {
-    title: '服务与支持 / Support',
+    title: '服务与支持',
     summary:
       '产品目录申请、资料获取与技术配合现在都收束到同一条支持路径里。',
     description:
@@ -810,7 +810,7 @@ export const zhSiteContent: SiteContent = {
       '\u65e0\u8bba\u662f\u4ea7\u54c1\u9009\u578b\u3001\u7cfb\u7edf\u96c6\u6210\u8def\u5f84\uff0c\u8fd8\u662f\u4ea7\u7ebf\u81ea\u52a8\u5316\u914d\u5408\u9700\u6c42\uff0c\u90fd\u53ef\u4ee5\u5148\u4ece\u54a8\u8be2\u5165\u53e3\u5f00\u59cb\u3002',
   },
   contact: {
-    title: '\u8054\u7cfb\u6211\u4eec / Contact',
+    title: '\u8054\u7cfb\u6211\u4eec',
     summary:
       '\u5c06\u4ea7\u54c1\u5174\u8da3\u3001\u65b9\u6848\u6c9f\u901a\u548c\u9879\u76ee\u8be2\u76d8\u6c47\u5165\u540c\u4e00\u4e2a\u8054\u7cfb\u5165\u53e3\u3002',
     description:

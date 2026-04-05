@@ -33,6 +33,7 @@
   - Started a new refinement pass focused on English product detail page tone
   - Reworked English family/group copy into a more formal enterprise voice
   - Added English assertions for family and subgroup pages
+  - Removed `/ Support` and `/ Contact` suffixes from the Chinese support/contact page titles
 - Files created/modified:
   - `task_plan.md`
   - `findings.md`
@@ -42,6 +43,7 @@
   - `frontend/src/pages/ProductGroupPage.tsx`
   - `frontend/src/pages/ProductFamilyPage.test.tsx`
   - `frontend/src/pages/ProductGroupPage.test.tsx`
+  - `frontend/src/content/site/zh.ts`
 
 ## Test Results
 | Test | Input | Expected | Actual | Status |

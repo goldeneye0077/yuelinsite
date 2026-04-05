@@ -25,6 +25,7 @@ Phase 3
 - [x] Tighten homepage and product center body copy
 - [x] Tighten product family and product group detail copy
 - [x] Refine English tone on product family and product group pages
+- [x] Remove English suffixes from Chinese support/contact page titles
 - [ ] Continue future requested refinements with file-based updates first
 - **Status:** in_progress
 

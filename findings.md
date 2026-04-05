@@ -6,6 +6,7 @@
 - The site is already production-deployed, so every page refinement should be treated as a live change.
 - Recent tasks focus on making copy read more like a formal enterprise website and less like explanatory documentation.
 - The current request is specifically about the English tone on product family and product group detail pages.
+- The current request is to remove the `/ Support` and `/ Contact` English suffixes from the Chinese support/contact page titles.
 
 ## Research Findings
 - The repo already contains long-term GSD planning in `.planning/`, but that does not automatically act as session memory for rapid iterative page polishing.
@@ -19,6 +20,7 @@
 | Record both local verification and live deployment state in progress.md | The project is deployed continuously, so local-only logs are not sufficient |
 | Keep copy-shortening logic in shared page-level maps when possible | Makes later tone adjustments faster and more consistent across product pages |
 | Keep English product-detail tone in the shared compact copy map | Lets family and group pages stay consistent without duplicating revised copy |
+| Keep Chinese support/contact page titles pure Chinese | The bilingual slash suffix made those entry titles feel less like a formal corporate site |
 
 ## Issues Encountered
 | Issue | Resolution |
