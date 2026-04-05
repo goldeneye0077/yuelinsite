@@ -26,7 +26,7 @@ describe('SolutionsPage', () => {
       (await screen.findAllByText(content.solutionsPage.coverageItems[0].title)).length,
     ).toBeGreaterThan(0)
     expect(
-      await screen.findByText(content.solutionsPage.processTitle),
+      await screen.findByText('推进节奏'),
     ).toBeInTheDocument()
     expect(
       (

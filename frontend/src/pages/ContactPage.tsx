@@ -193,6 +193,94 @@ export function ContactPage() {
           primaryCta: 'Submit inquiry',
           secondaryCta: 'Support',
         }
+  const bodyCopy =
+    locale === 'zh'
+      ? {
+          formTitle: '询盘表单',
+          formSummary: '先留下企业信息和项目边界，表单会直接进入后端受理。',
+          requiredHint: '首次受理需要完整基本信息。',
+          helperNote: '如已知道型号、检测距离、接口条件或安全边界，建议直接写明。',
+          guidanceTitle: '提交前建议',
+          guidanceSummary: '简短但具体的项目描述，更容易被快速分派。',
+          guidanceItems: [
+            {
+              title: '先说清设备或产线语境',
+              detail: '可提及生产环境、检测对象、检测距离或集成边界。',
+            },
+            {
+              title: '先确定大致方向',
+              detail: '即使还没有最终料号，先选产品大类或方案方向也会更快。',
+            },
+            {
+              title: '商务与技术问题可以一起写',
+              detail: '如果选型与集成是同一个项目问题，建议一次说清。',
+            },
+          ],
+          routingTitle: '如果需求还在成形',
+          routingSummary: '还没到正式留资时，可以先回到相关页面继续判断。',
+          processTitle: '提交之后会发生什么',
+          processSummary: '询盘表单不是浏览终点，而是进入后续沟通的轻量交接点。',
+          processSteps: [
+            {
+              step: '01',
+              title: '提交内容会立即入库',
+              detail: '询盘会真实写入后端，而不是停留在占位响应。',
+            },
+            {
+              step: '02',
+              title: '按类型与场景快速分派',
+              detail: '产品方向、解决路径和现场描述会成为第一层判断依据。',
+            },
+            {
+              step: '03',
+              title: '进入合适的下一步沟通',
+              detail: '后续会进入产品确认、资料反馈、报价讨论或技术集成沟通。',
+            },
+          ],
+        }
+      : {
+          formTitle: 'Inquiry form',
+          formSummary: 'Leave the company details and project boundary first. The form goes straight into backend intake.',
+          requiredHint: 'Complete basic information is required for first-pass intake.',
+          helperNote: 'If model numbers, sensing distance, interface conditions, or safety limits are known, include them directly.',
+          guidanceTitle: 'Before you send',
+          guidanceSummary: 'A short but concrete project note gets routed faster.',
+          guidanceItems: [
+            {
+              title: 'State the machine or line context first',
+              detail: 'Mention the production environment, sensing target, distance, or integration boundary.',
+            },
+            {
+              title: 'Point to the likely direction first',
+              detail: 'Even without a final model, choosing the product family or solution route helps.',
+            },
+            {
+              title: 'Business and technical questions can stay together',
+              detail: 'If selection and integration belong to the same project, send them in one note.',
+            },
+          ],
+          routingTitle: 'If the request is still taking shape',
+          routingSummary: 'If you are not ready to leave full details, go back and keep judging from the related pages.',
+          processTitle: 'What happens after submission',
+          processSummary: 'The form is not the end of browsing. It is the handoff into the next conversation.',
+          processSteps: [
+            {
+              step: '01',
+              title: 'The submission is stored immediately',
+              detail: 'The inquiry is written into the backend instead of stopping at a placeholder response.',
+            },
+            {
+              step: '02',
+              title: 'It is routed by type and scenario',
+              detail: 'Product direction, solution route, and field context become the first triage layer.',
+            },
+            {
+              step: '03',
+              title: 'It moves into the right next discussion',
+              detail: 'The next step can become product confirmation, file feedback, quotation, or technical integration.',
+            },
+          ],
+        }
   const location = useLocation()
   const [searchParams] = useSearchParams()
   const defaultCategory = resolveRequestedCategory(
@@ -326,8 +414,8 @@ export function ContactPage() {
         <div className="contact-layout">
           <Card className="contact-form-panel">
             <CardHeader className="contact-section-heading">
-              <p className="eyebrow">{content.contactPage.formTitle}</p>
-              <CardTitle>{content.contactPage.formSummary}</CardTitle>
+              <p className="eyebrow">{bodyCopy.formTitle}</p>
+              <CardTitle>{bodyCopy.formSummary}</CardTitle>
             </CardHeader>
             <CardContent>
               <form className="space-y-5" id="contact-form" onSubmit={handleSubmit}>
@@ -480,8 +568,8 @@ export function ContactPage() {
 
                 <div className="flex flex-col gap-4 border-t border-border/70 pt-4 md:flex-row md:items-center md:justify-between">
                   <div className="space-y-1">
-                    <p className="field-hint">{formCopy.requiredHint}</p>
-                    <p className="field-hint">{formCopy.helperNote}</p>
+                    <p className="field-hint">{bodyCopy.requiredHint}</p>
+                    <p className="field-hint">{bodyCopy.helperNote}</p>
                   </div>
                   <Button
                     className="min-w-[180px]"
@@ -504,11 +592,11 @@ export function ContactPage() {
           <div className="contact-sidebar space-y-6">
             <Card className="contact-side-panel">
               <CardHeader>
-                <p className="eyebrow">{content.contactPage.guidanceTitle}</p>
-                <CardTitle>{content.contactPage.guidanceSummary}</CardTitle>
+                <p className="eyebrow">{bodyCopy.guidanceTitle}</p>
+                <CardTitle>{bodyCopy.guidanceSummary}</CardTitle>
               </CardHeader>
               <CardContent className="grid gap-4">
-                {content.contactPage.guidanceItems.map((item) => (
+                {bodyCopy.guidanceItems.map((item) => (
                   <Card key={item.title} className="story-item border-border/50 bg-card/70">
                     <CardContent className="grid gap-2 p-5">
                       <CardTitle className="text-lg">{item.title}</CardTitle>
@@ -521,8 +609,8 @@ export function ContactPage() {
 
             <Card className="contact-side-panel contact-side-panel--offset">
               <CardHeader>
-                <p className="eyebrow">{content.contactPage.routingTitle}</p>
-                <CardTitle>{content.contactPage.routingSummary}</CardTitle>
+                <p className="eyebrow">{bodyCopy.routingTitle}</p>
+                <CardTitle>{bodyCopy.routingSummary}</CardTitle>
               </CardHeader>
               <CardContent className="grid gap-3">
                 {content.contactPage.routingLinks.map((item) => (
@@ -544,11 +632,11 @@ export function ContactPage() {
       <MotionSection className="page-band page-band--bordered" delay={0.1}>
         <Card className="contact-process">
           <CardHeader className="contact-section-heading">
-            <p className="eyebrow">{content.contactPage.processTitle}</p>
-            <CardTitle>{content.contactPage.processSummary}</CardTitle>
+            <p className="eyebrow">{bodyCopy.processTitle}</p>
+            <CardTitle>{bodyCopy.processSummary}</CardTitle>
           </CardHeader>
           <CardContent className="process-list">
-            {content.contactPage.processSteps.map((item) => (
+            {bodyCopy.processSteps.map((item) => (
               <article key={item.step} className="process-step">
                 <p className="process-step__index">{item.step}</p>
                 <div className="process-step__copy">

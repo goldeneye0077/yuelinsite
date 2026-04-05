@@ -9,6 +9,7 @@ describe('SupportPage', () => {
   it('renders the dedicated support surface with capability and resource-entry modules', async () => {
     const content = getSiteContent('zh')
     const heroPrimaryCta = '获取支持'
+    const resourcePrimaryCta = '申请目录'
     const router = createAppRouter({
       initialEntries: ['/zh/support'],
     })
@@ -29,11 +30,11 @@ describe('SupportPage', () => {
       await screen.findByText(content.supportPage.resources[0].title),
     ).toBeInTheDocument()
     expect(
-      await screen.findByText(content.supportPage.processTitle),
+      await screen.findByText('响应节奏'),
     ).toBeInTheDocument()
     expect(
       await screen.findByRole('link', {
-        name: content.supportPage.resources[0].primaryCta.label,
+        name: resourcePrimaryCta,
       }),
     ).toBeInTheDocument()
     expect(
