@@ -12,15 +12,15 @@ const familySummaries = {
   } satisfies Record<ProductFamilyKey, string>,
   en: {
     "industrial-sensors":
-      "Covers sensing and identification, best read from subgroups first.",
+      "A structured entry into sensing and identification, starting from the right subgroup.",
     "safety-protection-sensors":
-      "Built for safety detection, guarded areas, and interlock scenarios.",
+      "Built for safeguarding, area monitoring, and interlock control.",
     "laser-ranging-sensors":
-      "Suitable for ranging, displacement checks, and precise positioning.",
+      "Focused on ranging, displacement inspection, and precision positioning.",
     "linear-guides-and-modules":
-      "Fits motion structures, module integration, and positioning stages.",
+      "Supports linear motion assemblies, module integration, and positioning structures.",
     "pneumatic-components":
-      "Used for actuation, air control, and standard pneumatic support.",
+      "Covers actuation, air control, and standard pneumatic assemblies.",
   } satisfies Record<ProductFamilyKey, string>,
 };
 
@@ -34,15 +34,15 @@ const familyUseCases = {
   } satisfies Record<ProductFamilyKey, string>,
   en: {
     "industrial-sensors":
-      "Suitable for equipment builds, inspection stations, and line retrofits.",
+      "Used in equipment development, inspection stations, and production-line upgrades.",
     "safety-protection-sensors":
-      "Suitable for safety reinforcement, interlocks, and guarded-area checks.",
+      "Used in safety upgrades, interlock systems, and guarded-area projects.",
     "laser-ranging-sensors":
-      "Suitable for non-contact measurement and precise positioning.",
+      "Used in non-contact measurement and high-precision positioning.",
     "linear-guides-and-modules":
-      "Suitable for slides, modules, and structure upgrades.",
+      "Used in slide assemblies, motion modules, and machine-structure upgrades.",
     "pneumatic-components":
-      "Suitable for cylinders, valve islands, and air preparation support.",
+      "Used in cylinder, valve-island, and air-preparation projects.",
   } satisfies Record<ProductFamilyKey, string>,
 };
 
@@ -81,57 +81,45 @@ const groupSummaries: Record<Locale, Record<string, string>> = {
   },
   en: {
     "fiber-sensors":
-      "Built for small targets, tight spaces, and high-precision checks.",
+      "For compact targets, fine alignment, and tight installation zones.",
     "photoelectric-sensors":
-      "Suitable for presence, identification, and pass/fail detection.",
+      "For presence checks, identification, and pass-fail sensing.",
     "displacement-sensors":
-      "Suitable for displacement, thickness, and height inspection.",
+      "For displacement, thickness, and height inspection.",
     "slot-sensors": "Suitable for labels, edges, and slot-trigger scenarios.",
-    "color-and-label-sensors":
-      "Suitable for color, label, and mark identification.",
-    "inductive-proximity-sensors":
-      "Suitable for metal presence and proximity detection.",
-    "capacitive-proximity-sensors":
-      "Suitable for liquid level and non-metal detection.",
-    "industrial-code-readers": "Suitable for barcode and QR code reading.",
-    "vision-sensors":
-      "Suitable for lightweight visual recognition and inspection.",
-    "pressure-sensors":
-      "Suitable for pressure monitoring and corrosive environments.",
+    "color-and-label-sensors": "For color, label, and mark recognition.",
+    "inductive-proximity-sensors": "For metal presence and proximity sensing.",
+    "capacitive-proximity-sensors": "For liquid level and non-metal detection.",
+    "industrial-code-readers": "For barcode and QR code reading on the line.",
+    "vision-sensors": "For lightweight visual inspection and recognition.",
+    "pressure-sensors": "For pressure monitoring and corrosive environments.",
     "ultrasonic-sensors":
-      "Suitable for transparent objects, liquid level, and stable ranging.",
-    "contact-sensors":
-      "Suitable for contact inspection and micro-displacement checks.",
-    "magnetic-sensors":
-      "Suitable for cylinder magnetic feedback and position sensing.",
-    accessories: "Supports connection, wiring, and installation needs.",
+      "For transparent targets, liquid level, and stable ranging.",
+    "contact-sensors": "For contact inspection and micro-displacement checks.",
+    "magnetic-sensors": "For cylinder feedback and magnetic position sensing.",
+    accessories: "For connection, wiring, and installation support.",
     "light-curtains-and-area-sensors":
-      "Suitable for area guarding and personnel safety detection.",
+      "For guarded areas and personnel safety detection.",
     "safety-door-lock-switches":
-      "Suitable for interlocks and safety door status control.",
+      "For interlocks and safety door status control.",
     "safety-relay-and-non-contact-switches":
-      "Suitable for safety circuits, magnetic switches, and relay control.",
-    "laser-ranging":
-      "Suitable for non-contact ranging and general laser detection.",
+      "For safety circuits, non-contact door sensing, and relay control.",
+    "laser-ranging": "For non-contact ranging and general laser detection.",
     "tof-laser-sensors":
-      "Suitable for longer range, fast response, and complex backgrounds.",
+      "For longer range, fast response, and complex backgrounds.",
     "laser-displacement":
-      "Suitable for high-precision displacement and thickness measurement.",
-    "linear-guides":
-      "Suitable for guiding, sliding, and precise linear motion.",
-    "slide-modules": "Suitable for slide units and structure upgrades.",
-    "ball-screw-modules":
-      "Suitable for precise positioning and repeatable motion.",
-    "belt-driven-modules": "Suitable for long travel and high-speed transfer.",
-    "positioning-stages":
-      "Suitable for stage positioning and multi-axis structures.",
-    cylinders: "Suitable for standard actuation and linear push-pull motion.",
-    "solenoid-valves": "Suitable for air switching and actuation control.",
+      "For high-precision displacement and thickness measurement.",
+    "linear-guides": "For guiding, sliding, and precise linear motion.",
+    "slide-modules": "For slide units and structure-level motion upgrades.",
+    "ball-screw-modules": "For precise positioning and repeatable motion.",
+    "belt-driven-modules": "For long travel and higher-speed transfer.",
+    "positioning-stages": "For stage positioning and multi-axis structures.",
+    cylinders: "For standard actuation and linear push-pull motion.",
+    "solenoid-valves": "For air switching and actuation control.",
     "air-preparation":
-      "Suitable for filtration, pressure control, and stable air supply.",
-    "fittings-and-tubing":
-      "Suitable for connection, splitting, and air routing.",
-    "vacuum-components": "Suitable for suction handling and vacuum control.",
+      "For filtration, pressure control, and stable air supply.",
+    "fittings-and-tubing": "For connection, splitting, and air routing.",
+    "vacuum-components": "For suction handling and vacuum control.",
   },
 };
 

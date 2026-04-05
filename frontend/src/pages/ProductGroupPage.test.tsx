@@ -184,6 +184,12 @@ describe("ProductGroupPage", () => {
       </AppProviders>,
     );
 
+    expect((await screen.findAllByText("Subgroup Map")).length).toBeGreaterThan(0);
+    expect(
+      await screen.findByText(
+        "Review the featured series first, then move into inquiry when the direction is clear.",
+      ),
+    ).toBeInTheDocument();
     expect(
       await screen.findByText("Specs to prepare first"),
     ).toBeInTheDocument();

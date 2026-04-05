@@ -123,18 +123,18 @@ export function ProductGroupPage() {
           applicationLabel: "Application",
           seriesLabel: "Series",
           referenceLabel: "Reference",
-          previewTitle: "Reference products",
+          previewTitle: "Reference Product",
           heroDescription: getCompactFamilyUseCase(locale, family.key),
           featuredProductsSummary:
-            "Review the featured series first, then decide whether to inquire.",
+            "Review the featured series first, then move into inquiry when the direction is clear.",
           listingTemplateSummary:
-            "The series area keeps the image, focus, and inquiry hint together for quick review.",
-          subgroupNavigatorTitle: "Same-level Switch",
+            "This section keeps the image, focus, and inquiry cue together for faster review.",
+          subgroupNavigatorTitle: "Subgroup Map",
           subgroupNavigatorSummary:
-            "If this subgroup is not the right fit, move across the sibling directions directly.",
-          siblingGroupsTitle: "Explore Other Subgroups",
+            "If this subgroup is not the right fit, switch across sibling directions here.",
+          siblingGroupsTitle: "Other Subgroups",
           siblingGroupsSummary:
-            "Other subgroups in the same family can also be compared side by side.",
+            "Compare other subgroups in the same family without leaving the current line.",
         };
 
   const inquiryAssist =

@@ -104,15 +104,15 @@ export function ProductFamilyPage() {
           referenceLabel: "参考",
         }
       : {
-          subgroupNavigatorTitle: "Subgroups",
+          subgroupNavigatorTitle: "Subgroup Map",
           subgroupNavigatorSummary:
-            "Start from the subgroup direction, then move into series, visuals, and inquiry.",
-          consultTitle: "Selection Support",
+            "Review the subgroup first, then move into series, visuals, and inquiry.",
+          consultTitle: "Need Selection Support?",
           consultBody:
-            "If the direction is clear, bring the application and structure limits into the conversation.",
-          relatedFamiliesTitle: "Explore Other Families",
+            "If the direction is already clear, send the application and structure limits to start the conversation.",
+          relatedFamiliesTitle: "Other Product Families",
           relatedFamiliesSummary:
-            "If this family is not the right fit yet, continue comparing the other product lines.",
+            "If this family is not the best fit, compare the other product lines next.",
           referenceLabel: "Reference",
         };
 

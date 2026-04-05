@@ -85,4 +85,30 @@ describe("ProductFamilyPage", () => {
       screen.getAllByRole("link", { name: /线性滑轨/i }).length,
     ).toBeGreaterThan(0);
   });
+
+  it("renders english family pages with polished enterprise tone", async () => {
+    const router = createAppRouter({
+      initialEntries: ["/en/products/industrial-sensors"],
+    });
+
+    render(
+      <AppProviders>
+        <RouterProvider router={router} />
+      </AppProviders>,
+    );
+
+    expect(
+      await screen.findByText(
+        "A structured entry into sensing and identification, starting from the right subgroup.",
+      ),
+    ).toBeInTheDocument();
+    expect(
+      await screen.findByText(
+        "Review the subgroup first, then move into series, visuals, and inquiry.",
+      ),
+    ).toBeInTheDocument();
+    expect(
+      await screen.findByText("Other Product Families"),
+    ).toBeInTheDocument();
+  });
 });
